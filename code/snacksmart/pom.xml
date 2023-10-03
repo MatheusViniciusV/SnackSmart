@@ -21,6 +21,8 @@
           
     <module>View-jsp</module>
     <module>DAO-MySQL</module>
+    <module>ServiceLocacao</module>
+    <module>ServiceLocatario</module>
   </modules>
       
   <properties>
