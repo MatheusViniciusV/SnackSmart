@@ -6,7 +6,7 @@ Projeto Sistema de Controle de Máquinas de Alimentos
 
 Faça um clone do repositório
 ```bash
-git commit https://github.com/MatheusViniciusV/lp1-2023-projeto5.git
+git clone https://github.com/MatheusViniciusV/lp1-2023-projeto5.git
 ```
 
 Crie uma branch para cada caso de uso, use o mesmo como nome o código do caso de uso (ex. GER CSU01).
