@@ -21,8 +21,6 @@ Se a branch já existe mude para ela.
 git checkout {nome_da_branch}
 ```
 
-...
-
 Ao terminar realize um add com o código criado.
 
 ```bash
@@ -44,4 +42,10 @@ git push --set-upstream origin {nome_da_branch}
 Se ela já existe use:
 ```bash
 git push origin {nome_da_branch}
+```
+
+Caso sua versão não esteja atualizada, use o seguinte comando para atualizar a branch local:
+
+```bash
+git pull origin {nome_da_branch_atualizada}
 ```
