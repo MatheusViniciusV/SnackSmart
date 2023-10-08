@@ -1,0 +1,50 @@
+/* 
+    Created on : 8 de out. de 2023, 12:14:10
+    Author     : eloym
+*/
+
+section#lista-contratos {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90vw;
+    padding: 1vh;
+    height: 60vh;
+    overflow-y: auto;
+    margin: 3vh auto;
+    border-radius: 15px;
+    background-color: var(--cor-terciaria);
+}
+
+article.contratos {
+    height: 40vh;
+    width: 28vh;
+    margin: 5vh 4.4vh;
+    border-radius: 10px;
+    background-color: #FFF;
+    position: relative;
+}
+
+article.contratos h3 {
+    margin: 5% auto;
+    text-align: center;
+    width: 100%;
+}
+
+article.contratos div {
+    margin: 9% auto;
+    height: 2%;
+    width: 80%;
+    background-color: var(--texto-cor-principal);
+}
+
+article.contratos div:last-child {
+    margin: 20% 10%;
+    height: 2%;
+    width: 40%;
+}
+
+article.selecionado {
+    border: solid 2px var(--cor-secundaria);
+    width: 27.5vh;
+    height: 39.5vh;
+}
