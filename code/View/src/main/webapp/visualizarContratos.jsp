@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,6 +17,8 @@
     <body>
         <%@include file="comuns/retornarInicial.jsp" %>
         <main>
+            
+            </c:forEach>
             <h1>Contratos</h1>
             <section id="lista-contratos">
                 <article class="contratos">
@@ -33,26 +36,13 @@
                 <article class="contratos">
                     <h3>Contrato 2</h3>
                 </article>
-                <article class="contratos">
-                    <h3>Contrato 2</h3>
-                </article><article class="contratos">
-                    <h3>Contrato 2</h3>
-                </article><article class="contratos">
-                    <h3>Contrato 2</h3>
-                </article><article class="contratos">
-                    <h3>Contrato 2</h3>
-                </article><article class="contratos">
-                    <h3>Contrato 2</h3>
-                </article><article class="contratos">
-                    <h3>Contrato 2</h3>
-                </article><article class="contratos">
-                    <h3>Contrato 2</h3>
-                </article><article class="contratos">
-                    <h3>Contrato 2</h3>
-                </article><article class="contratos">
-                    <h3>Contrato 2</h3>
-                </article>
             </section>
+            <div id="botoes">
+                <button id="solicita-cancelar-contrato" class="null"><h2>Solicitar cancelamento</h2></button>
+                ­<button id="pdf-contrato"><h2>Emitir PDF</h2></button>
+                
+                
+            </div>
         </main>
 
         <%@include file="comuns/jqueryLink.jsp" %>

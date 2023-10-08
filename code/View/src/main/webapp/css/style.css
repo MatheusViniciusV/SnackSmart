@@ -9,6 +9,8 @@
     --cor-terciaria: #C1C1C1;
     --texto-cor-principal: #7D7D7D;
     --texto-cor-secundaria: #6f0000;
+    --cor-ativo: #b80909;
+    --cor-confimado: #28A745;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
@@ -46,4 +48,20 @@ main {
 
 main h1 {
     margin: 2vh 2vw;
+}
+
+button {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-principal);
+    cursor: pointer;
+}
+
+button:active {
+    background-color: var(--cor-ativo);
+    color: var(--cor-principal);
+}
+
+button.btn-confirmado {
+    background-color: var(--cor-confimado); /* Cor verde */
+    transition: background-color 0.2s; /* Duração da animação */
 }
