@@ -1,0 +1,38 @@
+/* 
+    Created on : 8 de out. de 2023, 11:21:52
+    Author     : eloym
+*/
+
+:root {
+    --cor-principal: #E9E9E9;
+    --cor-secundaria: #CB0000;
+    --texto-cor-principal: #7D7D7D;
+    --texto-cor-secundaria: #6f0000;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+    color: var(--texto-cor-principal);
+    overflow: hidden;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    font-size: large;
+    color: var(--texto-cor-secundaria);
+    background-color: var(--cor-secundaria);
+}
+
+nav a:link,
+    a:hover,
+    a:visited,
+    a {
+    text-decoration: none;
+    color: var(--texto-cor-secundaria);
+}
