@@ -1,0 +1,80 @@
+.conteudo{
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+.box{
+    height: 9em;
+    width: 17em;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    /*justify-items: left;*/
+    background-color: #FFFFFF;
+    border-radius: 20%;
+    box-shadow: 0.1em 0.2em #464040;
+    align-items: center;
+    
+}
+#recebimento{
+    color: #00ff0d;
+   
+}
+#gastos{
+    color: #ff0000; 
+}
+#saldo{
+    color: black;
+    
+}
+#calendario{
+    display: flex;
+    flex-direction: column;
+    height: 19em;
+    width: 19em;
+    background-color: #FFFFFF;
+    border-radius: 10%;
+    box-shadow: 0.1em 0.2em #464040;
+    align-items: center;
+
+}
+.row{
+    width: 16em;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+#dias{
+    height: 16em;
+    width: 16em;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 1em;
+    justify-items: center;
+    justify-content: space-around;
+}
+.diaAtual{
+    background-color: #ff0000;
+    border-radius: 80%;
+    color: #FFFFFF;
+}
+#nota{
+    display: flex;
+    flex-direction: column;
+    height: 19em;
+    width: 30em;
+    
+    align-items: center;
+}
+#texto{
+    height: inherit;
+    width: inherit;
+    background-color: #FFFFFF;
+    border-radius: 10%;
+    box-shadow: 0.1em 0.2em #464040;
+
+
+
+}
