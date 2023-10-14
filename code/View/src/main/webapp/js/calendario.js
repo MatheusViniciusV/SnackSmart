@@ -53,15 +53,6 @@ setData();
 function setDias(nMes) {
     let primeiroDiaSemana = new Date(Ano.innerHTML, nMes, 1).getDay();
     let ultimoDia = new Date(Ano.innerHTML, nMes + 1, 0).getDate();
-
-
-
-
-
-
-
-
-
     let dias = document.querySelectorAll("#dias li");
     let rep = 0;
     dias.forEach(element => {
@@ -83,6 +74,4 @@ function setDias(nMes) {
         }
 
     });
-    console.log("Mes: ", Mes.innerHTML, "\nUltimo dia:", `${ultimoDia}`, "\nPrimeiro dia: ", `${primeiroDiaSemana}`);
-
 }
