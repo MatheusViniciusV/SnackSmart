@@ -41,7 +41,7 @@
         <div id="calendario">
             <ul class="row">
                 <li id="mesAnterior">&lt</li>
-                <li>Mês Ano</li>
+                <li><span id="Mes">Outubro </span><span id="Ano">2023</span></li>
                 <li id="proximoMes">&gt</li>
             </ul>
             <ul class="row">
@@ -86,6 +86,15 @@
                 <li>29</li>
                 <li>30</li>
                 <li>31</li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
             </ul>
         </div>
         <div id="nota">
@@ -95,7 +104,7 @@
 
 
     </div>
-
+    <script src="js/calendario.js"></script>
 </body>
 
 </html>
