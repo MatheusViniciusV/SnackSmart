@@ -20,9 +20,7 @@
   <modules>
         
     <module>Core</module>
-        
-    <module>View</module>
-      
+    <module>../../../Desktop/lp1-2023-projeto5-CSU17(1)/code/View</module>
   </modules>
         
   
