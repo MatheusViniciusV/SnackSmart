@@ -19,14 +19,14 @@
         <%@include file="comuns/retornarInicial.jsp" %>
         <div id="topo">
         <h1 id ="titulo">Finaceiro</h1>
-        <button id="botaoRelatorio">Emitir relatÃ³rio geral</button>
+        <button id="botaoRelatorio">Emitir relatório geral</button>
         </div>
             
         <div class="conteudo">
             <div class="box">
-                <p>Recebimento previsto para o mï¿½s:</p>
+                <p>Recebimento previsto para o mês:</p>
                 <p id="recebimento">R$: 1000,00</p>
-                <! -- <p style="size:0.8em">Data de recebimento: XX/XX/XXXX</p>
+                <p>Data de recebimento: XX/XX/XXXX</p>
             </div>
             <div class="box">
                 <p>Gastos feitos neste mï¿½s:</p>
