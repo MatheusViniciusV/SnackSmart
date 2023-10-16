@@ -43,7 +43,6 @@ public class ContratoDTO {
             Calendar dataInicio, Calendar dataExpiracao, Calendar dataPagamento,
             String observacoes) {
         
-        this.id = id;
         this.dataExpiracao = dataExpiracao;
         this.dataInicio = dataInicio;
         this.dataPagamento = dataPagamento;
@@ -55,32 +54,32 @@ public class ContratoDTO {
         
     }
     
-    public long obterId() {
+    public long getId() {
         return id;
     }
 
-    public Calendar obterDataInicio() {
+    public Calendar getDataInicio() {
         return dataInicio;
     }
 
-    public Calendar obterDataExpiracao() {
+    public Calendar getDataExpiracao() {
         return dataExpiracao;
     }
 
-    public Calendar obterDataPagamento() {
+    public Calendar getDataPagamento() {
         return dataPagamento;
     }
 
-    public String obterObservacoes() {
+    public String getObservacoes() {
         return observacoes;
     }
 
-    public GerenteDTO obterGerente() {
+    public GerenteDTO getGerente() {
         return gerente;
     }
 
     /*
-    public Locatario obterLocatario() {
+    public Locatario getLocatario() {
         return locatario;
     }
 */
