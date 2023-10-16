@@ -1,0 +1,52 @@
+/* 
+    Created on : 16 de out. de 2023, 10:52:12
+    Author     : Aluno
+*/
+
+html, body {
+    overflow: auto;
+}
+#titulo{
+    margin: 2vw;
+}
+#gestaoMaquinasMain{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    justify-content: space-around; 
+    align-items: baseline;
+}
+.slot {
+    background-color: white;
+    border: solid black 1px; 
+    padding: 10px 10px;
+    border-radius: 5%;
+    box-shadow: 2px 2px 2px gray;
+    width: 15vw;
+    height: 25vh;
+    margin: 8vh 8vw;
+}
+
+#gestaoMaquinasMain button{
+    border-radius: 10px;
+    width: 5vw;
+    height: 5vh;
+}
+#remover {
+    background: red;
+    color: white; 
+}
+
+#gestaoMaquinasMain h2, #gestaoMaquinasMain h3{
+    font-family: 'Lato', sans-serif;
+    font-size: large;
+    color: black;
+    text-align: center;
+}
+
+#gestaoMaquinasMain p {
+    font-family: 'Lato', sans-serif;
+    font-size: medium; 
+    color: black;
+    text-align: center;
+}
