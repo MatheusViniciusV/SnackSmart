@@ -1,8 +1,28 @@
+#topo{
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 2%;
+    align-items: center;
+    
+}
+#botaoRelatorio{
+    color: #FECCCB;
+    width: 13em;
+    height: 5em;
+    padding: 0em 1em 0em 1em;
+    background-color: #C70000;
+    font-size: 1em;
+    border: none;
+    border-radius: 10%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+
+}
+
 .conteudo{
     display: flex;
     justify-content: space-around;
     gap: 8%;
-    height: 35%;
+    height: 40%;
 }
 .box{
     height: 80%;
@@ -14,7 +34,7 @@
     /*justify-items: left;*/
     background-color: #FFFFFF;
     border-radius: 20%;
-    box-shadow: 0.1em 0.2em #464040;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     align-items: center;
     
 }
@@ -32,11 +52,11 @@
 #calendario{
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: 19em;
     width: 20em;
     background-color: #FFFFFF;
     border-radius: 10%;
-    box-shadow: 0.1em 0.2em #464040;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     align-items: center;
 
 }
@@ -45,12 +65,10 @@
     list-style: none;
     display: flex;
     justify-content: space-between;
-    padding: 3% 5% 3% 5%; 
-
+    padding-left: 0px;
 
 }
 #dias{
-    height: 80%;
     width: 16em;
     list-style: none;
     display: grid;
@@ -76,11 +94,10 @@
 }
 #texto{
     height: inherit;
-    width: inherit;
+    width: 35em;
     background-color: #FFFFFF;
     border-radius: 10%;
-    box-shadow: 0.1em 0.2em #464040;
-
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
 
 }
