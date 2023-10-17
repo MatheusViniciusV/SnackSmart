@@ -70,32 +70,3 @@ if($contratoSelecionado !== null) {
         });
     })
 }
-
-
-const jabutiEL = document.querySelector('#jabuti');
-const javaliEl = document.querySelector('#javali');
-const enviarBtn = document.querySelector('#enviar');
-const respostasEl = document.querySelectorAll('.resposta')
-
-enviarBtn.addEventListener('click', function () {
-    if(parseInt(jabutiEL.value) > 0) {
-        alert('oi mundo');
-    }
-});
-
- 
-// 3. Na primeira tem uma variavel intermediaria para receber o valor
-
-// Como .resposta é uma classe, podem haver varios elementos
-respostasEl.forEach(function (e) {
-    e.classList.add('correto');
-});
-
-respostasEl.forEach(function (e) {
-    e.innerHTML = 'ola mundo';
-});
-
-const inputsNumericos =  document.querySelectorAll('input[type="number"]');
-inputsNumericos.forEach(function (e) {
-    e.innerHTML = 0;
-});
