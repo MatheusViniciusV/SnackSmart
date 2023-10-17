@@ -1,3 +1,4 @@
+let $contratoSelecionado;
 let $contratosMini = $('article.contratos');
 $contratosMini.click(function () {
     let selecionado = $(this).hasClass('selecionado');
@@ -7,47 +8,94 @@ $contratosMini.click(function () {
     if(!selecionado) {
         $(this).addClass('selecionado');
         $('#solicita-cancelar-contrato').removeClass('null');
+        $('#pdf-contrato').removeClass('null');
+        $('#pdf-contrato a').attr('href', 'PDFContrato?contrato=');
+        $contratoSelecionado = $(this);
     } else {
         $('#solicita-cancelar-contrato').addClass('null');
+        $('#pdf-contrato').addClass('null');
+        $('#pdf-contrato a').removeAttr('href');
+        $contratoSelecionado = null;
     }
         
 });
 
 
 let $solicitarCancelamentoBtn = $('#solicita-cancelar-contrato');
-$solicitarCancelamentoBtn.click(function () {
-    //TODO Enviar para o servlet.
+
+if($contratoSelecionado !== null) {
+
+    $solicitarCancelamentoBtn.click(function () {
+        //TODO Enviar para o servlet.
+        
+        // Adicionar essa animação quando o servlet confirmar
+        $(this).addClass('btn-confirmado');
     
-    // Adicionar essa animação quando o servlet confirmar
-    $(this).addClass('btn-confirmado');
+        setTimeout(function() {
+            $('#solicita-cancelar-contrato').removeClass('btn-confirmado');
+            $contratosMini.removeClass('selecionado');
+            $('#solicita-cancelar-contrato').addClass('null');
+    
+        }, 1000);
+    
+        const contratoDataSend = {
+            titulo: "oi",
+            id: $contratoSelecionado.data('id'),
+        };
+    
+        $.ajax({
+            type: 'POST', // Tipo de solicitação (POST)
+            url: 'SolicitarCancelarContrato', // URL do servlet
+            data: contratoDataSend, // Dados a serem enviados no corpo da solicitação
+            success: function (response) {
+                // Ação a ser executada em caso de sucesso
+                // alert("Solicitação bem-sucedida:" + response);
+    
+                $('#solicita-cancelar-contrato').addClass('btn-confirmado');
+    
+                setTimeout(function() {
+                    $contratoSelecionado.remove();
+                    $('#solicita-cancelar-contrato').removeClass('btn-confirmado');
+                    $('#solicita-cancelar-contrato').addClass('null');
+            
+                }, 750);
+    
+                console.log(`Contrato ${contratoDataSend.id} deletado com sucesso.`);
+            },
+            error: function (error) {
+                
+                console.error(error);
+    
+            }
+        });
+    })
+}
 
-    setTimeout(function() {
-        $('#solicita-cancelar-contrato').removeClass('btn-confirmado');
-        $contratosMini.removeClass('selecionado');
-        $('#solicita-cancelar-contrato').addClass('null');
 
-    }, 1000);
+const jabutiEL = document.querySelector('#jabuti');
+const javaliEl = document.querySelector('#javali');
+const enviarBtn = document.querySelector('#enviar');
+const respostasEl = document.querySelectorAll('.resposta')
 
-    var dataToSend = {
-        minhaString: "cu" // Altere isso para a string que deseja enviar
-    };
+enviarBtn.addEventListener('click', function () {
+    if(parseInt(jabutiEL.value) > 0) {
+        alert('oi mundo');
+    }
+});
 
-    $.ajax({
-        type: 'POST', // Tipo de solicitação (POST)
-        url: '/SolicitarCancelarContratos', // URL do servlet
-        data: dataToSend, // Dados a serem enviados no corpo da solicitação
-        success: function (response) {
-            // Ação a ser executada em caso de sucesso
-            alert("Solicitação bem-sucedida:" + response);
+ 
+// 3. Na primeira tem uma variavel intermediaria para receber o valor
 
-            // Você pode adicionar código aqui para lidar com a resposta do servidor
-        },
-        error: function (error) {
-            // Ação a ser executada em caso de erro
-            console.log("oi");
-            console.error(error);
+// Como .resposta é uma classe, podem haver varios elementos
+respostasEl.forEach(function (e) {
+    e.classList.add('correto');
+});
 
-            // Você pode adicionar código aqui para lidar com o erro
-        }
-    });
-})
+respostasEl.forEach(function (e) {
+    e.innerHTML = 'ola mundo';
+});
+
+const inputsNumericos =  document.querySelectorAll('input[type="number"]');
+inputsNumericos.forEach(function (e) {
+    e.innerHTML = 0;
+});
