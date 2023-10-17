@@ -30,21 +30,25 @@ public class gestaoMaquina extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         /*try (PrintWriter out = response.getWriter()) {*/
             /* TODO output your page here. You may use following sample code. */
-            PrintWriter out = response.getWriter();
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet GestaoMaquina</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet GestaoMaquina at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        PrintWriter out = response.getWriter();
+        out.println("<!DOCTYPE html>");
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Servlet GestaoMaquina</title>");            
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1>Servlet GestaoMaquina at " + request.getContextPath() + "</h1>");
+        out.println("</body>");
+        out.println("</html>");
+
+        String nome = request.getParameter("nome");
+        String tipo = request.getParameter("tipo");
+        String localizacao = request.getParameter("localizacao");
             
-            
-            
+        request.setAttribute("nome", nome);
+        request.setAttribute("tipo", tipo);
+        request.setAttribute("localizacao", localizacao);
         
-            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
