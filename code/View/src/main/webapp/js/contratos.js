@@ -62,7 +62,8 @@ if($contratoSelecionado !== null) {
             
                 }, 750);
     
-                console.log(`Contrato ${contratoDataSend.id} deletado com sucesso.`);
+//                console.log(`Contrato ${contratoDataSend.id} deletado com sucesso.`);
+                console.log(response);
             },
             error: function (error) {
                 

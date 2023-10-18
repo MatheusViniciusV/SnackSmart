@@ -4,7 +4,7 @@
  */
 package br.cefetmg.snacksmart.dto;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 import br.cefetmg.snacksmart.idao.IGerenteDAO;
 import br.cefetmg.snacksmart.dao.GerenteDAO;
 
@@ -14,9 +14,9 @@ import br.cefetmg.snacksmart.dao.GerenteDAO;
  */
 public class ContratoDTO {
     private long id;
-    private Calendar dataInicio;
-    private Calendar dataExpiracao;
-    private Calendar dataPagamento;
+    private LocalDate dataInicio;
+    private LocalDate dataExpiracao;
+    private LocalDate dataPagamento;
     private String observacoes;
     private final GerenteDTO gerente;
 //    private final LocatarioDTO locatario;
@@ -24,7 +24,7 @@ public class ContratoDTO {
     // Construtor da classe Contrato
     ContratoDTO(long id,
             //LocatarioDTO locatario,
-            Calendar dataInicio, Calendar dataExpiracao, Calendar dataPagamento,
+            LocalDate dataInicio, LocalDate dataExpiracao, LocalDate dataPagamento,
             String observacoes) {
         
         this.id = id;
@@ -39,9 +39,7 @@ public class ContratoDTO {
         
     }
     
-    ContratoDTO(//LocatarioDTO locatario,
-            Calendar dataInicio, Calendar dataExpiracao, Calendar dataPagamento,
-            String observacoes) {
+    public ContratoDTO( LocalDate dataInicio, LocalDate dataExpiracao, LocalDate dataPagamento, String observacoes) {
         
         this.dataExpiracao = dataExpiracao;
         this.dataInicio = dataInicio;
@@ -53,20 +51,21 @@ public class ContratoDTO {
         this.gerente = daoGerente.get();
         
     }
-    
+    //LocatarioDTO locatario,
+        
     public long getId() {
         return id;
     }
 
-    public Calendar getDataInicio() {
+    public LocalDate getDataInicio() {
         return dataInicio;
     }
 
-    public Calendar getDataExpiracao() {
+    public LocalDate getDataExpiracao() {
         return dataExpiracao;
     }
 
-    public Calendar getDataPagamento() {
+    public LocalDate getDataPagamento() {
         return dataPagamento;
     }
 
@@ -86,5 +85,10 @@ public class ContratoDTO {
     
     public void setId(long id) {
         // esperando BD, talvez seja bom colocar um id para cada contrato.
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("Contrato:\n data inicio: %s", dataInicio.toString());
     }
 }
