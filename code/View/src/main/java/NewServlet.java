@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package br.cefetmg.snacksmart.services_locatario;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,16 +11,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import br.cefetmg.snacksmart.dto.ContratoDTO;
-import java.time.LocalDate;
+import br.cefetmg.snacksmart.dto.MaquinaDTO;
 
 /**
  *
  * @author eloym
  */
-@WebServlet(name="SolicitarCancelarContrato", urlPatterns={"/SolicitarCancelarContrato"})
-public class SolicitarCancelarContrato extends HttpServlet {
+@WebServlet(urlPatterns={"/NewServlet"})
+public class NewServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,13 +32,7 @@ public class SolicitarCancelarContrato extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
-            LocalDate dataInicio = LocalDate.of(2023, 7, 1);
-            LocalDate dataExpiracao = dataInicio.plusYears(1);  // Um ano após o início
-            LocalDate dataPagamento = LocalDate.of(2023, 7, 1);
-            String observacoes = "Observações aleatórias";  // Substitua por observações aleatórias
-
-            ContratoDTO contrato = new ContratoDTO(dataInicio, dataExpiracao, dataPagamento, observacoes);
+            MaquinaDTO maq = new MaquinaDTO(1, "Meu ovo", 0.69);
             
             out.println("<!DOCTYPE html>");
             out.println("<html>");
@@ -50,7 +41,7 @@ public class SolicitarCancelarContrato extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet SolicitarCancelarContrato at " + request.getContextPath () + "</h1>");
-            out.println("<p>" + contrato.toString() + "</p>");
+//            out.println("<p>" + maq.toString() + "</p>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -80,20 +71,7 @@ public class SolicitarCancelarContrato extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String stringRecebida = request.getParameter("minhaString");
-
-        // Verifique se a string é "oi"
-        if ("oi".equals(stringRecebida)) {
-            // Se for "oi", retorne "ola"
-            String resposta = "ola";
-
-            // Defina o tipo de conteúdo da resposta como texto
-            response.setContentType("text/plain");
-
-            // Escreva a resposta para o cliente
-            PrintWriter out = response.getWriter();
-            out.print(resposta);
-        }
+        processRequest(request, response);
     }
 
     /** 

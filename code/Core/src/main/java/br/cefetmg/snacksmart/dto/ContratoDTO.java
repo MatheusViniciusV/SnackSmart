@@ -4,7 +4,7 @@
  */
 package br.cefetmg.snacksmart.dto;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 import br.cefetmg.snacksmart.idao.IGerenteDAO;
 import br.cefetmg.snacksmart.dao.GerenteDAO;
 
@@ -14,17 +14,17 @@ import br.cefetmg.snacksmart.dao.GerenteDAO;
  */
 public class ContratoDTO {
     private long id;
-    private Calendar dataInicio;
-    private Calendar dataExpiracao;
-    private Calendar dataPagamento;
+    private LocalDate dataInicio;
+    private LocalDate dataExpiracao;
+    private LocalDate dataPagamento;
     private String observacoes;
     private final GerenteDTO gerente;
 //    private final LocatarioDTO locatario;
 
     // Construtor da classe Contrato
-    ContratoDTO(long id,
+    public ContratoDTO(long id,
             //LocatarioDTO locatario,
-            Calendar dataInicio, Calendar dataExpiracao, Calendar dataPagamento,
+            LocalDate dataInicio, LocalDate dataExpiracao, LocalDate dataPagamento,
             String observacoes) {
         
         this.id = id;
@@ -39,8 +39,8 @@ public class ContratoDTO {
         
     }
     
-    ContratoDTO(//LocatarioDTO locatario,
-            Calendar dataInicio, Calendar dataExpiracao, Calendar dataPagamento,
+    public ContratoDTO(//LocatarioDTO locatario,
+            LocalDate dataInicio, LocalDate dataExpiracao, LocalDate dataPagamento,
             String observacoes) {
         
         this.dataExpiracao = dataExpiracao;
@@ -58,15 +58,15 @@ public class ContratoDTO {
         return id;
     }
 
-    public Calendar getDataInicio() {
+    public LocalDate getDataInicio() {
         return dataInicio;
     }
 
-    public Calendar getDataExpiracao() {
+    public LocalDate getDataExpiracao() {
         return dataExpiracao;
     }
 
-    public Calendar getDataPagamento() {
+    public LocalDate getDataPagamento() {
         return dataPagamento;
     }
 
@@ -86,5 +86,10 @@ public class ContratoDTO {
     
     public void setId(long id) {
         // esperando BD, talvez seja bom colocar um id para cada contrato.
+    }
+    
+    @Override
+    public String toString() {
+        return "Contrato 1, inicio em" + dataInicio.toString();
     }
 }
