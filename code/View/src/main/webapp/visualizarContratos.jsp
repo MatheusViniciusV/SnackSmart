@@ -57,33 +57,37 @@
                 <form action="CriarContrato" method="post">
                     <h2>Novo contrato</h2>
                     <h3>Dados do Locador</h3>
-                    <label>Nome: <br>
-                        <input type="text" name="locador-nome" readonly="readonly" value="Algum nome">
-                    </label>
-                    <label class="cpf">CPF <br>
-                        <input type="text" name="locador-cpf" readonly="readonly" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" value="000.000.000-01">
-                    </label>
-                    <label class="telefone">Telefone: <br>
-                        <input type="tel" name="locatador-telefone">
-                    </label>
-                    <label>Email: <br>
-                        <input type="email" name="locador-email">
-                    </label>
+                    <div id="dados-locador">
+                        <label>Nome: <br>
+                            <input type="text" name="locador-nome" readonly="readonly" value="Algum nome">
+                        </label>
+                        <label class="cpf">CPF <br>
+                            <input type="text" name="locador-cpf" readonly="readonly" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" value="000.000.000-01">
+                        </label>
+                        <label>Email: <br>
+                            <input type="email" name="locador-email">
+                        </label>
+                        <label class="telefone">Telefone: <br>
+                            <input type="tel" name="locatador-telefone">
+                        </label>
+                    </div>
                     <h3>Dados do Locatário</h3>
-                    <label>Nome:  <br>
-                        <input type="text" name="locatario-nome" id="">
-                    </label>
-                    <label class="cpf">CPF: <br>
-                        <input type="text" name="locatario-cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
-                    </label>
-                    <label class="telefone">Telefone: <br>
-                        <input type="tel" name="locatario-telefone">
-                    </label>
-                    <label>Email: <br>
-                        <input type="email" name="locatario-email">
-                    </label>
+                    <div id="dados-locatario">
+                        <label>Nome:  <br>
+                            <input type="text" name="locatario-nome" id="">
+                        </label>
+                        <label class="cpf">CPF: <br>
+                            <input type="text" name="locatario-cpf" placeholder="000.000.000-00" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
+                        </label>
+                        <label>Email: <br>
+                            <input type="email" placeholder="emailexemplo@exemplo.com" name="locatario-email">
+                        </label>
+                        <label class="telefone">Telefone: <br>
+                            <input type="tel" placeholder="(00)000000000" name="locatario-telefone">
+                        </label>
+                    </div>
                     <h3>Dados do contrato</h3>
-                    <div id="datas">
+                    <div id="dados-contrato">
                         <label>Data de inicio: <br>
                             <input type="date" name="data-inicio" id="">
                         </label>
@@ -93,24 +97,25 @@
                         <label>Data mensal de pagamento: <br>
                             <input type="date" name="data-pagamento" id="">
                         </label>
+                        <label>Observações: <br>
+                            <textarea name="observacoes" wrap="hard" cols="85" 
+                                placeholder="escreva informações adicionais que não estão contidas nos campos anteriores."
+                            ></textarea>
+                        </label>
                     </div>
-                    <label>Observações: <br>
-                        <textarea name="observacoes" wrap="hard" cols="85"></textarea>
-                    </label>
                     <div id="boteos-criar-contrato">
-                        <button><h3>Criar Contrato</h3></button>
-                        <button><h3>Cancelar</h3></button>
+                        <button type="button" id="enviar"><h3>Criar Contrato</h3></button>
+                        <button type="button" id="cancelar"><h3>Cancelar</h3></button>
                     </div>
                 </form>
             </section>
+
             <div id="botoes">
                 <button id="solicita-cancelar-contrato" class="null"><h2>Solicitar cancelamento</h2></button>
                 <button id="criar-contrato"><h2>Criar Novo Contrato</h2></button>
                 <button id="pdf-contrato" class="null"><a><h2>Emitir PDF</h2></a></button>
             </div>
         </main>
-
-
 
         <%@include file="comuns/jqueryLink.jsp" %>
         <script src="js/contratos.js"></script>

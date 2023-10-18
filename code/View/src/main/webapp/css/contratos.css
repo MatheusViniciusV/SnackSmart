@@ -78,7 +78,7 @@ button#pdf-contrato a {
     color: var(--cor-principal);
 }
 
-section#criar-contrato-form {
+#criar-contrato-form {
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -86,55 +86,91 @@ section#criar-contrato-form {
     align-items: center;
     justify-content: center;
     top: 0;
+    left: 0;
 }
 
-section#criar-contrato-form.oculto {
+#criar-contrato-form.oculto {
     display: none;
 }
 
-section#criar-contrato-form form {
+#criar-contrato-form h2 {
+    margin-top: .1rem;
+}
+
+#criar-contrato-form h3 {
+    margin: 0.5rem 0;
+}
+
+#criar-contrato-form form {
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    padding: 2rem 3rem;
     background-color: var(--cor-principal);
     margin: auto;
     border-radius: 10px;
-    width: 42vw;
-    height: 80vh;
+    width: 39vw;
+    height: 76vh;
     overflow-y: auto;
     border: .2rem solid var(--texto-cor-secundaria);
 }
 
-section#criar-contrato-form input {
-    width: 90%;
-    margin: 0.3rem auto;
-}
-
-section#criar-contrato-form .cpf, .telefone {
-    width: 7rem;
-}
-
-section#criar-contrato-form form div#datas {
-    display: flex;
-    flex-direction: row;
-}
-
-div#datas label {
+section#criar-contrato-form input, label {
     width: 100%;
-    margin: .4rem;
-    align-items: end;
+    margin: 0.2rem 0;
 }
 
-section#criar-contrato-form #boteos-criar-contrato {
-    display: flex;
-    justify-content: space-around;
-    margin: 1vh;
+#criar-contrato-form #dados-locador, #criar-contrato-form #dados-locatario {
+    display: grid; 
+    grid-template-columns: 1.8fr 0.6fr; 
+    grid-template-rows: 0.4fr 1.6fr; 
+    gap: .6rem 3rem; 
+    grid-template-areas: 
+        ". .";
+    height: 20%; 
 }
 
-section#criar-contrato-form input[type=submit], section#criar-contrato-form button {
+#criar-contrato-form #dados-contrato {
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: 0.4fr 1.6fr; 
+    gap: 2%; 
+    grid-template-areas: 
+    ". . ."
+}
+
+#dados-contrato label {
+    width: 12vw;
+}
+
+#criar-contrato-form #dados-contrato input {
+    width: 9em;
+}
+
+#criar-contrato-form #dados-contrato label:last-child {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#dados-contrato textarea {
+    resize: none;
+    width: 100%;
+    height: 10em;
+    margin: 1% 0;
+
+}
+
+section#criar-contrato-form button {
     width: 30%;
     padding: .1rem;
     margin: 1vh;
     border-radius: 5px;
     border: none;
+}
+
+#criar-contrato-form #boteos-criar-contrato {
+    display: flex;
+    justify-content: space-around;
+    margin: 1vh;
 }

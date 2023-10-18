@@ -57,6 +57,8 @@ if($contratoSelecionado !== null) {
                     $contratoSelecionado.remove();
                     $('#solicita-cancelar-contrato').removeClass('btn-confirmado');
                     $('#solicita-cancelar-contrato').addClass('null');
+                    $('#pdf-contrato').addClass('null');
+                    $('#pdf-contrato a').removeAttr('href');
             
                 }, 750);
     
@@ -68,5 +70,18 @@ if($contratoSelecionado !== null) {
     
             }
         });
-    })
+    });
 }
+
+$('#criar-contrato').click(function () {
+    $('#criar-contrato-form').removeClass('oculto')
+});
+
+$('#cancelar').click(function () {
+    $('#criar-contrato-form').addClass('oculto')
+});
+
+$('#enviar').click(function() {
+    alert('ainda não implementado.');
+    $('#criar-contrato-form').addClass('oculto')
+});
