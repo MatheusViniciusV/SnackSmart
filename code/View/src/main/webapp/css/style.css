@@ -2,6 +2,7 @@
     Created on : 8 de out. de 2023, 11:21:52
     Author     : eloym
 */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
 
 :root {
     --cor-principal: #E9E9E9;
@@ -13,13 +14,12 @@
     --cor-confimado: #28A745;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
-
 html, body {
     margin: 0;
     padding: 0;
     font-family: 'Lato', sans-serif;
     color: var(--texto-cor-principal);
+    background-color: var(--cor-principal);
     overflow: hidden;
 }
 
@@ -40,28 +40,3 @@ nav a:link,
     color: var(--texto-cor-secundaria);
 }
 
-main {
-    min-height: 100vh;
-    padding: 1rem 3rem;
-    background-color: var(--cor-principal);
-}
-
-main h1 {
-    margin: 2vh 2vw;
-}
-
-button {
-    background-color: var(--cor-secundaria);
-    color: var(--cor-principal);
-    cursor: pointer;
-}
-
-button:active {
-    background-color: var(--cor-ativo);
-    color: var(--cor-principal);
-}
-
-button.btn-confirmado {
-    background-color: var(--cor-confimado); /* Cor verde */
-    transition: background-color 0.2s; /* Duração da animação */
-}

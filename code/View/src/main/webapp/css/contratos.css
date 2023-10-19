@@ -6,6 +6,32 @@
     --cor-form: #bebcbc;
 }
 
+main {
+    min-height: 100vh;
+    padding: 1rem 3rem;
+    background-color: var(--cor-principal);
+}
+
+main h1 {
+    margin: 2vh 2vw;
+}
+
+button {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-principal);
+    cursor: pointer;
+}
+
+button:active {
+    background-color: var(--cor-ativo);
+    color: var(--cor-principal);
+}
+
+button.btn-confirmado {
+    background-color: var(--cor-confimado); /* Cor verde */
+    transition: background-color 0.2s; /* Duração da animação */
+}
+
 section#lista-contratos {
     display: flex;
     flex-wrap: wrap;
@@ -119,6 +145,10 @@ section#criar-contrato-form input, label {
     margin: 0.2rem 0;
 }
 
+section#criar-contrato-form input.errado {
+    border: 2px solid red;
+}
+
 #criar-contrato-form #dados-locador, #criar-contrato-form #dados-locatario {
     display: grid; 
     grid-template-columns: 1.8fr 0.6fr; 
@@ -173,4 +203,14 @@ section#criar-contrato-form button {
     display: flex;
     justify-content: space-around;
     margin: 1vh;
+}
+
+span.obrigatorio:first-child {
+    color: var(--cor-secundaria);
+    font-size: medium;
+}
+
+span.obrigatorio {
+    color: var(--cor-secundaria);
+    font-size: small;
 }
