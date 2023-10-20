@@ -17,10 +17,10 @@
                 <h3>COD-001</h3>
                 <p>Status: null</p>
                 <img src="src" alt="alt"/><br>
-                <button id="infomaquina">Informações de contrato</button>
-                <button id="remover">Remover Máquina</button>
+                <button class="infoMaquina">Informações de contrato</button>
+                <button class="removerMaquina">Remover Máquina</button>
             </div>
-            
+           
             <div class="slot">
                 <h2>Máquina 02</h2>
                 <h3>COD-002</h3>

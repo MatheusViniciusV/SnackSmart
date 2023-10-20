@@ -1,24 +1,6 @@
-//Buttons 
-let addMaquinaEL = document.querySelector("#addMaquina");
-let infomaquinaEl = document.querySelector(".infomaquinaEl");
-let removerMaquinaEl = document.querySelector(".removerMaquinaEl");
-
-let formAddMaquinaEl = document.querySelector("#formAddMaquinaEl");
-let infoContratoMaquinaEl = document.querySelector("#infoContratoMaquina");
-let remocaoMaquinaEl = document.querySelector("#remocaoMaquinaEl");
-
-addMaquinaEL.addEventListener('click', function(){
-    formAddMaquinaEl.style.display = "inherit;"; 
-});
-
-infomaquinaEl.addEventListener('click', function(){
-    infoContratoMaquinaEl.style.display = "inherit;";    
-});
-
-removerMaquinaEl.addEventListener('click', function(){
-    remocaoMaquinaEl.style.display = "inherit;";    
-});
-
+function  mostrarFormulário(tipoForm){
+    tipoForm.style.display = "inherit;"; 
+}
 
 function criarSlotMaquina(nome, codigo, status, img){
     let novoSlot = document.createElement("div");
@@ -39,3 +21,29 @@ function criarSlotMaquina(nome, codigo, status, img){
     novoSlot.appendChild(novoP);
     novoSlot.appendChild(novaImg);
 }
+
+//Buttons 
+let addMaquinaEL = document.querySelector("#addMaquina");
+let infomaquinaEl = document.querySelectorAll(".infoMaquina");
+let removerMaquinaEl = document.querySelectorAll(".removerMaquina");
+
+let formAddMaquinaEl = document.querySelector("#formAddMaquina");
+let infoContratoMaquinaEl = document.querySelector("#infoContratoMaquina");
+let remocaoMaquinaEl = document.querySelector("#remocaoMaquina");
+
+addMaquinaEL.addEventListener('click', mostrarFormulário(formAddMaquinaEl));
+
+infomaquinaEl.forEach(button => {
+    button.addEventListener("click", function() {
+        mostrarFormulário(infoContratoMaquinaEl);
+    });
+});
+
+removerMaquinaEl.forEach(button => {
+    button.addEventListener("click", function() {
+        mostrarFormulário(remocaoMaquinaEl);
+    });
+});
+
+
+

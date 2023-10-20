@@ -11,6 +11,27 @@ html, body {
     justify-content: space-around; 
     align-items: baseline;
 }
+
+
+/*Inicio - Estilo dos botôes*/
+ .removerMaquina, .infoMaquina{
+    border-radius: 10px;
+    width: 5vw;
+    height: 5vh;
+    font-size: small;
+    
+}
+.infoMaquina{
+    grid-area: 5 / 1 / 6 / 2;
+}
+.removerMaquina {
+    background: red;
+    color: white; 
+    grid-area: 5 / 3 / 6 / 4;
+}
+/*Fim - Estilo dos botôes*/
+
+/*Inicio - Estilo dos slots*/
 .slot {
     background-color: white;
     border: solid black 1px; 
@@ -18,18 +39,11 @@ html, body {
     border-radius: 5%;
     box-shadow: 2px 2px 2px gray;
     width: 15vw;
-    height: 25vh;
+    height: 30vh;
     margin: 8vh 8vw;
-}
-
-#gestaoMaquinasMain button{
-    border-radius: 10px;
-    width: 5vw;
-    height: 5vh;
-}
-#remover {
-    background: red;
-    color: white; 
+    display: grid; 
+    grid-template-columns: 4.5vw 6vw 4.5vw; 
+    grid-template-rows: 7vh 7vh 7vh 1fr 1fr;
 }
 
 #gestaoMaquinasMain h2, #gestaoMaquinasMain h3{
@@ -39,13 +53,39 @@ html, body {
     text-align: center;
 }
 
+#gestaoMaquinasMain h2{
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+#gestaoMaquinasMain h3{
+    grid-area: 2 / 2 / 3 / 3;
+}
+#gestaoMaquinasMain img{
+    grid-area: 4 / 2 / 5 / 3;
+}
 #gestaoMaquinasMain p {
     font-family: 'Lato', sans-serif;
     font-size: medium; 
     color: black;
     text-align: center;
+    grid-area: 3 / 2 / 4 / 3;
 }
+#addMaquina{
+    grid-area: 3 / 2 / 4 / 3;
+}
+/*Fim - Estilo dos slots*/
 
-#formAddMaquina, #infoContratoMaquina{
+#formAddMaquina, #infoContratoMaquina, #remocaoMaquina{
     display: none; 
+    position: fixed;
+    top: 0px;
+    align-self: center;
+    background-color: white;
+    border: solid black 1px; 
+    padding: 10px 10px;
+    border-radius: 5%;
+    box-shadow: 2px 2px 2px gray;
+    width: 15vw;
+    height: 30vh;
+    margin: 8vh 8vw;
 }
