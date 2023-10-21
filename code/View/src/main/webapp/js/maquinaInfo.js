@@ -1,49 +1,147 @@
-function  mostrarFormulário(tipoForm){
-    tipoForm.style.display = "inherit;"; 
+//Botões  
+let vetor = ["Alice", "Duda", "Fernando", "Alemão", "Jó Soares", "Neymar", "Yasmin"];
+let addMaquinaEL = document.querySelector("#addMaquina");
+let infomaquinaEl = document.querySelectorAll(".infoMaquina");
+let removerMaquinaEl = document.querySelectorAll(".removerMaquina");
+let formAddMaquinaEl = document.querySelector("#formAddMaquina");
+let infoContratoMaquinaEl = document.querySelector("#infoContratoMaquina");
+let remocaoMaquinaEl = document.querySelector("#remocaoMaquina");
+let blockerEl = document.getElementById("blocker");
+    
+function  mostrarFormulario(tipoForm){
+    let formulario = document.getElementById(tipoForm);
+    if (tipoForm === "formAddMaquina"){
+        selectDinamicoLocatario(vetor);     //Aqui será necessário comunicar com o banco de dados
+    }
+    formulario.style.display = "flex"; 
+    blockerEl.style.display = "block";
+}
+
+function mudarH2() {
+    let statusEl = document.getElementById("status");
+        let statusDinamicoH2El = document.getElementById("statusDinamicoH2");
+        let opcaoSelecionada = statusEl.value;
+
+        switch (opcaoSelecionada) {
+            case "Disponível":   
+                statusDinamicoH2El.innerHTML = "Status da Máquina: Disponível";  
+                break;
+            case "Em funcionamento":
+                statusDinamicoH2El.innerHTML = "Status da Máquina: Em funcionamento";
+                break;
+            case "Em manutenção":
+                statusDinamicoH2El.innerHTML = "Status da Máquina: Em manutenção";
+                break;
+            default:
+                statusDinamicoH2El.innerHTML = "Status da Máquina: Aguardando manutenção";
+        }
+}
+
+function selectDinamicoLocatario(vetor){
+    let locatarioEl = document.getElementById("locatario");
+    for (let i = 0; i < vetor.length; i++){
+        let option = document.createElement('option');
+        option.value = vetor[i];
+        option.textContent = vetor[i];
+        locatarioEl.appendChild(option); 
+    }
+}
+
+function ButtonIClick() {
+    mostrarFormulario('infoContratoMaquina');
+}
+function ButtonRClick() {
+    mostrarFormulario('remocaoMaquina');
 }
 
 function criarSlotMaquina(nome, codigo, status, img){
+    let mainEl = document.getElementById("gestaoMaquinasMain");
+    let articleBeforeEl = document.getElementById("formAddMaquina"); 
     let novoSlot = document.createElement("div");
     let novoh2 = document.createElement("h2");
     let novoh3 = document.createElement("h3");
     let novoP = document.createElement("p");
     let novaImg = document.createElement("img");
+    let novoBotaoInfoEl = document.createElement("button");
+    let novoBotaoRemoverEl = document.createElement("button");
+    let novoBreak = document.createElement("br");
+    
     
     novoSlot.classList.add("slot");
+    novoBotaoInfoEl.classList.add("infoMaquina");
+    novoBotaoRemoverEl.classList.add("removerMaquina");
+    
+    novoBotaoInfoEl.addEventListener("click", ButtonIClick);
+    novoBotaoRemoverEl.addEventListener("click", ButtonRClick);
+
+   
+    novoBotaoInfoEl.innerHTML = "Informações de contrato";
+    novoBotaoRemoverEl.innerHTML = "Remover Máquina";
     novoh2.innerHTML = nome;
     novoh3.innerHTML = "COD-" + codigo;
-    novoP.innerHTML = "Status: " + status; 
+    novoP.innerHTML = status; 
     novaImg.src = img; 
     novaImg.alt = "Imagem da "+ nome; 
     
+    mainEl.insertBefore(novoSlot, articleBeforeEl);
     novoSlot.appendChild(novoh2);
     novoSlot.appendChild(novoh3);
     novoSlot.appendChild(novoP);
     novoSlot.appendChild(novaImg);
+    novoSlot.appendChild(novoBreak);  
+    novoSlot.appendChild(novoBotaoInfoEl);
+    novoSlot.appendChild(novoBotaoRemoverEl);
+   
+   let slot = document.getElementById("addMaquinaSlot");
+   slot.remove();
+   criarSlotAddMaquina();
+   let infoEl = document.querySelectorAll(".infoMaquina");
+   infoEl.forEach(function(botao) {
+    botao.addEventListener("click", recuperaInfoSlotMaquina);
+   });
 }
 
-//Buttons 
-let addMaquinaEL = document.querySelector("#addMaquina");
-let infomaquinaEl = document.querySelectorAll(".infoMaquina");
-let removerMaquinaEl = document.querySelectorAll(".removerMaquina");
+function criarSlotAddMaquina(){
+    let mainEl = document.getElementById("gestaoMaquinasMain"); 
+    let articleBeforeEl = document.getElementById("formAddMaquina"); 
+    
+    let novoSlot = document.createElement("div");
+    let novoLabel = document.createElement("label");
+    let novoBreak = document.createElement("br");
+    let novoBotao = document.createElement("button");
+    
+    novoSlot.classList.add("slot");
+    novoSlot.setAttribute("id", "addMaquinaSlot");
+    novoBotao.setAttribute("id", "addMaquina");
+    novoLabel.setAttribute("id", "addMaquinaL");
+    function ButtonClick() { 
+        mostrarFormulario('formAddMaquina');
+    }
+    novoBotao.addEventListener("click", ButtonClick); 
+    novoBotao.innerHTML = "+";
+    novoLabel.innerHTML = "Adicionar nova máquina";
+    mainEl.insertBefore(novoSlot, articleBeforeEl);
+    novoSlot.appendChild(novoLabel);
+    novoSlot.appendChild(novoBotao);
+    novoSlot.appendChild(novoBreak);  
+}
 
-let formAddMaquinaEl = document.querySelector("#formAddMaquina");
-let infoContratoMaquinaEl = document.querySelector("#infoContratoMaquina");
-let remocaoMaquinaEl = document.querySelector("#remocaoMaquina");
-
-addMaquinaEL.addEventListener('click', mostrarFormulário(formAddMaquinaEl));
-
-infomaquinaEl.forEach(button => {
-    button.addEventListener("click", function() {
-        mostrarFormulário(infoContratoMaquinaEl);
-    });
-});
-
-removerMaquinaEl.forEach(button => {
-    button.addEventListener("click", function() {
-        mostrarFormulário(remocaoMaquinaEl);
-    });
-});
+function recuperaInfoSlotMaquina() {
+   let informacoeSlotMaquina = []; 
+   informacoeSlotMaquina[0] = this.parentNode.firstElementChild.innerHTML;
+   informacoeSlotMaquina[1] = this.parentNode.children[1].innerHTML;
+   informacoeSlotMaquina[2] = this.parentNode.children[2].innerHTML;
+   return informacoeSlotMaquina; 
+}
 
 
 
+
+function Main(){
+    criarSlotMaquina("Máquina de Salgadinhos", 372, "Aguardando manutenção", "Ceara.png"); //FUNÇAO TESTE
+    criarSlotMaquina("KTO", 69, "Em manutenção", "Ceara.png"); //FUNÇAO TESTE
+    criarSlotMaquina("Corinthians", 24, "Em funcionamento", "Ceara.png"); //FUNÇAO TESTE
+    criarSlotMaquina("Bradesco", 2021, "Disponível", "Ceara.png"); //FUNÇAO TESTE
+}
+
+Main(); 

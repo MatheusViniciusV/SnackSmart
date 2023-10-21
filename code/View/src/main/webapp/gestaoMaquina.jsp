@@ -10,35 +10,20 @@
     <body>
         <%@include file="comuns/retornarInicial.jsp" %>
         <h1 id="titulo">Máquinas</h1>
+        <div id="blocker"></div>
         <main id="gestaoMaquinasMain">
-            
-            <div class="slot">
-                <h2>Máquina 01</h2>
-                <h3>COD-001</h3>
-                <p>Status: null</p>
-                <img src="src" alt="alt"/><br>
-                <button class="infoMaquina">Informações de contrato</button>
-                <button class="removerMaquina">Remover Máquina</button>
+                                            
+            <div class="slot" id="addMaquinaSlot">
+                <label id="addMaquinaL">Adicionar nova máquina</label>
+                <button id="addMaquina">+</button>
+                <br>
             </div>
-           
-            <div class="slot">
-                <h2>Máquina 02</h2>
-                <h3>COD-002</h3>
-                <p>Status: null</p>
-                <img src="src" alt="alt"/><br>
-                <button class="infoMaquina">Informações de contrato</button>
-                <button class="removerMaquina">Remover Máquina</button>
-            </div>
-            
-            <div class="slot">
-                <button id="addMaquina">Adicionar nova máquina</button>
-            </div>
-                         
-            <article id="formAddMaquina">
-                <h2>Adicionar nova máquina</h2>
-                <p>Preencha todos os campos abaixos<p>
+                        
+            <article id="formAddMaquina">               
                 <form action="GestaoMaquina" method="post" enctype="multipart/form-data">
-                    <label for="nome">Nome:</label>
+                    <h1>Adicionar nova máquina</h1>
+                    <h2>Preencha todos os campos abaixos</h2>
+                    <label for="nome">Nome da Máquina:</label>
                     <input type="text" id="nome" name="nome" required><br>
 
                     <label for="tipo">Tipo:</label>                       
@@ -47,32 +32,47 @@
                         <option value="nãoRefrigerada">Não refrigerada</option>
                     </select><br>
 
-                    <label for="imagem">Imagem:</label>
+                    <label for="imagem">Foto da máquina:</label>
                     <input type="file" id="imagem" name="imagem" required><br>
-
+                    
+                    <label for="locatario">Locatário responsável:</label>
+                    <select id="locatario" name="locatario" required>
+                    </select><br>  
+                
                     <label for="localizacao">Localização:</label>
                     <input type="text" id="localizacao" name="localizacao" required><br>
-
+                    
                     <input type="submit" value="Enviar">
-                    <button type="cancel" onclick="window.location='http://gestaoMaquina.jsp';">Cancelar</button>
+                    <button type="cancel" onclick="window.location='gestaoMaquina.jsp';">Cancelar</button>
                 </form>
             </article>
                 
             <article id="infoContratoMaquina"> 
-                <p>Localização: </p> 
-                <p>Locatário responsável: </P> 
-                <select id="status" name="status" required>
+                <h1 id="nomeMaquina">Máquina 01</h1>
+                <h1 id="codeMaquina">COD-001</h1>
+                <h2>👤Locatário responsável: Geraldo Azeved</h2> 
+                <h2>📍Localização: Bahia, Salvador</h2>              
+                <h2 id="statusDinamicoH2">Status da Máquina: Disponível</h2> 
+                
+                <label>Alterar status da máquina:
+                <select id="status" name="status" onchange="mudarH2()" required >
                     <option value="Disponível">Disponível</option>
                     <option value="Em funcionamento">Em funcionamento</option>
                     <option value="Em manutenção">Em manutenção</option>
                     <option value="Aguardando manutenção">Aguardando manutenção</option>                       
-                </select><br>   
+                </select><br>  
+                </label>
+                <input type="submit" value="Concluído">
+                <button type="cancel" onclick="window.location='gestaoMaquina.jsp';">Cancelar</button>
             </article>
             
             <article id="remocaoMaquina">
-                <h2>Você tem certeza?</h2>
+                <h1>Você tem certeza?</h1>
+                <h2>Ao remover a máquina, todos os dados relacionados a ela serão excluídos!</h2>
+                <p>⚠ Dados relacionados à máquina e ao locatário não poderão serem acessados posteriormente.
+                    Caso a máquina esteja ligada a algum cliente é importante que o locatário esteja ciente disso.</p>
                 <input type="submit" value="REMOVER MÁQUINA">
-                <button type="cancel" onclick="window.location='http://gestaoMaquina.jsp';">Cancelar</button>
+                <button type="cancel" onclick="window.location='gestaoMaquina.jsp';">CANCELAR</button>
             </article>
             
         </main>
