@@ -24,8 +24,9 @@
             
         <div class="conteudo">
             <div class="box">
+                <%String recebimento = (String)request.getAttribute("dados");%>
                 <p>Recebimento previsto para o mês:</p>
-                <p id="recebimento">R$: 1000,00</p>
+                <p id="recebimento"><%= recebimento%></p>
                 <p>Data de recebimento: XX/XX/XXXX</p>
             </div>
             <div class="box">
