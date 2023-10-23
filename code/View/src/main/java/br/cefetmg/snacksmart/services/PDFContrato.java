@@ -18,8 +18,10 @@ import br.cefetmg.snacksmart.idao.IContratosDAO;
 import br.cefetmg.snacksmart.dao.ContratoDAO;
 import com.aspose.pdf.Document;
 import com.aspose.pdf.Page;
+import com.aspose.pdf.Position;
 import com.aspose.pdf.TextFragment;
 import java.io.OutputStream;
+import java.time.LocalDate;
 
 
 /**
@@ -34,11 +36,22 @@ public class PDFContrato extends HttpServlet {
     throws ServletException, IOException {
         response.setContentType("application/pdf");
         
+        LocalDate dataInicio = LocalDate.of(2023, 7, 1);
+        LocalDate dataExpiracao = dataInicio.plusYears(1);  // Um ano após o início
+        LocalDate dataPagamento = LocalDate.of(2023, 7, 1);
+        String observacoes = "Observações aleatórias";  // Substitua por observações aleatórias
+
+        ContratoDTO contrato = new ContratoDTO(dataInicio, dataExpiracao, dataPagamento, observacoes);
 
         
         Document documento = new Document();
         Page pagina = documento.getPages().add();
-        pagina.getParagraphs().add(new TextFragment("Hello World!"));
+        TextFragment titulo = new TextFragment("Hello World!");
+        titulo.setPosition(new Position(100, 900));
+        titulo.getTextState().setFontSize(16);
+        
+        
+        pagina.getParagraphs().add(titulo);
         
         // Configurar cabeçalhos para download
         response.setHeader("Content-Disposition", "attachment; filename=\"contrato-.pdf\"");
