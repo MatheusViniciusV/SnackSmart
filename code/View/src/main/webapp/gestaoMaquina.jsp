@@ -11,39 +11,37 @@
         <%@include file="comuns/retornarInicial.jsp" %>
         <h1 id="titulo">Máquinas</h1>
         <div id="blocker"></div>
-        <main id="gestaoMaquinasMain">
-                                            
+        <main id="gestaoMaquinasMain">                                 
             <div class="slot" id="addMaquinaSlot">
                 <label id="addMaquinaL">Adicionar nova máquina</label>
                 <button id="addMaquina">+</button>
-                <br>
             </div>
                         
             <article id="formAddMaquina">               
                 <form action="GestaoMaquina" method="post" enctype="multipart/form-data">
-                    <h1>Adicionar nova máquina</h1>
-                    <h2>Preencha todos os campos abaixos</h2>
-                    <label for="nome">Nome da Máquina:</label>
+                    <h1 id="tituloForm">Adicionar nova máquina</h1>
+                    <h2 id="subtituloForm">Preencha todos os campos abaixos</h2>
+                    <label id="nomeDaMaquina" for="nome">Nome da Máquina:</label>
                     <input type="text" id="nome" name="nome" required><br>
 
-                    <label for="tipo">Tipo:</label>                       
+                    <label id="tipoInput" for="tipo">Tipo:</label>                       
                     <select id="tipo" name="tipo" required>
                         <option value="refrigerada">Refrigerada</option>
                         <option value="nãoRefrigerada">Não refrigerada</option>
                     </select><br>
 
-                    <label for="imagem">Foto da máquina:</label>
-                    <input type="file" id="imagem" name="imagem" required><br>
+                    <label class="imagem" for="imagem">Foto da máquina:</label>
+                    <input type="file" class="imagem" name="imagem" required><br>
                     
-                    <label for="locatario">Locatário responsável:</label>
+                    <label id="locatarioInput" for="locatario">Locatário responsável:</label>
                     <select id="locatario" name="locatario" required>
                     </select><br>  
                 
-                    <label for="localizacao">Localização:</label>
+                    <label id="localizacaoText" for="localizacao">Localização:</label>
                     <input type="text" id="localizacao" name="localizacao" required><br>
                     
-                    <input type="submit" value="Enviar">
-                    <button type="cancel" onclick="window.location='gestaoMaquina.jsp';">Cancelar</button>
+                    <input id="enviarformAddMaquina"class="botaoForm" type="submit" value="Enviar">
+                    <button id="cancelarformAddMaquina" class="botaoForm"type="cancel" onclick="window.location='gestaoMaquina.jsp';">Cancelar</button>
                 </form>
             </article>
                 
@@ -62,8 +60,11 @@
                     <option value="Aguardando manutenção">Aguardando manutenção</option>                       
                 </select><br>  
                 </label>
-                <input type="submit" value="Concluído">
-                <button type="cancel" onclick="window.location='gestaoMaquina.jsp';">Cancelar</button>
+                <div class="botoesForm">
+                    <input class="botaoForm" type="submit" value="Concluído">
+                    <button class="botaoForm" type="cancel" onclick="window.location='gestaoMaquina.jsp';">Cancelar</button>
+                </div>
+                    
             </article>
             
             <article id="remocaoMaquina">
@@ -71,8 +72,10 @@
                 <h2>Ao remover a máquina, todos os dados relacionados a ela serão excluídos!</h2>
                 <p>⚠ Dados relacionados à máquina e ao locatário não poderão serem acessados posteriormente.
                     Caso a máquina esteja ligada a algum cliente é importante que o locatário esteja ciente disso.</p>
-                <input type="submit" value="REMOVER MÁQUINA">
-                <button type="cancel" onclick="window.location='gestaoMaquina.jsp';">CANCELAR</button>
+                <div class="botoesForm">
+                    <input class="botaoForm" type="submit" value="REMOVER MÁQUINA">
+                    <button class="botaoForm" type="cancel" onclick="window.location='gestaoMaquina.jsp';">CANCELAR</button>
+                </div>
             </article>
             
         </main>

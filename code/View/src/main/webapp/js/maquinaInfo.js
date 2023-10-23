@@ -1,5 +1,5 @@
 //Botões  
-let vetor = ["Alice", "Duda", "Fernando", "Alemão", "Jó Soares", "Neymar", "Yasmin"];
+let vetor = ["Nenhum", "Alice", "Duda", "Fernando", "Alemão", "Jó Soares", "Neymar", "Yasmin"];
 let addMaquinaEL = document.querySelector("#addMaquina");
 let infomaquinaEl = document.querySelectorAll(".infoMaquina");
 let removerMaquinaEl = document.querySelectorAll(".removerMaquina");
@@ -140,8 +140,8 @@ function recuperaInfoSlotMaquina() {
 function Main(){
     criarSlotMaquina("Máquina de Salgadinhos", 372, "Aguardando manutenção", "Ceara.png"); //FUNÇAO TESTE
     criarSlotMaquina("KTO", 69, "Em manutenção", "Ceara.png"); //FUNÇAO TESTE
-    criarSlotMaquina("Corinthians", 24, "Em funcionamento", "Ceara.png"); //FUNÇAO TESTE
-    criarSlotMaquina("Bradesco", 2021, "Disponível", "Ceara.png"); //FUNÇAO TESTE
-}
+    criarSlotMaquina("Corinthians", 24, "Disponível", "Ceara.png"); //FUNÇAO TESTE
+    criarSlotMaquina("Corinthians", 24, "Disponível", "Ceara.png"); //FUNÇAO TESTE
+}   
 
 Main(); 
