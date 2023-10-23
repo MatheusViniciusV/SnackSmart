@@ -117,6 +117,7 @@
             </div>
         </main>
 
+        <%@include file="comuns/validarRegEx.jsp" %>
         <%@include file="comuns/jqueryLink.jsp" %>
         <script src="js/contratos.js"></script>
     </body>

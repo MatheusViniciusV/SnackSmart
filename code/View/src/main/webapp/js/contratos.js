@@ -50,16 +50,16 @@ if($contratoSelecionado !== null) {
             success: function (response) {
     
                 $('#solicita-cancelar-contrato').addClass('btn-confirmado');
-    
+                
                 setTimeout(function() {
                     $contratoSelecionado.remove();
                     $('#solicita-cancelar-contrato').removeClass('btn-confirmado');
                     $('#solicita-cancelar-contrato').addClass('null');
                     $('#pdf-contrato').addClass('null');
                     $('#pdf-contrato a').removeAttr('href');
-            
+                    $contratoSelecionado = null;
                 }, 750);
-    
+                
                 console.log(`Contrato ${contratoDataSend.id} deletado com sucesso.`);
             },
             error: function (error) {
@@ -76,31 +76,20 @@ $('#criar-contrato').click(function () {
 });
 
 $('#cancelar').click(function () {
-    $('#criar-contrato-form').addClass('oculto')
+    $('#criar-contrato-form').addClass('oculto');
+    $('input').removeClass('errado');
+    
 });
 
 $('#enviar').click(function() {
-    let formCorreto = true;
-    const cpfRegEx = /\d{3}\.\d{3}\.\d{3}\.-\d{2}/;
-    const telRegEx = /\(\d{2}\)\d{9}/
-    const emailRegEx = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i
-
-    function validarRegEx(input, regEx) {
-        let $input = $(input);
-
-        if(!regEx.test($input.val())) {
-            $input.addClass('errado');
-            $input.val('');
-            formCorreto = false;
-        }
-    } 
-
-    validarRegEx('input[name=locatario-cpf', cpfRegEx);
-    validarRegEx('input[name=locatario-email', emailRegEx);
-    validarRegEx('input[name=locatario-telefone', telRegEx);
+    let formCorreto = true; 
+    
+    validarRegEx('input[name=locatario-cpf', cpfRegEx, formCorreto);
+    validarRegEx('input[name=locatario-email', emailRegEx, formCorreto);
+    validarRegEx('input[name=locatario-telefone', telRegEx, formCorreto);
 
     $('input').each(function() {
-        if($(this).val() == '') {
+        if($(this).val() === '') {
             $(this).addClass('errado');
             formCorreto = false;
         } else {
@@ -126,12 +115,12 @@ $('#enviar').click(function() {
             dataTermino: $('input[name=data-termino').val(),
             dataPagamento: $('input[name=data-pagamento').val(),
             Observacoes: $('textarea[name=observacoes]').val(),
-        }
+        };
     
         $.ajax({
-            type: 'POST', // Tipo de solicitação (POST)
-            url: 'CriarContrato', // URL do servlet
-            data: dataContrato, // Dados a serem enviados no corpo da solicitação
+            type: 'POST', 
+            url: 'CriarContrato', 
+            data: dataContrato, 
             success: function (response) {
                 // Ação a ser executada em caso de sucesso
                 // alert("Solicitação bem-sucedida:" + response);
@@ -147,7 +136,7 @@ $('#enviar').click(function() {
             
                 }, 750);
     
-                console.log(`Contrato ${contratoDataSend.id} deletado com sucesso.`);
+                console.log(`Contrato ${dataContrato.id} deletado com sucesso.`);
             },
             error: function (error) {
                 

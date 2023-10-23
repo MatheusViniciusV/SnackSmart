@@ -13,6 +13,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import br.cefetmg.snacksmart.dto.ContratoDTO;
+import br.cefetmg.snacksmart.idao.IContratosDAO;
+import br.cefetmg.snacksmart.dao.ContratoDAO;
+import com.aspose.pdf.Document;
+import com.aspose.pdf.Page;
+import com.aspose.pdf.TextFragment;
+import java.io.OutputStream;
+
+
 /**
  *
  * @author eloym
@@ -24,10 +33,24 @@ public class PDFContrato extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("application/pdf");
+        
 
+        
+        Document documento = new Document();
+        Page pagina = documento.getPages().add();
+        pagina.getParagraphs().add(new TextFragment("Hello World!"));
+        
         // Configurar cabeçalhos para download
         response.setHeader("Content-Disposition", "attachment; filename=\"contrato-.pdf\"");
 
+        OutputStream out = response.getOutputStream();
+
+
+        // Salve o documento PDF no OutputStream
+        documento.save(out);
+
+        // Feche o documento
+        documento.close();
     } 
 
     
