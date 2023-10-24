@@ -5,13 +5,12 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%--<%@include file="comuns/taglibs.jsp" %>--%>
 <%-- 
     Será o mesmo jsp para locador e locatario, quando eu tiver com 
     as dependencias corretas vou fazer a view separar a visão de cada 
     da tela.
 --%>
-
 
 
 <!DOCTYPE html>
@@ -56,6 +55,7 @@
             <section id="criar-contrato-form" class="oculto">
                 <form action="CriarContrato" method="post">
                     <h2>Novo contrato</h2>
+                    <span class="obrigatorio">obrigatório *</span>
                     <h3>Dados do Locador</h3>
                     <div id="dados-locador">
                         <label>Nome: <br>
@@ -68,33 +68,33 @@
                             <input type="email" name="locador-email">
                         </label>
                         <label class="telefone">Telefone: <br>
-                            <input type="tel" name="locatador-telefone">
+                            <input type="tel" name="locador-telefone">
                         </label>
                     </div>
                     <h3>Dados do Locatário</h3>
                     <div id="dados-locatario">
-                        <label>Nome:  <br>
+                        <label>Nome: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr>  <br>
                             <input type="text" name="locatario-nome" id="">
                         </label>
-                        <label class="cpf">CPF: <br>
+                        <label class="cpf">CPF: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
                             <input type="text" name="locatario-cpf" placeholder="000.000.000-00" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
                         </label>
-                        <label>Email: <br>
+                        <label>Email: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
                             <input type="email" placeholder="emailexemplo@exemplo.com" name="locatario-email">
                         </label>
-                        <label class="telefone">Telefone: <br>
+                        <label class="telefone">Telefone: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
                             <input type="tel" placeholder="(00)000000000" name="locatario-telefone">
                         </label>
                     </div>
                     <h3>Dados do contrato</h3>
                     <div id="dados-contrato">
-                        <label>Data de inicio: <br>
+                        <label>Data de inicio: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
                             <input type="date" name="data-inicio" id="">
                         </label>
-                        <label>Data de término: <br>
+                        <label>Data de término: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
                             <input type="date" name="data-termino" id="">
                         </label>
-                        <label>Data mensal de pagamento: <br>
+                        <label>Data mensal de pagamento: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
                             <input type="date" name="data-pagamento" id="">
                         </label>
                         <label>Observações: <br>
@@ -117,6 +117,7 @@
             </div>
         </main>
 
+        <%@include file="comuns/validarRegEx.jsp" %>
         <%@include file="comuns/jqueryLink.jsp" %>
         <script src="js/contratos.js"></script>
     </body>
