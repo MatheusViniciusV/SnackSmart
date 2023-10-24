@@ -1,0 +1,128 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 24 de out. de 2023, 09:42:21
+    Author     : marco
+*/
+
+
+.botaoCalendar {
+  width: 75px;
+  cursor: pointer;
+  box-shadow: 0px 0px 2px gray;
+  border: none;
+  outline: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+}
+
+#header {
+  padding: 10px;
+  color: var(--header-color) ;
+  font-size: 26px;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: space-between;
+}
+#header button .botaoCalendar {
+  background-color:var(--header-button);
+}
+#container {
+  width: 42vw;
+  margin-left: 4vw;
+  background-color: #fff; 
+  border-radius: 10px; 
+  padding: 10px;
+  box-shadow: 5px 4px 14px 0px rgb(53, 53, 53);
+}
+#weekdays {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  color: var(--color-weekdays) ;
+  margin-bottom: 1vh;
+}
+#weekdays div {
+
+}
+#calendar {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.day {
+  width: 6vw;
+  height: 6vh;
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: var(--color-day);
+  box-shadow: 0px 0px 3px ;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+}
+.day:hover {
+  background-color: var(--hover);
+}
+
+.day + #currentDay {
+  background-color:var(--current-day);
+}
+.event {
+  background-color: var(--event-color);
+  color: rgb(5, 5, 5);
+  overflow: hidden;
+  font-size: 13px;
+}
+.padding {
+  cursor: default !important;
+  background-color: var(--body-color) !important;
+  box-shadow: none !important;
+}
+#newEventModal, #deleteEventModal {
+  display: none;
+  z-index: 20;
+  background-color: lightgray;
+  box-shadow: 0px 0px 3px black;
+  border-radius: 5px;
+  left: calc(50% - 175px);
+  position: absolute;
+  font-family: sans-serif;
+  top: 30vh;
+  padding: 1vw;
+}
+#eventTitleInput {
+  box-sizing: border-box;
+  margin-bottom: 25px;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  box-shadow: 0px 0px 3px gray;
+}
+ #eventTitleInput.error {
+  border: 2px solid red;
+ }
+#cancelButton, #deleteButton {
+  background-color: gray;
+}
+#saveButton, #closeButton {
+  background-color: gray;
+}
+#eventText {
+  font-size: 14px;
+}
+#modalBackDrop {
+  display: none;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: rgba(0,0,0,0.8);
+  top: 0vh;
+}
