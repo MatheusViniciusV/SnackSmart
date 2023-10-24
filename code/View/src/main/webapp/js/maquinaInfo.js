@@ -7,6 +7,8 @@ let formAddMaquinaEl = document.querySelector("#formAddMaquina");
 let infoContratoMaquinaEl = document.querySelector("#infoContratoMaquina");
 let remocaoMaquinaEl = document.querySelector("#remocaoMaquina");
 let blockerEl = document.getElementById("blocker");
+let localizacaoEl = document.getElementById("localizacao");
+let localizacaoTextEl = document.getElementById("localizacaoText");
     
 function  mostrarFormulario(tipoForm){
     let formulario = document.getElementById(tipoForm);
@@ -134,7 +136,40 @@ function recuperaInfoSlotMaquina() {
    return informacoeSlotMaquina; 
 }
 
+function validarEndereco(input, label) {
+    let apiKey = 'f93f6ab5e3bc485dbd4afd9a9036f5dd'; 
+    let endereco = input.value;    
+    let enderecoBrasil = `${encodeURIComponent(endereco)}, Brasil`;
+    let url = `https://api.opencagedata.com/geocode/v1/json?q=${enderecoBrasil}&key=${apiKey}`;
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.results.length > 0) {
+                input.style.border = "black 2px solid";
+                let resultado = data.results[0];
+                label.textContent = "Localização:";               
+                input.value = resultado.formatted;   
+                if (resultado.components.postcode) {
+                    input.style.border = "red 2px solid";
+                    label.textContent = "Localização Inválida";               
+                    input.value = ""; 
+                } 
+            } 
+            if (input.value === "Brasil"){
+                input.style.border = "red 2px solid";
+                label.textContent = "Localização Inválida";               
+                input.value = ""; 
+            }            
+        })
+        .catch(error => {
+            console.error("Erro ao validar o endereço:", error);
+        });
+} 
 
+
+localizacaoEl.addEventListener("blur", function() {
+    validarEndereco(localizacaoEl, localizacaoTextEl);
+});
 
 
 function Main(){

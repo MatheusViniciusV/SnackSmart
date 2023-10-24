@@ -24,14 +24,14 @@
                     <label id="nomeDaMaquina" for="nome">Nome da Máquina:</label>
                     <input type="text" id="nome" name="nome" required><br>
 
-                    <label id="tipoInput" for="tipo">Tipo:</label>                       
+                    <label id="tipoInput" for="tipo">Tipo da máquina:</label>                       
                     <select id="tipo" name="tipo" required>
                         <option value="refrigerada">Refrigerada</option>
                         <option value="nãoRefrigerada">Não refrigerada</option>
                     </select><br>
-
-                    <label class="imagem" for="imagem">Foto da máquina:</label>
-                    <input type="file" class="imagem" name="imagem" required><br>
+                    
+                    <label id="labelMaquina" class="imagem" for="imagem">Foto da máquina:</label>
+                    <input id="inputMaquina" type="file" class="imagem" name="imagem" required ><br>
                     
                     <label id="locatarioInput" for="locatario">Locatário responsável:</label>
                     <select id="locatario" name="locatario" required>
