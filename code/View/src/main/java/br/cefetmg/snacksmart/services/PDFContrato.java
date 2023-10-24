@@ -5,23 +5,21 @@
 
 package br.cefetmg.snacksmart.services;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import br.cefetmg.snacksmart.dto.ContratoDTO;
-import br.cefetmg.snacksmart.idao.IContratosDAO;
-import br.cefetmg.snacksmart.dao.ContratoDAO;
-import com.aspose.pdf.Document;
-import com.aspose.pdf.Page;
-import com.aspose.pdf.Position;
-import com.aspose.pdf.TextFragment;
-import java.io.OutputStream;
-import java.time.LocalDate;
+
 
 
 /**
@@ -35,36 +33,38 @@ public class PDFContrato extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         response.setContentType("application/pdf");
-        
-        LocalDate dataInicio = LocalDate.of(2023, 7, 1);
-        LocalDate dataExpiracao = dataInicio.plusYears(1);  // Um ano após o início
-        LocalDate dataPagamento = LocalDate.of(2023, 7, 1);
-        String observacoes = "Observações aleatórias";  // Substitua por observações aleatórias
-
-        ContratoDTO contrato = new ContratoDTO(dataInicio, dataExpiracao, dataPagamento, observacoes);
-
+        response.setHeader("Content-Disposition", "attachment; filename=teste.pdf");
         
         Document documento = new Document();
-        Page pagina = documento.getPages().add();
-        TextFragment titulo = new TextFragment("Hello World!");
-        titulo.setPosition(new Position(100, 900));
-        titulo.getTextState().setFontSize(16);
-        
-        
-        pagina.getParagraphs().add(titulo);
-        
-        // Configurar cabeçalhos para download
-        response.setHeader("Content-Disposition", "attachment; filename=\"contrato-.pdf\"");
+        try {
+            PdfWriter.getInstance(documento, response.getOutputStream());
+            
+            criaPDF(documento);
+        } catch(DocumentException | IOException de) {
+            System.err.println(de.getMessage());
+        } finally {
+            documento.close();
+        }
 
-        OutputStream out = response.getOutputStream();
-
-
-        // Salve o documento PDF no OutputStream
-        documento.save(out);
-
-        // Feche o documento
-        documento.close();
     } 
+    
+    private void criaPDF(Document documento) throws DocumentException, IOException {
+        float margensLaterais = 50;
+        BaseFont fontBase = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+        Font fontTitulo = new Font(fontBase, 20, Font.BOLD);
+        
+        documento.open();
+        documento.setMargins(margensLaterais, margensLaterais, 10, 10);
+        // adicionando um parágrafo ao documento
+        
+        documento.add(new Paragraph("Hello World", fontTitulo));
+        documento.add(new Paragraph("Gerando um PDF usando iText em Java"));
+
+        // adicionando um parágrafo com fonte diferente ao arquivo
+        documento.add(new Paragraph("Adicionando outro paragrafo"));
+        
+        documento.add(new Paragraph("testando se rodou\nsla"));
+    }
 
     
     @Override

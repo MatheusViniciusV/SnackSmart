@@ -82,7 +82,6 @@ $('#cancelar').click(function () {
 });
 
 $('#enviar').click(function() {
-<<<<<<< HEAD
     alert('ainda não implementado.');
     $('#criar-contrato-form').addClass('oculto');
 
@@ -97,10 +96,8 @@ $('#enviar').click(function() {
         dataTermino: null,
         dataPagamento: null,
         Observacoes: null,
-    }
+    };
 
-    alert(dataContrato.nomeLocatario);
-=======
     let formCorreto = true; 
     
     validarRegEx('input[name=locatario-cpf', cpfRegEx, formCorreto);
@@ -165,5 +162,4 @@ $('#enviar').click(function() {
         });
     }
 
->>>>>>> f12e031ab7062712b459b3ee4ee69473e9337db5
 });
