@@ -83,5 +83,20 @@ $('#cancelar').click(function () {
 
 $('#enviar').click(function() {
     alert('ainda não implementado.');
-    $('#criar-contrato-form').addClass('oculto')
+    $('#criar-contrato-form').addClass('oculto');
+
+    const dataContrato = {
+        // dados do locatario
+        nomeLocatario: $('input[name=locatario-nome').val(),
+        cpfLocatario: null,
+        emailLocatario: null,
+        telefoneLocatario: null,
+        // dados do contrato
+        dataInicio: null,
+        dataTermino: null,
+        dataPagamento: null,
+        Observacoes: null,
+    }
+
+    alert(dataContrato.nomeLocatario);
 });

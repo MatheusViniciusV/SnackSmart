@@ -18,8 +18,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/contratos.css">
+        <link rel="stylesheet" href="css/style.css">
         <title>Contratos</title>
     </head>
     <body>

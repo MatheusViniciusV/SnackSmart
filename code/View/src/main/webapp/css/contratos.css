@@ -6,6 +6,32 @@
     --cor-form: #bebcbc;
 }
 
+main {
+    min-height: 100vh;
+    padding: 1rem 3rem;
+    background-color: var(--cor-principal);
+}
+
+main h1 {
+    margin: 2vh 2vw;
+}
+
+button {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-principal);
+    cursor: pointer;
+}
+
+button:active {
+    background-color: var(--cor-ativo);
+    color: var(--cor-principal);
+}
+
+button.btn-confirmado {
+    background-color: var(--cor-confimado); /* Cor verde */
+    transition: background-color 0.2s; /* Duração da animação */
+}
+
 section#lista-contratos {
     display: flex;
     flex-wrap: wrap;
