@@ -8,4 +8,8 @@
             30
         </session-timeout>
     </session-config>
+    <servlet>
+        <servlet-name>GerFinanceiroServlet</servlet-name>
+        <servlet-class>GerFinanceiroServlet</servlet-class>
+    </servlet>
 </web-app>

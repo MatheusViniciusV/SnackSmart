@@ -22,7 +22,7 @@
         <input type="button" id="botaoRelatorio" onClick ="document.location.href='a'" value="Emitir relatório geral"></input>
         </div>
             
-        <div class="conteudo">
+        <div class="conteudo" >
             <div class="box">
                 <%String recebimento = (String)request.getAttribute("dados");%>
                 <p>Recebimento previsto para o mês:</p>
