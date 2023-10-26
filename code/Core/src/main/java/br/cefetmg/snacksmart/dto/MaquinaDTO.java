@@ -12,17 +12,8 @@ import br.cefetmg.snacksmart.exceptions.dto.FilaAteracoesVaziaException;
  * @author Arthur Milagres
  */
 public class MaquinaDTO {
-    private String nome, 
-            codigo,
-            imagem,
-            localizacao,
-            tipo, 
-            status;
-    
-    private String novoNome, 
-            novaImagem,
-            novaLocalizacao, 
-            alterarStatus;
+    private String nome, codigo, imagem, localizacao, tipo, locatarioResponsavel, status;
+    private String novoNome, novaImagem, novaLocalizacao, alterarStatus;
     
     MaquinaDTO(String nome, String codigo, String imagem, String tipo){
         this.nome = nome;

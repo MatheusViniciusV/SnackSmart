@@ -9,7 +9,8 @@ let remocaoMaquinaEl = document.querySelector("#remocaoMaquina");
 let blockerEl = document.getElementById("blocker");
 let localizacaoEl = document.getElementById("localizacao");
 let localizacaoTextEl = document.getElementById("localizacaoText");
-    
+let preencherEl = document.querySelectorAll(".preencher");
+
 function  mostrarFormulario(tipoForm){
     let formulario = document.getElementById(tipoForm);
     if (tipoForm === "formAddMaquina"){
@@ -50,6 +51,9 @@ function selectDinamicoLocatario(vetor){
 }
 
 function ButtonIClick() {
+    exibirInfoContratoMaquina("Maquina de Salgados", 3302, "Em funcionamento",
+    "Refrigerada", "Rua Castelo de Arraiolos, Castelo, Belo Horizonte, MG - 31330-070", "Waldir Braz");//FUNÇAO TESTE
+    //Será necessário criar uma conexão com o banco de dados para a passagem dos parâmetros
     mostrarFormulario('infoContratoMaquina');
 }
 function ButtonRClick() {
@@ -136,47 +140,102 @@ function recuperaInfoSlotMaquina() {
    return informacoeSlotMaquina; 
 }
 
-function validarEndereco(input, label) {
-    let apiKey = 'f93f6ab5e3bc485dbd4afd9a9036f5dd'; 
-    let endereco = input.value;    
-    let enderecoBrasil = `${encodeURIComponent(endereco)}, Brasil`;
-    let url = `https://api.opencagedata.com/geocode/v1/json?q=${enderecoBrasil}&key=${apiKey}`;
+function buscarCEP(cep, resposta) {
+    let cepEl = cep; 
+    cep = cep.value.replace(/\D/g, '');
+    if (cep.length !== 8) {
+        resposta.textContent = "CEP inválido.";
+        cepEl.value = "";
+        cepEl.style.border = "1px solid red";
+        return;
+    }
+    const url = `https://viacep.com.br/ws/${cep}/json/`;
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            if (data.results.length > 0) {
-                input.style.border = "black 2px solid";
-                let resultado = data.results[0];
-                label.textContent = "Localização:";               
-                input.value = resultado.formatted;   
-                if (resultado.components.postcode) {
-                    input.style.border = "red 2px solid";
-                    label.textContent = "Localização Inválida";               
-                    input.value = ""; 
-                } 
-            } 
-            if (input.value === "Brasil"){
-                input.style.border = "red 2px solid";
-                label.textContent = "Localização Inválida";               
-                input.value = ""; 
-            }            
+            if (data.erro) {
+                resposta.textContent = "CEP não encontrado.";
+                cepEl.value = "";
+                cepEl.style.border = "1px solid red";
+            } else {               
+                resposta.textContent = "Localização (CEP): ";
+                cepEl.value = `${data.logradouro}, ${data.bairro}, ${data.localidade}, ${data.uf} - ${data.cep}`;
+                cepEl.style.border = "1px solid black";
+            }
         })
         .catch(error => {
-            console.error("Erro ao validar o endereço:", error);
+            console.error('Erro ao buscar o CEP:', error);
+            cepEl.value = "";
+            cepEl.style.border = "1px solid red";
         });
-} 
+}
 
+function verificaPreenchido (event){
+    let inputSelecionado = event.target;
+    if (inputSelecionado.value === ""){
+        inputSelecionado.style.border = "1px solid red";
+    } 
+    else {
+        inputSelecionado.style.border = "1px solid black";
+    }
+}
+
+function exibirInfoContratoMaquina(nomeMaquina, codeMaquina, statusMaquina, tipoMaquina, LocalizacaoDaMaquina, locatarioResponsavel){
+    let nomeMaquinaEl = document.getElementById("nomeMaquina");
+    let codeMaquinaEl = document.getElementById("codeMaquina");
+    let statusMaquinaEl = document.getElementById("statusDinamicoH2");
+    let tipoMaquinaEl = document.getElementById("tipoMaquina");
+    let LocalizacaoDaMaquinaEl = document.getElementById("LocalizacaoDaMaquina");
+    let locatarioMaquinaEl = document.getElementById("locatarioMaquina");
+    
+    nomeMaquinaEl.textContent = nomeMaquina;
+    codeMaquinaEl.textContent = "COD-" + codeMaquina;
+    statusMaquinaEl.textContent = "Status da Máquina: " + statusMaquina;
+    tipoMaquinaEl.textContent = "Tipo da Máquina: " + tipoMaquina;
+    LocalizacaoDaMaquinaEl.textContent = "📍Localização: " + LocalizacaoDaMaquina;
+    locatarioMaquinaEl.textContent = "👤Locatário responsável: " + locatarioResponsavel;
+}
+
+preencherEl.forEach(function(botao) {
+    botao.addEventListener("blur", verificaPreenchido);
+});
 
 localizacaoEl.addEventListener("blur", function() {
-    validarEndereco(localizacaoEl, localizacaoTextEl);
+    buscarCEP(localizacaoEl, localizacaoTextEl);
 });
 
 
+
 function Main(){
-    criarSlotMaquina("Máquina de Salgadinhos", 372, "Aguardando manutenção", "Ceara.png"); //FUNÇAO TESTE
-    criarSlotMaquina("KTO", 69, "Em manutenção", "Ceara.png"); //FUNÇAO TESTE
-    criarSlotMaquina("Corinthians", 24, "Disponível", "Ceara.png"); //FUNÇAO TESTE
-    criarSlotMaquina("Corinthians", 24, "Disponível", "Ceara.png"); //FUNÇAO TESTE
+    let maquina1 = {
+        nome: "Máquina de Salgadinhos",
+        cod: 3372,
+        status: "Aguardando manutenção",
+        imagem: "Ceara.png"
+    };
+    let maquina2 = {
+        nome: "Máquina Coca-Cola",
+        cod: 4322,
+        status: "Em manutenção",
+        imagem: "Ceara.png"
+    };
+    let maquina3 = {
+        nome: "Promotional Machine",
+        cod: 3334,
+        status: "Disponível",
+        imagem: "Ceara.png"
+    };
+    let maquina4 = {
+        nome: "Máquina de Refrigerantes",
+        cod: 9302,
+        status: "Em funcionamento",
+        imagem: "Ceara.png"
+    };
+    
+    let VetorDeObjetoMaquinas = [maquina1, maquina2, maquina3, maquina4];
+    VetorDeObjetoMaquinas.forEach((maquina) => criarSlotMaquina(maquina.nome, maquina.cod, maquina.status, maquina.imagem));
+    //Conexão com o banco de dados para criar cada slot
+   
 }   
 
 Main(); 

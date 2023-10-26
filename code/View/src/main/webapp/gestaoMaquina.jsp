@@ -18,11 +18,11 @@
             </div>
                         
             <article id="formAddMaquina">               
-                <form action="GestaoMaquina" method="post" enctype="multipart/form-data">
+                <form action="gestaoMaquinaServlet" method="post" enctype="multipart/form-data">
                     <h1 id="tituloForm">Adicionar nova máquina</h1>
                     <h2 id="subtituloForm">Preencha todos os campos abaixos</h2>
                     <label id="nomeDaMaquina" for="nome">Nome da Máquina:</label>
-                    <input type="text" id="nome" name="nome" required><br>
+                    <input class="preencher" type="text" id="nome" name="nome" required><br>
 
                     <label id="tipoInput" for="tipo">Tipo da máquina:</label>                       
                     <select id="tipo" name="tipo" required>
@@ -37,8 +37,8 @@
                     <select id="locatario" name="locatario" required>
                     </select><br>  
                 
-                    <label id="localizacaoText" for="localizacao">Localização:</label>
-                    <input type="text" id="localizacao" name="localizacao" required><br>
+                    <label id="localizacaoText" for="localizacao">Localização (CEP):</label>
+                    <input class="preencher" type="text" id="localizacao" name="localizacao" required><br>
                     
                     <input id="enviarformAddMaquina"class="botaoForm" type="submit" value="Enviar">
                     <button id="cancelarformAddMaquina" class="botaoForm"type="cancel" onclick="window.location='gestaoMaquina.jsp';">Cancelar</button>
@@ -48,10 +48,10 @@
             <article id="infoContratoMaquina"> 
                 <h1 id="nomeMaquina">Máquina 01</h1>
                 <h1 id="codeMaquina">COD-001</h1>
-                <h2>👤Locatário responsável: Geraldo Azeved</h2> 
-                <h2>📍Localização: Bahia, Salvador</h2>              
+                <h2 id="locatarioMaquina">👤Locatário responsável: Geraldo Azeved</h2> 
+                <h2 id="LocalizacaoDaMaquina">📍Localização: Bahia, Salvador</h2>              
                 <h2 id="statusDinamicoH2">Status da Máquina: Disponível</h2> 
-                
+                <h2 id="tipoMaquina">Tipo da Máquina: Refrigerada</h2> 
                 <label>Alterar status da máquina:
                 <select id="status" name="status" onchange="mudarH2()" required >
                     <option value="Disponível">Disponível</option>
