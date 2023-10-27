@@ -41,30 +41,21 @@
                     <input class="preencher" type="text" id="localizacao" name="localizacao" required><br>
                     
                     <input id="enviarformAddMaquina"class="botaoForm" type="submit" value="Enviar">
-                    <button id="cancelarformAddMaquina" class="botaoForm"type="cancel" onclick="window.location='gestaoMaquina.jsp';">Cancelar</button>
+                    <div id="cancelarformAddMaquina" class="botaoForm cancelar">Cancelar</div>
                 </form>
             </article>
                 
-            <article id="infoContratoMaquina"> 
+            <article id="infoContratoMaquina">             
                 <h1 id="nomeMaquina">Máquina 01</h1>
                 <h1 id="codeMaquina">COD-001</h1>
                 <h2 id="locatarioMaquina">👤Locatário responsável: Geraldo Azeved</h2> 
                 <h2 id="LocalizacaoDaMaquina">📍Localização: Bahia, Salvador</h2>              
                 <h2 id="statusDinamicoH2">Status da Máquina: Disponível</h2> 
-                <h2 id="tipoMaquina">Tipo da Máquina: Refrigerada</h2> 
-                <label>Alterar status da máquina:
-                <select id="status" name="status" onchange="mudarH2()" required >
-                    <option value="Disponível">Disponível</option>
-                    <option value="Em funcionamento">Em funcionamento</option>
-                    <option value="Em manutenção">Em manutenção</option>
-                    <option value="Aguardando manutenção">Aguardando manutenção</option>                       
-                </select><br>  
-                </label>
+                <h2 id="tipoMaquina">Tipo da Máquina: Refrigerada</h2>                
                 <div class="botoesForm">
-                    <input class="botaoForm" type="submit" value="Concluído">
-                    <button class="botaoForm" type="cancel" onclick="window.location='gestaoMaquina.jsp';">Cancelar</button>
+                    <input class="botaoForm" id="atualizarDados" type="submit" value="Atualizar dados">
+                    <div class="botaoForm cancelar">Voltar</div>
                 </div>
-                    
             </article>
             
             <article id="remocaoMaquina">
@@ -72,12 +63,43 @@
                 <h2>Ao remover a máquina, todos os dados relacionados a ela serão excluídos!</h2>
                 <p>⚠ Dados relacionados à máquina e ao locatário não poderão serem acessados posteriormente.
                     Caso a máquina esteja ligada a algum cliente é importante que o locatário esteja ciente disso.</p>
-                <div class="botoesForm">
-                    <input class="botaoForm" type="submit" value="REMOVER MÁQUINA">
-                    <button class="botaoForm" type="cancel" onclick="window.location='gestaoMaquina.jsp';">CANCELAR</button>
-                </div>
+                <form action="gestaoMaquinaServlet" method="post" enctype="multipart/form-data">
+                    <div class="botoesForm">
+                        <input class="botaoForm" type="submit" value="REMOVER MÁQUINA">
+                        <div class="botaoForm cancelar">Cancelar</div>
+                    </div>
+                </form>
             </article>
             
+            <article id="formAtualizarMaquina">               
+                <form action="gestaoMaquinaServlet" method="post" enctype="multipart/form-data">
+                    <h1 id="tituloUpdate">Atualizar dados da máquina</h1>
+                    
+                    <label id="novoNomeLabel" for="novoNome">Alterar nome da Máquina:</label>
+                    <input type="text" id="novoNome" name="novoNome"><br>
+                    
+                    <label id="novaLocalizacaoLabel" for="novaLocalizacao">Nova localização (CEP):</label>
+                    <input type="text" id="novaLocalizacao" name="novaLocalizacao"><br>
+                    
+                    <label id="novoLocatarioInput" for="novoLocatario">Alterar locatário:</label>
+                    <select id="novoLocatario" name="novoLocatario">
+                    </select><br>  
+                    
+                    <label id="statusLabel" for="status">Alterar status da máquina:</label>
+                    <select id="status" name="status">
+                        <option value="Disponível">Disponível</option>
+                        <option value="Em funcionamento">Em funcionamento</option>
+                        <option value="Em manutenção">Em manutenção</option>
+                        <option value="Aguardando manutenção">Aguardando manutenção</option>                       
+                    </select><br>    
+                    
+                    <label id="labelNovaImagen" class="imagem" for="novaImagem">Alterar foto da máquina:</label>
+                    <input id="inputNovaImagen" type="file" class="imagem" name="novaImagem"><br>
+                                       
+                    <input id="enviarformAtualizarMaquina"class="botaoForm" type="submit" value="Realizar Alterações">
+                    <div id="cancelarformAtualizarMaquina" class="botaoForm cancelar">Cancelar</div>
+                </form>
+            </article> 
         </main>
         <%@include file="comuns/jqueryLink.jsp" %>
         <script src="js/maquinaInfo.js"></script>

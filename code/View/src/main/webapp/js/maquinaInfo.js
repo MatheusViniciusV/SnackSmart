@@ -4,49 +4,48 @@ let addMaquinaEL = document.querySelector("#addMaquina");
 let infomaquinaEl = document.querySelectorAll(".infoMaquina");
 let removerMaquinaEl = document.querySelectorAll(".removerMaquina");
 let formAddMaquinaEl = document.querySelector("#formAddMaquina");
+let formAtualizarMaquinaEl = document.querySelector("#formAtualizarMaquina");
 let infoContratoMaquinaEl = document.querySelector("#infoContratoMaquina");
 let remocaoMaquinaEl = document.querySelector("#remocaoMaquina");
 let blockerEl = document.getElementById("blocker");
 let localizacaoEl = document.getElementById("localizacao");
 let localizacaoTextEl = document.getElementById("localizacaoText");
+let novaLocalizacaoEl = document.getElementById("novaLocalizacao");
+let novaLocalizacaoLabelEl = document.getElementById("novaLocalizacaoLabel");
 let preencherEl = document.querySelectorAll(".preencher");
-
-function  mostrarFormulario(tipoForm){
+let atualizarDadosEl = document.getElementById("atualizarDados");
+let botoesCancelarEl = document.querySelectorAll(".cancelar");
+function mostrarFormulario(tipoForm){
     let formulario = document.getElementById(tipoForm);
-    if (tipoForm === "formAddMaquina"){
+    if (tipoForm === "formAddMaquina" || tipoForm === "formAtualizarMaquina"){
         selectDinamicoLocatario(vetor);     //Aqui será necessário comunicar com o banco de dados
     }
     formulario.style.display = "flex"; 
     blockerEl.style.display = "block";
 }
 
-function mudarH2() {
-    let statusEl = document.getElementById("status");
-        let statusDinamicoH2El = document.getElementById("statusDinamicoH2");
-        let opcaoSelecionada = statusEl.value;
-
-        switch (opcaoSelecionada) {
-            case "Disponível":   
-                statusDinamicoH2El.innerHTML = "Status da Máquina: Disponível";  
-                break;
-            case "Em funcionamento":
-                statusDinamicoH2El.innerHTML = "Status da Máquina: Em funcionamento";
-                break;
-            case "Em manutenção":
-                statusDinamicoH2El.innerHTML = "Status da Máquina: Em manutenção";
-                break;
-            default:
-                statusDinamicoH2El.innerHTML = "Status da Máquina: Aguardando manutenção";
-        }
+function fecharFormularios(){
+    formAddMaquinaEl.style.display = "none"; 
+    formAtualizarMaquinaEl.style.display = "none"; 
+    infoContratoMaquinaEl.style.display = "none"; 
+    remocaoMaquinaEl.style.display = "none"; 
+    blockerEl.style.display = "none";
 }
 
 function selectDinamicoLocatario(vetor){
     let locatarioEl = document.getElementById("locatario");
+    let novoLocatarioEl = document.getElementById("novoLocatario");
+    locatarioEl.innerHTML = "";
+    novoLocatarioEl.innerHTML = "";
     for (let i = 0; i < vetor.length; i++){
         let option = document.createElement('option');
         option.value = vetor[i];
         option.textContent = vetor[i];
-        locatarioEl.appendChild(option); 
+        novoLocatarioEl.appendChild(option);
+        let option2 = document.createElement('option');
+        option2.value = vetor[i];
+        option2.textContent = vetor[i];
+        locatarioEl.appendChild(option2);      
     }
 }
 
@@ -158,7 +157,7 @@ function buscarCEP(cep, resposta) {
                 cepEl.value = "";
                 cepEl.style.border = "1px solid red";
             } else {               
-                resposta.textContent = "Localização (CEP): ";
+                resposta.textContent = "CEP válido: ";
                 cepEl.value = `${data.logradouro}, ${data.bairro}, ${data.localidade}, ${data.uf} - ${data.cep}`;
                 cepEl.style.border = "1px solid black";
             }
@@ -204,7 +203,18 @@ localizacaoEl.addEventListener("blur", function() {
     buscarCEP(localizacaoEl, localizacaoTextEl);
 });
 
+novaLocalizacaoEl .addEventListener("blur", function() {
+    buscarCEP(novaLocalizacaoEl, novaLocalizacaoLabelEl);
+});
 
+atualizarDadosEl.addEventListener("click", function() {
+    fecharFormularios();
+    mostrarFormulario('formAtualizarMaquina'); 
+});;
+
+botoesCancelarEl.forEach(function(botao) {
+    botao.addEventListener("click", fecharFormularios);
+});
 
 function Main(){
     let maquina1 = {
