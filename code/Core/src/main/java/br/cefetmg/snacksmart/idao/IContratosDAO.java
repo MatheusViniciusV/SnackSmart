@@ -4,7 +4,12 @@
  */
 package br.cefetmg.snacksmart.idao;
 
-import br.cefetmg.snacksmart.dto.ContratoDTO;
+import br.cefetmg.snacksmart.dto.ContratosDTO;
+import br.cefetmg.snacksmart.dto.LocatarioDTO;
+import br.cefetmg.snacksmart.exceptions.dao.ElementoNaoExisteException;
+import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
+import br.cefetmg.snacksmart.utils.enums.StatusContrato;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -12,19 +17,25 @@ import java.util.ArrayList;
  * @author eloym
  */
 public interface IContratosDAO {
-    ContratoDTO obterPorID(long id);
+    ContratosDTO getId(long id) throws ElementoNaoExisteException, SQLException;
     
-    ArrayList<ContratoDTO> obterTodos();
+    ArrayList<ContratosDTO> getTodos();
     
-    void registraContrato(ContratoDTO contrato);
+    ArrayList<ContratosDTO> filtra(LocatarioDTO locatario) throws LocatarioInvalidoException, SQLException;
+    
+    void registraContrato(ContratosDTO contrato);
     
     void delete(long id);
     
-    void delete(ContratoDTO contrato);
+    void delete(ContratosDTO contrato);
     
-    void atualizaContrato(ContratoDTO contrato);
+    void atualizaContrato(ContratosDTO contrato);
     
     //long proximoId();
     
     //boolean idUnico(long id);
+    
+    void atualizarStatus(long id, StatusContrato status) throws SQLException;
+    
+    boolean validaAcessoLocatario(long id, String cpfLocatario);
 }

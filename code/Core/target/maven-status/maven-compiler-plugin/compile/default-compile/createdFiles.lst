@@ -1,0 +1,10 @@
+br\cefetmg\snacksmart\dao\MaquinaDAO.class
+br\cefetmg\snacksmart\idao\IGerenteDAO.class
+br\cefetmg\snacksmart\dao\GerenteDAO.class
+br\cefetmg\snacksmart\idao\IMaquinaDAO.class
+br\cefetmg\snacksmart\dto\GerenteDTO.class
+br\cefetmg\snacksmart\dto\MaquinaDTO.class
+br\cefetmg\snacksmart\exceptions\dto\FilaAteracoesVaziaException.class
+br\cefetmg\snacksmart\exceptions\dto\CPFInvalidoException.class
+br\cefetmg\snacksmart\exceptions\dto\SenhaInvalidaTamanhoException.class
+br\cefetmg\snacksmart\exceptions\dto\NomeNuloException.class

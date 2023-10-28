@@ -12,17 +12,19 @@ import br.cefetmg.snacksmart.dao.GerenteDAO;
  *
  * @author eloym
  */
-public class ContratoDTO {
+public class ContratosDTO {
     private long id;
+    private double valor;
     private LocalDate dataInicio;
     private LocalDate dataExpiracao;
     private LocalDate dataPagamento;
     private String observacoes;
     private final GerenteDTO gerente;
 //    private final LocatarioDTO locatario;
+//    private final MaquinaDTO maquina;
 
     // Construtor da classe Contrato
-    public ContratoDTO(long id,
+    public ContratosDTO(long id,
             //LocatarioDTO locatario,
             LocalDate dataInicio, LocalDate dataExpiracao, LocalDate dataPagamento,
             String observacoes) {
@@ -39,7 +41,7 @@ public class ContratoDTO {
         
     }
     
-    public ContratoDTO(//LocatarioDTO locatario,
+    public ContratosDTO(//LocatarioDTO locatario,
             LocalDate dataInicio, LocalDate dataExpiracao, LocalDate dataPagamento,
             String observacoes) {
         
@@ -69,6 +71,10 @@ public class ContratoDTO {
     public LocalDate getDataPagamento() {
         return dataPagamento;
     }
+    
+    public double getValorPagamento() {
+        return valor;
+    }
 
     public String getObservacoes() {
         return observacoes;
@@ -77,12 +83,44 @@ public class ContratoDTO {
     public GerenteDTO getGerente() {
         return gerente;
     }
+    
+    public String getGerenteNome() {
+        return "oi";
+    }
+    
+    public String getGerenteCPF() {
+        return "oi";
+    }
+    
+    public String getGerenteTelefone() {
+        return "oi";
+    }
+    
+    public String getGerenteEmail() {
+        return "oi";
+    }
 
     /*
     public Locatario getLocatario() {
         return locatario;
     }
 */
+    
+    public String getLocatarioNome() {
+        return "sla";
+    }
+    
+    public String getLocatarioCPF() {
+        return "sla";
+    }
+    
+    public String getLocatarioTelefone() {
+        return "sla";
+    }
+    
+    public String getLocatarioEmail() {
+        return "sla";
+    }
     
     public void setId(long id) {
         // esperando BD, talvez seja bom colocar um id para cada contrato.

@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%--<%@include file="comuns/taglibs.jsp" %>--%>
+<%@include file="comuns/taglibs.jsp" %>
 <%-- 
     Será o mesmo jsp para locador e locatario, quando eu tiver com 
     as dependencias corretas vou fazer a view separar a visão de cada 

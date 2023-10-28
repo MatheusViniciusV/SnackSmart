@@ -1,5 +1,7 @@
-package br.cefetmg.snacksmart.services;
+package br.cefetmg.snacksmart.facade;
 
+import br.cefetmg.snacksmart.services.ValidadorUsuario;
+import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,22 +24,28 @@ public class LoginServlet extends HttpServlet {
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ValidadorUsuario validador = new ValidadorUsuario();
+        
         String usuario = request.getParameter("usuario");
         String senha = request.getParameter("senha");
+        
+        if(validador.tipoUsuario(usuario) == TipoUsuario.NAO_CADASTRADO) {
+            
+        }
 
-        int codigologin = validarLogin(usuario, senha);
+        TipoUsuario codigologin = validador.tipoUsuario(usuario);
 
         HttpSession session = request.getSession();
         session.setAttribute("tipousuario", codigologin);
         
         switch(codigologin) {
-            case 0: //inválido
+            case NAO_CADASTRADO: //inválido
                 response.sendRedirect("index.html?error=1"); // Redireciona para a página de login com mensagem de erro
                 break;
-            case 1: // gerente
+            case LOCADOR: // gerente
                 response.sendRedirect("gerenteprincipal.jsp"); // Redireciona para a página principal do gerente
                 break;
-            case 2: // locatário
+            case LOCATARIO: // locatário
                 response.sendRedirect("locatarioprincipal.jsp"); // Redireciona para a página principal do locatario
                 break;
         }
