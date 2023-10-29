@@ -21,7 +21,7 @@ public class MaquinaDTO {
     public int getCodigo(){
         return codigo;
     }
-    public void setLacalizacao(String localizacao){
+    public void setLocalizacao(String localizacao){
          this.localizacao = localizacao;
     }
     public String getLocalizacao(){

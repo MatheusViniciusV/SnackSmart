@@ -10,10 +10,10 @@ public interface IMaquinaDAO {
 
     /**
      *
-     * @return
+     * @param maquina
      */
     void set(MaquinaDTO maquina);
-    public MaquinaDTO get();
+    public MaquinaDTO get(int codigo);
     ArrayList<MaquinaDTO> listarTodos();
     
 }
