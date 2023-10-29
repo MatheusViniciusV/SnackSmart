@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="br.cefetmg.snacksmart.utils.enums.TipoUsuario" %>
 <%@include file="comuns/taglibs.jsp" %>
 
 <%-- 
@@ -14,10 +15,10 @@
 --%>
 
 <% 
-    Integer tipoUsuario = (Integer) session.getAttribute("tipoUsuario"); 
-    Integer LOCADOR = (Integer) session.getAttribute("LOCADOR");
-    Integer LOCATARIO = (Integer) session.getAttribute("LOCATARIO");
-    Integer NAO_CADASTRADO = (Integer) session.getAttribute("NAO_CADASTRADO");
+    TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario"); 
+    TipoUsuario LOCADOR = (TipoUsuario) session.getAttribute("LOCADOR");
+    TipoUsuario LOCATARIO = (TipoUsuario) session.getAttribute("LOCATARIO");
+    TipoUsuario NAO_CADASTRADO = (TipoUsuario) session.getAttribute("NAO_CADASTRADO");
 %>
 
 <!DOCTYPE html>
@@ -28,9 +29,11 @@
         <link rel="stylesheet" href="css/style.css">
         <title>Contratos</title>
     </head>
+    <!-- TODO fazer opção de filtro e busca de contratos -->
     <body>
         <%@include file="comuns/retornarInicial.jsp" %>
         <main>
+            <!-- TODO fazer essa lista aparecer de maneira dinamica -->
             <h1>Contratos </h1>
             <section id="lista-contratos">
                 <article class="contratos" id="contrato-01" data-id="01">
@@ -120,12 +123,16 @@
             </c:if>
             
             <div id="botoes">
-                <button id="solicita-cancelar-contrato" class="null"><h2>Solicitar cancelamento</h2></button>
                 <button id="pdf-contrato" class="null"><a><h2>Emitir PDF</h2></a></button>
-                <c:if test="${tipoUsuario == LOCADOR}">
-                    <button id="criar-contrato"><h2>Criar Novo Contrato</h2></button>
-                </c:if>
-            
+                <c:choose>
+                    <c:when test="${tipoUsuario == LOCADOR}">
+                        <button id="solicita-cancelar-contrato" class="null" data-calcelar="CancelarContrato"><h2>Cancelar Contrato</h2></button>
+                        <button id="criar-contrato"><h2>Criar Novo Contrato</h2></button>
+                    </c:when>
+                    <c:otherwise>
+                        <button id="solicita-cancelar-contrato" class="null" data-calcelar="SolicitarCancelarContrato"><h2>Solicitar cancelamento</h2></button>
+                    </c:otherwise>
+                </c:choose>        
             </div>
         </main>
 

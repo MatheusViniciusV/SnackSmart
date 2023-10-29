@@ -8,12 +8,13 @@ import java.time.LocalDate;
 import br.cefetmg.snacksmart.idao.IGerenteDAO;
 import br.cefetmg.snacksmart.dao.GerenteDAO;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
+import br.cefetmg.snacksmart.utils.enums.StatusContrato;
 
 /**
  *
  * @author eloym
  */
-public class ContratosDTO {
+public class ContratoDTO {
     private long id;
     private double valor;
     private LocalDate dataInicio;
@@ -25,7 +26,7 @@ public class ContratosDTO {
 //    private final MaquinaDTO maquina;
 
     // Construtor da classe Contrato
-    public ContratosDTO(long id,
+    public ContratoDTO(long id,
             //LocatarioDTO locatario,
             LocalDate dataInicio, LocalDate dataExpiracao, LocalDate dataPagamento,
             String observacoes) throws PersistenciaException {
@@ -42,7 +43,7 @@ public class ContratosDTO {
         
     }
     
-    public ContratosDTO(//LocatarioDTO locatario,
+    public ContratoDTO(//LocatarioDTO locatario,
             LocalDate dataInicio, LocalDate dataExpiracao, LocalDate dataPagamento,
             String observacoes) throws PersistenciaException {
         
@@ -59,6 +60,10 @@ public class ContratosDTO {
     
     public long getId() {
         return id;
+    }
+    
+    public StatusContrato getStatus() {
+        return StatusContrato.INVALIDO;
     }
 
     public LocalDate getDataInicio() {

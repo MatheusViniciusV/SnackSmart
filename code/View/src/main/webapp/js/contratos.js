@@ -45,7 +45,7 @@ if($contratoSelecionado !== null) {
     
         $.ajax({
             type: 'POST', 
-            url: 'SolicitarCancelarContrato', 
+            url: $('#solicita-cancelar-contrato').data("calcelar"), 
             data: contratoDataSend,
             success: function (response) {
     

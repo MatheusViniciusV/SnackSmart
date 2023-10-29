@@ -1,7 +1,7 @@
 package br.cefetmg.snacksmart.service_locatario;
 
 import br.cefetmg.snacksmart.dao.ContratosDAO;
-import br.cefetmg.snacksmart.dto.ContratosDTO;
+import br.cefetmg.snacksmart.dto.ContratoDTO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.exceptions.dao.ElementoNaoExisteException;
 import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
@@ -41,9 +41,9 @@ public class AcessarContratos {
             throw new LocatarioInvalidoException("Locatario " + locatario.getNome() + "não existe ou não tem acesso ao contrato");
     }
     
-    public ContratosDTO getContrato(long id, String locatarioCPF) 
+    public ContratoDTO getContrato(long id, String locatarioCPF) 
             throws SQLException, ElementoNaoExisteException, LocatarioInvalidoException {
-        ContratosDTO contrato;
+        ContratoDTO contrato;
         
         LocatarioDTO locatario = new LocatarioDTO();
         
@@ -55,7 +55,7 @@ public class AcessarContratos {
         return contrato;
     }
     
-    public ArrayList<ContratosDTO> getContratos(LocatarioDTO locatario) throws LocatarioInvalidoException, SQLException {
+    public ArrayList<ContratoDTO> getContratos(LocatarioDTO locatario) throws LocatarioInvalidoException, SQLException {
         ArrayList contratos = dao.filtra(locatario);
         
         return contratos;
@@ -72,7 +72,7 @@ public class AcessarContratos {
         Document documento = new Document(PageSize.A4, 60, 60, 40, 40);
         
         PdfWriter.getInstance(documento, output);
-        ContratosDTO contrato = dao.getId(id);
+        ContratoDTO contrato = dao.getId(id);
 
         BaseFont fontBase = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
         Font fontTitulo = new Font(fontBase, 20, Font.BOLD);

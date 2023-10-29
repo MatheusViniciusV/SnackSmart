@@ -4,7 +4,7 @@
  */
 package br.cefetmg.snacksmart.dao;
 
-import br.cefetmg.snacksmart.dto.ContratosDTO;
+import br.cefetmg.snacksmart.dto.ContratoDTO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.exceptions.dao.ElementoNaoExisteException;
 import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
@@ -19,22 +19,27 @@ import java.util.ArrayList;
  */
 public class ContratosDAO implements IContratosDAO {
     @Override
-    public ContratosDTO getId(long id) throws ElementoNaoExisteException, SQLException {
+    public ContratoDTO getId(long id) throws ElementoNaoExisteException, SQLException {
         return null;
     }
     
     @Override
-    public ArrayList<ContratosDTO> getTodos() {
+    public ArrayList<ContratoDTO> getTodos() {
         return null;
     }
     
     @Override
-    public ArrayList<ContratosDTO> filtra(LocatarioDTO locatario) throws LocatarioInvalidoException, SQLException {
+    public ArrayList<ContratoDTO> filtra(LocatarioDTO locatario) throws LocatarioInvalidoException, SQLException {
         return null;
     }
     
     @Override
-    public void registraContrato(ContratosDTO contrato) {
+    public ArrayList<ContratoDTO> filtra(StatusContrato status) throws LocatarioInvalidoException, SQLException {
+        return null;
+    }
+    
+    @Override
+    public void registraContrato(ContratoDTO contrato) {
         
     }
     
@@ -44,12 +49,12 @@ public class ContratosDAO implements IContratosDAO {
     }
     
     @Override
-    public void delete(ContratosDTO contrato) {
+    public void delete(ContratoDTO contrato) {
         
     }
     
     @Override
-    public void atualizaContrato(ContratosDTO contrato) {
+    public void atualizaContrato(ContratoDTO contrato) {
         
     }
     
