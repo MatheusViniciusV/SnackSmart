@@ -26,7 +26,7 @@ public class service_maquina extends HttpServlet {
         out.println("<title>Servlet service_maquina</title>");            
         out.println("</head>");
         out.println("<body>");
-        out.println("<h1>Servlet service_maquina at " + request.getContextPath() + "</h1>");
+        out.println("<h1>Servlet ta rodando</h1>");
         out.println("</body>");
         out.println("</html>");
     }

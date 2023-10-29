@@ -7,6 +7,7 @@ public class MaquinaDTO {
     private final String codigo, tipo;
     private byte[] imagem; 
     StatusMaquina status = StatusMaquina.DISPONIVEL;
+
     public MaquinaDTO(String nome, String codigo, byte[] imagem, String tipo, String localizacao, String locatario, StatusMaquina status){        
         this.nome = nome;
         this.codigo = codigo;

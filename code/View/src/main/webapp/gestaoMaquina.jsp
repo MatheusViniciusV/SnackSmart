@@ -12,18 +12,31 @@
     </head>
     <body>
         <%@include file="comuns/retornarInicial.jsp" %>
-        <h1 id="titulo">Máquinas</h1>
-        <div id="blocker"></div>
-        <main id="gestaoMaquinasMain">                                 
+        <h1 id="tituloDaPagina">Máquinas</h1>
+        <div id="bloquearConteudo"></div>
+        <main id="gestaoMaquinasMain">                  
+            <c:forEach var="item" items="${vetorMaquinas}">
+                <script>
+                    try {
+                        criarSlotMaquina("${item.nome}", "${item.codigo}", "${item.status}", "${item.imagem}");
+                    } catch (NetworkError e) {
+                        console.log("Erro de rede ao criar as máquinas: " + e);
+                    } catch (Exception e) {
+                        console.log("Erro ao criar as máquinas: " + e);
+                    }
+                </script>
+            </c:forEach>
             <div class="slot" id="addMaquinaSlot">
-                <label id="addMaquinaL">Adicionar nova máquina</label>
-                <button id="addMaquina">+</button>
+                <label id="addMaquinaLabel">Adicionar nova máquina</label>
+                <button id="addMaquinaButton">+</button>
             </div>
             <article id="formAddMaquina">               
-                <form action="service_maquina" name="formAddMaquina" method="post" enctype="multipart/form-data">
+                <form action="service_maquina" name="formAddMaquina" method="post" enctype="multipart/form-data">                                 
                     <input type="hidden" name="formulario" value="formAddMaquina">
+                    
                     <h1 id="tituloForm">Adicionar nova máquina</h1>
                     <h2 id="subtituloForm">Preencha todos os campos abaixos</h2>
+                    
                     <label id="nomeDaMaquina" for="nome">Nome da Máquina:</label>
                     <input class="preencher" type="text" id="nome" name="nome" minlength="5" maxlength="32" required><br>
 
@@ -33,8 +46,8 @@
                         <option value="nãoRefrigerada">Não refrigerada</option>
                     </select><br>
                     
-                    <label id="labelMaquina" class="imagem" for="imagem">Foto da máquina:</label>
-                    <input id="inputMaquina" type="file" accept="image/png" class="imagem" name="imagem" required ><br>
+                    <label id="labelImagem" class="imagem" for="imagem">Foto da máquina:</label>
+                    <input id="inputImagem" type="file" accept="image/png" class="imagem" name="imagem" required ><br>
                     
                     <label id="locatarioInput" for="locatario">Locatário responsável:</label>
                     <select id="locatario" name="locatario" required>
@@ -48,17 +61,20 @@
                 </form>
             </article>
                 
-            <article id="infoContratoMaquina">             
+            <article id="informacaoMaquina">       
+                
                 <h1 id="nomeMaquina">Máquina 01</h1>
                 <h1 id="codeMaquina">COD-001</h1>
                 <h2 id="locatarioMaquina">👤Locatário responsável: Geraldo Azeved</h2> 
                 <h2 id="LocalizacaoDaMaquina">📍Localização: Bahia, Salvador</h2>              
                 <h2 id="statusDinamicoH2">Status da Máquina: Disponível</h2> 
-                <h2 id="tipoMaquina">Tipo da Máquina: Refrigerada</h2>                
+                <h2 id="tipoMaquina">Tipo da Máquina: Refrigerada</h2>   
+                
                 <div class="botoesForm">
                     <input class="botaoForm" id="atualizarDados" type="submit" value="Atualizar dados">
                     <div class="botaoForm cancelar">Voltar</div>
                 </div>
+                
             </article>
             
             <article id="remocaoMaquina">
@@ -69,10 +85,12 @@
                 <form action="service_maquina" name="remocaoMaquina" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="formulario" value="remocaoMaquina">
                     <input type="hidden" name="removerMaquinaCodigo" id="removerMaquinaCodigo">
+                    
                     <div class="botoesForm">
                         <input class="botaoForm" name="remover" type="submit" value="REMOVER MÁQUINA">
                         <div class="botaoForm cancelar">Cancelar</div>
                     </div>
+                    
                 </form>
             </article>
             
@@ -109,5 +127,14 @@
             </article> 
         </main>   
         <script src="js/maquinaInfo.js"></script> 
+        <c:set var="VetorDeObjetoMaquinas" value="${vetorMaquinas}"></c:set>
+        <script>
+            try {
+                let vetorMaquinaJSON = '${VetorDeObjetoMaquinas}';
+                vetorMaquinaArray = JSON.parse(vetorMaquinaJSON);
+            } catch (Exception e) {
+                console.log("Erro ao atribuir os valores: " + e);
+            }
+        </script>
     </body>
 </html>

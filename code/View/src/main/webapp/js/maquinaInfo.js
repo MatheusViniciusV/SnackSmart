@@ -1,40 +1,28 @@
-//Aqui será necessário comunicar com o banco de dados dos locatarios, o que será feito posteriormente
-let vetor = ["Nenhum", "Alice", "Duda", "Fernando", "Alemão", "Jó Soares", "Neymar", "Yasmin"];
-//botões
+//Botões
 let addMaquinaEL = document.querySelector("#addMaquina");
+let informacaoMaquinaEl = document.querySelector("#informacaoMaquina");
+let remocaoMaquinaEl = document.querySelector("#remocaoMaquina");
+let atualizarDadosEl = document.getElementById("atualizarDados");
+let botoesCancelarEl = document.querySelectorAll(".cancelar");
+//Formularios
 let formAddMaquinaEl = document.querySelector("#formAddMaquina");
 let formAtualizarMaquinaEl = document.querySelector("#formAtualizarMaquina");
-let infoContratoMaquinaEl = document.querySelector("#infoContratoMaquina");
-let remocaoMaquinaEl = document.querySelector("#remocaoMaquina");
-let blockerEl = document.getElementById("blocker");
+let bloquearConteudoEl = document.getElementById("bloquearConteudo");
+//Verificações de CEP
 let localizacaoEl = document.getElementById("localizacao");
 let localizacaoTextEl = document.getElementById("localizacaoText");
 let novaLocalizacaoEl = document.getElementById("novaLocalizacao");
 let novaLocalizacaoLabelEl = document.getElementById("novaLocalizacaoLabel");
+//Input CSS
 let preencherEl = document.querySelectorAll(".preencher");
-let atualizarDadosEl = document.getElementById("atualizarDados");
-let botoesCancelarEl = document.querySelectorAll(".cancelar");
+//Codigo da máquina
 let removerMaquinaCodigoEl = document.getElementById("removerMaquinaCodigo");
 let atualizarMaquinaCodigoEl = document.getElementById("atualizarMaquinaCodigo");
-let codigoInfoMaquina;
 
-function mostrarFormulario(tipoForm){
-    let formulario = document.getElementById(tipoForm);
-    if (tipoForm === "formAddMaquina" || tipoForm === "formAtualizarMaquina"){
-        selectDinamicoLocatario(vetor);     
-    }
-    
-    formulario.style.display = "flex"; 
-    blockerEl.style.display = "block";
-}
-
-function fecharFormularios(){
-    formAddMaquinaEl.style.display = "none"; 
-    formAtualizarMaquinaEl.style.display = "none"; 
-    infoContratoMaquinaEl.style.display = "none"; 
-    remocaoMaquinaEl.style.display = "none"; 
-    blockerEl.style.display = "none";
-}
+var codigoInfoMaquina;
+var vetorMaquinaArray; 
+//Aqui será necessário comunicar com o banco de dados dos locatarios, o que será feito posteriormente
+let vetor = ["Nenhum", "Alice", "Duda", "Fernando", "Alemão", "Jó Soares", "Neymar", "Yasmin"];
 
 function selectDinamicoLocatario(vetor){
     let locatarioEl = document.getElementById("locatario");
@@ -53,15 +41,48 @@ function selectDinamicoLocatario(vetor){
     }
 }
 
-function ButtonIClick() {
-    exibirInfoContratoMaquina("Maquina de Salgados", 3302, "Em funcionamento",
-    "Refrigerada", "Rua Castelo de Arraiolos, Castelo, Belo Horizonte, MG - 31330-070", "Waldir Braz");//FUNÇAO TESTE
-    mostrarFormulario('infoContratoMaquina');
-}
-function ButtonRClick() {
-    mostrarFormulario('remocaoMaquina');
+function mostrarFormulario(tipoForm){
+    let formulario = document.getElementById(tipoForm);
+    if (tipoForm === "formAddMaquina" || tipoForm === "formAtualizarMaquina"){
+        selectDinamicoLocatario(vetor);     
+    }
+    
+    formulario.style.display = "flex"; 
+    bloquearConteudoEl.style.display = "block";
 }
 
+function fecharFormularios(){
+    formAddMaquinaEl.style.display = "none"; 
+    formAtualizarMaquinaEl.style.display = "none"; 
+    informacaoMaquinaEl.style.display = "none"; 
+    remocaoMaquinaEl.style.display = "none"; 
+    bloquearConteudoEl.style.display = "none";
+}
+
+function criarSlotAddMaquina(){
+    let mainEl = document.getElementById("gestaoMaquinasMain"); 
+    let articleBeforeEl = document.getElementById("formAddMaquina"); 
+    
+    let novoSlot = document.createElement("div");
+    let novoLabel = document.createElement("label");
+    let novoBreak = document.createElement("br");
+    let novoBotao = document.createElement("button");
+    
+    novoSlot.classList.add("slot");
+    novoSlot.setAttribute("id", "addMaquinaSlot");
+    novoBotao.setAttribute("id", "addMaquinaButton");
+    novoLabel.setAttribute("id", "addMaquinaLabel");
+    function ButtonClick() { 
+        mostrarFormulario('formAddMaquina');
+    }
+    novoBotao.addEventListener("click", ButtonClick); 
+    novoBotao.innerHTML = "+";
+    novoLabel.innerHTML = "Adicionar nova máquina";
+    mainEl.insertBefore(novoSlot, articleBeforeEl);
+    novoSlot.appendChild(novoLabel);
+    novoSlot.appendChild(novoBotao);
+    novoSlot.appendChild(novoBreak);  
+}
 
 function criarSlotMaquina(nome, codigo, status, img){
     let mainEl = document.getElementById("gestaoMaquinasMain");
@@ -84,7 +105,7 @@ function criarSlotMaquina(nome, codigo, status, img){
     novoBotaoRemoverEl.addEventListener("click", ButtonRClick);
 
    
-    novoBotaoInfoEl.innerHTML = "Informações de contrato";
+    novoBotaoInfoEl.innerHTML = "Informações da máquina";
     novoBotaoRemoverEl.innerHTML = "Remover Máquina";
     novoh2.innerHTML = nome;
     novoh3.innerHTML = "COD-" + codigo;
@@ -109,40 +130,6 @@ function criarSlotMaquina(nome, codigo, status, img){
    infoEl.forEach(function(botao) {
         botao.addEventListener("click", recuperaInfoSlotMaquina);
    });
-}
-
-function criarSlotAddMaquina(){
-    let mainEl = document.getElementById("gestaoMaquinasMain"); 
-    let articleBeforeEl = document.getElementById("formAddMaquina"); 
-    
-    let novoSlot = document.createElement("div");
-    let novoLabel = document.createElement("label");
-    let novoBreak = document.createElement("br");
-    let novoBotao = document.createElement("button");
-    
-    novoSlot.classList.add("slot");
-    novoSlot.setAttribute("id", "addMaquinaSlot");
-    novoBotao.setAttribute("id", "addMaquina");
-    novoLabel.setAttribute("id", "addMaquinaL");
-    function ButtonClick() { 
-        mostrarFormulario('formAddMaquina');
-    }
-    novoBotao.addEventListener("click", ButtonClick); 
-    novoBotao.innerHTML = "+";
-    novoLabel.innerHTML = "Adicionar nova máquina";
-    mainEl.insertBefore(novoSlot, articleBeforeEl);
-    novoSlot.appendChild(novoLabel);
-    novoSlot.appendChild(novoBotao);
-    novoSlot.appendChild(novoBreak);  
-}
-
-function recuperaInfoSlotMaquina() {
-   let informacoeSlotMaquina = []; 
-   informacoeSlotMaquina[0] = this.parentNode.firstElementChild.innerHTML;
-   informacoeSlotMaquina[1] = this.parentNode.children[1].innerHTML;
-   informacoeSlotMaquina[2] = this.parentNode.children[2].innerHTML;
-   codigoInfoMaquina = informacoeSlotMaquina[1].replace("COD-", "");
-   return informacoeSlotMaquina; 
 }
 
 function buscarCEP(cep, resposta) {
@@ -185,7 +172,7 @@ function verificaPreenchido (event){
     }
 }
 
-function exibirInfoContratoMaquina(nomeMaquina, codeMaquina, statusMaquina, tipoMaquina, LocalizacaoDaMaquina, locatarioResponsavel){
+function exibirInformacaoMaquina(nomeMaquina, codeMaquina, statusMaquina, tipoMaquina, LocalizacaoDaMaquina, locatarioResponsavel){
     let nomeMaquinaEl = document.getElementById("nomeMaquina");
     let codeMaquinaEl = document.getElementById("codeMaquina");
     let statusMaquinaEl = document.getElementById("statusDinamicoH2");
@@ -199,6 +186,54 @@ function exibirInfoContratoMaquina(nomeMaquina, codeMaquina, statusMaquina, tipo
     tipoMaquinaEl.textContent = "Tipo da Máquina: " + tipoMaquina;
     LocalizacaoDaMaquinaEl.textContent = "📍Localização: " + LocalizacaoDaMaquina;
     locatarioMaquinaEl.textContent = "👤Locatário responsável: " + locatarioResponsavel;
+}
+
+function ButtonIClick() {
+    exibirInformacaoMaquina("Maquina de Salgados", 3302, "Em funcionamento",
+    "Refrigerada", "Rua Castelo de Arraiolos, Castelo, Belo Horizonte, MG - 31330-070", "Waldir Braz");//FUNÇAO TESTE
+    /*let maquinaEncontrada = encontrarMaquinaPorCodigo(codigoInfoMaquina, vetorMaquinaArray);
+    if (maquinaEncontrada !== null) {
+        exibirInformacaoMaquina(maquinaEncontrada.nome, maquinaEncontrada.codigo, maquinaEncontrada.status, 
+        maquinaEncontrada.tipo, maquinaEncontrada.localizacao, maquinaEncontrada.locatario);
+    }*/
+    mostrarFormulario('informacaoMaquina');
+}
+function ButtonRClick() {
+    mostrarFormulario('remocaoMaquina');
+}
+
+function recuperaInfoSlotMaquina() {
+   let informacoeSlotMaquina = []; 
+   informacoeSlotMaquina[0] = this.parentNode.firstElementChild.innerHTML;
+   informacoeSlotMaquina[1] = this.parentNode.children[1].innerHTML;
+   informacoeSlotMaquina[2] = this.parentNode.children[2].innerHTML;
+   codigoInfoMaquina = informacoeSlotMaquina[1].replace("COD-", "");
+   return informacoeSlotMaquina; 
+}
+
+function encontrarMaquinaPorCodigo(codigoInfoMaquina, maquinas) {
+    for (var i = 0; i < maquinas.length; i++) {
+        if (maquinas[i].codigo === codigoInfoMaquina) {
+            return maquinas[i];
+        }
+    }
+    return null; 
+} 
+
+function retornarCodigo(botao, str) {
+    if (str === "rb"){
+        let pai = botao.parentNode;
+        let strCodigo = pai.children[1].textContent; 
+        let codigo = strCodigo.slice(strCodigo.indexOf("-") + 1);
+        removerMaquinaCodigoEl.value = codigo;
+        return codigo;
+    } else {
+        let avo = botao.parentNode.parentNode;
+        let strCodigo = avo.children[1].textContent; 
+        let codigo = strCodigo.slice(strCodigo.indexOf("-") + 1);
+        atualizarMaquinaCodigoEl.value = codigo;
+        return codigo;
+    }
 }
 
 function converterBytesEmImagem(bytes, imagemEl){
@@ -216,22 +251,6 @@ function converterBytesEmImagem(bytes, imagemEl){
     } catch(err){
         imagemEl.src = "img/NonePhoto.png";
     }  
-}
-
-function retornarCodigo(botao, str) {
-    if (str === "rb"){
-        let pai = botao.parentNode;
-        let strCodigo = pai.children[1].textContent; 
-        let codigo = strCodigo.slice(strCodigo.indexOf("-") + 1);
-        removerMaquinaCodigoEl.value = codigo;
-        return codigo;
-    } else {
-        let avo = botao.parentNode.parentNode;
-        let strCodigo = avo.children[1].textContent; 
-        let codigo = strCodigo.slice(strCodigo.indexOf("-") + 1);
-        atualizarMaquinaCodigoEl.value = codigo;
-        return codigo;
-    }
 }
 
 
@@ -299,30 +318,14 @@ function Main(){
         imagem: "img/NonePhoto.png"
     };
     
-    let VetorDeObjetoMaquinas = [maquina1, maquina2, maquina3, maquina4];
-    VetorDeObjetoMaquinas.forEach((maquina) => criarSlotMaquina(maquina.nome, maquina.cod, maquina.status, maquina.imagem));
+    let Vet = [maquina1, maquina2, maquina3, maquina4];
+    Vet.forEach((maquina) => criarSlotMaquina(maquina.nome, maquina.cod, maquina.status, maquina.imagem));
     //Conexão com o banco de dados para criar cada slot*/
     
     /* No Servlet ou Controller
         Maquina DAO maquinaDao = new MaquinaDAO();
         ArrayList<MaquinaDTO> vetorMaquinas = maquinaDAO.getAll();
-        request.setAttribute("vetorMaquinas", vetorMaquinas);*/
-
-    /* <c:forEach var="item" items="${vetorMaquinas}">
-        <script>
-            criarSlotMaquina("${item.nome}", "${item.codigo}", "${item.status}", "${item.imagem}");
-        </script>
-    </c:forEach>*/
-    /* MOSTRAR AS INFORMAÇOES DO SLOT
-       <c:forEach var="item" items="${vetorMaquinas}"> 
-            <script>
-                if ("${item.codigo}" == codigoInfoMaquina){
-                    exibirInfoContratoMaquina("${item.nome}", "${item.codigo}", "${item.status}",
-                        "${item.tipo}", "${item.localizacao}", "${item.locatarioResponsavel}");
-                }
-            </script>
-        </c:forEach>
-    */
+        request.setAttribute("vetorMaquinas", vetorMaquinas);*/      
 }   
 
 Main(); 

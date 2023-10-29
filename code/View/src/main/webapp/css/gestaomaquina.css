@@ -2,7 +2,7 @@ html, body {
     overflow: auto;
     height: 100%;
 }
-#titulo{
+#tituloDaPagina{W
     justify-self: center;
     margin: 2vh 13vw;
     font-size: 8vh;
@@ -131,7 +131,7 @@ nav{
     grid-area: 3 / 1 / 4 / 4
 }
 
-#addMaquina{
+#addMaquinaButton{
     grid-area: 4 / 2 / 5 / 3;
     align-self: center;
     justify-self: center;
@@ -150,17 +150,17 @@ nav{
     height: 8vh;
 }
 
-#addMaquina:hover{
+#addMaquinaButton:hover{
     box-shadow: 2px 2px black;
     cursor: pointer;
     transition: 0.5s;
 }
 
-#addMaquina:active{
+#addMaquinaButton:active{
     background-color: var(--cor-secundaria  ); 
 }
 
-#addMaquinaL{
+#addMaquinaLabel{
     grid-area: 2 / 1 / 3 / 4;
     font-family: 'Lato', sans-serif;
     text-align: center;
@@ -173,7 +173,7 @@ nav{
 /*Fim - Estilo dos slots*/
 
 /*Início - Estilo dos formulários*/
-#formAddMaquina, #infoContratoMaquina, #remocaoMaquina, #formAtualizarMaquina{
+#formAddMaquina, #informacaoMaquina, #remocaoMaquina, #formAtualizarMaquina{
     display: none;  
     position: absolute;
     left: 25%;
@@ -199,13 +199,13 @@ nav{
     text-align: center;
 }
 
-#formAddMaquina input:not(#enviarformAddMaquina, #inputMaquina), #formAddMaquina select{
+#formAddMaquina input:not(#enviarformAddMaquina, #inputImagem), #formAddMaquina select{
     border: 1px solid black;
     border-radius: 3%;
     padding: 0.5vw 0.5vw;
 }
 
-#formAddMaquina #inputMaquina:hover, #formAddMaquina select:hover,
+#formAddMaquina #inputImagem:hover, #formAddMaquina select:hover,
 #formAtualizarMaquina #inputNovaImagen:hover, #formAtualizarMaquina select:hover{
     cursor:pointer;
 }
@@ -227,17 +227,17 @@ nav{
     gap: 2% 5%;
     grid-auto-flow: row;
     grid-template-areas:
-      "Titulo Titulo Titulo Titulo"
+      "titulo titulo titulo titulo"
       "subtitulo subtitulo subtitulo subtitulo"
       "nomeDaMaquina nomeDaMaquina localizacaoForm localizacaoForm"
       "area-escrita area-escrita area-escrita2 area-escrita2"
       "TipoInput TipoInput LocatarioInput LocatarioInput"
       "Tipo Tipo Locatario Locatario"
-      "labelMaquina labelMaquina labelMaquina labelMaquina"
+      "labelImagem labelImagem labelImagem labelImagem"
       "Selecionar-imagem Selecionar-imagem Selecionar-imagem Selecionar-imagem"
-      ". Enviar Cancelar .";
+      ". botaoEnviar botaoCancelar .";
     
-    #tituloForm { grid-area: Titulo; }
+    #tituloForm { grid-area: titulo; }
     #subtituloForm { grid-area: subtitulo; }
     
     #nomeDaMaquina { grid-area: nomeDaMaquina; }
@@ -251,11 +251,11 @@ nav{
     #locatarioInput { grid-area: LocatarioInput; }
     #locatario { grid-area: Locatario; }
     
-    #labelMaquina { grid-area: labelMaquina; } 
+    #labelImagem { grid-area: labelImagem; } 
     .imagem { grid-area: Selecionar-imagem; }  
     
-    #enviarformAddMaquina { grid-area: Enviar; }
-    #cancelarformAddMaquina { grid-area: Cancelar; }
+    #enviarformAddMaquina { grid-area: botaoEnviar; }
+    #cancelarformAddMaquina { grid-area: botaoCancelar; }
 }
 
 #formAtualizarMaquina form{
@@ -295,7 +295,7 @@ nav{
     #cancelarformAtualizarMaquina { grid-area: Cancelar; }
 }
 
-#blocker {        /*Quando estiver preenchendo um formulário desativa a página*/
+#bloquearConteudo {        /*Quando estiver preenchendo um formulário desativa a página*/
     display: none;
     position: fixed;
     top: 0;
