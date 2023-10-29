@@ -1,15 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package br.cefetmg.snacksmart.service;
 
 import java.io.IOException;
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -23,12 +21,13 @@ public class controler extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         request.setCharacterEncoding("UTF-8");
-        String acao = request.getParameter("acao");
+        String pagina = request.getParameter("pagina");
         
-        if(acao.equals("EmitirRelatorio"))
+        if(pagina.equals("EmitirRelatorio"))
             jsp = RelatorioGerente.execute(request);
         
         RequestDispatcher rd = request.getRequestDispatcher(jsp);
         rd.forward(request, response);
-
+    }
+    
 }
