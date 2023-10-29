@@ -24,11 +24,11 @@ public class MaquinaDTO {
         this.localizacao = localizacao;
         this.valor = valor;
         estado = 0;
-        
-        this.novaLocalizacao = "";
-        this.novoCodigo = 0;
-        this.novoValor = 0.0;
-        novoEstado = 0;
+//        
+//        this.novaLocalizacao = "";
+//        this.novoCodigo = 0;
+//        this.novoValor = 0.0;
+//        novoEstado = 0;
     }
     public void setCodigo(int codigo){
         this.codigo = codigo;
