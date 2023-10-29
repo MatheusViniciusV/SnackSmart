@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="br.cefetmg.snacksmart.utils.enums.TipoUsuario" %>
-<%@include file="comuns/taglibs.jsp" %>
+<%@include file="../../comuns/taglibs.jsp" %>
 
 <%-- 
     Será o mesmo jsp para locador e locatario, quando eu tiver com 
@@ -31,7 +31,7 @@
     </head>
     <!-- TODO fazer opção de filtro e busca de contratos -->
     <body>
-        <%@include file="comuns/retornarInicial.jsp" %>
+        <%@include file="../../comuns/retornarInicial.jsp" %>
         <main>
             <!-- TODO fazer essa lista aparecer de maneira dinamica -->
             <h1>Contratos </h1>
@@ -136,8 +136,8 @@
             </div>
         </main>
 
-        <%@include file="comuns/validarRegEx.jsp" %>
-        <%@include file="comuns/jqueryLink.jsp" %>
+        <%@include file="../../comuns/validarRegEx.jsp" %>
+        <%@include file="../../comuns/jqueryLink.jsp" %>
         <script src="js/contratos.js"></script>
         <c:if test="${tipoUsuario == LOCADOR}">
             <script src="js/criarContrato.js"></script>

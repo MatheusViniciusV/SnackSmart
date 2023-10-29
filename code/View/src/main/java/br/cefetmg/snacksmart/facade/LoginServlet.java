@@ -56,7 +56,7 @@ public class LoginServlet extends HttpServlet {
                 case LOCATARIO: // locatário
                     if(validador.validarLocatario(usuario, senha)) {
                         response.sendRedirect("principal.jsp");
-                        session.setAttribute("NAO_CADASTRADO", TipoUsuario.NAO_CADASTRADO);
+                        session.setAttribute("tipoUsuario", tipoUsuario);
                     } else {
                         response.sendRedirect("index.html");
                     }
@@ -66,6 +66,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("tipoUsuario", TipoUsuario.LOCATARIO);
             session.setAttribute("LOCATARIO", TipoUsuario.LOCATARIO);
             session.setAttribute("LOCADOR", TipoUsuario.LOCADOR);
+            session.setMaxInactiveInterval(15000);
         } catch (PersistenciaException | UnsupportedEncodingException | NoSuchAlgorithmException ex) {
             Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }

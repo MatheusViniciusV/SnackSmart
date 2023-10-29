@@ -26,27 +26,15 @@ let $solicitarCancelamentoBtn = $('#solicita-cancelar-contrato');
 if($contratoSelecionado !== null) {
 
     $solicitarCancelamentoBtn.click(function () {
-        //TODO Enviar para o servlet.
-        
-        // Adicionar essa animação quando o servlet confirmar
-        $(this).addClass('btn-confirmado');
-    
-        setTimeout(function() {
-            $('#solicita-cancelar-contrato').removeClass('btn-confirmado');
-            $contratosMini.removeClass('selecionado');
-            $('#solicita-cancelar-contrato').addClass('null');
-    
-        }, 1000);
-    
-        const contratoDataSend = {
-            titulo: "oi",
+        const contratoData = {
+            locatarioCPF: "oi",
             id: $contratoSelecionado.data('id'),
         };
     
         $.ajax({
             type: 'POST', 
             url: $('#solicita-cancelar-contrato').data("calcelar"), 
-            data: contratoDataSend,
+            data: contratoData,
             success: function (response) {
     
                 $('#solicita-cancelar-contrato').addClass('btn-confirmado');
@@ -60,7 +48,7 @@ if($contratoSelecionado !== null) {
                     $contratoSelecionado = null;
                 }, 750);
                 
-                console.log(`Contrato ${contratoDataSend.id} deletado com sucesso.`);
+                console.log(`Contrato ${contratoData.id} deletado com sucesso.`);
             },
             error: function (error) {
                 
