@@ -4,8 +4,11 @@
 :root {
     --cor-principal: #E9E9E9;
     --cor-secundaria: #CB0000;
+    --cor-terciaria: #C1C1C1;
     --texto-cor-principal: #7D7D7D;
     --texto-cor-secundaria: #6f0000;
+    --cor-ativo: #b80909;
+    --cor-confimado: #28A745;
 }
 
 html, body {
