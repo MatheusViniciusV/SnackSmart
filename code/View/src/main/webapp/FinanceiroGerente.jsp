@@ -19,7 +19,7 @@
        <%@include file="comuns/retornarInicial.jsp" %>
         <div class="div-head">
             <h1>Financeiro</h1>
-            <div id="emitirRelatorio"><a href='/locadora/controller?acao=EmitirRelatorio'>Emitir Relatorio</a></div>
+            <div id="emitirRelatorio"><a href='/locadora/controller?pagina=EmitirRelatorio'>Emitir Relatorio</a></div>
         </div>
     <div class="div-principal">
         <div class="div-segundo">
@@ -38,10 +38,5 @@
         </div>
     </div>
         <%@include file="comuns/Calendario.jsp" %>
-        <!-- <div class="div-notas"> 
-            <h2>Notas</h2>
-            <p>Data: <input type="date" id="calendario" /></p>
-            <textarea id="nota" rows="4" cols="50" placeholder="Adicione notas aqui..."></textarea>
-        </div> -->
     </body>
 </html>

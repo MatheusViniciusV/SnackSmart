@@ -12,8 +12,8 @@ public interface IMaquinaDAO {
      *
      * @return
      */
-    public MaquinaDTO get();
     void set(MaquinaDTO maquina);
+    public MaquinaDTO get();
     ArrayList<MaquinaDTO> listarTodos();
     
 }

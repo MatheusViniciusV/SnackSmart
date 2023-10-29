@@ -1,20 +1,20 @@
-package br.cefetmg.snacksmart.view.resources;
+package br.cefetmg.snacksmart.View.resources;
 
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.core.Response;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
 
 /**
  *
  * @author 
  */
-@Path("jakartaee10")
+@Path("rest")
 public class JakartaEE10Resource {
     
     @GET
     public Response ping(){
         return Response
-                .ok("ping Jakarta EE")
+                .ok("ping")
                 .build();
     }
 }
