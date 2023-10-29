@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="comuns/JSTL.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,6 +7,8 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/gestaomaquina.css">
         <title>Gestão de Máquinas</title>
+        <%@include file="comuns/jqueryLink.jsp" %>
+
     </head>
     <body>
         <%@include file="comuns/retornarInicial.jsp" %>
@@ -16,13 +19,13 @@
                 <label id="addMaquinaL">Adicionar nova máquina</label>
                 <button id="addMaquina">+</button>
             </div>
-                        
             <article id="formAddMaquina">               
-                <form action="gestaoMaquinaServlet" method="post" enctype="multipart/form-data">
+                <form action="service_maquina" name="formAddMaquina" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="formulario" value="formAddMaquina">
                     <h1 id="tituloForm">Adicionar nova máquina</h1>
                     <h2 id="subtituloForm">Preencha todos os campos abaixos</h2>
                     <label id="nomeDaMaquina" for="nome">Nome da Máquina:</label>
-                    <input class="preencher" type="text" id="nome" name="nome" required><br>
+                    <input class="preencher" type="text" id="nome" name="nome" minlength="5" maxlength="32" required><br>
 
                     <label id="tipoInput" for="tipo">Tipo da máquina:</label>                       
                     <select id="tipo" name="tipo" required>
@@ -31,7 +34,7 @@
                     </select><br>
                     
                     <label id="labelMaquina" class="imagem" for="imagem">Foto da máquina:</label>
-                    <input id="inputMaquina" type="file" class="imagem" name="imagem" required ><br>
+                    <input id="inputMaquina" type="file" accept="image/png" class="imagem" name="imagem" required ><br>
                     
                     <label id="locatarioInput" for="locatario">Locatário responsável:</label>
                     <select id="locatario" name="locatario" required>
@@ -63,20 +66,24 @@
                 <h2>Ao remover a máquina, todos os dados relacionados a ela serão excluídos!</h2>
                 <p>⚠ Dados relacionados à máquina e ao locatário não poderão serem acessados posteriormente.
                     Caso a máquina esteja ligada a algum cliente é importante que o locatário esteja ciente disso.</p>
-                <form action="gestaoMaquinaServlet" method="post" enctype="multipart/form-data">
+                <form action="service_maquina" name="remocaoMaquina" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="formulario" value="remocaoMaquina">
+                    <input type="hidden" name="removerMaquinaCodigo" id="removerMaquinaCodigo">
                     <div class="botoesForm">
-                        <input class="botaoForm" type="submit" value="REMOVER MÁQUINA">
+                        <input class="botaoForm" name="remover" type="submit" value="REMOVER MÁQUINA">
                         <div class="botaoForm cancelar">Cancelar</div>
                     </div>
                 </form>
             </article>
             
             <article id="formAtualizarMaquina">               
-                <form action="gestaoMaquinaServlet" method="post" enctype="multipart/form-data">
+                <form action="service_maquina" name="formAtualizarMaquina" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="formulario" value="formAtualizarMaquina">
+                    <input type="hidden" name="atualizarMaquinaCodigo" id="atualizarMaquinaCodigo">
                     <h1 id="tituloUpdate">Atualizar dados da máquina</h1>
                     
                     <label id="novoNomeLabel" for="novoNome">Alterar nome da Máquina:</label>
-                    <input type="text" id="novoNome" name="novoNome"><br>
+                    <input type="text" id="novoNome" name="novoNome" minlength="5" maxlength="32"><br>
                     
                     <label id="novaLocalizacaoLabel" for="novaLocalizacao">Nova localização (CEP):</label>
                     <input type="text" id="novaLocalizacao" name="novaLocalizacao"><br>
@@ -87,22 +94,20 @@
                     
                     <label id="statusLabel" for="status">Alterar status da máquina:</label>
                     <select id="status" name="status">
-                        <option value="Disponível">Disponível</option>
+                        <option value="Disponivel">Disponível</option>
                         <option value="Em funcionamento">Em funcionamento</option>
-                        <option value="Em manutenção">Em manutenção</option>
-                        <option value="Aguardando manutenção">Aguardando manutenção</option>                       
+                        <option value="Em manutencao">Em manutenção</option>
+                        <option value="Aguardando manutencao">Aguardando manutenção</option>                       
                     </select><br>    
                     
                     <label id="labelNovaImagen" class="imagem" for="novaImagem">Alterar foto da máquina:</label>
-                    <input id="inputNovaImagen" type="file" class="imagem" name="novaImagem"><br>
+                    <input id="inputNovaImagen" type="file" accept="image/png" class="imagem" name="novaImagem"><br>
                                        
                     <input id="enviarformAtualizarMaquina"class="botaoForm" type="submit" value="Realizar Alterações">
                     <div id="cancelarformAtualizarMaquina" class="botaoForm cancelar">Cancelar</div>
                 </form>
             </article> 
-        </main>
-        <%@include file="comuns/jqueryLink.jsp" %>
-        <script src="js/maquinaInfo.js"></script>
-        
+        </main>   
+        <script src="js/maquinaInfo.js"></script> 
     </body>
 </html>
