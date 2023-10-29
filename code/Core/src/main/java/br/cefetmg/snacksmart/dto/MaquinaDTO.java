@@ -15,6 +15,10 @@ public class MaquinaDTO {
     private int codigo, novoCodigo,estado,novoEstado;
     // para estado 0 = disponivel, 1 = alugada, 2 = em manutenção 
 
+    public MaquinaDTO() {
+        
+    }
+    
     public MaquinaDTO(int codigo, String localizacao, Double valor){
         this.codigo = codigo;
         this.localizacao = localizacao;

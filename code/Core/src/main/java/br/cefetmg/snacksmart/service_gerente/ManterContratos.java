@@ -55,7 +55,7 @@ public class ManterContratos {
         return contrato;
     }
     
-    public void cancelarContrato(long id) throws SQLException {
+    public void cancelarContrato(long id) throws ClassNotFoundException, SQLException {
         ContratoDTO contrato = dao.getId(id);
         
         if(contrato.getStatus() == StatusContrato.ATIVO || contrato.getStatus() == StatusContrato.CANCELAMENTO_SOLICITADO)

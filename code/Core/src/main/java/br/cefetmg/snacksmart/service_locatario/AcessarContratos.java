@@ -2,6 +2,7 @@ package br.cefetmg.snacksmart.service_locatario;
 
 import br.cefetmg.snacksmart.dao.ContratosDAO;
 import br.cefetmg.snacksmart.dto.ContratoDTO;
+import br.cefetmg.snacksmart.dto.GerenteDTO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.exceptions.dao.ElementoNaoExisteException;
 import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
@@ -32,22 +33,22 @@ public class AcessarContratos {
     }
     
     public void solicitarCancelamento(long id, String locatarioCPF) 
-            throws SQLException, ElementoNaoExisteException, LocatarioInvalidoException {
+            throws ClassNotFoundException, SQLException, ElementoNaoExisteException, LocatarioInvalidoException, ClassNotFoundException {
         LocatarioDTO locatario = new LocatarioDTO();
         
-        if(dao.validaAcessoLocatario(id, locatario.getCPF())) 
+        if(dao.getIdLocatario(id, locatario.getCPF()) != null) 
             dao.atualizarStatus(id, StatusContrato.CANCELAMENTO_SOLICITADO);
         else
             throw new LocatarioInvalidoException("Locatario " + locatario.getNome() + "não existe ou não tem acesso ao contrato");
     }
     
     public ContratoDTO getContrato(long id, String locatarioCPF) 
-            throws SQLException, ElementoNaoExisteException, LocatarioInvalidoException {
+            throws SQLException, ElementoNaoExisteException, LocatarioInvalidoException, ClassNotFoundException {
         ContratoDTO contrato;
         
         LocatarioDTO locatario = new LocatarioDTO();
         
-        if(dao.validaAcessoLocatario(id, locatario.getCPF()))
+        if(dao.getIdLocatario(id, locatario.getCPF()) != null)
             contrato = dao.getId(id);
         else
             throw new LocatarioInvalidoException("Locatario " + locatario.getNome() + "não existe ou não tem acesso ao contrato");
@@ -64,17 +65,17 @@ public class AcessarContratos {
     }
     
     public void getPdf(long id, String locatarioCPF, OutputStream output)
-            throws ElementoNaoExisteException, LocatarioInvalidoException, DocumentException, IOException, SQLException {
-        LocatarioDTO locatario = new LocatarioDTO();
+            throws ElementoNaoExisteException, LocatarioInvalidoException, DocumentException, IOException, SQLException, ClassNotFoundException {
+//        LocatarioDTO locatario = new LocatarioDTO();
         
-        if(!dao.validaAcessoLocatario(id, locatario.getCPF())) {
-            throw new LocatarioInvalidoException("Locatario " + locatario.getNome() + "não existe ou não tem acesso ao contrato");
-        }
+//        if(dao.getIdLocatario(id, locatarioCPF) == null) {
+//            throw new LocatarioInvalidoException("Locatario " + locatarioCPF + "não existe ou não tem acesso ao contrato");
+//        }
         
         Document documento = new Document(PageSize.A4, 60, 60, 40, 40);
         
         PdfWriter.getInstance(documento, output);
-        ContratoDTO contrato = dao.getId(id);
+//        ContratoDTO contrato = dao.getId(id);
 
         BaseFont fontBase = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
         Font fontTitulo = new Font(fontBase, 20, Font.BOLD);
@@ -85,22 +86,33 @@ public class AcessarContratos {
 
         documento.add(new Paragraph("Contrato ", fontTitulo));
 
-        String[] textos = new String[4];
+        String[] textos = new String[3];
 
+//        GerenteDTO gerente = contrato.getGerente();
+//        LocatarioDTO locatario = contrato.getLocatario();
+        
         textos[0] = String.format(""
                 + "Contrato firmado entre o locador %s, de CPF %s, número de telefone %s e email "
                 + "%s, atuais até o momento de edição deste contrado, e o locatário %s, de CPF %s"
                 + ", número de telefone %s e email %s, atuais até o momento de edição deste contrado,"
                 + " sobre o direito de uso da máquina de vendas de produtos alimenticios indentificada "
                 + "pelo código.", 
-                contrato.getGerenteNome(),
-                contrato.getGerenteCPF(),
-                contrato.getGerenteTelefone(),
-                contrato.getGerenteEmail(),
-                contrato.getLocatarioNome(),
-                contrato.getLocatarioCPF(),
-                contrato.getGerenteTelefone(),
-                contrato.getLocatarioEmail());
+                "teste",
+                "teste",
+                "teste",
+                "teste",
+                "teste",
+                "teste",
+                "teste",
+                "teste");
+//                gerente.getNome(),
+//                gerente.getCPF(),
+//                gerente.getTelefone(),
+//                gerente.getEmail(),
+//                contrato.getLocatarioNome(),
+//                contrato.getLocatarioCPF(),
+//                contrato.getGerenteTelefone(),
+//                contrato.getLocatarioEmail());
 
         textos[1] = String.format(""
                 + "A validade deste contrato se estende da data %s a data %s, sendo um periodo de %d"
@@ -109,11 +121,16 @@ public class AcessarContratos {
                 + " uteis após o dia de pagamento estipulado para que seja efetuado o pagamento."
                 + " Caso o pagamento não seja cumprido poderá haver consequências previstas na "
                 + "clausula observações ou até o cancelamento deste contrato.", 
-                contrato.getDataInicio(),
-                contrato.getDataExpiracao(),
-                364,
-                contrato.getValorPagamento(),
-                contrato.getDataPagamento());
+                "teste",
+                "teste",
+                1,
+                1.1,
+                "teste");
+//                contrato.getDataInicio(),
+//                contrato.getDataExpiracao(),
+//                364,
+//                contrato.getValorPagamento(),
+//                contrato.getDataPagamento());
 
         textos[2] = ""
                 + "É de responsabilidade do locatários zelar pelo estado da máquina, evitando ambientes"
@@ -125,11 +142,11 @@ public class AcessarContratos {
                 + " situação.";
 
 
-        textos[3] = (contrato.getObservacoes().length() > 0) ? "Para concluir, cabe as seguintes informações" + contrato.getObservacoes() : "";
+//        textos[3] = (contrato.getObservacoes().length() > 0) ? "Para concluir, cabe as seguintes informações" + contrato.getObservacoes() : "";
 
 
 
-        Paragraph[] paragrafos = new Paragraph[4];
+        Paragraph[] paragrafos = new Paragraph[3];
         for(int i = 0; i < paragrafos.length; i++) {
             paragrafos[i] = new Paragraph(textos[i], fontParagrafo);
             paragrafos[i].setFirstLineIndent(30);

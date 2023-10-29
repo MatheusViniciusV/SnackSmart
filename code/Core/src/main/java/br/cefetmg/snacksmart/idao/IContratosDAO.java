@@ -19,17 +19,17 @@ import java.util.ArrayList;
 public interface IContratosDAO {
     ContratoDTO getId(long id) throws ElementoNaoExisteException, SQLException;
     
-    ArrayList<ContratoDTO> getTodos();
+    ContratoDTO getIdLocatario(long id, String cpfLocatario) throws ClassNotFoundException,  SQLException;
+    
+    ArrayList<ContratoDTO> getTodos() throws SQLException;
     
     ArrayList<ContratoDTO> filtra(LocatarioDTO locatario) throws LocatarioInvalidoException, SQLException;
     
     ArrayList<ContratoDTO> filtra(StatusContrato status) throws LocatarioInvalidoException, SQLException;
     
-    void registraContrato(ContratoDTO contrato);
+    void registraContrato(ContratoDTO contrato) throws SQLException;
     
-    void delete(long id);
-    
-    void delete(ContratoDTO contrato);
+    void delete(long id) throws SQLException;
     
     void atualizaContrato(ContratoDTO contrato);
     
@@ -37,7 +37,5 @@ public interface IContratosDAO {
     
     //boolean idUnico(long id);
     
-    void atualizarStatus(long id, StatusContrato status) throws SQLException;
-    
-    boolean validaAcessoLocatario(long id, String cpfLocatario);
+    void atualizarStatus(long id, StatusContrato status) throws ClassNotFoundException, SQLException;
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.cefetmg.snacksmart.dto;
 
 import java.time.LocalDate;
@@ -9,6 +5,7 @@ import br.cefetmg.snacksmart.idao.IGerenteDAO;
 import br.cefetmg.snacksmart.dao.GerenteDAO;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.utils.enums.StatusContrato;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -21,22 +18,25 @@ public class ContratoDTO {
     private LocalDate dataExpiracao;
     private LocalDate dataPagamento;
     private String observacoes;
-    private final GerenteDTO gerente;
-//    private final LocatarioDTO locatario;
-//    private final MaquinaDTO maquina;
+    private GerenteDTO gerente;
+    private LocatarioDTO locatario;
+    private MaquinaDTO maquina;
 
     // Construtor da classe Contrato
     public ContratoDTO(long id,
-            //LocatarioDTO locatario,
+            double valor,
+            LocatarioDTO locatario,
+            MaquinaDTO maquina,
             LocalDate dataInicio, LocalDate dataExpiracao, LocalDate dataPagamento,
             String observacoes) throws PersistenciaException {
         
         this.id = id;
+        this.valor = valor;
         this.dataExpiracao = dataExpiracao;
         this.dataInicio = dataInicio;
         this.dataPagamento = dataPagamento;
         this.observacoes = observacoes;
-//        this.locatario = locatario Depois fazer verificação melhor disso
+        this.locatario = locatario;
 
         IGerenteDAO daoGerente = new GerenteDAO();
         this.gerente = daoGerente.get();
@@ -90,21 +90,25 @@ public class ContratoDTO {
         return gerente;
     }
     
-    public String getGerenteNome() {
-        return "oi";
+    public MaquinaDTO getMaquina() {
+        return maquina;
     }
     
-    public String getGerenteCPF() {
-        return "oi";
-    }
-    
-    public String getGerenteTelefone() {
-        return "oi";
-    }
-    
-    public String getGerenteEmail() {
-        return "oi";
-    }
+//    public String getGerenteNome() {
+//        return "oi";
+//    }
+//    
+//    public String getGerenteCPF() {
+//        return "oi";
+//    }
+//    
+//    public String getGerenteTelefone() {
+//        return "oi";
+//    }
+//    
+//    public String getGerenteEmail() {
+//        return "oi";
+//    }
 
     /*
     public Locatario getLocatario() {
@@ -112,28 +116,30 @@ public class ContratoDTO {
     }
 */
     
-    public String getLocatarioNome() {
-        return "sla";
-    }
-    
-    public String getLocatarioCPF() {
-        return "sla";
-    }
-    
-    public String getLocatarioTelefone() {
-        return "sla";
-    }
-    
-    public String getLocatarioEmail() {
-        return "sla";
-    }
-    
-    public void setId(long id) {
-        // esperando BD, talvez seja bom colocar um id para cada contrato.
-    }
+//    public String getLocatarioNome() {
+//        return "sla";
+//    }
+//    
+//    public String getLocatarioCPF() {
+//        return "sla";
+//    }
+//    
+//    public String getLocatarioTelefone() {
+//        return "sla";
+//    }
+//    
+//    public String getLocatarioEmail() {
+//        return "sla";
+//    }
+
     
     @Override
     public String toString() {
-        return "Contrato 1, inicio em" + dataInicio.toString();
+        DateTimeFormatter formata = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        
+        String str = String.format("Contrato %d, iniciado na data de %s com fim em %s",
+                id, dataInicio.format(formata), dataExpiracao.format(formata));
+        
+        return str;
     }
 }

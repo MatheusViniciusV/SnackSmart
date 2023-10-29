@@ -17,6 +17,8 @@ import br.cefetmg.snacksmart.exceptions.dao.ElementoNaoExisteException;
 import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
 import br.cefetmg.snacksmart.service_locatario.AcessarContratos;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -44,6 +46,8 @@ public class SolicitarCancelarContrato extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "o contrato não existe.");            
         } catch(LocatarioInvalidoException e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SolicitarCancelarContrato.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

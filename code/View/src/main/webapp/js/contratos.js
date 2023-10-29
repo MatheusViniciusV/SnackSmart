@@ -9,7 +9,7 @@ $contratosMini.click(function () {
         $(this).addClass('selecionado');
         $('#solicita-cancelar-contrato').removeClass('null');
         $('#pdf-contrato').removeClass('null');
-        $('#pdf-contrato a').attr('href', 'PDFContrato?contrato=');
+        $('#pdf-contrato a').attr('href', 'PDFContrato?id=1');
         $contratoSelecionado = $(this);
     } else {
         $('#solicita-cancelar-contrato').addClass('null');

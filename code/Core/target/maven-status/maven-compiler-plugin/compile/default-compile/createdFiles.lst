@@ -8,9 +8,7 @@ br\cefetmg\snacksmart\dao\ContratosDAO.class
 br\cefetmg\snacksmart\exceptions\dao\LocatarioInvalidoException.class
 br\cefetmg\snacksmart\utils\enums\TipoUsuario.class
 br\cefetmg\snacksmart\exceptions\dto\SenhaInvalidaTamanhoException.class
-.netbeans_automatic_build
 br\cefetmg\snacksmart\exceptions\bd\PersistenciaException.class
-br\cefetmg\snacksmart\dto\ContratosDTO.class
 br\cefetmg\snacksmart\dao\MaquinaDAO.class
 br\cefetmg\snacksmart\dto\LocatarioDTO.class
 br\cefetmg\snacksmart\services\ValidadorUsuario.class

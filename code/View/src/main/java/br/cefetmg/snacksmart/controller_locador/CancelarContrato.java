@@ -9,9 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.sql.SQLException;
-import br.cefetmg.snacksmart.dao.ContratosDAO;
-import br.cefetmg.snacksmart.idao.IContratosDAO;
-import br.cefetmg.snacksmart.utils.enums.StatusContrato;
+import br.cefetmg.snacksmart.service_gerente.ManterContratos;
 
 /**
  * @author eloym
@@ -21,22 +19,20 @@ public class CancelarContrato extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        IContratosDAO contratoDAO = new ContratosDAO(); 
+        ManterContratos acesso = new ManterContratos(); 
         
         long contratoId =  Long.parseLong(request.getParameter("contratoId"));
         
         try {
-            if(contratoDAO.getId(contratoId) != null) {
-                contratoDAO.atualizarStatus(contratoId, StatusContrato.CANCELADO);
+            acesso.cancelarContrato(contratoId);
 
-                response.setContentType("text/plain");
-                out.printf("contrato %d cancelado.", contratoId);
-
-            } else if(contratoDAO.getId(contratoId) != null) {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "o contrato não existe.");
-            }
+            response.setContentType("text/plain");
+            out.printf("contrato %d cancelado.", contratoId);
+            
         } catch(SQLException e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "erro interno.");
+        } catch (ClassNotFoundException ex) {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "o contrato não existe.");
         }
     }
 }
