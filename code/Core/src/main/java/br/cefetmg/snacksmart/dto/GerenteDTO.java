@@ -2,6 +2,7 @@ package br.cefetmg.snacksmart.dto;
 
 import br.cefetmg.snacksmart.idao.IGerenteDAO;
 import br.cefetmg.snacksmart.dao.GerenteDAO;
+import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import java.util.Random;
 
 // Importe das exceções usadas
@@ -99,26 +100,11 @@ public class GerenteDTO {
         novoToken = aux.toString();
     }
     
-    public boolean validarToken(String token) throws NoSuchAlgorithmException,
-            UnsupportedEncodingException {
-        
-        MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
-        byte hash[] = algorithm.digest(token.getBytes("UTF-8"));
-        
-        StringBuilder aux = new StringBuilder();
-        for (byte b : hash) {
-            aux.append(String.format("%02X", 0xFF & b));
-        }
-        token = aux.toString();
-        
-        return this.token.equals(token);
-    }
-    
-    String getToken() {
+    public String getToken() {
         return token;
     }
     
-    public void aplicarMudanças() throws FilaAteracoesVaziaException {
+    public void aplicarMudanças() throws FilaAteracoesVaziaException, PersistenciaException {
         String novoNome = (this.novoNome.length() == 0) ? this.nome : this.novoNome;
         String novoCPF = (this.novoCPF.length() == 0) ? this.cpf : this.novoCPF;
         String novoToken  = (this.novoToken.length() == 0) ? this.token : this.novoToken;

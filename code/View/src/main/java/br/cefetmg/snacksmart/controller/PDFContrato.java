@@ -1,4 +1,4 @@
-package br.cefetmg.snacksmart.services;
+package br.cefetmg.snacksmart.controller;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;

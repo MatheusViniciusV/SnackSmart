@@ -14,14 +14,20 @@ public enum TipoUsuario {
     LOCATARIO,
     NAO_CADASTRADO;
     
-    public int toInt(TipoUsuario usuario) {
+    
+    public static int toInt(TipoUsuario usuario) {
         int valor = 0;
         
         switch (usuario) {
             case LOCADOR:
                 valor = 0;
+                break;
             case LOCATARIO: 
                 valor = 1;
+                break;
+            default:
+                valor = 3;
+                break;
         }
         
         return valor; 

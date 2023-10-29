@@ -1,4 +1,4 @@
-package br.cefetmg.snacksmart.services_locador;
+package br.cefetmg.snacksmart.controller_locador;
 
 import java.io.IOException;
 import java.io.PrintWriter;

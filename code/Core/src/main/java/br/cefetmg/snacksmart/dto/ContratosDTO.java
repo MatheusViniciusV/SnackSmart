@@ -7,6 +7,7 @@ package br.cefetmg.snacksmart.dto;
 import java.time.LocalDate;
 import br.cefetmg.snacksmart.idao.IGerenteDAO;
 import br.cefetmg.snacksmart.dao.GerenteDAO;
+import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 
 /**
  *
@@ -27,7 +28,7 @@ public class ContratosDTO {
     public ContratosDTO(long id,
             //LocatarioDTO locatario,
             LocalDate dataInicio, LocalDate dataExpiracao, LocalDate dataPagamento,
-            String observacoes) {
+            String observacoes) throws PersistenciaException {
         
         this.id = id;
         this.dataExpiracao = dataExpiracao;
@@ -43,7 +44,7 @@ public class ContratosDTO {
     
     public ContratosDTO(//LocatarioDTO locatario,
             LocalDate dataInicio, LocalDate dataExpiracao, LocalDate dataPagamento,
-            String observacoes) {
+            String observacoes) throws PersistenciaException {
         
         this.dataExpiracao = dataExpiracao;
         this.dataInicio = dataInicio;
