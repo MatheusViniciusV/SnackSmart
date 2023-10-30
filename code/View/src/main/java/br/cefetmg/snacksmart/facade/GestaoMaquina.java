@@ -55,7 +55,15 @@ public class GestaoMaquina extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        AcessarMaquinas acesso = new AcessarMaquinas();
+        ArrayList<MaquinaDTO> vetorMaquinasSQL;
+            request.getRequestDispatcher("WEB-INF/paginas/gestaoMaquina.jsp").forward(request, response);
+//        try {
+//            vetorMaquinasSQL = acesso.getAllMaquinas();
+//            request.setAttribute("vetorMaquinas", vetorMaquinasSQL);;
+//        } catch (SQLException ex) {
+//            Logger.getLogger(GestaoMaquina.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     /**

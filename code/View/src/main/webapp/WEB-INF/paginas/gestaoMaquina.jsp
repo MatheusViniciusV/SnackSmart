@@ -7,7 +7,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/GerenciarMaquina.css">
+        <link rel="stylesheet" href="css/gestaomaquina.css">
         <title>Gestão de Máquinas</title>
         <%@include file="../../comuns/jqueryLink.jsp" %>
 
@@ -16,7 +16,7 @@
         <%@include file="../../comuns/retornarInicial.jsp" %>
         <h1 id="tituloDaPagina">Máquinas</h1>
         <div id="bloquearConteudo"></div>
-        <main id="GerenciarMaquinasMain">  
+        <main id="gestaoMaquinasMain">  
             <% ArrayList<MaquinaDTO> vetorMaquinas =(ArrayList<MaquinaDTO>) request.getAttribute("vetorMaquinas"); %>
             <c:forEach var="item" items="${vetorMaquinas}">
                 <script>
