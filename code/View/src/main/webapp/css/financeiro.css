@@ -1,0 +1,108 @@
+#topo{
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 2%;
+    padding-top: 2%;
+    align-items: center;
+    
+}
+#botaoRelatorio{
+    color: #FECCCB;
+    width: 13em;
+    height: 5em;
+    padding: 0em 1em 0em 1em;
+    background-color: #ff0000;
+    font-size: 1em;
+    border: none;
+    border-radius: 10%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+
+}
+
+.conteudo{
+    padding-left: 6em;
+    padding-right: 6em;
+    display: flex;
+    justify-content: space-around;
+    gap: 8%;
+    height: 30%;
+}
+.box{
+    height: 10em;
+    width: 25em;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    /*justify-items: left;*/
+    background-color: #FFFFFF;
+    border-radius: 20%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    
+}
+#recebimento{
+    color: #00ff0d;
+   
+}
+#gastos{
+    color: #ff0000; 
+}
+#saldo{
+    color: black;
+    
+}
+#calendario{
+    display: flex;
+    flex-direction: column;
+    height: 16em;
+    width: 17em;
+    background-color: #FFFFFF;
+    border-radius: 10%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    align-items: center;
+
+}
+.row{
+    width: 16em;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 0px;
+
+}
+#dias{
+    width: 16em;
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 1em;
+    justify-items: center;
+    justify-content: space-around;
+    padding-left: 0px;
+
+}
+.diaAtual{
+    background-color: #ff0000;
+    border-radius: 80%;
+    color: #FFFFFF;
+}
+#nota{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 30em;
+    
+    align-items: center;
+}
+#texto{
+    font-size: 1.5em;
+    padding: 1em 1em 1em 1em;
+    height: 11em;
+    width: 35em;
+    background-color: #FFFFFF;
+    border-radius: 10%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+
+}

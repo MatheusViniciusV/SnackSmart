@@ -4,6 +4,6 @@
     Author     : eloym
 --%>
 <nav>
-    <a href="index.html"><h1><</h1></a>
+    <a href="principal.jsp"><h1><</h1></a>
     <h1>SnackSmart</h1>
 </nav>

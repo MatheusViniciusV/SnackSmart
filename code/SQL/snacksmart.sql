@@ -8,16 +8,16 @@
 -- Estrutura da tabela `gerente`
 --
 
-create table gerente {
-    pk int auto_increment primary key,
-    usuario  varchar(64)  not null,
-    nome     varchar(256) not null,
-    senha    varchar(256) not null,
-    cpf      char(11)     not null,
-    rg       char(10)     not null,
-    telefone varchar(14)  null,
-    email    varchar(128) null
-};
+CREATE TABLE `gerente` (
+    `pk` INT AUTO_INCREMENT PRIMARY KEY,
+    `usuario` VARCHAR(64) NOT NULL,
+    `nome` VARCHAR(256) NOT NULL,
+    `senha` VARCHAR(256) NOT NULL,
+    `cpf` CHAR(11) NOT NULL,
+    `rg` CHAR(10) NOT NULL,
+    `telefone` VARCHAR(14) NULL,
+    `email` VARCHAR(128) NULL
+);
 
 -- --------------------------------------------------------
 
@@ -25,16 +25,16 @@ create table gerente {
 -- Estrutura da tabela `locatario`
 --
 
-create table locatario {
-    pk int auto_increment primary key,
-    usuario  varchar(64)  not null,
-    nome     varchar(256) not null,
-    senha    varchar(256) not null,
-    cpf      char(11)     not null,
-    rg       char(10)     not null,
-    telefone varchar(14)  null,
-    email    varchar(128) null
-};
+CREATE TABLE `locatario` (
+    `pk` INT AUTO_INCREMENT PRIMARY KEY,
+    `usuario` VARCHAR(64) NOT NULL,
+    `nome` VARCHAR(256) NOT NULL,
+    `senha` VARCHAR(256) NOT NULL,
+    `cpf` CHAR(11) NOT NULL,
+    `rg` CHAR(10) NOT NULL,
+    `telefone` VARCHAR(14) NULL,
+    `email` VARCHAR(128) NULL
+);
 
 -- --------------------------------------------------------
 
@@ -42,135 +42,135 @@ create table locatario {
 -- Estrutura da tabela `fornecedor`
 --
 
-create table fornecedor {
-    pk int auto_increment primary key,
-    nome     varchar(256) not null,
-    telefone varchar(14)  null,
-    email    varchar(128) null
-};
+CREATE TABLE `fornecedor` (
+    `pk` INT AUTO_INCREMENT PRIMARY KEY,
+    `nome` VARCHAR(256) NOT NULL,
+    `telefone` VARCHAR(14) NULL,
+    `email` VARCHAR(128) NULL
+);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela 'lote'
+-- Estrutura da tabela `lote`
 --
 
-create table lote {
-    pk int auto_increment primary key,
-    tipo_produto   varchar(128) not null,
-    quantidade     int          not null,
-    preco_compra   float        not null,
-    preco_venda    float        not null,
-    fornecedor__fk int          not null,
-    locatario__fk  int          not null,
-    foreign key (tipo_produto__fk) references tipo_produto (pk),
-    foreign key (fornecedor__fk)   references fornecedor   (pk),
-    foreign key (locatario__fk)    references locatario    (pk)
-};
+CREATE TABLE `lote` (
+    `pk` INT AUTO_INCREMENT PRIMARY KEY,
+    `tipo_produto` VARCHAR(128) NOT NULL,
+    `quantidade` INT NOT NULL,
+    `preco_compra` FLOAT NOT NULL,
+    `preco_venda` FLOAT NOT NULL,
+    `fornecedor__fk` INT NOT NULL,
+    `locatario__fk` INT NOT NULL,
+    FOREIGN KEY (`tipo_produto__fk`) REFERENCES `tipo_produto` (`pk`),
+    FOREIGN KEY (`fornecedor__fk`) REFERENCES `fornecedor` (`pk`),
+    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`)
+);
 
--- Observação: Preço de compra e venda são relativos à uma unidade do produto
+-- Observação: Preço de compra e venda são relativos a uma unidade do produto
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela 'maquina'
+-- Estrutura da tabela `maquina`
 --
 
-create table maquina {
-    pk int auto_increment primary key,
-    aluguel       float not null,
-    locatario__fk int   null,
-    estado ENUM('ALUGADA','EM_MANUTENCAO','AGUARDANDO_MANUTENCAO','DISPONIVEL') not null,
-    foreign key (locatario__fk) references locatario (pk)
-};
+CREATE TABLE `maquina` (
+    `pk` INT AUTO_INCREMENT PRIMARY KEY,
+    `aluguel` FLOAT NOT NULL,
+    `locatario__fk` INT NULL,
+    `estado` ENUM('ALUGADA', 'EM_MANUTENCAO', 'AGUARDANDO_MANUTENCAO', 'DISPONIVEL') NOT NULL,
+    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`)
+);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela 'contrato'
+-- Estrutura da tabela `contrato`
 --
 
-create table contrato {
-    pk int auto_increment primary key,
-    data_inicio   date not null,
-    data_fim      date not null,
-    gerente__fk   int  not null,
-    locatario__fk int  not null,
-    maquina__fk   int  not null,
-    estado ENUM('VIGENTE', 'EXPIRADO', 'INATIVO', 'CANCELADO') not null,
-    foreign key (gerente__fk)   references gerente   (pk),
-    foreign key (locatario__fk) references locatario (pk),
-    foreign key (maquina__fk)   references maquina   (pk)
-};
+CREATE TABLE `contrato` (
+    `pk` INT AUTO_INCREMENT PRIMARY KEY,
+    `data_inicio` DATE NOT NULL,
+    `data_fim` DATE NOT NULL,
+    `gerente__fk` INT NOT NULL,
+    `locatario__fk` INT NOT NULL,
+    `maquina__fk` INT NOT NULL,
+    `estado` ENUM('VIGENTE', 'EXPIRADO', 'INATIVO', 'CANCELADO') NOT NULL,
+    FOREIGN KEY (`gerente__fk`) REFERENCES `gerente` (`pk`),
+    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`),
+    FOREIGN KEY (`maquina__fk`) REFERENCES `maquina` (`pk`)
+);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela 'contatos_gerente'
+-- Estrutura da tabela `contatos_gerente`
 --
 
-create table contatos_gerente {
-    pk int auto_increment primary key,
-    gerente__fk   int not null
-    locatario__fk int not null,
-    foreign key (gerente__fk)   references gerente   (pk),
-    foreign key (locatario__fk) references locatario (pk)
-}
+CREATE TABLE `contatos_gerente` (
+    `pk` INT AUTO_INCREMENT PRIMARY KEY,
+    `gerente__fk` INT NOT NULL,
+    `locatario__fk` INT NOT NULL,
+    FOREIGN KEY (`gerente__fk`) REFERENCES `gerente` (`pk`),
+    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`)
+);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela 'contatos_locatario'
+-- Estrutura da tabela `contatos_locatario`
 --
 
-create table contatos_locatario {
-    pk int auto_increment primary key,
-    fornecedor__fk int  not null,
-    locatario__fk  int  not null,
-    foreign key (locatario__fk)  references locatario  (pk),
-    foreign key (fornecedor__fk) references fornecedor (pk)
-}
-
+CREATE TABLE `contatos_locatario` (
+    `pk` INT AUTO_INCREMENT PRIMARY KEY,
+    `fornecedor__fk` INT NOT NULL,
+    `locatario__fk` INT NOT NULL,
+    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`),
+    FOREIGN KEY (`fornecedor__fk`) REFERENCES `fornecedor` (`pk`)
+);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela 'feedback'
+-- Estrutura da tabela `feedback`
 --
 
-create table feedback {
-    pk int auto_increment primary key,
-    mensagem      varchar(2048) null,
-    gerente__fk   int           not null,
-    locatario__fk int           not null,
-    foreign key (gerente__fk)   references gerente   (pk),
-    foreign key (locatario__fk) references locatario (pk),
-}
+CREATE TABLE `feedback` (
+    `pk` INT AUTO_INCREMENT PRIMARY KEY,
+    `mensagem` VARCHAR(2048) NULL,
+    `gerente__fk` INT NOT NULL,
+    `locatario__fk` INT NOT NULL,
+    FOREIGN KEY (`gerente__fk`) REFERENCES `gerente` (`pk`),
+    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`)
+);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela 'notas_locatario'
+-- Estrutura da tabela `notas_locatario`
 --
 
-create table notas_locatario {
-    pk int auto_increment primary key,
-    mensagem      varchar(1024) null,
-    dia           date          not null,
-    locatario__fk int           not null,
-    foreign key (locatario__fk) references locatario (pk)
-}
+CREATE TABLE `notas_locatario` (
+    `pk` INT AUTO_INCREMENT PRIMARY KEY,
+    `mensagem` VARCHAR(1024) NULL,
+    `dia` DATE NOT NULL,
+    `locatario__fk` INT NOT NULL,
+    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`)
+);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela 'notas_gerente'
+-- Estrutura da tabela `notas_gerente`
 --
 
-create table notas_gerente {
-    pk int auto_increment primary key,
-    mensagem    varchar(1024) null,
-    dia         date          not null,
-    gerente__fk int           not null,
-    foreign key (gerente__fk) references gerente (pk)
-}
+CREATE TABLE `notas_gerente` (
+    `pk` INT AUTO_INCREMENT PRIMARY KEY,
+    `mensagem` VARCHAR(1024) NULL,
+    `dia` DATE NOT NULL,
+    `gerente__fk` INT NOT NULL,
+    FOREIGN KEY (`gerente__fk`) REFERENCES `gerente` (`pk`)
+);
+```
