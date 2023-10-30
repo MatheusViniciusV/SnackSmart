@@ -17,6 +17,16 @@ public class MaquinaDTO {
         this.status = status;
         this.locatarioResponsavel = locatario; 
     }
+    
+    public MaquinaDTO(){        
+        this.nome = "Não escrito";
+        this.codigo = "Não escrito";
+        this.imagem = null;
+        this.localizacao = "Não escrito";
+        this.tipo = "Não escrito";
+        this.status =  null;
+        this.locatarioResponsavel = "Não escrito"; 
+    }
      
     public String getNome() {
         return nome;

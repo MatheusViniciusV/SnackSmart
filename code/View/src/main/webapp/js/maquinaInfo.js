@@ -319,13 +319,7 @@ function Main(){
     };
     
     let Vet = [maquina1, maquina2, maquina3, maquina4];
-    Vet.forEach((maquina) => criarSlotMaquina(maquina.nome, maquina.cod, maquina.status, maquina.imagem));
-    //Conexão com o banco de dados para criar cada slot*/
-    
-    /* No Servlet ou Controller
-        Maquina DAO maquinaDao = new MaquinaDAO();
-        ArrayList<MaquinaDTO> vetorMaquinas = maquinaDAO.getAll();
-        request.setAttribute("vetorMaquinas", vetorMaquinas);*/      
+    Vet.forEach((maquina) => criarSlotMaquina(maquina.nome, maquina.cod, maquina.status, maquina.imagem)); //TESTE;
 }   
 
 Main(); 

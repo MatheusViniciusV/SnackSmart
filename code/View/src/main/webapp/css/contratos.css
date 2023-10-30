@@ -1,0 +1,216 @@
+/* 
+    Created on : 8 de out. de 2023, 12:14:10
+    Author     : eloym
+*/
+:root {
+    --cor-form: #bebcbc;
+}
+
+main {
+    min-height: 100vh;
+    padding: 1rem 3rem;
+    background-color: var(--cor-principal);
+}
+
+main h1 {
+    margin: 2vh 2vw;
+}
+
+button {
+    background-color: var(--cor-secundaria);
+    color: var(--cor-principal);
+    cursor: pointer;
+}
+
+button:active {
+    background-color: var(--cor-ativo);
+    color: var(--cor-principal);
+}
+
+button.btn-confirmado {
+    background-color: var(--cor-confimado); /* Cor verde */
+    transition: background-color 0.2s; /* Duração da animação */
+}
+
+section#lista-contratos {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90vw;
+    padding: 1vh;
+    height: 60vh;
+    overflow-y: auto;
+    margin: 3vh auto;
+    border-radius: 15px;
+    background-color: var(--cor-terciaria);
+}
+
+article.contratos {
+    height: 40vh;
+    width: 28vh;
+    margin: 5vh 4.4vh;
+    border-radius: 10px;
+    background-color: #FFF;
+    position: relative;
+}
+
+article.contratos h3 {
+    margin: 5% auto;
+    text-align: center;
+    width: 100%;
+}
+
+article.contratos div {
+    margin: 9% auto;
+    height: 2%;
+    width: 80%;
+    background-color: var(--texto-cor-principal);
+}
+
+article.contratos div:last-child {
+    margin: 20% 10%;
+    height: 2%;
+    width: 40%;
+}
+
+article.selecionado {
+    border: solid 2px var(--cor-secundaria);
+    width: 27.5vh;
+    height: 39.5vh;
+}
+
+#botoes {
+    display: flex;
+    justify-content: space-around;
+}
+
+#botoes button {
+    padding: 0 .5rem;
+    margin: 0 3.5vh;
+    border-radius: 10px;
+    border: none;
+    width: 18vw;
+}
+
+button.null {
+    background-color: var(--texto-cor-principal) !important;
+}
+
+button:active {
+    border-radius: 10px;
+    border: none;
+}
+
+button#pdf-contrato a {
+    color: var(--cor-principal);
+}
+
+#criar-contrato-form {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+}
+
+#criar-contrato-form.oculto {
+    display: none;
+}
+
+#criar-contrato-form h2 {
+    margin-top: .1rem;
+}
+
+#criar-contrato-form h3 {
+    margin: 0.5rem 0;
+}
+
+#criar-contrato-form form {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 3rem;
+    background-color: var(--cor-principal);
+    margin: auto;
+    border-radius: 10px;
+    width: 39vw;
+    height: 76vh;
+    overflow-y: auto;
+    border: .2rem solid var(--texto-cor-secundaria);
+}
+
+section#criar-contrato-form input, label {
+    width: 100%;
+    margin: 0.2rem 0;
+}
+
+section#criar-contrato-form input.errado {
+    border: 2px solid red;
+}
+
+#criar-contrato-form #dados-locador, #criar-contrato-form #dados-locatario {
+    display: grid; 
+    grid-template-columns: 1.8fr 0.6fr; 
+    grid-template-rows: 0.4fr 1.6fr; 
+    gap: .6rem 3rem; 
+    grid-template-areas: 
+        ". .";
+    height: 20%; 
+}
+
+#criar-contrato-form #dados-contrato {
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: 0.4fr 1.6fr; 
+    gap: 2%; 
+    grid-template-areas: 
+    ". . ."
+}
+
+#dados-contrato label {
+    width: 12vw;
+}
+
+#criar-contrato-form #dados-contrato input {
+    width: 9em;
+}
+
+#criar-contrato-form #dados-contrato label:last-child {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#dados-contrato textarea {
+    resize: none;
+    width: 100%;
+    height: 10em;
+    margin: 1% 0;
+
+}
+
+section#criar-contrato-form button {
+    width: 30%;
+    padding: .1rem;
+    margin: 1vh;
+    border-radius: 5px;
+    border: none;
+}
+
+#criar-contrato-form #boteos-criar-contrato {
+    display: flex;
+    justify-content: space-around;
+    margin: 1vh;
+}
+
+span.obrigatorio:first-child {
+    color: var(--cor-secundaria);
+    font-size: medium;
+}
+
+span.obrigatorio {
+    color: var(--cor-secundaria);
+    font-size: small;
+}

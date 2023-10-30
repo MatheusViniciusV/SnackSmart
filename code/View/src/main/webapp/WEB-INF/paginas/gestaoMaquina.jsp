@@ -1,5 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="comuns/JSTL.jsp" %>
+<%@page import="br.cefetmg.snacksmart.dto.MaquinaDTO" %>
+<%@page import="java.util.ArrayList" %>
+<%@include file="../../comuns/JSTL.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,14 +9,15 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/gestaomaquina.css">
         <title>Gestão de Máquinas</title>
-        <%@include file="comuns/jqueryLink.jsp" %>
+        <%@include file="../../comuns/jqueryLink.jsp" %>
 
     </head>
     <body>
-        <%@include file="comuns/retornarInicial.jsp" %>
+        <%@include file="../../comuns/retornarInicial.jsp" %>
         <h1 id="tituloDaPagina">Máquinas</h1>
         <div id="bloquearConteudo"></div>
-        <main id="gestaoMaquinasMain">                  
+        <main id="gestaoMaquinasMain">  
+            <% ArrayList<MaquinaDTO> vetorMaquinas =(ArrayList<MaquinaDTO>) request.getAttribute("vetorMaquinas"); %>
             <c:forEach var="item" items="${vetorMaquinas}">
                 <script>
                     try {
@@ -31,7 +34,7 @@
                 <button id="addMaquinaButton">+</button>
             </div>
             <article id="formAddMaquina">               
-                <form action="service_maquina" name="formAddMaquina" method="post" enctype="multipart/form-data">                                 
+                <form action="GerenciarMaquina" name="formAddMaquina" method="post" enctype="multipart/form-data">                                 
                     <input type="hidden" name="formulario" value="formAddMaquina">
                     
                     <h1 id="tituloForm">Adicionar nova máquina</h1>
@@ -82,7 +85,7 @@
                 <h2>Ao remover a máquina, todos os dados relacionados a ela serão excluídos!</h2>
                 <p>⚠ Dados relacionados à máquina e ao locatário não poderão serem acessados posteriormente.
                     Caso a máquina esteja ligada a algum cliente é importante que o locatário esteja ciente disso.</p>
-                <form action="service_maquina" name="remocaoMaquina" method="post" enctype="multipart/form-data">
+                <form action="GerenciarMaquina" name="remocaoMaquina" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="formulario" value="remocaoMaquina">
                     <input type="hidden" name="removerMaquinaCodigo" id="removerMaquinaCodigo">
                     
@@ -95,7 +98,7 @@
             </article>
             
             <article id="formAtualizarMaquina">               
-                <form action="service_maquina" name="formAtualizarMaquina" method="post" enctype="multipart/form-data">
+                <form action="GerenciarMaquina" name="formAtualizarMaquina" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="formulario" value="formAtualizarMaquina">
                     <input type="hidden" name="atualizarMaquinaCodigo" id="atualizarMaquinaCodigo">
                     <h1 id="tituloUpdate">Atualizar dados da máquina</h1>
@@ -127,6 +130,7 @@
             </article> 
         </main>   
         <script src="js/maquinaInfo.js"></script> 
+        <!-- Mostrar Info do slot selecionado-->
         <c:set var="VetorDeObjetoMaquinas" value="${vetorMaquinas}"></c:set>
         <script>
             try {
