@@ -32,4 +32,5 @@ public enum TipoUsuario {
         
         return valor; 
     }
+    
 }

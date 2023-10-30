@@ -5,21 +5,20 @@ package br.cefetmg.snacksmart.utils.enums;
  * @author eloym
  */
 public enum StatusContrato {
-    INVALIDO,
-    ATIVO,
-    CANCELAMENTO_SOLICITADO,
-    CANCELADO,
-    EXCLUIDO;
+    INVALIDO(0),
+    ATIVO(1),
+    CANCELAMENTO_SOLICITADO(2),
+    CANCELADO(3),
+    EXCLUIDO(4);
     
-    public int toInt(StatusContrato status) {
-        return switch (status) {
-            case INVALIDO -> 0;
-            case ATIVO -> 1;
-            case CANCELAMENTO_SOLICITADO -> 2;
-            case CANCELADO -> 3;
-            case EXCLUIDO -> 4;
-            default -> 0;
-        };
+    private int status;
+    
+    StatusContrato(int opcao) {
+        status = opcao;
+    }
+    
+    public int toInt() {
+        return status;
     }
     
     public int toStatus(int valor) {

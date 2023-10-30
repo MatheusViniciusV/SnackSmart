@@ -38,7 +38,7 @@ public class ManterContratos {
     }
     
     public ArrayList<ContratoDTO> filtraContratos(LocatarioDTO locatario) throws LocatarioInvalidoException, SQLException {
-        ArrayList contratos = dao.filtra(locatario);
+        ArrayList contratos = dao.filtra(locatario.getCPF());
         
         return contratos;
     }
@@ -49,7 +49,7 @@ public class ManterContratos {
         return contratos;
     }
     
-    public ContratoDTO getContrato(long id) throws SQLException, ElementoNaoExisteException {
+    public ContratoDTO getContrato(long id) throws SQLException, ElementoNaoExisteException, ClassNotFoundException {
         ContratoDTO contrato = dao.getId(id);
         
         return contrato;

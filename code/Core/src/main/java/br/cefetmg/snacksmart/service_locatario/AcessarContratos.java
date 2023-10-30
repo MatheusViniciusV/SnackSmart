@@ -59,7 +59,7 @@ public class AcessarContratos {
     public ArrayList<ContratoDTO> getContratos(String locatarioCPF) throws LocatarioInvalidoException, SQLException {
         LocatarioDTO locatario = new LocatarioDTO();
         
-        ArrayList contratos = dao.filtra(locatario);
+        ArrayList contratos = dao.filtra("bla");
         
         return contratos;
     }

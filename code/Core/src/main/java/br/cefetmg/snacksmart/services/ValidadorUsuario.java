@@ -42,7 +42,7 @@ public class ValidadorUsuario {
         return TipoUsuario.NAO_CADASTRADO;
     }
     
-    public boolean validarGerente(String cpf, String token) 
+    public boolean validarGerente(String cpf, String token)   
             throws UnsupportedEncodingException, NoSuchAlgorithmException, PersistenciaException {
         
 //        GerenteDTO gerente = daoGerente.get();
