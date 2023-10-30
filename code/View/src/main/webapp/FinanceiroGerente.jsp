@@ -29,16 +29,15 @@
                 <%String dados[] = (String[])request.getAttribute("dados");%>
                 <p>Recebimento previsto para o mês:</p>
                 <p id="recebimento"><%= dados[0]%></p>
-                <p>Data de recebimento: <%= dados[1]%></p>
             </div>
             <div class="box">
                 <p>Gastos feitos neste mês:</p>
-                <p id="gastos">R$: <%= dados[2]%></p>
+                <p id="gastos">R$: <%= dados[1]%></p>
 
             </div>
             <div class="box">
                 <p>Saldo total</p>
-                <p id="saldo">R$: <%= dados[3]%></p>
+                <p id="saldo">R$: <%= dados[2]%></p>
 
 
             </div>
