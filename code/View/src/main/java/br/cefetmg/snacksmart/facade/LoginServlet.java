@@ -35,17 +35,22 @@ public class LoginServlet extends HttpServlet {
             String usuario = request.getParameter("usuario");
             String senha = request.getParameter("senha");
             
+            TipoUsuario tipoUsuario;
+            System.out.println(usuario);
             
-            TipoUsuario tipoUsuario = TipoUsuario.LOCATARIO;
+            if(usuario.equals("ger")) 
+                tipoUsuario = TipoUsuario.LOCADOR;
+            else
+                tipoUsuario = TipoUsuario.LOCATARIO;
             
             
             HttpSession session = request.getSession();
             
             switch(tipoUsuario) {
-                case NAO_CADASTRADO: //inválido
-                    response.sendRedirect("index.html"); // Redireciona para a página de login com mensagem de erro
+                case NAO_CADASTRADO: 
+                    response.sendRedirect("index.html"); 
                     break;
-                case LOCADOR: // gerente
+                case LOCADOR: 
                     if(validador.validarGerente(usuario, senha)) {
                         response.sendRedirect("principal.jsp");
                         session.setAttribute("tipoUsuario", tipoUsuario);
@@ -53,7 +58,7 @@ public class LoginServlet extends HttpServlet {
                         response.sendRedirect("index.html");
                     }
                     break;
-                case LOCATARIO: // locatário
+                case LOCATARIO: 
                     if(validador.validarLocatario(usuario, senha)) {
                         response.sendRedirect("principal.jsp");
                         session.setAttribute("tipoUsuario", tipoUsuario);
@@ -63,7 +68,7 @@ public class LoginServlet extends HttpServlet {
                     break;
             }
             
-            session.setAttribute("tipoUsuario", TipoUsuario.LOCATARIO);
+            
             session.setAttribute("LOCATARIO", TipoUsuario.LOCATARIO);
             session.setAttribute("LOCADOR", TipoUsuario.LOCADOR);
             session.setMaxInactiveInterval(15000);
@@ -79,7 +84,7 @@ public class LoginServlet extends HttpServlet {
         if(sessao != null) 
             sessao.invalidate();
         
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("index.html");
     }
 //
 //    //Retorna 0 se o login é inválido, 1 se o login é do gerente e 2 se o login é do locatário
