@@ -57,11 +57,11 @@ public class GerFinanceiro extends HttpServlet {
             
             try{
             
-                ArrayList<MaquinaDTO> listaMaquinas = Maquinas.listarTodos();
+                ArrayList<MaquinaDTO> listaMaquinas = Maquinas.getAll();
                 
                 for (MaquinaDTO m : listaMaquinas){
                 
-                    gasto += m.getValor();
+                    //gasto += m.getValor();
                 }
             }
             catch(Exception e){}
