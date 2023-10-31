@@ -17,24 +17,30 @@
         <h1 id="tituloDaPagina">Máquinas</h1>
         <div id="bloquearConteudo"></div>
         <main id="gestaoMaquinasMain">  
-            <% ArrayList<MaquinaDTO> vetorMaquinas =(ArrayList<MaquinaDTO>) request.getAttribute("vetorMaquinas"); %>
-            <c:forEach var="item" items="${vetorMaquinas}">
-                <script>
-                    try {
-                        criarSlotMaquina("${item.nome}", "${item.codigo}", "${item.status}", "${item.imagem}");
-                    } catch (NetworkError e) {
-                        console.log("Erro de rede ao criar as máquinas: " + e);
-                    } catch (Exception e) {
-                        console.log("Erro ao criar as máquinas: " + e);
-                    }
-                </script>
-            </c:forEach>
-            <div class="slot" id="addMaquinaSlot">
-                <label id="addMaquinaLabel">Adicionar nova máquina</label>
-                <button id="addMaquinaButton">+</button>
-            </div>
+            <% ArrayList<MaquinaDTO> listaMaquinas = (ArrayList<MaquinaDTO>) request.getAttribute("vetorMaquinas"); %>
+            <script>
+                var listaMaquinasJS = [
+                    <c:forEach var="maquina" items="${listaMaquinas}">
+                        {
+                            nome: '<c:out value="${maquina.nome}" />',
+                            codigo: <c:out value="${maquina.codigo}" />,
+                            localizacao: '<c:out value="${maquina.localizacao}" />',
+                            locatario: '<c:out value="${maquina.locatario}" />',
+                            status: '<c:out value="${maquina.status}" />',
+                            tipo: '<c:out value="${maquina.tipo}" />',
+                            imagem: [
+                                <c:forEach var="onebyte" items="${maquina.imagem}">
+                                    '<c:out value="${onebyte}" />'<c:if test="${!loop.last}">,</c:if>
+                                </c:forEach>
+                            ]
+                        }<c:if test="${!loop.last}">, </c:if>
+                    </c:forEach>
+                ];
+
+            </script>
+            
             <article id="formAddMaquina">               
-                <form action="GerenciarMaquina" name="formAddMaquina" method="post" enctype="multipart/form-data">                                 
+                <form action="/GerenciarMaquina" method="post" enctype="multipart/form-data">                                 
                     <input type="hidden" name="formulario" value="formAddMaquina">
                     
                     <h1 id="tituloForm">Adicionar nova máquina</h1>
@@ -46,7 +52,7 @@
                     <label id="tipoInput" for="tipo">Tipo da máquina:</label>                       
                     <select id="tipo" name="tipo" required>
                         <option value="refrigerada">Refrigerada</option>
-                        <option value="nãoRefrigerada">Não refrigerada</option>
+                        <option value="nao refrigerada">Não refrigerada</option>
                     </select><br>
                     
                     <label id="labelImagem" class="imagem" for="imagem">Foto da máquina:</label>
@@ -63,42 +69,9 @@
                     <div id="cancelarformAddMaquina" class="botaoForm cancelar">Cancelar</div>
                 </form>
             </article>
-                
-            <article id="informacaoMaquina">       
-                
-                <h1 id="nomeMaquina">Máquina 01</h1>
-                <h1 id="codeMaquina">COD-001</h1>
-                <h2 id="locatarioMaquina">👤Locatário responsável: Geraldo Azeved</h2> 
-                <h2 id="LocalizacaoDaMaquina">📍Localização: Bahia, Salvador</h2>              
-                <h2 id="statusDinamicoH2">Status da Máquina: Disponível</h2> 
-                <h2 id="tipoMaquina">Tipo da Máquina: Refrigerada</h2>   
-                
-                <div class="botoesForm">
-                    <input class="botaoForm" id="atualizarDados" type="submit" value="Atualizar dados">
-                    <div class="botaoForm cancelar">Voltar</div>
-                </div>
-                
-            </article>
-            
-            <article id="remocaoMaquina">
-                <h1>Você tem certeza?</h1>
-                <h2>Ao remover a máquina, todos os dados relacionados a ela serão excluídos!</h2>
-                <p>⚠ Dados relacionados à máquina e ao locatário não poderão serem acessados posteriormente.
-                    Caso a máquina esteja ligada a algum cliente é importante que o locatário esteja ciente disso.</p>
-                <form action="GerenciarMaquina" name="remocaoMaquina" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="formulario" value="remocaoMaquina">
-                    <input type="hidden" name="removerMaquinaCodigo" id="removerMaquinaCodigo">
-                    
-                    <div class="botoesForm">
-                        <input class="botaoForm" name="remover" type="submit" value="REMOVER MÁQUINA">
-                        <div class="botaoForm cancelar">Cancelar</div>
-                    </div>
-                    
-                </form>
-            </article>
-            
+                          
             <article id="formAtualizarMaquina">               
-                <form action="GerenciarMaquina" name="formAtualizarMaquina" method="post" enctype="multipart/form-data">
+                <form action="/GerenciarMaquina" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="formulario" value="formAtualizarMaquina">
                     <input type="hidden" name="atualizarMaquinaCodigo" id="atualizarMaquinaCodigo">
                     <h1 id="tituloUpdate">Atualizar dados da máquina</h1>
@@ -128,17 +101,65 @@
                     <div id="cancelarformAtualizarMaquina" class="botaoForm cancelar">Cancelar</div>
                 </form>
             </article> 
-        </main>   
+            
+            <article id="remocaoMaquina">
+                <h1>Você tem certeza?</h1>
+                <h2>Ao remover a máquina, todos os dados relacionados a ela serão excluídos!</h2>
+                <p>⚠ Dados relacionados à máquina e ao locatário não poderão serem acessados posteriormente.
+                    Caso a máquina esteja ligada a algum cliente é importante que o locatário esteja ciente disso.</p>
+                <form action="/GerenciarMaquina" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="formulario" value="remocaoMaquina">
+                    <input type="hidden" name="removerMaquinaCodigo" id="removerMaquinaCodigo">
+                    
+                    <div class="botoesForm">
+                        <input class="botaoForm" name="remover" type="submit" value="REMOVER MÁQUINA">
+                        <div class="botaoForm cancelar">Cancelar</div>
+                    </div>
+                    
+                </form>
+            </article>
+            
+            <article id="informacaoMaquina">       
+                
+                <h1 id="nomeMaquina">Máquina 01</h1>
+                <h1 id="codeMaquina">COD-001</h1>
+                <h2 id="locatarioMaquina">👤Locatário responsável: Geraldo Azeved</h2> 
+                <h2 id="LocalizacaoDaMaquina">📍Localização: Bahia, Salvador</h2>              
+                <h2 id="statusDinamicoH2">Status da Máquina: Disponível</h2> 
+                <h2 id="tipoMaquina">Tipo da Máquina: Refrigerada</h2>   
+                
+                <div class="botoesForm">
+                    <input class="botaoForm" id="atualizarDados" type="submit" value="Atualizar dados">
+                    <div class="botaoForm cancelar">Voltar</div>
+                </div>
+                
+            </article>
+        </main>             
         <script src="js/maquinaInfo.js"></script> 
+        <c:forEach var="item" items="${vetorMaquinas}">
+                <script>
+                    try {
+                        criarSlotMaquina("${item.nome}", "${item.codigo}", "${item.status}", "${item.imagem}");
+                    } catch (erro) {
+                        console.log("Erro ao criar as máquinas: " + erro);
+                    }
+                </script>
+                
+        </c:forEach>
         <!-- Mostrar Info do slot selecionado-->
-        <c:set var="VetorDeObjetoMaquinas" value="${vetorMaquinas}"></c:set>
         <script>
-            try {
-                let vetorMaquinaJSON = '${VetorDeObjetoMaquinas}';
-                vetorMaquinaArray = JSON.parse(vetorMaquinaJSON);
-            } catch (Exception e) {
-                console.log("Erro ao atribuir os valores: " + e);
-            }
+            var vetorMaquinaArray = [
+                <c:forEach items="${vetorMaquinas}" var="maquina">
+                    {
+                        nome: '${maquina.nome}',
+                        codigo: '${maquina.codigo}',
+                        locatario: '${maquina.locatario}',
+                        localizacao: '${maquina.localizacao}',
+                        status: '${maquina.status}',
+                        tipo: '${maquina.tipo}'
+                    },
+                </c:forEach>
+            ];
         </script>
     </body>
 </html>

@@ -4,8 +4,7 @@ public enum StatusMaquina {
     DISPONIVEL,
     EM_FUNCIONAMENTO,
     EM_MANUTENCAO,
-    AGUARDANDO_MANUTENCAO,
-    REMOVIDO;
+    AGUARDANDO_MANUTENCAO;
     
     public int toInt(StatusMaquina status) {
         return switch (status) {
@@ -13,7 +12,6 @@ public enum StatusMaquina {
             case EM_FUNCIONAMENTO -> 1;
             case EM_MANUTENCAO -> 2;
             case AGUARDANDO_MANUTENCAO -> 3;
-            case REMOVIDO -> 4;
             default -> 0;
         };
     }

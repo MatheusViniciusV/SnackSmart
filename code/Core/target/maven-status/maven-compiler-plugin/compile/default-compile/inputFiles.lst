@@ -1,31 +1,32 @@
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\TipoUsuario.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\service_locatario\AcessarContratos.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\bd\PersistenciaException.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\ContratoDTO.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\FilaAteracoesVaziaException.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\services\ValidadorUsuario.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\service_gerente\ManterContratos.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\service_maquinas\FormatoArquivoInvalidoException.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd\MysqlConnection.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\LocatarioDTO.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\SenhaInvalidaTamanhoException.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IGerenteDAO.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IMaquinaDAO.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\service_gerente\AcessarMaquinas.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dao\ElementoNaoExisteException.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dao\ContratosDAO.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\conexao\Conexao.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IContratosDAO.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dao\LocatarioInvalidoException.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dao\MaquinaDAO.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\StatusContrato.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\NomeNuloException.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\GerenteDTO.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dao\GerenteDAO.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\CPFInvalidoException.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\StatusMaquina.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\conection\EstabelecerConexao.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\MaquinaDTO.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\NomeInvalidoTamanhoException.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd\ConnectionFactory.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd\ConnectionManager.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\StatusMaquina.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd\MysqlConnection.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\service_locatario\AcessarContratos.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dao\GerenteDAO.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\ContratoDTO.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\service_gerente\ManterContratos.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IContratosDAO.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IMaquinaDAO.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\SenhaInvalidaTamanhoException.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\GerenteDTO.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IGerenteDAO.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\MaquinaDTO.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\FilaAteracoesVaziaException.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\NomeNuloException.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\conection\EstabelecerConexao.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dao\MaquinaDAO.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\CPFInvalidoException.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\TipoMaquina.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\bd\PersistenciaException.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\LocatarioDTO.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dao\ContratosDAO.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\TipoUsuario.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd\ConnectionManager.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\StatusContrato.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\services\ValidadorUsuario.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd\ConnectionFactory.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\service_gerente\AcessarMaquinas.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dao\ElementoNaoExisteException.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\conexao\Conexao.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dao\LocatarioInvalidoException.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\service_maquinas\FormatoArquivoInvalidoException.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\NomeInvalidoTamanhoException.java

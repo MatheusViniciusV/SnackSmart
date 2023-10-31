@@ -9,11 +9,18 @@ package br.cefetmg.snacksmart.dto;
  * @author eloym
  */
 public class LocatarioDTO {
+    private String nome; 
+    public LocatarioDTO(String nome){
+        this.nome = nome;
+    }
+    public LocatarioDTO(){
+        
+    }
     public String getCPF() {
         return null;
     }
     
     public String getNome() {
-        return null;
+        return nome;
     }
 }
