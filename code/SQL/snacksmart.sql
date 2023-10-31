@@ -14,7 +14,6 @@ CREATE TABLE `gerente` (
     `nome` VARCHAR(256) NOT NULL,
     `senha` VARCHAR(256) NOT NULL,
     `cpf` CHAR(11) NOT NULL,
-    `rg` CHAR(10) NOT NULL,
     `telefone` VARCHAR(14) NULL,
     `email` VARCHAR(128) NULL
 );
@@ -91,9 +90,11 @@ CREATE TABLE `maquina` (
 --
 
 CREATE TABLE `contrato` (
-    `pk` INT AUTO_INCREMENT PRIMARY KEY,
+    `pk` BIGINT AUTO_INCREMENT PRIMARY KEY,
     `data_inicio` DATE NOT NULL,
     `data_fim` DATE NOT NULL,
+    `data_pagamento` DATE NOT NULL,
+    `valor` INT NOT NULL,
     `gerente__fk` INT NOT NULL,
     `locatario__fk` INT NOT NULL,
     `maquina__fk` INT NOT NULL,
