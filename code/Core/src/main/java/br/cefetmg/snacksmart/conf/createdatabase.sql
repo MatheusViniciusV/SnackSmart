@@ -18,7 +18,7 @@ CREATE TABLE `gerente` (
     `nome` VARCHAR(256) NOT NULL,
     `senha` VARCHAR(256) NOT NULL,
     `cpf` CHAR(11) NOT NULL,
-    `rg` CHAR(10) NOT NULL,
+    `rg` CHAR(10) NULL,
     `telefone` VARCHAR(14) NULL,
     `email` VARCHAR(128) NULL
 );
@@ -36,7 +36,7 @@ CREATE TABLE `locatario` (
     `nome` VARCHAR(256) NOT NULL,
     `senha` VARCHAR(256) NOT NULL,
     `cpf` CHAR(11) NOT NULL,
-    `rg` CHAR(10) NOT NULL,
+    `rg` CHAR(10) NULL,
     `telefone` VARCHAR(14) NULL,
     `email` VARCHAR(128) NULL
 );
@@ -70,7 +70,6 @@ CREATE TABLE `lote` (
     `preco_venda` FLOAT NOT NULL,
     `fornecedor__fk` INT NOT NULL,
     `locatario__fk` INT NOT NULL,
-    FOREIGN KEY (`tipo_produto__fk`) REFERENCES `tipo_produto` (`pk`),
     FOREIGN KEY (`fornecedor__fk`) REFERENCES `fornecedor` (`pk`),
     FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`)
 );
@@ -86,6 +85,9 @@ CREATE TABLE `lote` (
 DROP TABLE IF EXISTS `maquina`;
 CREATE TABLE `maquina` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
+    `nome` VARCHAR(128) NULL,
+    `imagem` BLOB NULL,
+    `localizacao` VARCHAR(256) NULL,
     `aluguel` FLOAT NOT NULL,
     `locatario__fk` INT NULL,
     `estado` ENUM('ALUGADA', 'EM_MANUTENCAO', 'AGUARDANDO_MANUTENCAO', 'DISPONIVEL') NOT NULL,
@@ -103,6 +105,8 @@ CREATE TABLE `contrato` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `data_inicio` DATE NOT NULL,
     `data_fim` DATE NOT NULL,
+    `data_pagamento` DATE NOT NULL,
+    `valor` INT NOT NULL,
     `gerente__fk` INT NOT NULL,
     `locatario__fk` INT NOT NULL,
     `maquina__fk` INT NOT NULL,
