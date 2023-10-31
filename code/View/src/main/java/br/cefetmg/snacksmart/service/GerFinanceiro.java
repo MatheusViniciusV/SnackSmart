@@ -42,7 +42,7 @@ public class GerFinanceiro extends HttpServlet {
 
             ContratosDAO Contratos = new ContratosDAO();
             try {
-                ArrayList<ContratoDTO> listaContratos = Contratos.getTodos();
+                ArrayList<ContratoDTO> listaContratos = Contratos.listaTodos();
 
                 for (ContratoDTO i : listaContratos) {
 

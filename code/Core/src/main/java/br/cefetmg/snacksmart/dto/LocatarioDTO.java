@@ -15,6 +15,10 @@ public class LocatarioDTO {
     private String telefone;
     private String email;
 
+    public LocatarioDTO(String nome){
+        this.nome = nome;
+    }
+
     public LocatarioDTO(String nome, String cpf, String email, String telefone){
         this.nome = nome;
         this.cpf = cpf;
@@ -26,6 +30,10 @@ public class LocatarioDTO {
 
     public Long getPk() {
         return pk;
+    }
+
+    public void setPk(Long pk) {
+        this.pk = pk;
     }
 
     public void setId(Long pk) {

@@ -43,10 +43,11 @@ public class ContratosDAO implements IContratosDAO {
             if (rs.next()) {
                 contrato = new ContratoDTO(
                         rs.getLong("pk"),
-                        rs.getInt("valor"),
-                        rs.getDate("data-inicio").toLocalDate(),
-                        rs.getDate("data-fim").toLocalDate(),
-                        rs.getDate("data-pagamento").toLocalDate(),
+                        rs.getDouble("valor"),
+                        rs.getDate("data_inicio").toLocalDate(),
+                        rs.getDate("data_fim").toLocalDate(),
+//                        rs.getDate("data-pagamento").toLocalDate(),
+                        LocalDate.now(),
                         rs.getString("observacoes")
                 );
                 System.out.println("contrato pego do banco de dados");
@@ -66,7 +67,7 @@ public class ContratosDAO implements IContratosDAO {
     
     @Override
     public ArrayList<ContratoDTO> listaTodos() throws SQLException {
-        ArrayList<ContratoDTO> contratos = null;
+        ArrayList<ContratoDTO> contratos = new ArrayList<ContratoDTO>();
 
         ConnectionManager conn = ConnectionManager.getInstance();
         try {
@@ -77,17 +78,29 @@ public class ContratosDAO implements IContratosDAO {
             PreparedStatement pstmt = conexao.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
 
-            LocatarioDA
+            LocatarioDAO daoLocatario = new LocatarioDAO();
             while (rs.next()) {
                 ContratoDTO contrato = null;
-                contrato = new ContratoDTO(
-                        rs.getLong("pk");
 
-                )
+                    contrato = new ContratoDTO(
+                            rs.getLong("pk"),
+                            daoLocatario.consultarPorPk(rs.getLong("locatario__fk")),
+                            rs.getDate("data_inicio").toLocalDate(),
+                            rs.getDate("data_fim").toLocalDate(),
+//                            rs.getString("observacoes")
+                            ""
+                    );
+
+                    contratos.add(contrato);
+
             }
+        } catch (PersistenciaException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
-        return contratos
+        return contratos;
 
     }
     

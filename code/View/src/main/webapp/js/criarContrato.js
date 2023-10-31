@@ -9,27 +9,12 @@ $('#cancelar').click(function () {
 });
 
 $('#enviar').click(function() {
-    alert('ainda não implementado.');
-    $('#criar-contrato-form').addClass('oculto');
-
-    const dataContrato = {
-        // dados do locatario
-        nomeLocatario: $('input[name=locatario-nome').val(),
-        cpfLocatario: null,
-        emailLocatario: null,
-        telefoneLocatario: null,
-        // dados do contrato
-        dataInicio: null,
-        dataTermino: null,
-        dataPagamento: null,
-        Observacoes: null,
-    };
 
     let formCorreto = true; 
     
-    validarRegEx('input[name=locatario-cpf', cpfRegEx, formCorreto);
-    validarRegEx('input[name=locatario-email', emailRegEx, formCorreto);
-    validarRegEx('input[name=locatario-telefone', telRegEx, formCorreto);
+    validarRegEx('input[name=locatario-cpf]', cpfRegEx, formCorreto);
+    validarRegEx('input[name=locatario-email]', emailRegEx, formCorreto);
+    validarRegEx('input[name=locatario-telefone]', telRegEx, formCorreto);
 
     $('input').each(function() {
         if($(this).val() === '') {
@@ -44,19 +29,19 @@ $('#enviar').click(function() {
 
     if(formCorreto) {
 
-        alert('ainda não implementado.');
+
         $('#criar-contrato-form').addClass('oculto');
     
         const dataContrato = {
             // dados do locatario
-            nomeLocatario: $('input[name=locatario-nome').val(),
-            cpfLocatario: $('input[name=locatario-cpf').val(),
-            emailLocatario: $('input[name=locatario-email').val(),
-            telefoneLocatario: $('input[name=locatario-telefone').val(),
+            nomeLocatario: $('input[name=locatario-nome]').val(),
+            cpfLocatario: $('input[name=locatario-cpf]').val(),
+            emailLocatario: $("input[name=locatario-email]").val(),
+            telefoneLocatario: $('input[name=locatario-telefone]').val(),
             // dados do contrato
-            dataInicio: $('input[name=data-inicio').val(),
-            dataFim: $('input[name=data-termino').val(),
-            dataPagamento: $('input[name=data-pagamento').val(),
+            dataInicio: $('input[name=data-inicio]').val(),
+            dataFim: $('input[name=data-termino]').val(),
+            dataPagamento: $('input[name=data-pagamento]').val(),
             Observacoes: $('textarea[name=observacoes]').val(),
         };
     

@@ -23,12 +23,32 @@ public class ContratoDTO {
     private LocatarioDTO locatario;
     private MaquinaDTO maquina;
 
+    public ContratoDTO(long id,
+                       double valor,
+//                       LocatarioDTO locatario,
+//            MaquinaDTO maquina,
+                       LocalDate dataInicio, LocalDate dataExpiracao, LocalDate dataPagamento,
+                       String observacoes) throws PersistenciaException {
+
+        this.id = id;
+        this.valor = valor;
+        this.dataExpiracao = dataExpiracao;
+        this.dataInicio = dataInicio;
+        this.dataPagamento = dataPagamento;
+        this.observacoes = observacoes;
+//        this.locatario = locatario;
+
+        IGerenteDAO daoGerente = new GerenteDAO();
+        this.gerente = daoGerente.get();
+
+    }
+
     // Construtor da classe Contrato
     public ContratoDTO(long id,
 //            double valor,
             LocatarioDTO locatario,
 //            MaquinaDTO maquina,
-            LocalDate dataInicio, LocalDate dataExpiracao, LocalDate dataPagamento,
+            LocalDate dataInicio, LocalDate dataExpiracao, // LocalDate dataPagamento,
             String observacoes) throws PersistenciaException {
 
         this.id = id;
