@@ -1,5 +1,6 @@
 package br.cefetmg.snacksmart.facade;
 
+import br.cefetmg.snacksmart.dto.IUsuario;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.services.ValidadorUsuario;
 import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
@@ -12,10 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,11 +29,11 @@ public class LoginServlet extends HttpServlet {
         try {
             ValidadorUsuario validador = new ValidadorUsuario();
             
-            String usuario = request.getParameter("usuario");
+            String cpf = request.getParameter("usuario");
             String senha = request.getParameter("senha");
             
             
-            TipoUsuario tipoUsuario = TipoUsuario.LOCATARIO;
+            TipoUsuario tipoUsuario = validador.tipoUsuario(cpf);
             
             
             HttpSession session = request.getSession();
@@ -46,24 +43,25 @@ public class LoginServlet extends HttpServlet {
                     response.sendRedirect("index.html"); // Redireciona para a página de login com mensagem de erro
                     break;
                 case LOCADOR: // gerente
-                    if(validador.validarGerente(usuario, senha)) {
+                    if(validador.validarGerente(cpf, senha)) {
                         response.sendRedirect("principal.jsp");
                         session.setAttribute("tipoUsuario", tipoUsuario);
+                        session.setAttribute("usuario", validador.getGenrente());
                     } else {
                         response.sendRedirect("index.html");
                     }
                     break;
                 case LOCATARIO: // locatário
-                    if(validador.validarLocatario(usuario, senha)) {
+                    if(validador.validarLocatario(cpf, senha)) {
                         response.sendRedirect("principal.jsp");
                         session.setAttribute("tipoUsuario", tipoUsuario);
+                        session.setAttribute("usuario", null);
                     } else {
                         response.sendRedirect("index.html");
                     }
                     break;
             }
-            
-            session.setAttribute("tipoUsuario", TipoUsuario.LOCATARIO);
+
             session.setAttribute("LOCATARIO", TipoUsuario.LOCATARIO);
             session.setAttribute("LOCADOR", TipoUsuario.LOCADOR);
             session.setMaxInactiveInterval(15000);

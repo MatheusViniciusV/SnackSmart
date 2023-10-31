@@ -7,7 +7,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
+import br.cefetmg.snacksmart.utils.bd.ConnectionTester;
+
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,35 +20,45 @@ import java.sql.SQLException;
 public class GerenteDAO implements IGerenteDAO {
     @Override
     public GerenteDTO get() throws PersistenciaException {
+        ConnectionManager conn = ConnectionManager.getInstance();
+        GerenteDTO gerente = null;
         try {
-            Connection conexao = ConnectionManager.getInstance().getConnection();
+            Connection cn = conn.getConnection();
 
-            String sql = "SELECT * FROM `gerente` ";
-            PreparedStatement pstmt = conexao.prepareStatement(sql);
+
+
+            String sql = "SELECT * FROM `gerente`";
+
+            PreparedStatement pstmt = cn.prepareStatement(sql);
+
             ResultSet rs = pstmt.executeQuery();
 
-            GerenteDTO gerente = null;
+
             if (rs.next()) {
-                System.out.println(rs.getString("nome"));
                 gerente = new GerenteDTO(
-                                        rs.getString("nome"),
-                                        rs.getString("cpf"),
-                                        rs.getString("senha"));
+                        rs.getString("nome"),
+                        rs.getString("cpf"),
+                        rs.getString("senha"));
+
+                System.out.println("gerente pego do banco de dados");
             }
 
             rs.close();
             pstmt.close();
-            conexao.close();
-            
-            return gerente;
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-            throw new PersistenciaException(e.getMessage(), e);
+            cn.close();
+
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionTester.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
+
+        return gerente;
     }
     
     @Override
-    public void set(GerenteDTO gerente) throws PersistenciaException {
+    public int set(GerenteDTO gerente) throws PersistenciaException {
         try {
             delete();
 
@@ -58,10 +72,11 @@ public class GerenteDAO implements IGerenteDAO {
             pstmt.setString(4, gerente.getTelefone());
             pstmt.setString(5, gerente.getEmail());
 
-            pstmt.executeUpdate();
+            int retorno = pstmt.executeUpdate();
             pstmt.close();
             conexao.close();
 
+            return retorno;
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -77,7 +92,7 @@ public class GerenteDAO implements IGerenteDAO {
             pstmt.executeUpdate();
 
             pstmt.close();
-            connection.close();
+            conexao.close();
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

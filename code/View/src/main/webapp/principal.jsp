@@ -7,10 +7,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="br.cefetmg.snacksmart.utils.enums.TipoUsuario" %>
+<%@page import="br.cefetmg.snacksmart.dto.IUsuario" %>
 <%@include file="comuns/taglibs.jsp" %>
 
 <% 
-    TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario"); 
+    TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario");
+    IUsuario usuario = (IUsuario) session.getAttribute("usuario");
 %>
 
 
@@ -24,7 +26,7 @@
     </head>
     <body>
         <main>
-            <h1>Olá, <%=tipoUsuario%></h1>
+            <h1>Olá, <%=usuario.getNome()%></h1>
             
             
             <div id="menu">

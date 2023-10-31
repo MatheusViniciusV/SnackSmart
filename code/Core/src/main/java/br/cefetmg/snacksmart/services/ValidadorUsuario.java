@@ -6,8 +6,10 @@ package br.cefetmg.snacksmart.services;
 
 import br.cefetmg.snacksmart.dao.GerenteDAO;
 import br.cefetmg.snacksmart.dto.GerenteDTO;
+import br.cefetmg.snacksmart.dto.IUsuario;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.idao.IGerenteDAO;
+import br.cefetmg.snacksmart.utils.SenhaManager;
 import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -29,8 +31,8 @@ public class ValidadorUsuario {
     public TipoUsuario tipoUsuario(String cpf) throws PersistenciaException {
         TipoUsuario tipoUsuario;
         
-//        GerenteDTO gerente = daoGerente.get();
-        if(true)
+        GerenteDTO gerente = daoGerente.get();
+        if(gerente.getCPF().equals(cpf))
             return TipoUsuario.LOCADOR;
 //        
 //        // * validar se é locador
@@ -39,44 +41,36 @@ public class ValidadorUsuario {
         
         
         
-        return TipoUsuario.NAO_CADASTRADO;
+        return TipoUsuario.LOCATARIO;
     }
     
-    public boolean validarGerente(String cpf, String token) 
+    public boolean validarGerente(String cpf, String senha)
             throws UnsupportedEncodingException, NoSuchAlgorithmException, PersistenciaException {
         
-//        GerenteDTO gerente = daoGerente.get();
+        GerenteDTO gerente = daoGerente.get();
 
-        MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
-        byte hash[] = algorithm.digest(token.getBytes("UTF-8"));
+        senha = SenhaManager.fazHash(senha);
 
-        StringBuilder aux = new StringBuilder();
-        for (byte b : hash) {
-            aux.append(String.format("%02X", 0xFF & b));
-        }
-        token = aux.toString();
+        return (senha.equals(gerente.getSenha()) && cpf.equals(gerente.getCPF()));
+    }
+    
+    public boolean validarLocatario(String cpf, String senha)
+            throws UnsupportedEncodingException, NoSuchAlgorithmException, PersistenciaException {
+        
+//        LocatarioDTO locatario = ...;
 
-//        return (token.equals(gerente.getToken()) && cpf.equals(gerente.getCPF()));
+        senha = SenhaManager.fazHash(senha);
+
+//        return (token.equals(locatario.getSenha()) && cpf.equals(locatario.getCPF()));
 
         return true;
     }
-    
-    public boolean validarLocatario(String cpf, String token) 
-            throws UnsupportedEncodingException, NoSuchAlgorithmException, PersistenciaException {
-        
-//        GerenteDTO gerente = daoGerente.get();
 
-        MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
-        byte hash[] = algorithm.digest(token.getBytes("UTF-8"));
-
-        StringBuilder aux = new StringBuilder();
-        for (byte b : hash) {
-            aux.append(String.format("%02X", 0xFF & b));
+    public IUsuario getGenrente() {
+        try {
+            return daoGerente.get();
+        } catch (PersistenciaException e) {
+            throw new RuntimeException(e);
         }
-        token = aux.toString();
-
-//        return (token.equals(gerente.getToken()) && cpf.equals(gerente.getCPF()));
-
-        return true;
     }
 }

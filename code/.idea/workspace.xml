@@ -1,32 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="View:war" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dd24dd0-57d8-4f27-938d-95a9bbda0876" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Core/target/maven-archiver/pom.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/ContratoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/ContratosDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/ContratoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/ContratosDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/idao/IContratosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/idao/IContratosDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/View/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/services/PDFContrato.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/services/PDFContrato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/services_locatario/SolicitarCancelarContrato.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/services_locatario/SolicitarCancelarContrato.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/src/main/webapp/visualizarContratos.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/webapp/visualizarContratos.jsp" afterDir="false" />
+    <list default="true" id="5dd24dd0-57d8-4f27-938d-95a9bbda0876" name="Changes" comment="GerenteDAO feita">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_8_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/IUsuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/GerenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/GerenteDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/GerenteDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/GerenteDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/idao/IGerenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/idao/IGerenteDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/services/ValidadorUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/services/ValidadorUsuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/SenhaManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/SenhaManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/bd/MysqlConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/bd/MysqlConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/facade/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/facade/LoginServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/webapp/principal.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/webapp/principal.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2XK1Vp5JkQeNhWNJxDGiTruJFVh" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -36,12 +62,158 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "GER-CSU10",
-    "last_opened_file_path": "C:/Users/eloym/Desktop/lp1-2023-projeto5/code/View",
+    "last_opened_file_path": "C:/Program Files/MySQL/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.22413793",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Java",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\eloym\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Tomcat Server.Tomcat 10.1.15">
+    <configuration name="ConnectionTester" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="br.cefetmg.snacksmart.utils.bd.ConnectionTester" />
+      <module name="Core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.cefetmg.snacksmart.utils.bd.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GerenteDAO" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="br.cefetmg.snacksmart.dao.GerenteDAO" />
+      <module name="Core" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.cefetmg.snacksmart.dao.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/code/code/View/src/main/webapp/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="Tomcat 10.1.15" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.15" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="BROWSER_ID" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="View:war">
+          <settings>
+            <option name="CONTEXT_PATH" value="/View_war" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="628ef4b6-55a7-4ad4-ab9b-221fa6869488" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="51506" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="View:war" />
+        </option>
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.GerenteDAO" />
+      <item itemvalue="Application.ConnectionTester" />
+      <item itemvalue="JavaScript Debug.index.html" />
+      <item itemvalue="Tomcat Server.Tomcat 10.1.15" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.GerenteDAO" />
+        <item itemvalue="Application.ConnectionTester" />
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -51,10 +223,35 @@
       <option name="presentableId" value="Default" />
       <updated>1698362990905</updated>
       <workItem from="1698362992032" duration="169000" />
+      <workItem from="1698708500348" duration="12705000" />
     </task>
+    <task id="LOCAL-00001" summary="GerenteDAO feita">
+      <option name="closed" value="true" />
+      <created>1698715355617</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1698715355617</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="GerenteDAO feita" />
+    <option name="LAST_COMMIT_MESSAGE" value="GerenteDAO feita" />
   </component>
 </project>

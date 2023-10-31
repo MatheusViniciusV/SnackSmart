@@ -18,7 +18,7 @@ import br.cefetmg.snacksmart.exceptions.dto.FilaAteracoesVaziaException;
  *
  * @author eloym
  */
-public class GerenteDTO {
+public class GerenteDTO implements IUsuario {
     private String nome,
            cpf,
            senha,
