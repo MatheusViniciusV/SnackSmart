@@ -1,81 +1,78 @@
-
 package br.cefetmg.snacksmart.dto;
+import br.cefetmg.snacksmart.utils.enums.StatusMaquina;
 
-import br.cefetmg.snacksmart.dao.MaquinaDAO;
-import br.cefetmg.snacksmart.idao.IMaquinaDAO;
-
-import br.cefetmg.snacksmart.exceptions.dto.FilaAteracoesVaziaException;
-/**
- *
- * @author marco
- */
+/* @author Arthur Milagres */
 public class MaquinaDTO {
-    private String localizacao, novaLocalizacao;
-    private Double  valor, novoValor;
-    private int codigo, novoCodigo,estado,novoEstado;
-    // para estado 0 = disponivel, 1 = alugada, 2 = em manutenção 
+    private String nome, localizacao, locatarioResponsavel;
+    private final String codigo, tipo;
+    private byte[] imagem; 
+    StatusMaquina status = StatusMaquina.DISPONIVEL;
 
-    public MaquinaDTO() {
-        
+    public MaquinaDTO(String nome, String codigo, byte[] imagem, String tipo, String localizacao, String locatario, StatusMaquina status){        
+        this.nome = nome;
+        this.codigo = codigo;
+        this.imagem = imagem;
+        this.localizacao = localizacao;
+        this.tipo = tipo; 
+        this.status = status;
+        this.locatarioResponsavel = locatario; 
     }
     
-    public MaquinaDTO(int codigo, String localizacao, Double valor){
-        this.codigo = codigo;
-        this.localizacao = localizacao;
-        this.valor = valor;
-        estado = 0;
-        
-        this.novaLocalizacao = "";
-        this.novoCodigo = 0;
-        this.novoValor = 0.0;
-        novoEstado = 0;
+    public MaquinaDTO(){        
+        this.nome = "Não escrito";
+        this.codigo = "Não escrito";
+        this.imagem = null;
+        this.localizacao = "Não escrito";
+        this.tipo = "Não escrito";
+        this.status =  null;
+        this.locatarioResponsavel = "Não escrito"; 
     }
-    public void setCodigo(int codigo){
-        novoCodigo = codigo;
+     
+    public String getNome() {
+        return nome;
     }
-    public int getCodigo(){
+    
+    public String getCodigo() {
         return codigo;
     }
-    public void setLacalizacao(String localizacao){
-        novaLocalizacao = localizacao;
-    }
-    public String getLocalizacao(){
+    
+    public byte[] getImagem() {
+        return imagem;
+    }   
+    
+    public String getLocalizacao() {
         return localizacao;
     }
     
-    public void setValor(Double valor){
-        novoValor = valor;
+    public String getTipo() {
+        return tipo;
     }
-    public Double getValor(){
-        return valor;
+    
+    public String getLocatario() {
+        return locatarioResponsavel;
     }
-    public void setEstado(int estado){
-        novoEstado = estado;
+    
+    public StatusMaquina getStatus() {
+        return status;
     }
-    public int getEstado(){
-        return estado;
+      
+    public void setNome(String novoNome) {
+        nome = novoNome;
     }
-    public void aplicarMudanças()throws FilaAteracoesVaziaException{
-        int novoCodigo = (this.novoCodigo == 0) ? this.codigo : this.novoCodigo;
-        String novaLocalizacao = (this.localizacao.length() == 0) ? this.localizacao : this.novaLocalizacao;
-        Double novoValor  = (this.novoValor == 0.0) ? this.valor : this.novoValor;
-        int novoEstado = (this.novoEstado == 0) ? this.estado : this.novoEstado;
-        
-        
-        if(this.novoCodigo != 0 || this.novaLocalizacao.length() != 0 || this.novoValor != 0 || this.novoEstado != 0 ) {
-            MaquinaDTO novaMaquina = new MaquinaDTO(novoCodigo, novaLocalizacao, novoValor);
-            IMaquinaDAO dao = new MaquinaDAO();
-            
-            
-            dao.set(novaMaquina);
-            // imcompleto, irei aguardar o banco de dados para colocar exceptions entre outras coisas.
-            
-            codigo = novoCodigo;
-            localizacao = novaLocalizacao;
-            valor = novoValor;
-            estado = novoEstado;
-        } else {
-            throw new FilaAteracoesVaziaException("Nenhuma alteração foi especificada. Pelo menos um dos atributos (Codigo, Localizacao, Valor ou Estado) deve ser modificado para aplicar alterações.");
-        }
+    
+    public void setImagem(byte[] novaImagem) {
+        imagem = novaImagem;
+    }
+    
+    public void setLocalizacao(String novaLocalizacao) {
+        localizacao = novaLocalizacao;
+    }
+    
+    public void setLocatarioResponsavel(String novoLocatarioResponsavel) {
+        locatarioResponsavel = novoLocatarioResponsavel;
+    }
+    
+    public void setStatus(StatusMaquina novoStatus) {
+        status = novoStatus;   
     }
 }

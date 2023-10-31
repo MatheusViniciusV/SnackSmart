@@ -1,0 +1,12 @@
+br\cefetmg\snacksmart\controller_locador\GerenciarMaquina.class
+br\cefetmg\snacksmart\facade\LoginServlet.class
+br\cefetmg\snacksmart\facade\Filtro.class
+br\cefetmg\snacksmart\service\RelatorioGerente.class
+br\cefetmg\snacksmart\controller_locador\CriarContrato.class
+br\cefetmg\snacksmart\controller_locador\CancelarContrato.class
+br\cefetmg\snacksmart\facade\LoginServlet$1.class
+br\cefetmg\snacksmart\facade\GestaoMaquina.class
+br\cefetmg\snacksmart\controller_locatario\SolicitarCancelarContrato.class
+br\cefetmg\snacksmart\service\controler.class
+br\cefetmg\snacksmart\facade\VisualizarContratos.class
+br\cefetmg\snacksmart\controller\PDFContrato.class

@@ -36,7 +36,7 @@ public class ValidadorUsuario {
             return TipoUsuario.LOCADOR;
 //        
 //        // * validar se é locador
-//        if(cpf.equals("000.000.000-00"))
+//        if(cpf.equals(gerente.getCPF()))
 //            return TipoUsuario.LOCATARIO;
         
         

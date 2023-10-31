@@ -1,19 +1,15 @@
-
 package br.cefetmg.snacksmart.idao;
+
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
 import java.util.ArrayList;
 /**
  *
- * @author marco
+ * @author Arthur Milagres
  */
 public interface IMaquinaDAO {
-
-    /**
-     *
-     * @return
-     */
-    public MaquinaDTO get();
-    void set(MaquinaDTO maquina);
-    ArrayList<MaquinaDTO> listarTodos();
-    
+    MaquinaDTO get(String codigo);
+    ArrayList<MaquinaDTO> getAll();
+    void set(MaquinaDTO novaMaquina);
+    void update(String codigo, MaquinaDTO updatedMaquina);
+    void remove(String codigo);
 }

@@ -32,6 +32,8 @@ public class LoginServlet extends HttpServlet {
             String cpf = request.getParameter("usuario");
             String senha = request.getParameter("senha");
             
+            TipoUsuario tipoUsuario;
+            System.out.println(usuario);
             
             TipoUsuario tipoUsuario = validador.tipoUsuario(cpf);
             
@@ -39,8 +41,8 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession();
             
             switch(tipoUsuario) {
-                case NAO_CADASTRADO: //inválido
-                    response.sendRedirect("index.html"); // Redireciona para a página de login com mensagem de erro
+                case NAO_CADASTRADO: 
+                    response.sendRedirect("index.html"); 
                     break;
                 case LOCADOR: // gerente
                     if(validador.validarGerente(cpf, senha)) {
@@ -77,7 +79,7 @@ public class LoginServlet extends HttpServlet {
         if(sessao != null) 
             sessao.invalidate();
         
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("index.html");
     }
 //
 //    //Retorna 0 se o login é inválido, 1 se o login é do gerente e 2 se o login é do locatário
