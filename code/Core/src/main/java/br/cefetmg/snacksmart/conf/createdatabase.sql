@@ -2,18 +2,23 @@
 -- Banco de dados: `snacksmart`
 --
 
+CREATE DATABASE IF NOT EXISTS `snacksmart` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `snacksmart`;
+
 -- --------------------------------------------------------
 
 --
 -- Estrutura da tabela `gerente`
 --
 
+DROP TABLE IF EXISTS `gerente`;
 CREATE TABLE `gerente` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `usuario` VARCHAR(64) NOT NULL,
     `nome` VARCHAR(256) NOT NULL,
     `senha` VARCHAR(256) NOT NULL,
     `cpf` CHAR(11) NOT NULL,
+    `rg` CHAR(10) NOT NULL,
     `telefone` VARCHAR(14) NULL,
     `email` VARCHAR(128) NULL
 );
@@ -24,6 +29,7 @@ CREATE TABLE `gerente` (
 -- Estrutura da tabela `locatario`
 --
 
+DROP TABLE IF EXISTS `locatario`;
 CREATE TABLE `locatario` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `usuario` VARCHAR(64) NOT NULL,
@@ -41,6 +47,7 @@ CREATE TABLE `locatario` (
 -- Estrutura da tabela `fornecedor`
 --
 
+DROP TABLE IF EXISTS `fornecedor`;
 CREATE TABLE `fornecedor` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `nome` VARCHAR(256) NOT NULL,
@@ -54,6 +61,7 @@ CREATE TABLE `fornecedor` (
 -- Estrutura da tabela `lote`
 --
 
+DROP TABLE IF EXISTS `lote`;
 CREATE TABLE `lote` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `tipo_produto` VARCHAR(128) NOT NULL,
@@ -75,6 +83,7 @@ CREATE TABLE `lote` (
 -- Estrutura da tabela `maquina`
 --
 
+DROP TABLE IF EXISTS `maquina`;
 CREATE TABLE `maquina` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `aluguel` FLOAT NOT NULL,
@@ -89,12 +98,11 @@ CREATE TABLE `maquina` (
 -- Estrutura da tabela `contrato`
 --
 
+DROP TABLE IF EXISTS `contrato`;
 CREATE TABLE `contrato` (
-    `pk` BIGINT AUTO_INCREMENT PRIMARY KEY,
+    `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `data_inicio` DATE NOT NULL,
     `data_fim` DATE NOT NULL,
-    `data_pagamento` DATE NOT NULL,
-    `valor` INT NOT NULL,
     `gerente__fk` INT NOT NULL,
     `locatario__fk` INT NOT NULL,
     `maquina__fk` INT NOT NULL,
@@ -110,6 +118,7 @@ CREATE TABLE `contrato` (
 -- Estrutura da tabela `contatos_gerente`
 --
 
+DROP TABLE IF EXISTS `contatos_gerente`;
 CREATE TABLE `contatos_gerente` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `gerente__fk` INT NOT NULL,
@@ -124,6 +133,7 @@ CREATE TABLE `contatos_gerente` (
 -- Estrutura da tabela `contatos_locatario`
 --
 
+DROP TABLE IF EXISTS `contatos_locatario`;
 CREATE TABLE `contatos_locatario` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `fornecedor__fk` INT NOT NULL,
@@ -138,6 +148,7 @@ CREATE TABLE `contatos_locatario` (
 -- Estrutura da tabela `feedback`
 --
 
+DROP TABLE IF EXISTS `feedback`;
 CREATE TABLE `feedback` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `mensagem` VARCHAR(2048) NULL,
@@ -153,6 +164,7 @@ CREATE TABLE `feedback` (
 -- Estrutura da tabela `notas_locatario`
 --
 
+DROP TABLE IF EXISTS `notas_locatario`;
 CREATE TABLE `notas_locatario` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `mensagem` VARCHAR(1024) NULL,
@@ -167,6 +179,7 @@ CREATE TABLE `notas_locatario` (
 -- Estrutura da tabela `notas_gerente`
 --
 
+DROP TABLE IF EXISTS `notas_gerente`;
 CREATE TABLE `notas_gerente` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `mensagem` VARCHAR(1024) NULL,
@@ -174,4 +187,3 @@ CREATE TABLE `notas_gerente` (
     `gerente__fk` INT NOT NULL,
     FOREIGN KEY (`gerente__fk`) REFERENCES `gerente` (`pk`)
 );
-```
