@@ -44,8 +44,18 @@ Se ela já existe use:
 git push origin {nome_da_branch}
 ```
 
+
 Caso sua versão não esteja atualizada, use o seguinte comando para atualizar a branch local:
 
 ```bash
 git pull origin {nome_da_branch_atualizada}
 ```
+
+## Logar como gerente durante desenvolvimento
+
+na tabela de gerente, salve a senha com o comando: 
+``` sql
+UPDATE `gerente` SET `senha` = 'F59EFF44A211FA33E2513758C4C3BB13582678C5FF8B64D6C6338A0C6512A4AD' WHERE `gerente`.`pk` = 1; 
+```
+
+ou só defina a senha como F59EFF44A211FA33E2513758C4C3BB13582678C5FF8B64D6C6338A0C6512A4AD (isso é `ger` após passar pelo hash). Na hora de logar use a senha ger.

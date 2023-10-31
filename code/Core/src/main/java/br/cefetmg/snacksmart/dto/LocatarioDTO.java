@@ -48,6 +48,7 @@ public class LocatarioDTO {
         this.senha = senha;
     }
 
+
     public String getNome() {
         return nome;
     }

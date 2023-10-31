@@ -1,14 +1,16 @@
 package br.cefetmg.snacksmart.dto;
 import br.cefetmg.snacksmart.utils.enums.StatusMaquina;
-
+import br.cefetmg.snacksmart.utils.enums.TipoMaquina;
 /* @author Arthur Milagres */
 public class MaquinaDTO {
-    private String nome, localizacao, locatarioResponsavel;
-    private final String codigo, tipo;
+    private String nome, localizacao;
+    private LocatarioDTO locatarioResponsavel;
+    private final int codigo;
+    private final TipoMaquina tipo;
     private byte[] imagem; 
-    StatusMaquina status = StatusMaquina.DISPONIVEL;
+    private StatusMaquina status;
 
-    public MaquinaDTO(String nome, String codigo, byte[] imagem, String tipo, String localizacao, String locatario, StatusMaquina status){        
+    public MaquinaDTO(String nome, int codigo, byte[] imagem, TipoMaquina tipo, String localizacao, LocatarioDTO locatario, StatusMaquina status){        
         this.nome = nome;
         this.codigo = codigo;
         this.imagem = imagem;
@@ -17,22 +19,22 @@ public class MaquinaDTO {
         this.status = status;
         this.locatarioResponsavel = locatario; 
     }
-    
     public MaquinaDTO(){        
-        this.nome = "Não escrito";
-        this.codigo = "Não escrito";
+        this.nome = null;
+        this.codigo = 0;
         this.imagem = null;
-        this.localizacao = "Não escrito";
-        this.tipo = "Não escrito";
-        this.status =  null;
-        this.locatarioResponsavel = "Não escrito"; 
+        this.localizacao = null;
+        this.tipo = null; 
+        this.status = null;
+        this.locatarioResponsavel = null; 
     }
+    
      
     public String getNome() {
         return nome;
     }
     
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
     
@@ -44,11 +46,11 @@ public class MaquinaDTO {
         return localizacao;
     }
     
-    public String getTipo() {
+    public TipoMaquina getTipo() {
         return tipo;
     }
     
-    public String getLocatario() {
+    public LocatarioDTO getLocatario() {
         return locatarioResponsavel;
     }
     
@@ -68,7 +70,7 @@ public class MaquinaDTO {
         localizacao = novaLocalizacao;
     }
     
-    public void setLocatarioResponsavel(String novoLocatarioResponsavel) {
+    public void setLocatarioResponsavel(LocatarioDTO novoLocatarioResponsavel) {
         locatarioResponsavel = novoLocatarioResponsavel;
     }
     

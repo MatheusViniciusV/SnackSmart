@@ -189,13 +189,17 @@ function exibirInformacaoMaquina(nomeMaquina, codeMaquina, statusMaquina, tipoMa
 }
 
 function ButtonIClick() {
-    exibirInformacaoMaquina("Maquina de Salgados", 3302, "Em funcionamento",
-    "Refrigerada", "Rua Castelo de Arraiolos, Castelo, Belo Horizonte, MG - 31330-070", "Waldir Braz");//FUNÇAO TESTE
-    /*let maquinaEncontrada = encontrarMaquinaPorCodigo(codigoInfoMaquina, vetorMaquinaArray);
-    if (maquinaEncontrada !== null) {
-        exibirInformacaoMaquina(maquinaEncontrada.nome, maquinaEncontrada.codigo, maquinaEncontrada.status, 
-        maquinaEncontrada.tipo, maquinaEncontrada.localizacao, maquinaEncontrada.locatario);
-    }*/
+    try {
+        maquinaEncontrada = encontrarMaquinaPorCodigo(codigoInfoMaquina, vetorMaquinaArray);
+        if (maquinaEncontrada !== null) {
+            exibirInformacaoMaquina(maquinaEncontrada.nome, maquinaEncontrada.codigo, maquinaEncontrada.status, 
+            maquinaEncontrada.tipo, maquinaEncontrada.localizacao, maquinaEncontrada.locatario);
+        }
+    } catch { 
+        console.log("não foi possível exibir");
+        exibirInformacaoMaquina("Maquina Não Definida", 0000, "Não definido",
+    "Refrigerada", "Rua José de Bessas, Venda Nova, Belo Horizonte, MG - 93084-111", "Waldir Braz");//FUNÇAO TESTE
+    }
     mostrarFormulario('informacaoMaquina');
 }
 function ButtonRClick() {
@@ -212,7 +216,7 @@ function recuperaInfoSlotMaquina() {
 }
 
 function encontrarMaquinaPorCodigo(codigoInfoMaquina, maquinas) {
-    for (var i = 0; i < maquinas.length; i++) {
+    for (let i = 0; i < maquinas.length; i++) {
         if (maquinas[i].codigo === codigoInfoMaquina) {
             return maquinas[i];
         }
@@ -319,7 +323,8 @@ function Main(){
     };
     
     let Vet = [maquina1, maquina2, maquina3, maquina4];
-    Vet.forEach((maquina) => criarSlotMaquina(maquina.nome, maquina.cod, maquina.status, maquina.imagem)); //TESTE;
+    //Vet.forEach((maquina) => criarSlotMaquina(maquina.nome, maquina.cod, maquina.status, maquina.imagem)); //TESTE;
+    criarSlotAddMaquina();
 }   
 
 Main(); 
