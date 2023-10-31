@@ -16,7 +16,6 @@ public class MysqlConnection implements ConnectionFactory {
     
     @Override
     public Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName(dbDriver);
         return DriverManager.getConnection(dbURL, user, pass);
     }
 }

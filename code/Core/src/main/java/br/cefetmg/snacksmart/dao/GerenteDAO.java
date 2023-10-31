@@ -17,21 +17,24 @@ public class GerenteDAO implements IGerenteDAO {
     @Override
     public GerenteDTO get() throws PersistenciaException {
         try {
-            Connection connection = ConnectionManager.getInstance().getConnection();
-             
-            String sql = "SELECT * FROM `gerente`";
-             
-            PreparedStatement pstmt = connection.prepareStatement(sql);
-             
+            Connection conexao = ConnectionManager.getInstance().getConnection();
+
+            String sql = "SELECT * FROM `gerente` ";
+            PreparedStatement pstmt = conexao.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
-             
+
             GerenteDTO gerente = null;
-             
-            // * Criar um gerente com o resultado da busca.
-             
+            if (rs.next()) {
+                System.out.println(rs.getString("nome"));
+                gerente = new GerenteDTO(
+                                        rs.getString("nome"),
+                                        rs.getString("cpf"),
+                                        rs.getString("senha"));
+            }
+
             rs.close();
             pstmt.close();
-            connection.close();
+            conexao.close();
             
             return gerente;
         } catch (ClassNotFoundException | SQLException e) {
@@ -42,6 +45,41 @@ public class GerenteDAO implements IGerenteDAO {
     
     @Override
     public void set(GerenteDTO gerente) throws PersistenciaException {
-        
+        try {
+            delete();
+
+            Connection conexao = ConnectionManager.getInstance().getConnection();
+
+            String sql = "INSERT INTO `gerente` (`pk`, `nome`, `senha`, `cpf`, `telefone`, `email`) VALUES ('1',?,?,?,?,?)";
+            PreparedStatement pstmt = conexao.prepareStatement(sql);
+            pstmt.setString(1, gerente.getNome());
+            pstmt.setString(2, gerente.getSenha());
+            pstmt.setString(3, gerente.getCPF());
+            pstmt.setString(4, gerente.getTelefone());
+            pstmt.setString(5, gerente.getEmail());
+
+            pstmt.executeUpdate();
+            pstmt.close();
+            conexao.close();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void delete() throws PersistenciaException {
+        try {
+            Connection conexao = ConnectionManager.getInstance().getConnection();
+
+            String sql = "DELETE FROM `gerente` WHERE pk = 1";
+
+            PreparedStatement pstmt = conexao.prepareStatement(sql);
+            pstmt.executeUpdate();
+
+            pstmt.close();
+            connection.close();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -21,17 +21,17 @@ import br.cefetmg.snacksmart.exceptions.dto.FilaAteracoesVaziaException;
 public class GerenteDTO {
     private String nome,
            cpf,
-           token,
+           senha,
            novoNome,
            novoCPF,
-           novoToken;
+           novoSenha;
     
-    GerenteDTO(String nome, String cpf, String token) {
+    public GerenteDTO(String nome, String cpf, String senha) {
         this.nome = nome;
         this.cpf = cpf;
-        this.token = token;
+        this.senha = senha;
         
-        this.novoCPF = this.novoNome = this.novoToken = "";
+        this.novoCPF = this.novoNome = this.novoSenha = "";
     }
         
     public void setCPF(String cpf) throws CPFInvalidoException{
@@ -44,6 +44,10 @@ public class GerenteDTO {
     public String getCPF() {
         return cpf;
     }
+
+    public String getEmail() { return null; }
+
+    public String getTelefone() { return null; }
     
     public void SetNome(String nome) throws NomeNuloException {
         if(nome.length() == 0) 
@@ -56,62 +60,62 @@ public class GerenteDTO {
         return nome;
     }
     
-//  Define com um token aleatório e retorna esse novo tonken;
-    public String definirToken()  throws NoSuchAlgorithmException, UnsupportedEncodingException {
+//  Define com um senha aleatório e retorna esse novo tonken;
+    public String definirSenha()  throws NoSuchAlgorithmException, UnsupportedEncodingException {
         String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         
         Random random = new Random();
 
-        StringBuilder tokenAleatorio = new StringBuilder();
+        StringBuilder senhaAleatorio = new StringBuilder();
         
         for (int i = 0; i < 8; i++) {
             int indice = random.nextInt(caracteres.length());
             char caracterAleatorio = caracteres.charAt(indice);
-            tokenAleatorio.append(caracterAleatorio);
+            senhaAleatorio.append(caracterAleatorio);
         }
         
-        String token = tokenAleatorio.toString();
+        String senha = senhaAleatorio.toString();
         MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
-        byte hash[] = algorithm.digest(token.getBytes("UTF-8"));
+        byte hash[] = algorithm.digest(senha.getBytes("UTF-8"));
         
         StringBuilder aux = new StringBuilder();
         for (byte b : hash) {
             aux.append(String.format("%02X", 0xFF & b));
         }
         
-        novoToken = aux.toString();
+        novoSenha = aux.toString();
         
-        return novoToken;
+        return novoSenha;
     }
     
-//  Define com um token passado e retorna esse tonken
-    public void definirToken(String token) throws NoSuchAlgorithmException, UnsupportedEncodingException, SenhaInvalidaTamanhoException {
-        if(token.length() < 8)
+//  Define com um senha passado e retorna esse tonken
+    public void definirSenha(String senha) throws NoSuchAlgorithmException, UnsupportedEncodingException, SenhaInvalidaTamanhoException {
+        if(senha.length() < 8)
             throw new SenhaInvalidaTamanhoException("Senha deve ter mais de 8 caracteres.");
         
         MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
-        byte hash[] = algorithm.digest(token.getBytes("UTF-8"));
+        byte hash[] = algorithm.digest(senha.getBytes("UTF-8"));
         
         StringBuilder aux = new StringBuilder();
         for (byte b : hash) {
             aux.append(String.format("%02X", 0xFF & b));
         }
         
-        novoToken = aux.toString();
+        novoSenha = aux.toString();
     }
     
-    public String getToken() {
-        return token;
+    public String getSenha() {
+        return senha;
     }
     
     public void aplicarMudanças() throws FilaAteracoesVaziaException, PersistenciaException {
         String novoNome = (this.novoNome.length() == 0) ? this.nome : this.novoNome;
         String novoCPF = (this.novoCPF.length() == 0) ? this.cpf : this.novoCPF;
-        String novoToken  = (this.novoToken.length() == 0) ? this.token : this.novoToken;
+        String novoSenha  = (this.novoSenha.length() == 0) ? this.senha : this.novoSenha;
         
         
-        if(this.novoNome.length() != 0 || this.novoCPF.length() != 0 || this.novoToken.length() != 0) {
-            GerenteDTO novoGerente = new GerenteDTO(novoNome, novoCPF, novoToken);
+        if(this.novoNome.length() != 0 || this.novoCPF.length() != 0 || this.novoSenha.length() != 0) {
+            GerenteDTO novoGerente = new GerenteDTO(novoNome, novoCPF, novoSenha);
             IGerenteDAO dao = new GerenteDAO();
             
             
@@ -120,9 +124,9 @@ public class GerenteDTO {
             
             cpf = novoCPF;
             nome = novoNome;
-            token = novoToken;
+            senha = novoSenha;
         } else {
-            throw new FilaAteracoesVaziaException("Nenhuma alteração foi especificada. Pelo menos um dos atributos (nome, CPF ou token) deve ser modificado para aplicar alterações.");
+            throw new FilaAteracoesVaziaException("Nenhuma alteração foi especificada. Pelo menos um dos atributos (nome, CPF ou senha) deve ser modificado para aplicar alterações.");
         }
     }
 }
