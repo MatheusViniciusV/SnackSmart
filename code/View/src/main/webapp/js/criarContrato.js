@@ -1,4 +1,3 @@
-
 $('#criar-contrato').click(function () {
     $('#criar-contrato-form').removeClass('oculto')
 });
@@ -56,7 +55,7 @@ $('#enviar').click(function() {
             telefoneLocatario: $('input[name=locatario-telefone').val(),
             // dados do contrato
             dataInicio: $('input[name=data-inicio').val(),
-            dataTermino: $('input[name=data-termino').val(),
+            dataFim: $('input[name=data-termino').val(),
             dataPagamento: $('input[name=data-pagamento').val(),
             Observacoes: $('textarea[name=observacoes]').val(),
         };

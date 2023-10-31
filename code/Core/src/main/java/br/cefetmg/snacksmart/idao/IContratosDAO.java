@@ -21,7 +21,7 @@ public interface IContratosDAO {
     
     ContratoDTO getIdLocatario(long id, String cpfLocatario) throws ClassNotFoundException,  SQLException;
     
-    ArrayList<ContratoDTO> getTodos() throws SQLException;
+    ArrayList<ContratoDTO> listaTodos() throws SQLException;
     
     ArrayList<ContratoDTO> filtra(LocatarioDTO locatario) throws LocatarioInvalidoException, SQLException;
     

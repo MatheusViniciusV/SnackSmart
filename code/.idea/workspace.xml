@@ -11,7 +11,18 @@
   <component name="ChangeListManager">
     <list default="true" id="5dd24dd0-57d8-4f27-938d-95a9bbda0876" name="Changes" comment="GerenteDAO feita">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/facade/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/facade/LoginServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/ContratosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/ContratosDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/GerenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/GerenteDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/ContratoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/ContratoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/LocatarioDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/LocatarioDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/idao/IContratosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/idao/IContratosDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/service_gerente/ManterContratos.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/service_gerente/ManterContratos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/Data.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/enums/StatusContrato.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/enums/StatusContrato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/controller_locador/CancelarContrato.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/controller_locador/CancelarContrato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/controller_locador/CriarContrato.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/controller_locador/CriarContrato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/controller_locatario/SolicitarCancelarContrato.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/controller_locatario/SolicitarCancelarContrato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/webapp/js/criarContrato.js" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/webapp/js/criarContrato.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +64,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "GER-CSU10",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Program Files/MySQL/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -213,7 +224,7 @@
       <updated>1698362990905</updated>
       <workItem from="1698362992032" duration="169000" />
       <workItem from="1698708500348" duration="13089000" />
-      <workItem from="1698722745232" duration="291000" />
+      <workItem from="1698722745232" duration="8770000" />
     </task>
     <task id="LOCAL-00001" summary="GerenteDAO feita">
       <option name="closed" value="true" />
@@ -238,6 +249,17 @@
               <option name="CUSTOM_BOOLEAN_PROPERTIES">
                 <map>
                   <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
                 </map>
               </option>
             </State>

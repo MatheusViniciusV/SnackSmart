@@ -25,12 +25,9 @@ public class GerenteDAO implements IGerenteDAO {
         try {
             Connection cn = conn.getConnection();
 
-
-
             String sql = "SELECT * FROM `gerente`";
 
             PreparedStatement pstmt = cn.prepareStatement(sql);
-
             ResultSet rs = pstmt.executeQuery();
 
 
@@ -46,8 +43,6 @@ public class GerenteDAO implements IGerenteDAO {
             rs.close();
             pstmt.close();
             cn.close();
-
-
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionTester.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException e) {
