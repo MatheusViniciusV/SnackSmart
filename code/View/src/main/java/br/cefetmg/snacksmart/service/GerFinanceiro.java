@@ -4,9 +4,10 @@
  */
 package br.cefetmg.snacksmart.service;
 
-
-import br.cefetmg.snacksmart.dao.GerenteDAO;
-
+import br.cefetmg.snacksmart.dao.ContratosDAO;
+import br.cefetmg.snacksmart.dto.ContratoDTO;
+import br.cefetmg.snacksmart.dto.MaquinaDTO;
+import br.cefetmg.snacksmart.dao.MaquinaDAO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,7 +16,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.*; 
+import jakarta.servlet.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -37,20 +39,46 @@ public class GerFinanceiro extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+
+            double recebimento = 0.00, saldo, gasto = 0.00;
+
+            ContratosDAO Contratos = new ContratosDAO();
+            try {
+                ArrayList<ContratoDTO> listaContratos = Contratos.getTodos();
+
+                for (ContratoDTO i : listaContratos) {
+
+                    recebimento += i.getValorPagamento();
+
+                }
+            } catch (Exception a) {
+            }
+            MaquinaDAO Maquinas = new MaquinaDAO();
             
-            GerenteDAO GER = new GerenteDAO();
-            GER.get();
+            try{
+            
+                ArrayList<MaquinaDTO> listaMaquinas = Maquinas.listarTodos();
+                
+                for (MaquinaDTO m : listaMaquinas){
+                
+                    gasto += m.getValor();
+                }
+            }
+            catch(Exception e){}
+            
+
+            saldo = recebimento - gasto;
+
             /* TODO output your page here. You may use following sample code. */
-            String dados[] = new String[4];
-            dados[0] = "";
-            dados[1] = "";
-            dados [2] = "";
-            dados[3] = "";
-            
+            String dados[] = new String[3];
+            dados[0] = Double.toString(recebimento);
+            dados[1] = Double.toString(gasto);
+            dados[2] = Double.toString(saldo);
+
             request.setAttribute("dados", dados);
             RequestDispatcher d = request.getRequestDispatcher("index.jsp");
             d.forward(request, response);
-            
+
         }
     }
 

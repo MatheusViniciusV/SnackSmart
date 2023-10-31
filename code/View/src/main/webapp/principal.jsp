@@ -30,16 +30,15 @@
             <div id="menu">
                 <ul>
                     <li><a href="visualizarContratos"><button><h2>Visualizar Contrato</h2></button></a></li>
+                    <li><a href="FinanceiroGerente.jsp"><button><h2>Gestão Fianceira</h2></button></a></li>
                     <c:choose>
                         <c:when test="${tipoUsuario == TipoUsuario.LOCATARIO}">
-                            <li><a href="visualizarContratos"><button><h2>blablabla</h2></button></a></li>
                             <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
                             <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
                             <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
                             <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
                             <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
                             <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
                             <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
