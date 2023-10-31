@@ -32,8 +32,8 @@ public class LoginServlet extends HttpServlet {
             String cpf = request.getParameter("usuario");
             String senha = request.getParameter("senha");
             
-            TipoUsuario tipoUsuario;
-            System.out.println(usuario);
+
+            System.out.println(cpf);
             
             TipoUsuario tipoUsuario = validador.tipoUsuario(cpf);
             

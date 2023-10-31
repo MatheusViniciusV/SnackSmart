@@ -10,19 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dd24dd0-57d8-4f27-938d-95a9bbda0876" name="Changes" comment="GerenteDAO feita">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_8_2_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/IUsuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/GerenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/GerenteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/GerenteDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/GerenteDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/idao/IGerenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/idao/IGerenteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/services/ValidadorUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/services/ValidadorUsuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/SenhaManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/SenhaManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/bd/MysqlConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/bd/MysqlConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/facade/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/facade/LoginServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/src/main/webapp/principal.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/webapp/principal.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,7 +212,8 @@
       <option name="presentableId" value="Default" />
       <updated>1698362990905</updated>
       <workItem from="1698362992032" duration="169000" />
-      <workItem from="1698708500348" duration="12705000" />
+      <workItem from="1698708500348" duration="13089000" />
+      <workItem from="1698722745232" duration="291000" />
     </task>
     <task id="LOCAL-00001" summary="GerenteDAO feita">
       <option name="closed" value="true" />
@@ -244,7 +234,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
