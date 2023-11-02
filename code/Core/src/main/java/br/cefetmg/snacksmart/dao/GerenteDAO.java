@@ -39,8 +39,6 @@ public class GerenteDAO implements IGerenteDAO {
                         null,
                         rs.getString("email"),
                         rs.getString("telefone"));
-
-                System.out.println("gerente pego do banco de dados");
             }
 
             rs.close();

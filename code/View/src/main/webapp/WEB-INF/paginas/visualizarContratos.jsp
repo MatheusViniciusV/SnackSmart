@@ -16,16 +16,6 @@
     da tela.
 --%>
 
-<% 
-    TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario"); 
-    TipoUsuario LOCADOR = (TipoUsuario) session.getAttribute("LOCADOR");
-    TipoUsuario LOCATARIO = (TipoUsuario) session.getAttribute("LOCATARIO");
-    TipoUsuario NAO_CADASTRADO = (TipoUsuario) session.getAttribute("NAO_CADASTRADO");
-
-    ArrayList<ContratoDTO> contratos = null;
-    if(tipoUsuario == LOCADOR)
-        contratos = (ArrayList<ContratoDTO>) session.getAttribute("contratos");
-%>
 
 <!DOCTYPE html>
 <html>
@@ -42,17 +32,18 @@
             <!-- TODO fazer essa lista aparecer de maneira dinamica -->
             <h1>Contratos </h1>
             <section id="lista-contratos">
-                <c:forEach items="${ contratos }" var="contrato">
+
+
+                <c:forEach var="contrato" items="${contratos}">
+
                     <article class="contratos" id="contrato-01" data-id="01">
-                        <h3>Contrato 1</h3>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                        <h3>Contrato ${contrato.getId()}</h3>
+                        <span>Data inicio: ${contrato.getDataInicio()}</span>
+                        <span>Data fim: ${contrato.getDataFim()}</span>
+                        <span>Data pagamento: ${contrato.getDataPagamento().getDia()}</span>
+                        <c:if test="${tipoUsuario == LOCADOR}">
+                            <span>Locatario: ${contrato.getLocatario()}</span>
+                        </c:if>
                         <div></div>
                     </article>
                 </c:forEach>

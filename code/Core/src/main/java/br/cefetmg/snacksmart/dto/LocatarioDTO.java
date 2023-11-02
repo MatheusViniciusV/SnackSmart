@@ -83,4 +83,9 @@ public class LocatarioDTO implements IUsuarioDTO {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
 }

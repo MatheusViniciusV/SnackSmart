@@ -1,6 +1,7 @@
 package br.cefetmg.snacksmart.facade;
 
 import br.cefetmg.snacksmart.dto.ContratoDTO;
+import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
 import br.cefetmg.snacksmart.service_gerente.ManterContratos;
 import br.cefetmg.snacksmart.service_locatario.AcessarContratos;
@@ -32,12 +33,12 @@ public class VisualizarContratos extends HttpServlet {
         
         ArrayList<ContratoDTO> contratos = null;
         if(tipoUsuario == TipoUsuario.LOCATARIO) {
-            String locatarioCPF = (String) session.getAttribute("locatarioCPF");
+            LocatarioDTO locatario = (LocatarioDTO) session.getAttribute("usuario");
             
             AcessarContratos acesso = new AcessarContratos();
             
             try {
-                contratos = acesso.getContratos(locatarioCPF);
+                contratos = acesso.getContratos(locatario.getCPF());
             } catch (LocatarioInvalidoException | SQLException ex) {
                 Logger.getLogger(VisualizarContratos.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -50,8 +51,9 @@ public class VisualizarContratos extends HttpServlet {
                 Logger.getLogger(VisualizarContratos.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-        session.setAttribute("contratos", contratos);
+
+        System.out.println(contratos.size());
+        request.setAttribute("contratos", contratos);
         request.getRequestDispatcher("WEB-INF/paginas/visualizarContratos.jsp").forward(request, response);
     } 
 }

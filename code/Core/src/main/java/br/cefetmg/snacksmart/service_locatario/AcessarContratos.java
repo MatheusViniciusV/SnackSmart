@@ -1,9 +1,11 @@
 package br.cefetmg.snacksmart.service_locatario;
 
 import br.cefetmg.snacksmart.dao.ContratosDAO;
+import br.cefetmg.snacksmart.dao.LocatarioDAO;
 import br.cefetmg.snacksmart.dto.ContratoDTO;
 import br.cefetmg.snacksmart.dto.GerenteDTO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
+import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.exceptions.dao.ElementoNaoExisteException;
 import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
 import br.cefetmg.snacksmart.idao.IContratosDAO;
@@ -57,11 +59,15 @@ public class AcessarContratos {
     }
     
     public ArrayList<ContratoDTO> getContratos(String locatarioCPF) throws LocatarioInvalidoException, SQLException {
-        LocatarioDTO locatario = new LocatarioDTO();
-        
-        ArrayList contratos = dao.filtra(locatario);
-        
-        return contratos;
+        LocatarioDAO locatarioDAO = new LocatarioDAO();
+        LocatarioDTO locatario = null;
+        try {
+            locatario = locatarioDAO.consultarPorCPF(locatarioCPF);
+        } catch (PersistenciaException e) {
+            throw new RuntimeException(e);
+        }
+
+        return dao.filtra(locatario);
     }
     
     public void getPdf(long id, String locatarioCPF, OutputStream output)
