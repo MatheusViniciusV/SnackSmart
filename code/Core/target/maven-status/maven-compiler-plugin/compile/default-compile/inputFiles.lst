@@ -12,7 +12,6 @@ C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\ce
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\MaquinaDTO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\FilaAteracoesVaziaException.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\NomeNuloException.java
-C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\conection\EstabelecerConexao.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dao\MaquinaDAO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\CPFInvalidoException.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\TipoMaquina.java

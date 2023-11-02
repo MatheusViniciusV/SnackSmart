@@ -57,7 +57,7 @@ public class GerFinanceiro extends HttpServlet {
             
             try{
             
-                ArrayList<MaquinaDTO> listaMaquinas = Maquinas.getAll();
+                ArrayList<MaquinaDTO> listaMaquinas = Maquinas.acessarTodasMaquinas();
                 
                 for (MaquinaDTO m : listaMaquinas){
                 

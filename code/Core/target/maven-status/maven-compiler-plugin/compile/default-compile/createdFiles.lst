@@ -1,4 +1,3 @@
-br\cefetmg\snacksmart\conection\EstabelecerConexao.class
 br\cefetmg\snacksmart\idao\IContratosDAO.class
 br\cefetmg\snacksmart\service_locatario\AcessarContratos.class
 br\cefetmg\snacksmart\service_gerente\AcessarMaquinas.class
@@ -22,13 +21,14 @@ br\cefetmg\snacksmart\dao\MaquinaDAO.class
 br\cefetmg\snacksmart\dto\LocatarioDTO.class
 br\cefetmg\snacksmart\services\ValidadorUsuario.class
 br\cefetmg\snacksmart\utils\bd\ConnectionManager.class
+br\cefetmg\snacksmart\utils\enums\TipoMaquina$1.class
 br\cefetmg\snacksmart\utils\bd\MysqlConnection.class
 br\cefetmg\snacksmart\dao\GerenteDAO.class
 br\cefetmg\snacksmart\dto\GerenteDTO.class
 br\cefetmg\snacksmart\dto\MaquinaDTO.class
 br\cefetmg\snacksmart\utils\enums\StatusContrato.class
 br\cefetmg\snacksmart\utils\bd\ConnectionFactory.class
+br\cefetmg\snacksmart\utils\enums\TipoMaquina.class
 br\cefetmg\snacksmart\utils\enums\TipoUsuario$1.class
 br\cefetmg\snacksmart\exceptions\dto\CPFInvalidoException.class
-br\cefetmg\snacksmart\utils\enums\StatusContrato$1.class
 br\cefetmg\snacksmart\exceptions\dto\NomeNuloException.class

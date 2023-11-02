@@ -7,9 +7,9 @@ import java.util.ArrayList;
  * @author Arthur Milagres
  */
 public interface IMaquinaDAO {
-    MaquinaDTO get(int codigo);
-    ArrayList<MaquinaDTO> getAll();
-    void set(MaquinaDTO novaMaquina);
-    void update(MaquinaDTO updatedMaquina);
-    void remove(int codigo);
+    MaquinaDTO acessarMaquina(int codigo);
+    ArrayList<MaquinaDTO> acessarTodasMaquinas();
+    void adicionarMaquina(MaquinaDTO novaMaquina);
+    void atualizarMaquina(MaquinaDTO updatedMaquina);
+    void removerMaquina(int codigo);
 }

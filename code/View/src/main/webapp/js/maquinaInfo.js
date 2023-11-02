@@ -283,23 +283,10 @@ botoesCancelarEl.forEach(function(botao) {
 
 
 function Main(){
-    
-    let removerMaquinaEl = document.querySelectorAll(".removerMaquina");
-    removerMaquinaEl.forEach(function(botao) {
-        botao.addEventListener("click", function(event){
-            retornarCodigo(event.target, "rb");
-        });
-    });
-    let infoMaquinaEl = document.querySelectorAll(".infoMaquina");
-    infoMaquinaEl.forEach(function(botao) {
-        botao.addEventListener("click", function(event){
-            retornarCodigo(event.target, "rb");
-        });
-    });
-    
+       
     let maquina1 = {
         nome: "Máquina de Salgadinhos",
-        cod: 3372,
+        cod: 2,
         status: "Aguardando manutenção",
         imagem: "img/NonePhoto.png"
     };
@@ -324,7 +311,23 @@ function Main(){
     
     let Vet = [maquina1, maquina2, maquina3, maquina4];
     //Vet.forEach((maquina) => criarSlotMaquina(maquina.nome, maquina.cod, maquina.status, maquina.imagem)); //TESTE;
+   
     criarSlotAddMaquina();
+    criarSlotMaquina(maquina1.nome, maquina1.cod, maquina1.status, maquina1.imagem);
+    
+    
+    let removerMaquinaEl = document.querySelectorAll(".removerMaquina");
+    removerMaquinaEl.forEach(function(botao) {
+        botao.addEventListener("click", function(event){
+            retornarCodigo(event.target, "rb");
+        });
+    });
+    let infoMaquinaEl = document.querySelectorAll(".infoMaquina");
+    infoMaquinaEl.forEach(function(botao) {
+        botao.addEventListener("click", function(event){
+            retornarCodigo(event.target, "rb");
+        });
+    });
 }   
 
 Main(); 

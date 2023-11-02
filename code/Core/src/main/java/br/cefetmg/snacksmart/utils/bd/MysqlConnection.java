@@ -12,7 +12,7 @@ public class MysqlConnection implements ConnectionFactory {
     private final static String dbDriver = "org.postgresql.Driver";
     private final static String dbURL = "jdbc:mysql://localhost:3306/snacksmart";
     private final static String user = "root";
-    private final static String pass = "";
+    private final static String pass = "projeto";
     
     @Override
     public Connection getConnection() throws ClassNotFoundException, SQLException {

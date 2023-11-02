@@ -1,6 +1,5 @@
 package br.cefetmg.snacksmart.controller_locador;
 
-import br.cefetmg.snacksmart.dto.MaquinaDTO;
 import br.cefetmg.snacksmart.facade.GestaoMaquina;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -9,18 +8,22 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import br.cefetmg.snacksmart.service_gerente.AcessarMaquinas;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.Part;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(urlPatterns = {"/GerenciarMaquina"})
+@WebServlet(name="GerenciarMaquina", urlPatterns={"/GerenciarMaquina"})
+@MultipartConfig(fileSizeThreshold = 1024 * 1024,  
+                 maxFileSize = 1024 * 1024 * 5,     
+                 maxRequestSize = 1024 * 1024 * 5 * 5)  
 public class GerenciarMaquina extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String formulario = request.getParameter("formulario");
+        String formulario = request.getParameter("formSelecionado");
         AcessarMaquinas acesso = new AcessarMaquinas();
+        
         if (formulario != null) switch (formulario) {
             case "formAddMaquina":{
                 String nome = request.getParameter("nome");
@@ -50,14 +53,13 @@ public class GerenciarMaquina extends HttpServlet {
                 }
             default:               
                 break;
-        } 
-        ArrayList<MaquinaDTO> vetorMaquinasSQL = null;
-        try {
-            vetorMaquinasSQL = acesso.getAllMaquinas();
-        } catch (SQLException ex) {
-            Logger.getLogger(GestaoMaquina.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        request.setAttribute("vetorMaquinas", vetorMaquinasSQL);
-        request.getRequestDispatcher("WEB-INF/paginas/gestaoMaquina.jsp").forward(request, response);
+        }         
+            try
+            {
+                request.setAttribute("vetorMaquinas", acesso.getAllMaquinas());
+                request.getRequestDispatcher("WEB-INF/paginas/gestaoMaquina.jsp").forward(request, response);
+            } catch (SQLException ex) {
+                Logger.getLogger(GestaoMaquina.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 }

@@ -1,17 +1,17 @@
 package br.cefetmg.snacksmart.utils.enums;
 
 public enum StatusMaquina {
-    DISPONIVEL,
-    EM_FUNCIONAMENTO,
+    ALUGADA,
     EM_MANUTENCAO,
-    AGUARDANDO_MANUTENCAO;
+    AGUARDANDO_MANUTENCAO,
+    DISPONIVEL;
     
     public int toInt(StatusMaquina status) {
         return switch (status) {
-            case DISPONIVEL -> 0;
-            case EM_FUNCIONAMENTO -> 1;
-            case EM_MANUTENCAO -> 2;
-            case AGUARDANDO_MANUTENCAO -> 3;
+            case ALUGADA -> 0;
+            case EM_MANUTENCAO -> 1;
+            case AGUARDANDO_MANUTENCAO -> 2;
+            case DISPONIVEL -> 3;
             default -> 0;
         };
     }

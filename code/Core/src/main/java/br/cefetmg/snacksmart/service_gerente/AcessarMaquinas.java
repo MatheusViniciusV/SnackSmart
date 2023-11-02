@@ -17,11 +17,11 @@ public class AcessarMaquinas {
     }
     
     public ArrayList<MaquinaDTO> getAllMaquinas() throws SQLException{
-        return maquinaDAO.getAll();
+        return maquinaDAO.acessarTodasMaquinas();
     }
     
     private int gerarCodigo(){
-        int codigo = maquinaDAO.getAll().size() + 1;
+        int codigo = maquinaDAO.acessarTodasMaquinas().size() + 1;
         return codigo;
     }
     
@@ -32,20 +32,20 @@ public class AcessarMaquinas {
         LocatarioDTO locatario = new LocatarioDTO(locatarioStr);
         try {
             MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, imagemBytes, tipo, localizacao, locatario, status); 
-            maquinaDAO.set(maquinaDTO);
+            maquinaDAO.adicionarMaquina(maquinaDTO);
             throw new FormatoArquivoInvalidoException("O formato do arquivo é inválido.");
         } catch (FormatoArquivoInvalidoException e){
             MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, null, tipo, localizacao, locatario, status); 
-            maquinaDAO.set(maquinaDTO);
+            maquinaDAO.adicionarMaquina(maquinaDTO);
         }
     }
 
     public void remocaoMaquina(int codigo){
-        maquinaDAO.remove(codigo);
+        maquinaDAO.removerMaquina(codigo);
     }
 
     public void formAtualizarMaquina(int codigo, String novoNome, String novaLocalizacao, String novoLocatarioStr, String statusStr, byte[]novaImagemBytes){              
-        MaquinaDTO maquinaDTO = maquinaDAO.get(codigo); 
+        MaquinaDTO maquinaDTO = maquinaDAO.acessarMaquina(codigo); 
         if (novoNome != null)
             maquinaDTO.setNome(novoNome);
         if (novaLocalizacao != null)
@@ -59,10 +59,10 @@ public class AcessarMaquinas {
 
         try {
             maquinaDTO.setImagem(novaImagemBytes);
-            maquinaDAO.update(maquinaDTO);
+            maquinaDAO.atualizarMaquina(maquinaDTO);
             throw new FormatoArquivoInvalidoException("O formato do arquivo é inválido.");
         } catch (FormatoArquivoInvalidoException e){
-            maquinaDAO.update(maquinaDTO);
+            maquinaDAO.atualizarMaquina(maquinaDTO);
         }          
     } 
 }
