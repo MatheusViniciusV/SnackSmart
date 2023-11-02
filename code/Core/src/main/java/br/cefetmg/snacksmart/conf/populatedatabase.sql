@@ -65,47 +65,71 @@ VALUES(
 
 INSERT INTO `maquina` (
     `nome`,
+    `codigo`, 
+    `localizacao`,
     `aluguel`,
-    `estado`
+    `status`,
+    `tipo`    
 )
 VALUES (
     'maq dev 1',
+    '1',
+    'Rua Geólogo Thomaz de Aquino, Itapoã, Belo Horizonte, MG - 31710-680'
     '30.91',
-    'ALUGADA'
+    'ALUGADA',
+    'REFRIGERADA'
 );
 
 INSERT INTO `maquina` (
     `nome`,
+    `codigo`, 
+    `localizacao`,
     `aluguel`,
-    `estado`
+    `status`,
+    `tipo`    
 )
 VALUES (
     'maq dev 2',
+    '2',
+    'Rua Walter Guimarães Figueiredo, Buritis, Belo Horizonte, MG - 30492-030'
     '30.92',
-    'ALUGADA'
+    'EM_MANUTENCAO',
+    'REFRIGERADA'
 );
 
 INSERT INTO `maquina` (
     `nome`,
+    `codigo`, 
+    `localizacao`,
     `aluguel`,
-    `estado`
+    `status`,
+    `tipo`    
 )
 VALUES (
     'maq dev 3',
+    '3',
+    'Rua Radialista Ortiz Coelho, Céu Azul, Belo Horizonte, MG - 31580-340'
     '30.93',
-    'ALUGADA'
+    'ALUGADA',
+    'NAO_REFRIGERADA'
 );
 
 
 INSERT INTO `maquina` (
     `nome`,
+    `codigo`, 
+    `localizacao`,
     `aluguel`,
-    `estado`
+    `status`,
+    `tipo`    
 )
 VALUES (
     'maq dev 4',
+    '4',
+    'Rua Corumbá, Carlos Prates, Belo Horizonte, MG - 30710-280'
     '30.94',
-    'ALUGADA'
+    'DISPONIVEL',
+    'REFRIGERADA'
 );
 
 
