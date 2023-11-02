@@ -52,4 +52,4 @@
       
         <div id="modalBackDrop"></div>
       
-        <script src="javaScripit/Calendario.js"></script>
+        <script src="js/Calendario.js"></script>

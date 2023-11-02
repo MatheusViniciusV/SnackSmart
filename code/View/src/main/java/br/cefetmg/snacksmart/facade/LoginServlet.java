@@ -12,10 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,43 +28,40 @@ public class LoginServlet extends HttpServlet {
         try {
             ValidadorUsuario validador = new ValidadorUsuario();
             
-            String usuario = request.getParameter("usuario");
+            String cpf = request.getParameter("usuario");
             String senha = request.getParameter("senha");
             
-            TipoUsuario tipoUsuario;
-            System.out.println(usuario);
+
+            System.out.println(cpf);
             
-            if(usuario.equals("ger")) 
-                tipoUsuario = TipoUsuario.LOCADOR;
-            else
-                tipoUsuario = TipoUsuario.LOCATARIO;
+            TipoUsuario tipoUsuario = validador.tipoUsuario(cpf);
+            if(tipoUsuario == TipoUsuario.NAO_CADASTRADO)
+                response.sendRedirect("index.html");
             
             
             HttpSession session = request.getSession();
             
             switch(tipoUsuario) {
-                case NAO_CADASTRADO: 
-                    response.sendRedirect("index.html"); 
-                    break;
-                case LOCADOR: 
-                    if(validador.validarGerente(usuario, senha)) {
+                case LOCADOR: // gerente
+                    if(validador.validarGerente(cpf, senha)) {
                         response.sendRedirect("principal.jsp");
                         session.setAttribute("tipoUsuario", tipoUsuario);
+                        session.setAttribute("usuario", validador.getGenrente());
                     } else {
                         response.sendRedirect("index.html");
                     }
                     break;
-                case LOCATARIO: 
-                    if(validador.validarLocatario(usuario, senha)) {
+                case LOCATARIO: // locatário
+                    if(validador.validarLocatario(cpf, senha)) {
                         response.sendRedirect("principal.jsp");
                         session.setAttribute("tipoUsuario", tipoUsuario);
+                        session.setAttribute("usuario", validador.getLocatario(cpf));
                     } else {
                         response.sendRedirect("index.html");
                     }
                     break;
             }
-            
-            
+
             session.setAttribute("LOCATARIO", TipoUsuario.LOCATARIO);
             session.setAttribute("LOCADOR", TipoUsuario.LOCADOR);
             session.setMaxInactiveInterval(15000);

@@ -10,5 +10,5 @@ import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 public interface IGerenteDAO {
     GerenteDTO get()  throws PersistenciaException;
     
-    void set(GerenteDTO gerente) throws PersistenciaException;
+    int set(GerenteDTO gerente) throws PersistenciaException;
 }

@@ -5,15 +5,17 @@
 package br.cefetmg.snacksmart.services;
 
 import br.cefetmg.snacksmart.dao.GerenteDAO;
+import br.cefetmg.snacksmart.dao.LocatarioDAO;
 import br.cefetmg.snacksmart.dto.GerenteDTO;
+import br.cefetmg.snacksmart.dto.IUsuarioDTO;
+import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.idao.IGerenteDAO;
+import br.cefetmg.snacksmart.idao.ILocatarioDAO;
+import br.cefetmg.snacksmart.utils.SenhaManager;
 import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
 import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -21,62 +23,63 @@ import java.util.logging.Logger;
  */
 public class ValidadorUsuario {
     IGerenteDAO daoGerente;
+    ILocatarioDAO daoLocatario;
     
     public ValidadorUsuario() {
         daoGerente = new GerenteDAO();
+        daoLocatario = new LocatarioDAO();
     }
     
     public TipoUsuario tipoUsuario(String cpf) throws PersistenciaException {
         TipoUsuario tipoUsuario;
         
-//        GerenteDTO gerente = daoGerente.get();
-        if(true)
+        GerenteDTO gerente = daoGerente.get();
+        if(gerente.getCPF().equals(cpf))
             return TipoUsuario.LOCADOR;
-//        
+
+        LocatarioDTO locatario = daoLocatario.consultarPorCPF(cpf);
 //        // * validar se é locador
-//        if(cpf.equals(gerente.getCPF()))
-//            return TipoUsuario.LOCATARIO;
-        
-        
-        
+        if(locatario != null)
+            return TipoUsuario.LOCATARIO;
+
+
+
         return TipoUsuario.NAO_CADASTRADO;
     }
     
-    public boolean validarGerente(String cpf, String token) 
+    public boolean validarGerente(String cpf, String senha)
             throws UnsupportedEncodingException, NoSuchAlgorithmException, PersistenciaException {
         
-//        GerenteDTO gerente = daoGerente.get();
+        GerenteDTO gerente = daoGerente.get();
 
-        MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
-        byte hash[] = algorithm.digest(token.getBytes("UTF-8"));
+        senha = SenhaManager.fazHash(senha);
 
-        StringBuilder aux = new StringBuilder();
-        for (byte b : hash) {
-            aux.append(String.format("%02X", 0xFF & b));
-        }
-        token = aux.toString();
-
-//        return (token.equals(gerente.getToken()) && cpf.equals(gerente.getCPF()));
-
-        return true;
+        return (senha.equals(gerente.getSenha()) && cpf.equals(gerente.getCPF()));
     }
     
-    public boolean validarLocatario(String cpf, String token) 
+    public boolean validarLocatario(String cpf, String senha)
             throws UnsupportedEncodingException, NoSuchAlgorithmException, PersistenciaException {
         
-//        GerenteDTO gerente = daoGerente.get();
+        LocatarioDTO locatario = daoLocatario.consultarPorCPF(cpf);
 
-        MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
-        byte hash[] = algorithm.digest(token.getBytes("UTF-8"));
+        senha = SenhaManager.fazHash(senha);
 
-        StringBuilder aux = new StringBuilder();
-        for (byte b : hash) {
-            aux.append(String.format("%02X", 0xFF & b));
+        return (senha.equals(locatario.getSenha()) && cpf.equals(locatario.getCPF()));
+    }
+
+    public IUsuarioDTO getGenrente() {
+        try {
+            return daoGerente.get();
+        } catch (PersistenciaException e) {
+            throw new RuntimeException(e);
         }
-        token = aux.toString();
+    }
 
-//        return (token.equals(gerente.getToken()) && cpf.equals(gerente.getCPF()));
-
-        return true;
+    public IUsuarioDTO getLocatario(String cpf) {
+        try {
+            return daoLocatario.consultarPorCPF(cpf);
+        } catch (PersistenciaException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

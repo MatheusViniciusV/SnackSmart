@@ -24,3 +24,7 @@ hs_err_pid*
 replay_pid*
 /code/View/target/
 /code/Core/target/
+
+# ignorar pastas criadas pelo intelijj
+.idea/
+.idea/workspace.xml
