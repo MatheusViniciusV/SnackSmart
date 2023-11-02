@@ -86,11 +86,13 @@ DROP TABLE IF EXISTS `maquina`;
 CREATE TABLE `maquina` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `nome` VARCHAR(128) NULL,
+    `codigo` INT, 
     `imagem` BLOB NULL,
     `localizacao` VARCHAR(256) NULL,
     `aluguel` FLOAT NOT NULL,
     `locatario__fk` INT NULL,
-    `estado` ENUM('ALUGADA', 'EM_MANUTENCAO', 'AGUARDANDO_MANUTENCAO', 'DISPONIVEL') NOT NULL,
+    `status` ENUM('ALUGADA', 'EM_MANUTENCAO', 'AGUARDANDO_MANUTENCAO', 'DISPONIVEL') NOT NULL,
+    `tipo` ENUM('REFRIGERADA', 'NAO_REFRIGERADA') NOT NULL,    
     FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`)
 );
 
