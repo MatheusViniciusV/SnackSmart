@@ -14,13 +14,13 @@ USE `snacksmart`;
 DROP TABLE IF EXISTS `gerente`;
 CREATE TABLE `gerente` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
-    `usuario` VARCHAR(64) NOT NULL,
     `nome` VARCHAR(256) NOT NULL,
     `senha` VARCHAR(256) NOT NULL,
     `cpf` CHAR(11) NOT NULL,
     `rg` CHAR(10) NULL,
     `telefone` VARCHAR(14) NULL,
-    `email` VARCHAR(128) NULL
+    `email` VARCHAR(128) NULL,
+    CONSTRAINT `uk_cpf` UNIQUE (`cpf`)
 );
 
 -- --------------------------------------------------------
@@ -32,13 +32,13 @@ CREATE TABLE `gerente` (
 DROP TABLE IF EXISTS `locatario`;
 CREATE TABLE `locatario` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
-    `usuario` VARCHAR(64) NOT NULL,
     `nome` VARCHAR(256) NOT NULL,
     `senha` VARCHAR(256) NOT NULL,
     `cpf` CHAR(11) NOT NULL,
     `rg` CHAR(10) NULL,
     `telefone` VARCHAR(14) NULL,
-    `email` VARCHAR(128) NULL
+    `email` VARCHAR(128) NULL,
+    CONSTRAINT `uk_cpf` UNIQUE (`cpf`)
 );
 
 -- --------------------------------------------------------
@@ -103,6 +103,7 @@ CREATE TABLE `maquina` (
 DROP TABLE IF EXISTS `contrato`;
 CREATE TABLE `contrato` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
+    `observacoes` VARCHAR(512) NULL,
     `data_inicio` DATE NOT NULL,
     `data_fim` DATE NOT NULL,
     `data_pagamento` DATE NOT NULL,
@@ -110,7 +111,7 @@ CREATE TABLE `contrato` (
     `gerente__fk` INT NOT NULL,
     `locatario__fk` INT NOT NULL,
     `maquina__fk` INT NOT NULL,
-    `estado` ENUM('VIGENTE', 'EXPIRADO', 'INATIVO', 'CANCELADO') NOT NULL,
+    `estado` ENUM('VIGENTE', 'EXPIRADO', 'INATIVO', 'CANCELADO', 'CANCELAMENTO_SOLICITADO') NOT NULL,
     FOREIGN KEY (`gerente__fk`) REFERENCES `gerente` (`pk`),
     FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`),
     FOREIGN KEY (`maquina__fk`) REFERENCES `maquina` (`pk`)
@@ -190,4 +191,25 @@ CREATE TABLE `notas_gerente` (
     `dia` DATE NOT NULL,
     `gerente__fk` INT NOT NULL,
     FOREIGN KEY (`gerente__fk`) REFERENCES `gerente` (`pk`)
+);
+
+-- --------------------------------------------------------
+
+-- 
+-- Inserção de dados na tabela gerente
+-- 
+
+INSERT INTO `gerente`(
+    `nome`,
+    `senha`,
+    `cpf`,
+    `telefone`,
+    `email`
+)
+VALUES(
+    'Gerente',
+    'F59EFF44A211FA33E2513758C4C3BB13582678C5FF8B64D6C6338A0C6512A4AD',
+    '000',
+    '(00)99999999',
+    'gerente.desenvolvimento@dev.mail'
 );
