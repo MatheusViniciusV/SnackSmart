@@ -40,8 +40,8 @@ public class CriarContrato extends HttpServlet {
         String telLocatario = request.getParameter("telefoneLocatario");
 
         LocatarioDTO locatario = new LocatarioDTO(nomeLocatario, cpfLocatario, emailLocatario, telLocatario);
-        ContratoDTO contrato = new ContratoDTO(locatario, dataInicio.getData(), dataFim.getData(), dataPagagento.getData(), observacoes);
+//        ContratoDTO contrato = new ContratoDTO(locatario, dataInicio.getData(), dataFim.getData(), dataPagagento.getData(), observacoes);
 
-        service.criarContrato(contrato);
+//        service.criarContrato(contrato);
     }
 }

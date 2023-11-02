@@ -6,6 +6,7 @@ package br.cefetmg.snacksmart.utils.bd;
 
 import br.cefetmg.snacksmart.dao.ContratosDAO;
 import br.cefetmg.snacksmart.dao.LocatarioDAO;
+import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.utils.SenhaManager;
 
@@ -30,9 +31,9 @@ public class ConnectionTester {
 
             ContratosDAO contratosDAO = new ContratosDAO();
             LocatarioDAO locatarioDAO = new LocatarioDAO();
-            contratosDAO.deletarPorId(4);
+            LocatarioDTO loc = locatarioDAO.consultarPorCPF("111");
 
-            System.out.println(SenhaManager.fazHash("loc2"));
+            System.out.println(loc.getNome());
 
             String sql = "SELECT * FROM `gerente`";
 
@@ -49,6 +50,8 @@ public class ConnectionTester {
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionTester.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (PersistenciaException e) {
             throw new RuntimeException(e);
         }
 

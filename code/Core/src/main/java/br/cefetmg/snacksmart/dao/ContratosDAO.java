@@ -5,11 +5,8 @@
 package br.cefetmg.snacksmart.dao;
 
 import br.cefetmg.snacksmart.dto.ContratoDTO;
-import br.cefetmg.snacksmart.dto.GerenteDTO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
-import br.cefetmg.snacksmart.dto.MaquinaDTO;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
-import br.cefetmg.snacksmart.exceptions.dao.ElementoNaoExisteException;
 import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
 import br.cefetmg.snacksmart.idao.IContratosDAO;
 import br.cefetmg.snacksmart.utils.DataManager;
@@ -17,8 +14,6 @@ import br.cefetmg.snacksmart.utils.bd.ConnectionManager;
 import br.cefetmg.snacksmart.utils.enums.StatusContrato;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,7 +65,7 @@ public class ContratosDAO implements IContratosDAO {
     
     @Override
     public ArrayList<ContratoDTO> listaTodos() throws SQLException {
-        ArrayList<ContratoDTO> contratos = new ArrayList<ContratoDTO>();
+        ArrayList<ContratoDTO> contratos = new ArrayList<>();
 
         try {
             Connection conexao =  ConnectionManager.getInstance().getConnection();
@@ -82,7 +77,7 @@ public class ContratosDAO implements IContratosDAO {
 
             while (rs.next()) {
                 LocatarioDAO daoLocatario = new LocatarioDAO();
-                ContratoDTO contrato = null;
+                ContratoDTO contrato;
 
                 contrato = new ContratoDTO(
                         rs.getInt("pk"),
@@ -110,7 +105,7 @@ public class ContratosDAO implements IContratosDAO {
     
     @Override
     public ArrayList<ContratoDTO> filtra(LocatarioDTO locatario) throws LocatarioInvalidoException, SQLException {
-        ArrayList<ContratoDTO> contratos = new ArrayList<ContratoDTO>();
+        ArrayList<ContratoDTO> contratos = new ArrayList<>();
 
         try {
             Connection conexao =  ConnectionManager.getInstance().getConnection();
@@ -123,7 +118,7 @@ public class ContratosDAO implements IContratosDAO {
 
             while (rs.next()) {
                 LocatarioDAO daoLocatario = new LocatarioDAO();
-                ContratoDTO contrato = null;
+                ContratoDTO contrato;
 
                 contrato = new ContratoDTO(
                         rs.getInt("pk"),
@@ -151,7 +146,7 @@ public class ContratosDAO implements IContratosDAO {
     
     @Override
     public ArrayList<ContratoDTO> filtra(StatusContrato status) throws LocatarioInvalidoException, SQLException {
-        ArrayList<ContratoDTO> contratos = new ArrayList<ContratoDTO>();
+        ArrayList<ContratoDTO> contratos = new ArrayList<>();
 
         try {
             Connection conexao =  ConnectionManager.getInstance().getConnection();
@@ -164,7 +159,7 @@ public class ContratosDAO implements IContratosDAO {
 
             while (rs.next()) {
                 LocatarioDAO daoLocatario = new LocatarioDAO();
-                ContratoDTO contrato = null;
+                ContratoDTO contrato;
 
                 contrato = new ContratoDTO(
                         rs.getInt("pk"),
@@ -262,6 +257,7 @@ public class ContratosDAO implements IContratosDAO {
             pstmt.close();
             conexao.close();
         } catch (ClassNotFoundException e) {
+            //noinspection CallToPrintStackTrace
             e.printStackTrace();
             throw new RuntimeException(e);
         }
@@ -298,7 +294,8 @@ public class ContratosDAO implements IContratosDAO {
             preparedStatement.close();
             conexao.close();
         } catch (ClassNotFoundException ex) {
-           ex.printStackTrace();
+            //noinspection CallToPrintStackTrace
+            ex.printStackTrace();
         } catch (PersistenciaException ex) {
             Logger.getLogger(ContratosDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

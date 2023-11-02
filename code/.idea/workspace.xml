@@ -11,27 +11,15 @@
   <component name="ChangeListManager">
     <list default="true" id="5dd24dd0-57d8-4f27-938d-95a9bbda0876" name="Changes" comment="GerenteDAO feita">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/conexao/Conexao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/conf/createdatabase.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/conf/createdatabase.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/ContratosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/ContratosDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/GerenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/GerenteDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/LocatarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/LocatarioDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/ContratoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/ContratoDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/GerenteDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/GerenteDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/IUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/IUsuarioDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/LocatarioDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/LocatarioDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/idao/IContratosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/idao/IContratosDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/idao/ILocatarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/idao/ILocatarioDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/service_gerente/ManterContratos.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/service_gerente/ManterContratos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/service_locatario/AcessarContratos.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/service_locatario/AcessarContratos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/services/ValidadorUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/services/ValidadorUsuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/DataManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/bd/ConnectionTester.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/bd/ConnectionTester.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/enums/StatusContrato.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/enums/StatusContrato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/controller_locador/CancelarContrato.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/controller_locador/CancelarContrato.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/controller_locador/CriarContrato.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/controller_locador/CriarContrato.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/controller_locatario/SolicitarCancelarContrato.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/controller_locatario/SolicitarCancelarContrato.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/facade/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/facade/LoginServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/View/src/main/webapp/principal.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/webapp/principal.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +72,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.22413793",
     "settings.editor.selected.configurable": "database.query.execution",
@@ -96,7 +84,7 @@
       <recent name="C:\Users\eloym\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ConnectionTester">
+  <component name="RunManager" selected="Tomcat Server.Tomcat 10.1.15">
     <configuration name="ConnectionTester" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="br.cefetmg.snacksmart.utils.bd.ConnectionTester" />
       <module name="Core" />
@@ -127,13 +115,12 @@
       <method v="2" />
     </configuration>
     <configuration name="Tomcat 10.1.15" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.15" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/View/" />
       <option name="BROWSER_ID" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="View:war">
           <settings>
-            <option name="CONTEXT_PATH" value="/View_war" />
+            <option name="CONTEXT_PATH" value="/View" />
           </settings>
         </artifact>
       </deployment>

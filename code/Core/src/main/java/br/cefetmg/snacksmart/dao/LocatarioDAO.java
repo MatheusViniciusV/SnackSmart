@@ -119,7 +119,7 @@ public class LocatarioDAO implements ILocatarioDAO {
                 listAll = new ArrayList<>();
                 do {
                     LocatarioDTO locatarioDTO = new LocatarioDTO();
-                    locatarioDTO.setId(rs.getInt("id"));
+                    locatarioDTO.setId(rs.getInt("pk"));
                     locatarioDTO.setNome(rs.getString("nome"));
                     locatarioDTO.setSenha(rs.getString("senha"));
                     locatarioDTO.setCPF(rs.getString("CPF"));
@@ -191,7 +191,7 @@ public class LocatarioDAO implements ILocatarioDAO {
             LocatarioDTO locatarioDTO = null;
             if (rs.next()) {
                 locatarioDTO = new LocatarioDTO();
-                locatarioDTO.setId(rs.getInt("id"));
+                locatarioDTO.setId(rs.getInt("pk"));
                 locatarioDTO.setNome(rs.getString("nome"));
                 locatarioDTO.setSenha(rs.getString("senha"));
                 locatarioDTO.setCPF(rs.getString("CPF"));

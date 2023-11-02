@@ -32,7 +32,7 @@ public class SolicitarCancelarContrato extends HttpServlet {
         PrintWriter out = response.getWriter();
         AcessarContratos acessoContratos = new AcessarContratos();
         
-        long contratoId =  Long.parseLong(request.getParameter("contratoId"));
+        int contratoId =  Integer.parseInt(request.getParameter("contratoId"));
         String locatarioCPF = request.getParameter("locatarioCPF");
 
 //                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "o locatario não tem acesso ao contrato" + contratoId + "."); 

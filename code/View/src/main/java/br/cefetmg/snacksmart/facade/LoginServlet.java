@@ -35,14 +35,13 @@ public class LoginServlet extends HttpServlet {
             System.out.println(cpf);
             
             TipoUsuario tipoUsuario = validador.tipoUsuario(cpf);
+            if(tipoUsuario == TipoUsuario.NAO_CADASTRADO)
+                response.sendRedirect("index.html");
             
             
             HttpSession session = request.getSession();
             
             switch(tipoUsuario) {
-                case NAO_CADASTRADO: 
-                    response.sendRedirect("index.html"); 
-                    break;
                 case LOCADOR: // gerente
                     if(validador.validarGerente(cpf, senha)) {
                         response.sendRedirect("principal.jsp");
@@ -56,7 +55,7 @@ public class LoginServlet extends HttpServlet {
                     if(validador.validarLocatario(cpf, senha)) {
                         response.sendRedirect("principal.jsp");
                         session.setAttribute("tipoUsuario", tipoUsuario);
-                        session.setAttribute("usuario", null);
+                        session.setAttribute("usuario", validador.getLocatario(cpf));
                     } else {
                         response.sendRedirect("index.html");
                     }

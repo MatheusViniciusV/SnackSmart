@@ -4,7 +4,7 @@ package br.cefetmg.snacksmart.dto;
  *
  * @author eloym
  */
-public class LocatarioDTO {
+public class LocatarioDTO implements IUsuarioDTO {
 
     private int id;
     private String nome;
