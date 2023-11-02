@@ -6,24 +6,30 @@ package br.cefetmg.snacksmart.utils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.sql.Date;
 
 /**
  *
  * @author eloym
  */
-public class Data {
-    private LocalDate data;
-    private static final DateTimeFormatter formatador;
+public class DataManager {
+    private final LocalDate data;
+    private static final DateTimeFormatter formatador, formatadorPrint;
     
     static {
         formatador = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        formatadorPrint = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     }
 
-    public Data(LocalDate data) {
+    public DataManager(LocalDate data) {
         this.data = data;
     }
 
-    public Data(String data) {
+    public DataManager(Date data) {
+        this.data = data.toLocalDate();
+    }
+
+    public DataManager(String data) {
         this.data = LocalDate.parse(data, formatador);
     }
 
@@ -39,8 +45,10 @@ public class Data {
         return data;
     }
 
+    public Date getSqlDate() { return Date.valueOf(data); }
+
     @Override
     public String toString() {
-        return data.format(formatador);
+        return data.format(formatadorPrint);
     }
 }

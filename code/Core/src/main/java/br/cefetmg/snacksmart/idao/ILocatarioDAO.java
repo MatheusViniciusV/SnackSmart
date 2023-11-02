@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public interface ILocatarioDAO {
 
-    Long inserir(LocatarioDTO locatarioDTO) throws PersistenciaException;
+    int inserir(LocatarioDTO locatarioDTO) throws PersistenciaException;
 
     boolean atualizar(LocatarioDTO locatarioDTO) throws PersistenciaException;
 
@@ -14,7 +14,7 @@ public interface ILocatarioDAO {
 
     ArrayList<LocatarioDTO> listarTodos() throws PersistenciaException;
 
-    LocatarioDTO consultarPorPk(Long pk) throws PersistenciaException;
+    LocatarioDTO consultarPorId(int id) throws PersistenciaException;
     
     LocatarioDTO consultarPorCPF(String cpf) throws PersistenciaException;
 }

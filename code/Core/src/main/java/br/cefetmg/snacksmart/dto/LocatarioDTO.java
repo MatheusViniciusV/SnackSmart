@@ -6,8 +6,7 @@ package br.cefetmg.snacksmart.dto;
  */
 public class LocatarioDTO {
 
-    private Long pk;
-    private String usuario;
+    private int id;
     private String nome;
     private String senha;
     private String cpf;
@@ -28,24 +27,12 @@ public class LocatarioDTO {
 
     public LocatarioDTO() {}
 
-    public Long getPk() {
-        return pk;
+    public int getId() {
+        return id;
     }
 
-    public void setPk(Long pk) {
-        this.pk = pk;
-    }
-
-    public void setId(Long pk) {
-        this.pk = pk;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getSenha() {

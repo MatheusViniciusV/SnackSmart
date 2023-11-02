@@ -4,6 +4,11 @@
  */
 package br.cefetmg.snacksmart.utils.bd;
 
+import br.cefetmg.snacksmart.dao.ContratosDAO;
+import br.cefetmg.snacksmart.dao.LocatarioDAO;
+import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
+import br.cefetmg.snacksmart.utils.SenhaManager;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,9 +28,13 @@ public class ConnectionTester {
         try {
             Connection cn = conn.getConnection();
 
+            ContratosDAO contratosDAO = new ContratosDAO();
+            LocatarioDAO locatarioDAO = new LocatarioDAO();
+            contratosDAO.deletarPorId(4);
 
+            System.out.println(SenhaManager.fazHash("loc2"));
 
-            String sql = "SELECT * FROM `gerente` ";
+            String sql = "SELECT * FROM `gerente`";
 
             PreparedStatement pstmt = cn.prepareStatement(sql);
 

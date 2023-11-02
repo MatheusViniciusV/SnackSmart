@@ -6,12 +6,11 @@
 package br.cefetmg.snacksmart.controller_locador;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import br.cefetmg.snacksmart.dto.ContratoDTO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.service_gerente.ManterContratos;
-import br.cefetmg.snacksmart.utils.Data;
+import br.cefetmg.snacksmart.utils.DataManager;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -31,9 +30,9 @@ public class CriarContrato extends HttpServlet {
     throws ServletException, IOException {
         ManterContratos service = new ManterContratos();
 
-        Data dataInicio = new Data(request.getParameter("dataInicio"));
-        Data dataFim = new Data(request.getParameter("dataFim"));
-        Data dataPagagento = new Data(request.getParameter("dataPagagento"));
+        DataManager dataInicio = new DataManager(request.getParameter("dataInicio"));
+        DataManager dataFim = new DataManager(request.getParameter("dataFim"));
+        DataManager dataPagagento = new DataManager(request.getParameter("dataPagagento"));
         String observacoes  = request.getParameter("observações");
         String nomeLocatario = request.getParameter("nomeLocatario");
         String cpfLocatario = request.getParameter("cpfLocatario");

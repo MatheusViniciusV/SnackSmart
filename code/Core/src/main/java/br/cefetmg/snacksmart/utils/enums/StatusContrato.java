@@ -28,4 +28,9 @@ public enum StatusContrato {
             default: return INVALIDO;
         }
     }
+
+    @Override
+    public String toString() {
+        return status;
+    }
 }

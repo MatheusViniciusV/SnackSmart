@@ -1,6 +1,6 @@
 package br.cefetmg.snacksmart.dto;
 
-public interface IUsuario {
+public interface IUsuarioDTO {
     String getNome();
 
     String getCPF();

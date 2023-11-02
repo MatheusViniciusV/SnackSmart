@@ -12,32 +12,31 @@ import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 public class LocatarioDAO implements ILocatarioDAO {
     
     @Override
-    public Long inserir(LocatarioDTO locatarioDTO) throws PersistenciaException {
+    public int inserir(LocatarioDTO locatarioDTO) throws PersistenciaException {
         try {
             Connection connection = ConnectionManager.getInstance().getConnection();
          
-            String sql = "INSERT INTO locatario (usuario, nome, senha, cpf, rg, telefone, email) " 
-                       + "VALUES (?, ?, ?, ?, ?, ?, ?) ";
+            String sql = "INSERT INTO locatario (nome, senha, cpf, rg, telefone, email) "
+                       + "VALUES (?, ?, ?, ?, ?, ?) ";
             
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setString(1, locatarioDTO.getUsuario());
-            pstmt.setString(2, locatarioDTO.getNome());
-            pstmt.setString(3, locatarioDTO.getSenha());
-            pstmt.setString(4, locatarioDTO.getCPF());
-            pstmt.setString(5, locatarioDTO.getRG());
-            pstmt.setString(6, locatarioDTO.getTelefone());
-            pstmt.setString(7, locatarioDTO.getEmail());
+            pstmt.setString(1, locatarioDTO.getNome());
+            pstmt.setString(2, locatarioDTO.getSenha());
+            pstmt.setString(3, locatarioDTO.getCPF());
+            pstmt.setString(4, locatarioDTO.getRG());
+            pstmt.setString(5, locatarioDTO.getTelefone());
+            pstmt.setString(6, locatarioDTO.getEmail());
             pstmt.executeUpdate();
             
-            sql = "SELECT pk FROM locatario ORDER BY pk DESC LIMIT 1";
+            sql = "SELECT `pk` FROM `locatario` ORDER BY `pk` DESC LIMIT 1";
             
             pstmt = connection.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             
-            Long pk = null;
+            int pk = 0;
             if (rs.next()) {
-                pk = new Long(rs.getLong("pk"));
-                locatarioDTO.setPk(pk);
+                pk = rs.getInt("pk");
+                locatarioDTO.setId(pk);
             }
 
             pstmt.close();
@@ -57,8 +56,7 @@ public class LocatarioDAO implements ILocatarioDAO {
             Connection connection = ConnectionManager.getInstance().getConnection();
 
             String sql = "UPDATE locatario "
-                    + "   SET usuario = ?, "
-                    + "       nome = ?, "
+                    + "   SET nome = ?, "
                     + "       senha = ?, "
                     + "       cpf = ?, "
                     + "       rg = ?, "
@@ -67,14 +65,13 @@ public class LocatarioDAO implements ILocatarioDAO {
                     + " WHERE pk = ?;";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setString(1, locatarioDTO.getUsuario());
-            pstmt.setString(2, locatarioDTO.getNome());
-            pstmt.setString(3, locatarioDTO.getSenha());
-            pstmt.setString(4, locatarioDTO.getCPF());
-            pstmt.setString(5, locatarioDTO.getRG());
-            pstmt.setString(6, locatarioDTO.getTelefone());
-            pstmt.setString(7, locatarioDTO.getEmail());
-            pstmt.setLong(8, locatarioDTO.getPk());
+            pstmt.setString(1, locatarioDTO.getNome());
+            pstmt.setString(2, locatarioDTO.getSenha());
+            pstmt.setString(3, locatarioDTO.getCPF());
+            pstmt.setString(4, locatarioDTO.getRG());
+            pstmt.setString(5, locatarioDTO.getTelefone());
+            pstmt.setString(6, locatarioDTO.getEmail());
+            pstmt.setInt(7, locatarioDTO.getId());
             pstmt.executeUpdate();
 
             pstmt.close();
@@ -95,7 +92,7 @@ public class LocatarioDAO implements ILocatarioDAO {
             String sql = "DELETE FROM locatario WHERE pk = ?";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, locatarioDTO.getPk());
+            pstmt.setInt(1, locatarioDTO.getId());
             pstmt.executeUpdate();
 
             pstmt.close();
@@ -122,8 +119,7 @@ public class LocatarioDAO implements ILocatarioDAO {
                 listAll = new ArrayList<>();
                 do {
                     LocatarioDTO locatarioDTO = new LocatarioDTO();
-                    locatarioDTO.setPk(rs.getLong("id"));
-                    locatarioDTO.setUsuario(rs.getString("usuario"));
+                    locatarioDTO.setId(rs.getInt("id"));
                     locatarioDTO.setNome(rs.getString("nome"));
                     locatarioDTO.setSenha(rs.getString("senha"));
                     locatarioDTO.setCPF(rs.getString("CPF"));
@@ -146,7 +142,7 @@ public class LocatarioDAO implements ILocatarioDAO {
     }
     
     @Override
-    public LocatarioDTO consultarPorPk(Long pk) throws PersistenciaException {
+    public LocatarioDTO consultarPorId(int id) throws PersistenciaException {
 
         try {
             Connection connection = ConnectionManager.getInstance().getConnection();
@@ -154,14 +150,13 @@ public class LocatarioDAO implements ILocatarioDAO {
             String sql = "SELECT * FROM locatario WHERE pk = ?";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setLong(1, pk);
+            pstmt.setLong(1, id);
             ResultSet rs = pstmt.executeQuery();
 
             LocatarioDTO locatarioDTO = null;
             if (rs.next()) {
                 locatarioDTO = new LocatarioDTO();
-                locatarioDTO.setPk(rs.getLong("id"));
-                locatarioDTO.setUsuario(rs.getString("usuario"));
+                locatarioDTO.setId(rs.getInt("pk"));
                 locatarioDTO.setNome(rs.getString("nome"));
                 locatarioDTO.setSenha(rs.getString("senha"));
                 locatarioDTO.setCPF(rs.getString("CPF"));
@@ -196,8 +191,7 @@ public class LocatarioDAO implements ILocatarioDAO {
             LocatarioDTO locatarioDTO = null;
             if (rs.next()) {
                 locatarioDTO = new LocatarioDTO();
-                locatarioDTO.setPk(rs.getLong("id"));
-                locatarioDTO.setUsuario(rs.getString("usuario"));
+                locatarioDTO.setId(rs.getInt("id"));
                 locatarioDTO.setNome(rs.getString("nome"));
                 locatarioDTO.setSenha(rs.getString("senha"));
                 locatarioDTO.setCPF(rs.getString("CPF"));

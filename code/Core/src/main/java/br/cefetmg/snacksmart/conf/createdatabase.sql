@@ -107,7 +107,7 @@ CREATE TABLE `contrato` (
     `data_inicio` DATE NOT NULL,
     `data_fim` DATE NOT NULL,
     `data_pagamento` DATE NOT NULL,
-    `valor` INT NOT NULL,
+    `valor` FLOAT NOT NULL,
     `gerente__fk` INT NOT NULL,
     `locatario__fk` INT NOT NULL,
     `maquina__fk` INT NOT NULL,
@@ -191,25 +191,4 @@ CREATE TABLE `notas_gerente` (
     `dia` DATE NOT NULL,
     `gerente__fk` INT NOT NULL,
     FOREIGN KEY (`gerente__fk`) REFERENCES `gerente` (`pk`)
-);
-
--- --------------------------------------------------------
-
--- 
--- Inserção de dados na tabela gerente
--- 
-
-INSERT INTO `gerente`(
-    `nome`,
-    `senha`,
-    `cpf`,
-    `telefone`,
-    `email`
-)
-VALUES(
-    'Gerente',
-    'F59EFF44A211FA33E2513758C4C3BB13582678C5FF8B64D6C6338A0C6512A4AD',
-    '000',
-    '(00)99999999',
-    'gerente.desenvolvimento@dev.mail'
 );

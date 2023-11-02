@@ -35,7 +35,10 @@ public class GerenteDAO implements IGerenteDAO {
                 gerente = new GerenteDTO(
                         rs.getString("nome"),
                         rs.getString("cpf"),
-                        rs.getString("senha"));
+                        rs.getString("senha"),
+                        null,
+                        rs.getString("email"),
+                        rs.getString("telefone"));
 
                 System.out.println("gerente pego do banco de dados");
             }

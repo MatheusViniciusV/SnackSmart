@@ -32,24 +32,24 @@ public class AcessarContratos {
         dao = new ContratosDAO();
     }
     
-    public void solicitarCancelamento(long id, String locatarioCPF) 
+    public void solicitarCancelamento(int id, String locatarioCPF)
             throws ClassNotFoundException, SQLException, ElementoNaoExisteException, LocatarioInvalidoException, ClassNotFoundException {
         LocatarioDTO locatario = new LocatarioDTO();
         
-        if(dao.getIdLocatario(id, locatario.getCPF()) != null) 
+        if(dao.consultarPorIdLocatario(id, locatario) != null)
             dao.atualizarStatus(id, StatusContrato.CANCELAMENTO_SOLICITADO);
         else
             throw new LocatarioInvalidoException("Locatario " + locatario.getNome() + "não existe ou não tem acesso ao contrato");
     }
     
-    public ContratoDTO getContrato(long id, String locatarioCPF) 
+    public ContratoDTO getContrato(int id, String locatarioCPF)
             throws SQLException, ElementoNaoExisteException, LocatarioInvalidoException, ClassNotFoundException {
         ContratoDTO contrato;
         
         LocatarioDTO locatario = new LocatarioDTO();
         
-        if(dao.getIdLocatario(id, locatario.getCPF()) != null)
-            contrato = dao.getId(id);
+        if(dao.consultarPorIdLocatario(id, locatario) != null)
+            contrato = dao.consultarPorId(id);
         else
             throw new LocatarioInvalidoException("Locatario " + locatario.getNome() + "não existe ou não tem acesso ao contrato");
         

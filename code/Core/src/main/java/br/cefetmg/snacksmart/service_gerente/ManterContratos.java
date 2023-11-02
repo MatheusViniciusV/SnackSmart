@@ -55,14 +55,14 @@ public class ManterContratos {
         return contratos;
     }
     
-    public ContratoDTO getContrato(long id) throws SQLException, ElementoNaoExisteException {
-        ContratoDTO contrato = dao.getId(id);
+    public ContratoDTO getContrato(int id) throws SQLException, ElementoNaoExisteException {
+        ContratoDTO contrato = dao.consultarPorId(id);
         
         return contrato;
     }
     
-    public void cancelarContrato(long id) throws ClassNotFoundException, SQLException {
-        ContratoDTO contrato = dao.getId(id);
+    public void cancelarContrato(int id) throws ClassNotFoundException, SQLException {
+        ContratoDTO contrato = dao.consultarPorId(id);
         
         if(contrato.getStatus() == StatusContrato.VIGENTE || contrato.getStatus() == StatusContrato.CANCELAMENTO_SOLICITADO)
             dao.atualizarStatus(id, StatusContrato.CANCELADO);

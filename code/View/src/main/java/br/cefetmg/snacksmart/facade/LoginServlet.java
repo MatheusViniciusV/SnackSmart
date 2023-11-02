@@ -1,6 +1,5 @@
 package br.cefetmg.snacksmart.facade;
 
-import br.cefetmg.snacksmart.dto.IUsuario;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.services.ValidadorUsuario;
 import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
