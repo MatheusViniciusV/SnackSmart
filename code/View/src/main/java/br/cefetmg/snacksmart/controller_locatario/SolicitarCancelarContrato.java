@@ -7,6 +7,8 @@ package br.cefetmg.snacksmart.controller_locatario;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import br.cefetmg.snacksmart.utils.Data;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,6 +19,7 @@ import br.cefetmg.snacksmart.exceptions.dao.ElementoNaoExisteException;
 import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
 import br.cefetmg.snacksmart.service_locatario.AcessarContratos;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -33,7 +36,7 @@ public class SolicitarCancelarContrato extends HttpServlet {
         
         long contratoId =  Long.parseLong(request.getParameter("contratoId"));
         String locatarioCPF = request.getParameter("locatarioCPF");
-        
+
 //                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "o locatario não tem acesso ao contrato" + contratoId + "."); 
         try {
             acessoContratos.solicitarCancelamento(contratoId, locatarioCPF);

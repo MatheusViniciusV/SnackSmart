@@ -5,11 +5,15 @@
 package br.cefetmg.snacksmart.service_gerente;
 
 import br.cefetmg.snacksmart.dao.ContratosDAO;
+import br.cefetmg.snacksmart.dao.GerenteDAO;
 import br.cefetmg.snacksmart.dto.ContratoDTO;
+import br.cefetmg.snacksmart.dto.GerenteDTO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
+import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.exceptions.dao.ElementoNaoExisteException;
 import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
 import br.cefetmg.snacksmart.idao.IContratosDAO;
+import br.cefetmg.snacksmart.idao.IGerenteDAO;
 import br.cefetmg.snacksmart.utils.enums.StatusContrato;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,19 +24,21 @@ import java.util.ArrayList;
  */
 public class ManterContratos {
     private IContratosDAO dao;
+    private IGerenteDAO daoGerente;
     
     public ManterContratos() {
         dao = new ContratosDAO();
+        daoGerente = new GerenteDAO();
     }
     
     public ArrayList<ContratoDTO> getContratos() throws LocatarioInvalidoException, SQLException {
-        ArrayList contratos = dao.getTodos();
+        ArrayList contratos = dao.listaTodos();
         
         return contratos;
     }
     
     public ArrayList<ContratoDTO> getContratosAtivos() throws LocatarioInvalidoException, SQLException {
-        ArrayList contratos = dao.filtra(StatusContrato.ATIVO);
+        ArrayList contratos = dao.filtra(StatusContrato.VIGENTE);
         
         return contratos;
     }
@@ -58,11 +64,20 @@ public class ManterContratos {
     public void cancelarContrato(long id) throws ClassNotFoundException, SQLException {
         ContratoDTO contrato = dao.getId(id);
         
-        if(contrato.getStatus() == StatusContrato.ATIVO || contrato.getStatus() == StatusContrato.CANCELAMENTO_SOLICITADO)
+        if(contrato.getStatus() == StatusContrato.VIGENTE || contrato.getStatus() == StatusContrato.CANCELAMENTO_SOLICITADO)
             dao.atualizarStatus(id, StatusContrato.CANCELADO);
     }
     
     public void criarContrato(ContratoDTO contrato) {
-        
+        try {
+            GerenteDTO gerente = daoGerente.get();
+            contrato.setGerente(gerente);
+
+            dao.registraContrato(contrato);
+        } catch (PersistenciaException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

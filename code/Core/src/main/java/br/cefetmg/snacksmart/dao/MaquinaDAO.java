@@ -2,9 +2,11 @@ package br.cefetmg.snacksmart.dao;
 
 import br.cefetmg.snacksmart.conection.EstabelecerConexao;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
+import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.idao.IMaquinaDAO;
 import java.util.ArrayList;
 import br.cefetmg.snacksmart.utils.enums.StatusMaquina;
+import br.cefetmg.snacksmart.utils.enums.TipoMaquina;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,19 +17,20 @@ import java.sql.SQLException;
 public class MaquinaDAO implements IMaquinaDAO {    
     private Connection conexao = null;  
     @Override
-    public MaquinaDTO get(String codigo) {
+    public MaquinaDTO get(int codigo) {
         String sql = "SELECT nome, imagem, tipo, localizacao, locatario, status " +
                      "FROM maquinas WHERE codigo = ?";
         conexao = EstabelecerConexao.obterConexao(); 
         try (PreparedStatement preparedStatement = conexao.prepareStatement(sql)) {
-            preparedStatement.setString(1, codigo);
+            preparedStatement.setInt(1, codigo);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 String nome = resultSet.getString("nome");
                 byte[] imagem = resultSet.getBytes("imagem");
-                String tipo = resultSet.getString("tipo");
+                TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
                 String localizacao = resultSet.getString("localizacao");
-                String locatario = resultSet.getString("locatario");
+                String locatarioStr = resultSet.getString("locatario");
+                LocatarioDTO locatario = new LocatarioDTO(locatarioStr);
                 StatusMaquina status = StatusMaquina.valueOf(resultSet.getString("status"));
                 MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, imagem, tipo, localizacao, locatario, status);
                 EstabelecerConexao.fecharConexao(conexao);
@@ -50,12 +53,13 @@ public class MaquinaDAO implements IMaquinaDAO {
         try (PreparedStatement preparedStatement = conexao.prepareStatement(sql)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                String codigo = resultSet.getString("codigo");
+                int codigo = resultSet.getInt("codigo");
                 String nome = resultSet.getString("nome");
                 byte[] imagem = resultSet.getBytes("imagem");
-                String tipo = resultSet.getString("tipo");
+                TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
                 String localizacao = resultSet.getString("localizacao");
-                String locatario = resultSet.getString("locatario");
+                String locatarioStr = resultSet.getString("locatario");
+                LocatarioDTO locatario = new LocatarioDTO(locatarioStr);
                 StatusMaquina status = StatusMaquina.valueOf(resultSet.getString("status"));
 
                 MaquinaDTO maquina = new MaquinaDTO(nome, codigo, imagem, tipo, localizacao, locatario, status);
@@ -66,7 +70,7 @@ public class MaquinaDAO implements IMaquinaDAO {
             System.out.print("Não foi possivel realizar tal ação: " + e);
             EstabelecerConexao.fecharConexao(conexao); 
         }
-        
+        EstabelecerConexao.fecharConexao(conexao);
         return maquinasVetor;
     }  
     
@@ -77,11 +81,11 @@ public class MaquinaDAO implements IMaquinaDAO {
         conexao = EstabelecerConexao.obterConexao(); 
         try (PreparedStatement preparedStatement = conexao.prepareStatement(sql)) {
             preparedStatement.setString(1, maquina.getNome());
-            preparedStatement.setString(2, maquina.getCodigo());
+            preparedStatement.setInt(2, maquina.getCodigo());
             preparedStatement.setBytes(3, maquina.getImagem());
-            preparedStatement.setString(4, maquina.getTipo());
+            preparedStatement.setString(4, maquina.getTipo().name());
             preparedStatement.setString(5, maquina.getLocalizacao());
-            preparedStatement.setString(6, maquina.getLocatario());
+            preparedStatement.setString(6, maquina.getLocatario().getNome());
             preparedStatement.setString(7, maquina.getStatus().name());
 
             preparedStatement.executeUpdate();
@@ -93,18 +97,18 @@ public class MaquinaDAO implements IMaquinaDAO {
     }
     
     @Override
-    public void update(String codigo, MaquinaDTO updatedMaquina) {
+    public void update(MaquinaDTO updatedMaquina) {
         String sql = "UPDATE maquinas SET nome = ?, imagem = ?, tipo = ?, " +
                      "localizacao = ?, locatario = ?, status = ? WHERE codigo = ?";
         conexao = EstabelecerConexao.obterConexao();
         try (PreparedStatement preparedStatement = conexao.prepareStatement(sql)) {
             preparedStatement.setString(1, updatedMaquina.getNome());
             preparedStatement.setBytes(2, updatedMaquina.getImagem());
-            preparedStatement.setString(3, updatedMaquina.getTipo());
+            preparedStatement.setString(3, updatedMaquina.getTipo().name());
             preparedStatement.setString(4, updatedMaquina.getLocalizacao());
-            preparedStatement.setString(5, updatedMaquina.getLocatario());
+            preparedStatement.setString(5, updatedMaquina.getLocatario().getNome());
             preparedStatement.setString(6, updatedMaquina.getStatus().name());
-            preparedStatement.setString(7, codigo);
+            preparedStatement.setInt(7, updatedMaquina.getCodigo());
 
             preparedStatement.executeUpdate();
             EstabelecerConexao.fecharConexao(conexao);
@@ -115,18 +119,18 @@ public class MaquinaDAO implements IMaquinaDAO {
     }
     
     @Override
-    public void remove(String codigo) {
-        String sql = "UPDATE maquinas SET nome = NULL, imagem = NULL, tipo = NULL, " +
-                     "localizacao = NULL, locatario = NULL, status = 'REMOVIDO' WHERE codigo = ?";
+    public void remove(int codigo) {
+        String sql = "DELETE FROM maquinas WHERE codigo = ?";
         conexao = EstabelecerConexao.obterConexao();
         try (PreparedStatement preparedStatement = conexao.prepareStatement(sql)) {
-            preparedStatement.setString(1, codigo);
+            preparedStatement.setInt(1, codigo);
             preparedStatement.executeUpdate();
             EstabelecerConexao.fecharConexao(conexao);
         } catch (SQLException e) {
             System.out.print("Não foi possivel realizar tal ação: " + e);
             EstabelecerConexao.fecharConexao(conexao);
         }
+        EstabelecerConexao.fecharConexao(conexao);
     }
     
 }

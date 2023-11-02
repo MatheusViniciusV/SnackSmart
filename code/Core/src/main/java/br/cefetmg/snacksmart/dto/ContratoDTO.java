@@ -14,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 public class ContratoDTO {
     private long id;
     private double valor;
+    private StatusContrato status;
     private LocalDate dataInicio;
     private LocalDate dataExpiracao;
     private LocalDate dataPagamento;
@@ -22,39 +23,58 @@ public class ContratoDTO {
     private LocatarioDTO locatario;
     private MaquinaDTO maquina;
 
-    // Construtor da classe Contrato
     public ContratoDTO(long id,
-            double valor,
-            LocatarioDTO locatario,
-            MaquinaDTO maquina,
-            LocalDate dataInicio, LocalDate dataExpiracao, LocalDate dataPagamento,
-            String observacoes) throws PersistenciaException {
-        
+                       double valor,
+//                       LocatarioDTO locatario,
+//            MaquinaDTO maquina,
+                       LocalDate dataInicio, LocalDate dataExpiracao, LocalDate dataPagamento,
+                       String observacoes) throws PersistenciaException {
+
         this.id = id;
         this.valor = valor;
         this.dataExpiracao = dataExpiracao;
         this.dataInicio = dataInicio;
         this.dataPagamento = dataPagamento;
         this.observacoes = observacoes;
-        this.locatario = locatario;
+//        this.locatario = locatario;
+
+        IGerenteDAO daoGerente = new GerenteDAO();
+        this.gerente = daoGerente.get();
+
+    }
+
+    // Construtor da classe Contrato
+    public ContratoDTO(long id,
+//            double valor,
+            LocatarioDTO locatario,
+//            MaquinaDTO maquina,
+            LocalDate dataInicio, LocalDate dataExpiracao, // LocalDate dataPagamento,
+            String observacoes) throws PersistenciaException {
+
+        this.id = id;
+        this.valor = valor;
+        this.dataExpiracao = dataExpiracao;
+        this.dataInicio = dataInicio;
+        this.dataPagamento = dataPagamento;
+        this.observacoes = observacoes;
+//        this.locatario = locatario;
 
         IGerenteDAO daoGerente = new GerenteDAO();
         this.gerente = daoGerente.get();
         
     }
     
-    public ContratoDTO(//LocatarioDTO locatario,
+    public ContratoDTO(LocatarioDTO locatario,
             LocalDate dataInicio, LocalDate dataExpiracao, LocalDate dataPagamento,
-            String observacoes) throws PersistenciaException {
+            String observacoes) {
         
         this.dataExpiracao = dataExpiracao;
         this.dataInicio = dataInicio;
         this.dataPagamento = dataPagamento;
         this.observacoes = observacoes;
-//        this.locatario = locatario Depois fazer verificação melhor disso
+        this.locatario = locatario;
+        status = StatusContrato.VIGENTE;
 
-        IGerenteDAO daoGerente = new GerenteDAO();
-        this.gerente = daoGerente.get();
         
     }
     
@@ -63,7 +83,7 @@ public class ContratoDTO {
     }
     
     public StatusContrato getStatus() {
-        return StatusContrato.INVALIDO;
+        return status;
     }
 
     public LocalDate getDataInicio() {
@@ -93,46 +113,16 @@ public class ContratoDTO {
     public MaquinaDTO getMaquina() {
         return maquina;
     }
-    
-//    public String getGerenteNome() {
-//        return "oi";
-//    }
-//    
-//    public String getGerenteCPF() {
-//        return "oi";
-//    }
-//    
-//    public String getGerenteTelefone() {
-//        return "oi";
-//    }
-//    
-//    public String getGerenteEmail() {
-//        return "oi";
-//    }
 
-    /*
-    public Locatario getLocatario() {
+
+    public LocatarioDTO getLocatario() {
         return locatario;
     }
-*/
-    
-//    public String getLocatarioNome() {
-//        return "sla";
-//    }
-//    
-//    public String getLocatarioCPF() {
-//        return "sla";
-//    }
-//    
-//    public String getLocatarioTelefone() {
-//        return "sla";
-//    }
-//    
-//    public String getLocatarioEmail() {
-//        return "sla";
-//    }
 
-    
+    public void setGerente(GerenteDTO gerente) {
+        this.gerente = gerente;
+    }
+
     @Override
     public String toString() {
         DateTimeFormatter formata = DateTimeFormatter.ofPattern("dd/MM/yyyy");

@@ -30,17 +30,12 @@ public class GestaoMaquina extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            AcessarMaquinas acesso = new AcessarMaquinas();
-            ArrayList<MaquinaDTO> vetorMaquinasSQL = acesso.getAllMaquinas();
-            request.setAttribute("vetorMaquinas", vetorMaquinasSQL);
-            request.getRequestDispatcher("WEB-INF/paginas/gestaoMaquina.jsp").forward(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(GestaoMaquina.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        AcessarMaquinas acesso = new AcessarMaquinas();
+        ArrayList<MaquinaDTO> vetorMaquinasSQL = acesso.getAllMaquinas();
+        request.setAttribute("vetorMaquinas", vetorMaquinasSQL);
+        request.getRequestDispatcher("WEB-INF/paginas/gestaoMaquina.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,17 +48,17 @@ public class GestaoMaquina extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         AcessarMaquinas acesso = new AcessarMaquinas();
-        ArrayList<MaquinaDTO> vetorMaquinasSQL;
-            request.getRequestDispatcher("WEB-INF/paginas/gestaoMaquina.jsp").forward(request, response);
-//        try {
-//            vetorMaquinasSQL = acesso.getAllMaquinas();
-//            request.setAttribute("vetorMaquinas", vetorMaquinasSQL);;
-//        } catch (SQLException ex) {
-//            Logger.getLogger(GestaoMaquina.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        ArrayList<MaquinaDTO> vetorMaquinasSQL = null;
+        try {
+            vetorMaquinasSQL = acesso.getAllMaquinas();
+        } catch (SQLException ex) {
+            Logger.getLogger(GestaoMaquina.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        request.setAttribute("vetorMaquinas", vetorMaquinasSQL);
+        request.getRequestDispatcher("WEB-INF/paginas/gestaoMaquina.jsp").forward(request, response);
     }
 
     /**
@@ -77,7 +72,7 @@ public class GestaoMaquina extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**

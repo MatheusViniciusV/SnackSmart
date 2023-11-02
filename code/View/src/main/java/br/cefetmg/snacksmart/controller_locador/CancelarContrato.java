@@ -22,6 +22,7 @@ public class CancelarContrato extends HttpServlet {
         ManterContratos acesso = new ManterContratos(); 
         
         long contratoId =  Long.parseLong(request.getParameter("contratoId"));
+
         
         try {
             acesso.cancelarContrato(contratoId);

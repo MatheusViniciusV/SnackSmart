@@ -12,6 +12,12 @@
     <list default="true" id="5dd24dd0-57d8-4f27-938d-95a9bbda0876" name="Changes" comment="GerenteDAO feita">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/ContratosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/ContratosDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/ContratoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/ContratoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/LocatarioDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/LocatarioDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/service/GerFinanceiro.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/service/GerFinanceiro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/webapp/WEB-INF/paginas/visualizarContratos.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/webapp/WEB-INF/paginas/visualizarContratos.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/webapp/js/criarContrato.js" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/webapp/js/criarContrato.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +64,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "GER-CSU10",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Program Files/MySQL/mysql-connector-j-8.2.0/mysql-connector-j-8.2.0.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -251,6 +257,7 @@
                     <value>
                       <list>
                         <option value="GER-CSU10" />
+                        <option value="HEAD" />
                       </list>
                     </value>
                   </entry>

@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="br.cefetmg.snacksmart.utils.enums.TipoUsuario" %>
+<%@page import="java.util.ArrayList" %>
+<%@page import="br.cefetmg.snacksmart.dto.ContratoDTO" %>
 <%@include file="../../comuns/taglibs.jsp" %>
 
 <%-- 
@@ -19,6 +21,10 @@
     TipoUsuario LOCADOR = (TipoUsuario) session.getAttribute("LOCADOR");
     TipoUsuario LOCATARIO = (TipoUsuario) session.getAttribute("LOCATARIO");
     TipoUsuario NAO_CADASTRADO = (TipoUsuario) session.getAttribute("NAO_CADASTRADO");
+
+    ArrayList<ContratoDTO> contratos = null;
+    if(tipoUsuario == LOCADOR)
+        contratos = (ArrayList<ContratoDTO>) session.getAttribute("contratos");
 %>
 
 <!DOCTYPE html>
@@ -36,18 +42,21 @@
             <!-- TODO fazer essa lista aparecer de maneira dinamica -->
             <h1>Contratos </h1>
             <section id="lista-contratos">
-                <article class="contratos" id="contrato-01" data-id="01">
-                    <h3>Contrato 1</h3>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </article>
+                <c:forEach items="${ contratos }" var="contrato">
+                    <article class="contratos" id="contrato-01" data-id="01">
+                        <h3>Contrato 1</h3>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </article>
+                </c:forEach>
+
                 <article class="contratos">
                     <h3>Contrato 2</h3>
                     <div></div>

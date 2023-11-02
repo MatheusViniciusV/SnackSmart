@@ -5,6 +5,7 @@
 package br.cefetmg.snacksmart.dao;
 
 import br.cefetmg.snacksmart.dto.ContratoDTO;
+import br.cefetmg.snacksmart.dto.GerenteDTO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
@@ -13,10 +14,8 @@ import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
 import br.cefetmg.snacksmart.idao.IContratosDAO;
 import br.cefetmg.snacksmart.utils.bd.ConnectionManager;
 import br.cefetmg.snacksmart.utils.enums.StatusContrato;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -30,12 +29,79 @@ import java.util.logging.Logger;
 public class ContratosDAO implements IContratosDAO {
     @Override
     public ContratoDTO getId(long id) throws ElementoNaoExisteException, SQLException {
-        return null;
+        ConnectionManager conn = ConnectionManager.getInstance();
+        ContratoDTO contrato = null;
+        try {
+            Connection conexao =  conn.getConnection();
+
+            String sql = "SELECT * FROM locatario WHERE pk = ?";
+
+            PreparedStatement pstmt = conexao.prepareStatement(sql);
+            pstmt.setLong(1, id);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                contrato = new ContratoDTO(
+                        rs.getLong("pk"),
+                        rs.getDouble("valor"),
+                        rs.getDate("data_inicio").toLocalDate(),
+                        rs.getDate("data_fim").toLocalDate(),
+//                        rs.getDate("data-pagamento").toLocalDate(),
+                        LocalDate.now(),
+                        rs.getString("observacoes")
+                );
+                System.out.println("contrato pego do banco de dados");
+            }
+
+            rs.close();
+            pstmt.close();
+            conexao.close();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (PersistenciaException e) {
+            throw new RuntimeException(e);
+        }
+
+        return contrato;
     }
     
     @Override
-    public ArrayList<ContratoDTO> getTodos() throws SQLException {
-        return null;
+    public ArrayList<ContratoDTO> listaTodos() throws SQLException {
+        ArrayList<ContratoDTO> contratos = new ArrayList<ContratoDTO>();
+
+        ConnectionManager conn = ConnectionManager.getInstance();
+        try {
+            Connection conexao =  conn.getConnection();
+
+            String sql = "SELECT * FROM contrato ORDER BY pk";
+
+            PreparedStatement pstmt = conexao.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+
+            LocatarioDAO daoLocatario = new LocatarioDAO();
+            while (rs.next()) {
+                ContratoDTO contrato = null;
+
+                    contrato = new ContratoDTO(
+                            rs.getLong("pk"),
+                            daoLocatario.consultarPorPk(rs.getLong("locatario__fk")),
+                            rs.getDate("data_inicio").toLocalDate(),
+                            rs.getDate("data_fim").toLocalDate(),
+//                            rs.getString("observacoes")
+                            ""
+                    );
+
+                    contratos.add(contrato);
+
+            }
+        } catch (PersistenciaException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return contratos;
+
     }
     
     @Override
@@ -50,7 +116,32 @@ public class ContratosDAO implements IContratosDAO {
     
     @Override
     public void registraContrato(ContratoDTO contrato) {
-        
+        ConnectionManager conn = ConnectionManager.getInstance();
+
+        GerenteDTO gerente = contrato.getGerente();
+        LocatarioDTO locatario = contrato.getLocatario();
+
+        try {
+            Connection conexao =  conn.getConnection();
+
+            String sql = "INSERT INTO `contrato` (`data_inicio`, `data_fim`, `gerente__fk`, `locatario__fk`, `estado`)" +
+                    " VALUES (?, ?, ?, ?, ?);";
+
+            PreparedStatement pstmt = conexao.prepareStatement(sql);
+            Date dataInicio = Date.valueOf(contrato.getDataInicio());
+            pstmt.setDate(1, dataInicio);
+            Date dataFim = Date.valueOf(contrato.getDataExpiracao());
+            pstmt.setDate(2, dataFim);
+            pstmt.setInt(3, 1);
+            pstmt.setLong(4, locatario.getPk());
+            pstmt.setString(5, contrato.getStatus().toString());
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
     
     @Override
@@ -95,8 +186,8 @@ public class ContratosDAO implements IContratosDAO {
                 contrato = new ContratoDTO(
                         rs.getLong("id"),
                         rs.getDouble("valor"),
-                        new LocatarioDTO(),
-                        new MaquinaDTO(),
+//                        new LocatarioDTO(),
+//                        new MaquinaDTO(),
                         LocalDate.parse(rs.getString("data_incio"), formatter),
                         LocalDate.parse(rs.getString("data_expiracao"), formatter),
                         LocalDate.parse(rs.getString("data_pagamento"), formatter),
