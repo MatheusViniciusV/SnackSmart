@@ -25,10 +25,10 @@
     display: flex;
     justify-content: space-around;
     gap: 8%;
-    height: 40%;
+    height: 30%;
 }
 .box{
-    height: 14em;
+    height: 10em;
     width: 25em;
     display: flex;
     flex-direction: column;
@@ -55,8 +55,8 @@
 #calendario{
     display: flex;
     flex-direction: column;
-    height: 19em;
-    width: 20em;
+    height: 16em;
+    width: 17em;
     background-color: #FFFFFF;
     border-radius: 10%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
