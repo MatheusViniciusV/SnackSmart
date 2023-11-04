@@ -27,7 +27,6 @@ public class VisualizarContratos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
         HttpSession session = request.getSession();
         TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario");
         
@@ -52,7 +51,8 @@ public class VisualizarContratos extends HttpServlet {
             }
         }
 
-        System.out.println(contratos.size());
+        assert contratos != null;
+        System.out.println(contratos.get(0).getStatus());
         request.setAttribute("contratos", contratos);
         request.getRequestDispatcher("WEB-INF/paginas/visualizarContratos.jsp").forward(request, response);
     } 

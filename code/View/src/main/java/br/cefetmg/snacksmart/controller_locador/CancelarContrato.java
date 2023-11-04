@@ -14,14 +14,14 @@ import br.cefetmg.snacksmart.service_gerente.ManterContratos;
 /**
  * @author eloym
  */
-@WebServlet(name="CancelarContrato", urlPatterns={"/CancelarContrato"})
+@WebServlet(name="cancelarContrato", urlPatterns={"/cancelarContrato"})
 public class CancelarContrato extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         ManterContratos acesso = new ManterContratos(); 
         
-        int contratoId =  Integer.parseInt(request.getParameter("contratoId"));
+        int contratoId =  Integer.parseInt(request.getParameter("id"));
 
         
         try {

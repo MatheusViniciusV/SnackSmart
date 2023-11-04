@@ -68,14 +68,9 @@ public class ManterContratos {
             dao.atualizarStatus(id, StatusContrato.CANCELADO);
     }
     
-    public void criarContrato(ContratoDTO contrato) {
+    public ContratoDTO criarContrato(ContratoDTO contrato) throws PersistenciaException {
         try {
-            GerenteDTO gerente = daoGerente.get();
-            contrato.setGerente(gerente);
-
-            dao.registraContrato(contrato);
-        } catch (PersistenciaException e) {
-            throw new RuntimeException(e);
+            return dao.registraContrato(contrato);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

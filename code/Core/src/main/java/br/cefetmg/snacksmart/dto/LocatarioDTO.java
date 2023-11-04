@@ -25,6 +25,13 @@ public class LocatarioDTO implements IUsuarioDTO {
         this.telefone = telefone;
     }
 
+    public LocatarioDTO(int id, String nome, String cpf, String email, String telefone){
+        this.nome = nome;
+        this.cpf = cpf;
+        this.email = email;
+        this.telefone = telefone;
+    }
+
     public LocatarioDTO() {}
 
     public int getId() {

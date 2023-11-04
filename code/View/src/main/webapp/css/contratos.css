@@ -2,8 +2,8 @@
     Created on : 8 de out. de 2023, 12:14:10
     Author     : eloym
 */
-:root {
-    --cor-form: #bebcbc;
+html, body {
+    overflow: hidden;
 }
 
 main {
@@ -61,15 +61,30 @@ article.contratos h3 {
 
 article.contratos div {
     margin: 9% auto;
-    height: 2%;
     width: 80%;
-    background-color: var(--texto-cor-principal);
+    font-size: medium;
+    font-weight: bold;
+    /*background-color: var(--texto-cor-principal);*/
 }
 
-article.contratos div:last-child {
-    margin: 20% 10%;
-    height: 2%;
-    width: 40%;
+span.vigente {
+    color: #31ce31;
+}
+
+span.expirado {
+    color: #66879d;
+}
+
+span.inativo {
+    color: #ece359;
+}
+
+span.cancelado {
+    color: #8f1b1b;
+}
+
+span.cancelamento_solicitado {
+    color: #ce8531;
 }
 
 article.selecionado {
@@ -161,8 +176,8 @@ section#criar-contrato-form input.errado {
 
 #criar-contrato-form #dados-contrato {
     display: grid; 
-    grid-template-columns: 1fr 1fr 1fr; 
-    grid-template-rows: 0.4fr 1.6fr; 
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 0.4fr) 1.6fr;
     gap: 2%; 
     grid-template-areas: 
     ". . ."
@@ -170,6 +185,10 @@ section#criar-contrato-form input.errado {
 
 #dados-contrato label {
     width: 12vw;
+}
+
+#dados-contrato label:not(:last-child) {
+    height: 3.3rem;
 }
 
 #criar-contrato-form #dados-contrato input {

@@ -37,8 +37,16 @@ public class DataManager {
         return formatador;
     }
 
-    public String getDia() {
-        return data.format(DateTimeFormatter.ofPattern("dd"));
+    public int getDia() {
+        return data.getDayOfMonth();
+    }
+
+    public int getMes() {
+        return data.getMonthValue();
+    }
+
+    public int getAno() {
+        return data.getYear();
     }
 
     public LocalDate getData() {

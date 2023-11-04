@@ -10,13 +10,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dd24dd0-57d8-4f27-938d-95a9bbda0876" name="Changes" comment="GerenteDAO feita">
+      <change afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/service_gerente/ManterGerente.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/service_gerente/ManterLocatarios.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/controller_locador/ObterLocatario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/GerenteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/GerenteDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/LocatarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/LocatarioDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/ContratosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/ContratosDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/ContratoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/ContratoDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/LocatarioDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/LocatarioDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/service_locatario/AcessarContratos.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/service_locatario/AcessarContratos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/idao/IContratosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/idao/IContratosDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/service_gerente/ManterContratos.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/service_gerente/ManterContratos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/DataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/View/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/controller_locador/CancelarContrato.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/controller_locador/CancelarContrato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/controller_locador/CriarContrato.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/controller_locador/CriarContrato.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/facade/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/facade/LoginServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/facade/VisualizarContratos.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/facade/VisualizarContratos.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/View/src/main/webapp/WEB-INF/paginas/visualizarContratos.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/webapp/WEB-INF/paginas/visualizarContratos.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/webapp/css/contratos.css" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/webapp/css/contratos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/webapp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/webapp/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/webapp/js/contratos.js" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/webapp/js/contratos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/webapp/js/criarContrato.js" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/webapp/js/criarContrato.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/target/View-1.0-SNAPSHOT/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/View/target/View-1.0-SNAPSHOT/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +40,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="package.json" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -57,25 +72,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;GER-CSU10&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/eloym/Desktop/lp1-2023-projeto5/code/Core/src/main/java/br/cefetmg/snacksmart/conf/populatedatabase.sql&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.22413793&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;database.query.execution&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "GER-CSU10",
+    "last_opened_file_path": "C:/Users/eloym/Desktop/lp1-2023-projeto5/code/Core/src/main/java/br/cefetmg/snacksmart/conf/populatedatabase.sql",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.22413793",
+    "settings.editor.selected.configurable": "database.data.views.appearance",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\eloym\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd" />
@@ -113,6 +129,7 @@
     </configuration>
     <configuration name="Tomcat 10.1.15" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 10.1.15" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="BROWSER_ID" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
+      <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="View:war">
@@ -224,6 +241,8 @@
       <workItem from="1698362992032" duration="169000" />
       <workItem from="1698708500348" duration="13089000" />
       <workItem from="1698722745232" duration="11533000" />
+      <workItem from="1699064297141" duration="5925000" />
+      <workItem from="1699103731045" duration="26861000" />
     </task>
     <task id="LOCAL-00001" summary="GerenteDAO feita">
       <option name="closed" value="true" />

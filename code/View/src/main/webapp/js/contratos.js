@@ -8,11 +8,13 @@ $contratosMini.click(function () {
     if(!selecionado) {
         $(this).addClass('selecionado');
         $('#solicita-cancelar-contrato').removeClass('null');
+        $('#cancelar-contrato').removeClass('null');
         $('#pdf-contrato').removeClass('null');
         $('#pdf-contrato a').attr('href', 'PDFContrato?id=1');
         $contratoSelecionado = $(this);
     } else {
         $('#solicita-cancelar-contrato').addClass('null');
+        $('#cancelar-contrato').addClass('null');
         $('#pdf-contrato').addClass('null');
         $('#pdf-contrato a').removeAttr('href');
         $contratoSelecionado = null;
@@ -41,8 +43,8 @@ if($contratoSelecionado !== null) {
                 
                 setTimeout(function() {
                     $contratoSelecionado.remove();
-                    $('#solicita-cancelar-contrato').removeClass('btn-confirmado');
-                    $('#solicita-cancelar-contrato').addClass('null');
+                    $solicitarCancelamentoBtn.removeClass('btn-confirmado');
+                    $solicitarCancelamentoBtn.addClass('null');
                     $('#pdf-contrato').addClass('null');
                     $('#pdf-contrato a').removeAttr('href');
                     $contratoSelecionado = null;

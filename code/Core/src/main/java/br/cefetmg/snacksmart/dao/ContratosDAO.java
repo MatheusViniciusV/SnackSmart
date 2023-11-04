@@ -48,7 +48,8 @@ public class ContratosDAO implements IContratosDAO {
                         new DataManager(rs.getDate("data_inicio")),
                         new DataManager(rs.getDate("data_fim")),
                         new DataManager(rs.getDate("data_pagamento")),
-                        rs.getString("observacoes")
+                        rs.getString("observacoes"),
+                        StatusContrato.valueOf(rs.getString("estado"))
                 );
                 System.out.println("contrato pego do banco de dados");
             }
@@ -70,7 +71,7 @@ public class ContratosDAO implements IContratosDAO {
         try {
             Connection conexao =  ConnectionManager.getInstance().getConnection();
 
-            String sql = "SELECT * FROM `contrato` ORDER BY `pk`";
+            String sql = "SELECT * FROM `contrato` WHERE `estado` = 'VIGENTE' ORDER BY `pk`";
 
             PreparedStatement pstmt = conexao.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -87,7 +88,8 @@ public class ContratosDAO implements IContratosDAO {
                         new DataManager(rs.getDate("data_inicio")),
                         new DataManager(rs.getDate("data_fim")),
                         new DataManager(rs.getDate("data_pagamento")),
-                        rs.getString("observacoes")
+                        rs.getString("observacoes"),
+                        StatusContrato.valueOf(rs.getString("estado"))
                 );
 
                 contratos.add(contrato);
@@ -110,7 +112,7 @@ public class ContratosDAO implements IContratosDAO {
         try {
             Connection conexao =  ConnectionManager.getInstance().getConnection();
 
-            String sql = "SELECT *  FROM `contrato` WHERE `locatario__fk` = ? ORDER BY `pk`";
+            String sql = "SELECT *  FROM `contrato` WHERE `locatario__fk` = ? AND `estado` = 'VIGENTE' ORDER BY `pk`";
 
             PreparedStatement pstmt = conexao.prepareStatement(sql);
             pstmt.setInt(1, locatario.getId());
@@ -128,7 +130,8 @@ public class ContratosDAO implements IContratosDAO {
                         new DataManager(rs.getDate("data_inicio")),
                         new DataManager(rs.getDate("data_fim")),
                         new DataManager(rs.getDate("data_pagamento")),
-                        rs.getString("observacoes")
+                        rs.getString("observacoes"),
+                        StatusContrato.valueOf(rs.getString("estado"))
                 );
 
                 contratos.add(contrato);
@@ -169,7 +172,8 @@ public class ContratosDAO implements IContratosDAO {
                         new DataManager(rs.getDate("data_inicio")),
                         new DataManager(rs.getDate("data_fim")),
                         new DataManager(rs.getDate("data_pagamento")),
-                        rs.getString("observacoes")
+                        rs.getString("observacoes"),
+                        StatusContrato.valueOf(rs.getString("estado"))
                 );
 
                 contratos.add(contrato);
@@ -186,7 +190,7 @@ public class ContratosDAO implements IContratosDAO {
     }
     
     @Override
-    public void registraContrato(ContratoDTO contrato) {
+    public ContratoDTO registraContrato(ContratoDTO contrato) {
         ConnectionManager conn = ConnectionManager.getInstance();
 
         try {
@@ -220,7 +224,20 @@ public class ContratosDAO implements IContratosDAO {
             pstmt.executeUpdate();
 
             pstmt.close();
+
+            String obterPk = "SELECT LAST_INSERT_ID()";
+            pstmt = conexao.prepareStatement(obterPk);
+            ResultSet rs = pstmt.executeQuery();
+
+            ContratoDTO novoContrato = null;
+
+            if(rs.next()) {
+                novoContrato = consultarPorId(rs.getInt(1));
+            }
+
             conexao.close();
+
+            return novoContrato;
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -286,7 +303,8 @@ public class ContratosDAO implements IContratosDAO {
                         new DataManager(rs.getDate("data_inicio")),
                         new DataManager(rs.getDate("data_fim")),
                         new DataManager(rs.getDate("data_pagamento")),
-                        rs.getString("observacoes")
+                        rs.getString("observacoes"),
+                        StatusContrato.valueOf(rs.getString("estado"))
                 );
             }
             
