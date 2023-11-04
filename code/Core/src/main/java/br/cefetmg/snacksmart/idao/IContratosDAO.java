@@ -23,7 +23,7 @@ public interface IContratosDAO {
     
     ArrayList<ContratoDTO> listaTodos() throws SQLException;
     
-    ArrayList<ContratoDTO> filtra(String locatarioCpf) throws LocatarioInvalidoException, SQLException;
+    ArrayList<ContratoDTO> filtra(LocatarioDTO locatario) throws LocatarioInvalidoException, SQLException;
     
     ArrayList<ContratoDTO> filtra(StatusContrato status) throws LocatarioInvalidoException, SQLException;
     

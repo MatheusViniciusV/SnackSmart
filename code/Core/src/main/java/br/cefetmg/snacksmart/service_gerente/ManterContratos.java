@@ -44,7 +44,7 @@ public class ManterContratos {
     }
     
     public ArrayList<ContratoDTO> filtraContratos(LocatarioDTO locatario) throws LocatarioInvalidoException, SQLException {
-        ArrayList contratos = dao.filtra(locatario.getCPF());
+        ArrayList contratos = dao.filtra(locatario);
         
         return contratos;
     }
