@@ -21,22 +21,22 @@ let atualizarMaquinaCodigoEl = document.getElementById("atualizarMaquinaCodigo")
 
 var codigoInfoMaquina;
 var vetorMaquinaArray; 
-//Aqui será necessário comunicar com o banco de dados dos locatarios, o que será feito posteriormente
-let vetor = ["Nenhum", "Alice", "Duda", "Fernando", "Alemão", "Jó Soares", "Neymar", "Yasmin"];
 
-function selectDinamicoLocatario(vetor){
+var vetorNomes = ["Nenhum"];
+var vetorCPF = ["0"];
+function selectDinamicoLocatario(){
     let locatarioEl = document.getElementById("locatario");
     let novoLocatarioEl = document.getElementById("novoLocatario");
     locatarioEl.innerHTML = "";
     novoLocatarioEl.innerHTML = "";
-    for (let i = 0; i < vetor.length; i++){
+    for (let i = 0; i < vetorNomes.length; i++){
         let option = document.createElement('option');
-        option.value = vetor[i];
-        option.textContent = vetor[i];
+        option.value = vetorCPF[i];
+        option.textContent = vetorNomes[i];
         novoLocatarioEl.appendChild(option);
         let option2 = document.createElement('option');
-        option2.value = vetor[i];
-        option2.textContent = vetor[i];
+        option2.value = vetorCPF[i];
+        option2.textContent = vetorNomes[i];
         locatarioEl.appendChild(option2);      
     }
 }
@@ -44,7 +44,7 @@ function selectDinamicoLocatario(vetor){
 function mostrarFormulario(tipoForm){
     let formulario = document.getElementById(tipoForm);
     if (tipoForm === "formAddMaquina" || tipoForm === "formAtualizarMaquina"){
-        selectDinamicoLocatario(vetor);     
+        selectDinamicoLocatario();     
     }
     
     formulario.style.display = "flex"; 
@@ -307,13 +307,9 @@ function Main(){
         cod: 9302,
         status: "Em funcionamento",
         imagem: "img/NonePhoto.png"
-    };
-    
-    let Vet = [maquina1, maquina2, maquina3, maquina4];
-    //Vet.forEach((maquina) => criarSlotMaquina(maquina.nome, maquina.cod, maquina.status, maquina.imagem)); //TESTE;
-   
+    };      
     criarSlotAddMaquina();
-    criarSlotMaquina(maquina1.nome, maquina1.cod, maquina1.status, maquina1.imagem);
+    //criarSlotMaquina(maquina1.nome, maquina1.cod, maquina1.status, maquina1.imagem);
     
     
     let removerMaquinaEl = document.querySelectorAll(".removerMaquina");

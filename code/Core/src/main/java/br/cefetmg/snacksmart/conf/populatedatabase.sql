@@ -69,7 +69,8 @@ INSERT INTO `maquina` (
     `localizacao`,
     `aluguel`,
     `status`,
-    `tipo`    
+    `tipo`,
+    `locatario__fk`
 )
 VALUES (
     'maq dev 1',
@@ -77,7 +78,8 @@ VALUES (
     'Rua Geólogo Thomaz de Aquino, Itapoã, Belo Horizonte, MG - 31710-680',
     '30.91',
     'ALUGADA',
-    'REFRIGERADA'
+    'REFRIGERADA',
+    '2'
 );
 
 INSERT INTO `maquina` (
@@ -86,7 +88,8 @@ INSERT INTO `maquina` (
     `localizacao`,
     `aluguel`,
     `status`,
-    `tipo`    
+    `tipo`,
+    `locatario__fk`    
 )
 VALUES (
     'maq dev 2',
@@ -94,7 +97,8 @@ VALUES (
     'Rua Walter Guimarães Figueiredo, Buritis, Belo Horizonte, MG - 30492-030',
     '30.92',
     'EM_MANUTENCAO',
-    'REFRIGERADA'
+    'REFRIGERADA',
+    '1'
 );
 
 INSERT INTO `maquina` (
@@ -103,7 +107,8 @@ INSERT INTO `maquina` (
     `localizacao`,
     `aluguel`,
     `status`,
-    `tipo`    
+    `tipo`,
+    `locatario__fk`    
 )
 VALUES (
     'maq dev 3',
@@ -111,7 +116,8 @@ VALUES (
     'Rua Radialista Ortiz Coelho, Céu Azul, Belo Horizonte, MG - 31580-340',
     '30.93',
     'ALUGADA',
-    'NAO_REFRIGERADA'
+    'NAO_REFRIGERADA',
+    '1'
 );
 
 
@@ -121,7 +127,8 @@ INSERT INTO `maquina` (
     `localizacao`,
     `aluguel`,
     `status`,
-    `tipo`    
+    `tipo`,
+    `locatario__fk`    
 )
 VALUES (
     'maq dev 4',
@@ -129,7 +136,8 @@ VALUES (
     'Rua Corumbá, Carlos Prates, Belo Horizonte, MG - 30710-280',
     '30.94',
     'DISPONIVEL',
-    'REFRIGERADA'
+    'REFRIGERADA',
+    '2'
 );
 
 

@@ -91,7 +91,7 @@ CREATE TABLE `maquina` (
     `localizacao` VARCHAR(256) NULL,
     `aluguel` FLOAT NOT NULL,
     `locatario__fk` INT NULL,
-    `status` ENUM('ALUGADA', 'EM_MANUTENCAO', 'AGUARDANDO_MANUTENCAO', 'DISPONIVEL') NOT NULL,
+    `status` ENUM('ALUGADA', 'EM_MANUTENCAO', 'AGUARDANDO_MANUTENCAO', 'DISPONIVEL', 'REMOVIDA') NOT NULL,
     `tipo` ENUM('REFRIGERADA', 'NAO_REFRIGERADA') NOT NULL,    
     FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`)
 );

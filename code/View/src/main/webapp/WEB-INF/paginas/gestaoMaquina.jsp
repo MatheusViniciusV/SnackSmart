@@ -135,6 +135,19 @@
             </article>
         </main>             
         <script src="js/maquinaInfo.js"></script> 
+        <!-- Carrega os locatarios -->
+        <script>            
+            <c:forEach items="${listaLocatarios}" var="locatario">
+                var nome = "${locatario.nome}";
+                vetorNomes.push(nome);
+            </c:forEach>  
+            <c:forEach items="${listaLocatarios}" var="locatario">
+                var cpf = "${locatario.CPF}";
+                vetorCPF.push(cpf);
+            </c:forEach>
+        </script>
+        
+        <!-- Carrega os slots das maquinas -->
         <c:forEach var="item" items="${vetorMaquinas}">
                 <script>
                     try {
