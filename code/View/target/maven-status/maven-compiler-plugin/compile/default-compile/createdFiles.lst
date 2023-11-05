@@ -1,2 +1,3 @@
-br\cefetmg\snacksmart\View\resources\JakartaEE10Resource.class
-br\cefetmg\snacksmart\View\JakartaRestConfiguration.class
+br\cefetmg\snacksmart\controller_locatario\SolicitarCancelarContrato.class
+br\cefetmg\snacksmart\controller_locador\GerenciarMaquina.class
+br\cefetmg\snacksmart\facade\GestaoMaquina.class

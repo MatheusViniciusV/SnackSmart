@@ -76,7 +76,7 @@ public class GerFinanceiro extends HttpServlet {
             dados[2] = Double.toString(saldo);
 
             request.setAttribute("dados", dados);
-            RequestDispatcher d = request.getRequestDispatcher("index.jsp");
+            RequestDispatcher d = request.getRequestDispatcher("FinanceiroGerente.jsp");
             d.forward(request, response);
 
         }

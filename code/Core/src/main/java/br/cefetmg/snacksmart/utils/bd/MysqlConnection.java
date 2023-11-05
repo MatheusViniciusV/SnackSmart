@@ -9,7 +9,7 @@ import java.sql.SQLException;
  * @author eloym
  */
 public class MysqlConnection implements ConnectionFactory {
-    private final static String dbDriver = "org.postgresql.Driver";
+    private final static String dbDriver = "com.mysql.cj.jdbc.Driver";
     private final static String dbURL = "jdbc:mysql://localhost:3306/snacksmart";
     private final static String user = "root";
     private final static String pass = "";

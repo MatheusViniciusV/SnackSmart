@@ -20,42 +20,25 @@
         <%@include file="comuns/retornarInicial.jsp" %>
         <div class="div-head">
             <h1>Financeiro</h1>
-            <div id="emitirRelatorio"><a href="RelatorioGerente.jsp">Emitir Relatório Geral</a></div>
+            <div id="emitirRelatorio"><a href="RelatorioGerente.jsp">Emitir Relatï¿½rio Geral</a></div>
         </div>
     <div class="div-principal">
-        <div class="div-segundo">
-            <h2>Recebimento Previsto</h2>
-            <p>R$ 1.000,00</p>
-        </div>
-        
-        <div class="div-segundo">
-            <h2>Gasto do Mês</h2>
-            <p>R$ 800,00</p>
-        </div>
-        
-        <div class="div-segundo">
-            <h2>Lucro</h2>
-            <p>R$ 200,00</p>
-        </div>
-    </div>
-       <%--  <div class="conteudo">
-            <div class="box">
+            <div class="div-segundo">
                 <%String dados[] = (String[])request.getAttribute("dados"); %>
-                <p>Recebimento previsto para o mês:</p>
+                <p>Recebimento previsto para o mï¿½s:</p>
                 <p id="recebimento"><%= dados[0]%></p>
                 <p>Data de recebimento: <%= dados[1]%></p>
             </div>
-            <div class="box">
-                <p>Gastos feitos neste mês:</p>
-                <p id="gastos">R$: <%= dados[2]%></p>
+            <div class="div-segundo">
+                <p>Gastos feitos neste mÃªs:</p>
+                <p id="gastos">12.34</p>
 
             </div>
-            <div class="box">
+            <div class="div-segundo">
                 <p>Saldo total</p>
                 <p id="saldo">R$: <%= dados[3]%></p>
             </div>
         </div>
-            --%> <!-- comment -->
         <br>
         <%@include file="comuns/Calendario.jsp" %>
     </body>

@@ -1,58 +1,80 @@
-
 package br.cefetmg.snacksmart.dto;
-
-import br.cefetmg.snacksmart.dao.MaquinaDAO;
-import br.cefetmg.snacksmart.idao.IMaquinaDAO;
-
-import br.cefetmg.snacksmart.exceptions.dto.FilaAteracoesVaziaException;
-/**
- *
- * @author marco
- */
+import br.cefetmg.snacksmart.utils.enums.StatusMaquina;
+import br.cefetmg.snacksmart.utils.enums.TipoMaquina;
+/* @author Arthur Milagres */
 public class MaquinaDTO {
-    private String localizacao;
-    private Double  valor;
-    private int codigo, estado;
-    // para estado 0 = disponivel, 1 = alugada, 2 = em manutenção 
+    private String nome, localizacao;
+    private LocatarioDTO locatarioResponsavel;
+    private final int codigo;
+    private final TipoMaquina tipo;
+    private byte[] imagem; 
+    private StatusMaquina status;
 
-    public MaquinaDTO() {
-        
+    public MaquinaDTO(String nome, int codigo, byte[] imagem, TipoMaquina tipo, String localizacao, LocatarioDTO locatario, StatusMaquina status){        
+        this.nome = nome;
+        this.codigo = codigo;
+        this.imagem = imagem;
+        this.localizacao = localizacao;
+        this.tipo = tipo; 
+        this.status = status;
+        this.locatarioResponsavel = locatario; 
+    }
+    public MaquinaDTO(){        
+        this.nome = null;
+        this.codigo = 0;
+        this.imagem = null;
+        this.localizacao = null;
+        this.tipo = null; 
+        this.status = null;
+        this.locatarioResponsavel = null; 
     }
     
-    public MaquinaDTO(int codigo, String localizacao, Double valor){
-        this.codigo = codigo;
-        this.localizacao = localizacao;
-        this.valor = valor;
-        estado = 0;
-//        
-//        this.novaLocalizacao = "";
-//        this.novoCodigo = 0;
-//        this.novoValor = 0.0;
-//        novoEstado = 0;
+     
+    public String getNome() {
+        return nome;
     }
-    public void setCodigo(int codigo){
-        this.codigo = codigo;
-    }
-    public int getCodigo(){
+    
+    public int getCodigo() {
         return codigo;
     }
-    public void setLocalizacao(String localizacao){
-         this.localizacao = localizacao;
-    }
-    public String getLocalizacao(){
+    
+    public byte[] getImagem() {
+        return imagem;
+    }   
+    
+    public String getLocalizacao() {
         return localizacao;
     }
     
-    public void setValor(Double valor){
-         this.valor = valor;
+    public TipoMaquina getTipo() {
+        return tipo;
     }
-    public Double getValor(){
-        return valor;
+    
+    public LocatarioDTO getLocatario() {
+        return locatarioResponsavel;
     }
-    public void setEstado(int estado){
-         this.estado = estado;
+    
+    public StatusMaquina getStatus() {
+        return status;
     }
-    public int getEstado(){
-        return estado;
+      
+    public void setNome(String novoNome) {
+        nome = novoNome;
+    }
+    
+    public void setImagem(byte[] novaImagem) {
+        imagem = novaImagem;
+    }
+    
+    public void setLocalizacao(String novaLocalizacao) {
+        localizacao = novaLocalizacao;
+    }
+    
+    public void setLocatarioResponsavel(LocatarioDTO novoLocatarioResponsavel) {
+        locatarioResponsavel = novoLocatarioResponsavel;
+    }
+    
+    public void setStatus(StatusMaquina novoStatus) {
+        status = novoStatus;   
     }
 }

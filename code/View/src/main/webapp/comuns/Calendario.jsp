@@ -9,7 +9,7 @@
       
               <div>
                 <button id="backButton", class="botaoCalendar">Voltar</button>
-                <button id="nextButton", class="botaoCalendar">Próximo</button>
+                <button id="nextButton", class="botaoCalendar">Prï¿½ximo</button>
               </div>
                 
             </div>
@@ -17,11 +17,11 @@
             <div id="weekdays">
               <div>Domingo</div>
               <div>Segunda</div>
-              <div>Terça</div>
+              <div>Terï¿½a</div>
               <div>Quarta</div>
               <div>Quinta</div>
               <div>Sexta</div>
-              <div>Sábado</div>
+              <div>Sï¿½bado</div>
             </div>
       
       
@@ -51,4 +51,5 @@
         </div>
       
         <div id="modalBackDrop"></div>
-        <script src="javaScript\Calendario.js"></script>
+      
+        <script src="js/Calendario.js"></script>
