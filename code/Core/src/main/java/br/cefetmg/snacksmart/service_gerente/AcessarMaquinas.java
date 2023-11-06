@@ -29,13 +29,14 @@ public class AcessarMaquinas {
         int codigo = gerarCodigo();
         StatusMaquina status = StatusMaquina.DISPONIVEL;
         TipoMaquina tipo = TipoMaquina.fromString(tipoStr);
+        int valor = 0;
         LocatarioDTO locatario = new LocatarioDTO(locatarioStr);
         try {
-            MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, imagemBytes, tipo, localizacao, locatario, status); 
+            MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, imagemBytes, tipo, valor, localizacao, locatario, status); 
             maquinaDAO.set(maquinaDTO);
             throw new FormatoArquivoInvalidoException("O formato do arquivo é inválido.");
         } catch (FormatoArquivoInvalidoException e){
-            MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, null, tipo, localizacao, locatario, status); 
+            MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, null, tipo, valor, localizacao, locatario, status); 
             maquinaDAO.set(maquinaDTO);
         }
     }

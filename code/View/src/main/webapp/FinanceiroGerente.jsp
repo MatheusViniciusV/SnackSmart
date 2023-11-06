@@ -20,7 +20,7 @@
         <%@include file="comuns/retornarInicial.jsp" %>
         <div class="div-head">
             <h1>Financeiro</h1>
-            <div id="emitirRelatorio"><a href="RelatorioGerente.jsp">Emitir Relat�rio Geral</a></div>
+            <div id="emitirRelatorio"><a href="RelatorioGerente.jsp">Emitir Relatorio Geral</a></div>
         </div>
     <div class="div-principal">
             <div class="div-segundo">

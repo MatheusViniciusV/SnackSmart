@@ -7,15 +7,17 @@ public class MaquinaDTO {
     private LocatarioDTO locatarioResponsavel;
     private final int codigo;
     private final TipoMaquina tipo;
+    private int valor;
     private byte[] imagem; 
     private StatusMaquina status;
 
-    public MaquinaDTO(String nome, int codigo, byte[] imagem, TipoMaquina tipo, String localizacao, LocatarioDTO locatario, StatusMaquina status){        
+    public MaquinaDTO(String nome, int codigo, byte[] imagem, TipoMaquina tipo, int valor, String localizacao, LocatarioDTO locatario, StatusMaquina status){        
         this.nome = nome;
         this.codigo = codigo;
         this.imagem = imagem;
         this.localizacao = localizacao;
-        this.tipo = tipo; 
+        this.tipo = tipo;
+        this.valor = valor;
         this.status = status;
         this.locatarioResponsavel = locatario; 
     }
@@ -25,6 +27,7 @@ public class MaquinaDTO {
         this.imagem = null;
         this.localizacao = null;
         this.tipo = null; 
+        this.valor = 0;
         this.status = null;
         this.locatarioResponsavel = null; 
     }
@@ -57,6 +60,9 @@ public class MaquinaDTO {
     public StatusMaquina getStatus() {
         return status;
     }
+    public int getValor() {
+        return valor;
+    }
       
     public void setNome(String novoNome) {
         nome = novoNome;
@@ -76,5 +82,8 @@ public class MaquinaDTO {
     
     public void setStatus(StatusMaquina novoStatus) {
         status = novoStatus;   
+    }
+    public void setValor(int  novoValor) {
+        valor = novoValor;   
     }
 }

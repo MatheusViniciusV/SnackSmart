@@ -27,7 +27,7 @@ public class RelatorioGerente extends HttpServlet {
         String jsp = "";
         try {
             MaquinaDAO maquina = new MaquinaDAO();
-            ArrayList<MaquinaDTO> listMAquinas = maquina.listarTodos();
+            ArrayList<MaquinaDTO> listMAquinas = maquina.getAll() ;
             if (listMAquinas != null) {
                 request.setAttribute("listMaquinas", listMAquinas);
                 jsp = "/RelatorioGerente.jsp";

@@ -28,11 +28,12 @@ public class MaquinaDAO implements IMaquinaDAO {
                 String nome = resultSet.getString("nome");
                 byte[] imagem = resultSet.getBytes("imagem");
                 TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
+                int valor = 0;
                 String localizacao = resultSet.getString("localizacao");
                 String locatarioStr = resultSet.getString("locatario");
                 LocatarioDTO locatario = new LocatarioDTO(locatarioStr);
                 StatusMaquina status = StatusMaquina.valueOf(resultSet.getString("status"));
-                MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, imagem, tipo, localizacao, locatario, status);
+                MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, imagem, tipo, valor, localizacao, locatario, status);
                 EstabelecerConexao.fecharConexao(conexao);
                 return maquinaDTO;
             }
@@ -57,12 +58,13 @@ public class MaquinaDAO implements IMaquinaDAO {
                 String nome = resultSet.getString("nome");
                 byte[] imagem = resultSet.getBytes("imagem");
                 TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
+                int valor = 0;
                 String localizacao = resultSet.getString("localizacao");
                 String locatarioStr = resultSet.getString("locatario");
                 LocatarioDTO locatario = new LocatarioDTO(locatarioStr);
                 StatusMaquina status = StatusMaquina.valueOf(resultSet.getString("status"));
 
-                MaquinaDTO maquina = new MaquinaDTO(nome, codigo, imagem, tipo, localizacao, locatario, status);
+                MaquinaDTO maquina = new MaquinaDTO(nome, codigo, imagem, tipo, valor, localizacao, locatario, status);
                 maquinasVetor.add(maquina);
             }
             EstabelecerConexao.fecharConexao(conexao);       
