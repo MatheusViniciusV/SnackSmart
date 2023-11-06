@@ -12,8 +12,10 @@ import br.cefetmg.snacksmart.idao.IContratosDAO;
 import br.cefetmg.snacksmart.utils.DataManager;
 import br.cefetmg.snacksmart.utils.bd.ConnectionManager;
 import br.cefetmg.snacksmart.utils.enums.StatusContrato;
+import br.cefetmg.snacksmart.utils.enums.TiposOrdenacaContrato;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,7 +53,6 @@ public class ContratosDAO implements IContratosDAO {
                         rs.getString("observacoes"),
                         StatusContrato.valueOf(rs.getString("estado"))
                 );
-                System.out.println("contrato pego do banco de dados");
             }
 
             rs.close();
@@ -92,6 +93,11 @@ public class ContratosDAO implements IContratosDAO {
                         StatusContrato.valueOf(rs.getString("estado"))
                 );
 
+                if(contrato.getDataFim().antes(LocalDate.now())) {
+                    atualizarStatus(contrato.getId(), StatusContrato.EXPIRADO);
+                    continue;
+                }
+
                 contratos.add(contrato);
             }
 
@@ -106,13 +112,13 @@ public class ContratosDAO implements IContratosDAO {
     }
     
     @Override
-    public ArrayList<ContratoDTO> filtra(LocatarioDTO locatario) throws LocatarioInvalidoException, SQLException {
+    public ArrayList<ContratoDTO> filtra(LocatarioDTO locatario, TiposOrdenacaContrato ordenacao) throws LocatarioInvalidoException, SQLException {
         ArrayList<ContratoDTO> contratos = new ArrayList<>();
 
         try {
             Connection conexao =  ConnectionManager.getInstance().getConnection();
 
-            String sql = "SELECT *  FROM `contrato` WHERE `locatario__fk` = ? AND `estado` = 'VIGENTE' ORDER BY `pk`";
+            String sql = "SELECT *  FROM `contrato` WHERE `locatario__fk` = ? " + ordenacao.toSql();
 
             PreparedStatement pstmt = conexao.prepareStatement(sql);
             pstmt.setInt(1, locatario.getId());
@@ -134,6 +140,60 @@ public class ContratosDAO implements IContratosDAO {
                         StatusContrato.valueOf(rs.getString("estado"))
                 );
 
+                if(contrato.getDataFim().antes(LocalDate.now())) {
+                    atualizarStatus(contrato.getId(), StatusContrato.EXPIRADO);
+                    continue;
+                }
+
+                contratos.add(contrato);
+            }
+
+            rs.close();
+            pstmt.close();
+            conexao.close();
+        } catch (PersistenciaException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return contratos;
+    }
+
+    @Override
+    public ArrayList<ContratoDTO> filtra(LocatarioDTO locatario, StatusContrato status, TiposOrdenacaContrato ordenacao)
+            throws LocatarioInvalidoException, SQLException {
+        ArrayList<ContratoDTO> contratos = new ArrayList<>();
+
+        try {
+            Connection conexao =  ConnectionManager.getInstance().getConnection();
+
+            String sql = "SELECT * FROM `contrato` WHERE `locatario__fk` = ? AND `estado` = ? " + ordenacao.toSql();
+
+            PreparedStatement pstmt = conexao.prepareStatement(sql);
+            pstmt.setInt(1, locatario.getId());
+            pstmt.setString(2, status.toString());
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                LocatarioDAO daoLocatario = new LocatarioDAO();
+                ContratoDTO contrato;
+
+                contrato = new ContratoDTO(
+                        rs.getInt("pk"),
+                        rs.getDouble("valor"),
+                        daoLocatario.consultarPorId(rs.getInt("locatario__fk")),
+                        null,
+                        new DataManager(rs.getDate("data_inicio")),
+                        new DataManager(rs.getDate("data_fim")),
+                        new DataManager(rs.getDate("data_pagamento")),
+                        rs.getString("observacoes"),
+                        StatusContrato.valueOf(rs.getString("estado"))
+                );
+
+                if(contrato.getDataFim().antes(LocalDate.now())) {
+                    atualizarStatus(contrato.getId(), StatusContrato.EXPIRADO);
+                    continue;
+                }
+
                 contratos.add(contrato);
             }
 
@@ -148,13 +208,13 @@ public class ContratosDAO implements IContratosDAO {
     }
     
     @Override
-    public ArrayList<ContratoDTO> filtra(StatusContrato status) throws LocatarioInvalidoException, SQLException {
+    public ArrayList<ContratoDTO> filtra(StatusContrato status, TiposOrdenacaContrato ordenacao) throws LocatarioInvalidoException, SQLException {
         ArrayList<ContratoDTO> contratos = new ArrayList<>();
 
         try {
             Connection conexao =  ConnectionManager.getInstance().getConnection();
 
-            String sql = "SELECT *  FROM `contrato` WHERE `estado` = ? ORDER BY `pk`";
+            String sql = "SELECT *  FROM `contrato` WHERE `estado` = ? " + ordenacao.toSql();
 
             PreparedStatement pstmt = conexao.prepareStatement(sql);
             pstmt.setString(1, status.toString());

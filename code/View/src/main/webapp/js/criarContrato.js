@@ -100,7 +100,7 @@ $('#enviar').click(function() {
                 $contrato.append(`<div>Data inicio: ${response.contrato.dataInicio}</div>`);
                 $contrato.append(`<div>Data fim: ${response.contrato.dataFim}</div>`);
                 $contrato.append(`<div>Dia do pagamento: ${response.contrato.diaPagamento}</div>`);
-                $contrato.append(`<div>Valor: R$ ${parseFloat(response.contrato.valor).toFixed(2)}</div>`);
+                $contrato.append(`<div>Valor: R$ ${response.contrato.valor}</div>`);
                 $contrato.append(` <div>Status: <span class="vigente">vigente</span></div>`);
 
                 $contrato.attr("id", `contrato-${response.contrato.id}`);
@@ -108,6 +108,9 @@ $('#enviar').click(function() {
                 $contrato.addClass('contratos');
 
                 $('#lista-contratos').append($contrato);
+
+                $('#dados-locatario input').val('');
+                $('#dados-contrato input').val('');
             },
             error: function (error) {
                 

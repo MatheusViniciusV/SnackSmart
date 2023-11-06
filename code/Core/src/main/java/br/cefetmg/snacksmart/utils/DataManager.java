@@ -49,6 +49,14 @@ public class DataManager {
         return data.getYear();
     }
 
+    public boolean apos(LocalDate data) {
+        return this.data.isAfter(data);
+    }
+
+    public boolean antes(LocalDate data) {
+        return this.data.isBefore(data);
+    }
+
     public LocalDate getData() {
         return data;
     }

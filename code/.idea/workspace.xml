@@ -10,9 +10,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dd24dd0-57d8-4f27-938d-95a9bbda0876" name="Changes" comment="GerenteDAO feita">
+      <change afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/enums/TiposOrdenacaContrato.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/ContratosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dao/ContratosDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/ContratoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/dto/ContratoDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/idao/IContratosDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/idao/IContratosDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/service_gerente/ManterContratos.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/service_gerente/ManterContratos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/DataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Core/src/main/java/br/cefetmg/snacksmart/utils/DataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/facade/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/facade/LoginServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/facade/VisualizarContratos.java" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/java/br/cefetmg/snacksmart/facade/VisualizarContratos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/webapp/WEB-INF/paginas/visualizarContratos.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/webapp/WEB-INF/paginas/visualizarContratos.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/webapp/css/contratos.css" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/webapp/css/contratos.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/View/src/main/webapp/js/criarContrato.js" beforeDir="false" afterPath="$PROJECT_DIR$/View/src/main/webapp/js/criarContrato.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +34,7 @@
         <option value="Interface" />
         <option value="package.json" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -224,7 +234,7 @@
       <workItem from="1698708500348" duration="13089000" />
       <workItem from="1698722745232" duration="11533000" />
       <workItem from="1699064297141" duration="5925000" />
-      <workItem from="1699103731045" duration="28151000" />
+      <workItem from="1699103731045" duration="40800000" />
     </task>
     <task id="LOCAL-00001" summary="GerenteDAO feita">
       <option name="closed" value="true" />

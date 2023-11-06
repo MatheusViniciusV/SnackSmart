@@ -118,7 +118,7 @@
                                 ></textarea>
                             </label>
                         </div>
-                        <div id="boteos-criar-contrato">
+                        <div id="botoes-criar-contrato">
                             <button type="button" id="enviar"><h3>Criar Contrato</h3></button>
                             <button type="button" id="cancelar"><h3>Cancelar</h3></button>
                         </div>

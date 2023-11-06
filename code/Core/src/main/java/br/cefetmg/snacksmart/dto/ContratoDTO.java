@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class ContratoDTO {
     private int id;
-    private double valor;
+    private Double valor;
     private StatusContrato status;
     private DataManager dataInicio, dataExpiracao, dataPagamento;
     private String observacoes;
@@ -65,7 +65,7 @@ public class ContratoDTO {
 
     }
     
-    public long getId() {
+    public int getId() {
         return id;
     }
     
@@ -129,7 +129,7 @@ public class ContratoDTO {
                 "dataInicio":"%s",
                 "dataFim":"%s",
                 "diaPagamento":"%s",
-                "valor":"%f",
+                "valor":"%.2f",
                 "locatario":"%s",
                 "maquina":"",
                 "estado":"%s"

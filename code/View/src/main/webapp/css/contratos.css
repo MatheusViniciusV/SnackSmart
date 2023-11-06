@@ -218,7 +218,7 @@ section#criar-contrato-form button {
     border: none;
 }
 
-#criar-contrato-form #boteos-criar-contrato {
+#criar-contrato-form #botoes-criar-contrato {
     display: flex;
     justify-content: space-around;
     margin: 1vh;

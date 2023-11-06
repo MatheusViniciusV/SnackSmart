@@ -15,7 +15,10 @@ import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
 import br.cefetmg.snacksmart.idao.IContratosDAO;
 import br.cefetmg.snacksmart.idao.IGerenteDAO;
 import br.cefetmg.snacksmart.utils.enums.StatusContrato;
+import br.cefetmg.snacksmart.utils.enums.TiposOrdenacaContrato;
+
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -32,25 +35,22 @@ public class ManterContratos {
     }
     
     public ArrayList<ContratoDTO> getContratos() throws LocatarioInvalidoException, SQLException {
-        ArrayList contratos = dao.listaTodos();
+        ArrayList<ContratoDTO> contratos = dao.listaTodos();
         
         return contratos;
     }
     
-    public ArrayList<ContratoDTO> getContratosAtivos() throws LocatarioInvalidoException, SQLException {
-        ArrayList contratos = dao.filtra(StatusContrato.VIGENTE);
+    public ArrayList<ContratoDTO> filtraContratos(LocatarioDTO locatario, StatusContrato status, TiposOrdenacaContrato ordenacao) throws LocatarioInvalidoException, SQLException {
+        if(status == null)
+            status = StatusContrato.VIGENTE;
+
+        ArrayList<ContratoDTO> contratos = dao.filtra(locatario, status, ordenacao);
         
         return contratos;
     }
     
-    public ArrayList<ContratoDTO> filtraContratos(LocatarioDTO locatario) throws LocatarioInvalidoException, SQLException {
-        ArrayList contratos = dao.filtra(locatario);
-        
-        return contratos;
-    }
-    
-    public ArrayList<ContratoDTO> filtraContratos(StatusContrato status) throws LocatarioInvalidoException, SQLException {
-        ArrayList contratos = dao.filtra(status);
+    public ArrayList<ContratoDTO> filtraContratos(StatusContrato status, TiposOrdenacaContrato ordenacao) throws LocatarioInvalidoException, SQLException {
+        ArrayList contratos = dao.filtra(status, ordenacao);
         
         return contratos;
     }
