@@ -12,7 +12,7 @@ import br.cefetmg.snacksmart.idao.IContratosDAO;
 import br.cefetmg.snacksmart.utils.DataManager;
 import br.cefetmg.snacksmart.utils.bd.ConnectionManager;
 import br.cefetmg.snacksmart.utils.enums.StatusContrato;
-import br.cefetmg.snacksmart.utils.enums.TiposOrdenacaContrato;
+import br.cefetmg.snacksmart.utils.enums.TiposOrdenacaoContrato;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -112,7 +112,7 @@ public class ContratosDAO implements IContratosDAO {
     }
     
     @Override
-    public ArrayList<ContratoDTO> filtra(LocatarioDTO locatario, TiposOrdenacaContrato ordenacao) throws LocatarioInvalidoException, SQLException {
+    public ArrayList<ContratoDTO> filtra(LocatarioDTO locatario, TiposOrdenacaoContrato ordenacao) throws LocatarioInvalidoException, SQLException {
         ArrayList<ContratoDTO> contratos = new ArrayList<>();
 
         try {
@@ -159,7 +159,7 @@ public class ContratosDAO implements IContratosDAO {
     }
 
     @Override
-    public ArrayList<ContratoDTO> filtra(LocatarioDTO locatario, StatusContrato status, TiposOrdenacaContrato ordenacao)
+    public ArrayList<ContratoDTO> filtra(LocatarioDTO locatario, StatusContrato status, TiposOrdenacaoContrato ordenacao)
             throws LocatarioInvalidoException, SQLException {
         ArrayList<ContratoDTO> contratos = new ArrayList<>();
 
@@ -208,7 +208,7 @@ public class ContratosDAO implements IContratosDAO {
     }
     
     @Override
-    public ArrayList<ContratoDTO> filtra(StatusContrato status, TiposOrdenacaContrato ordenacao) throws LocatarioInvalidoException, SQLException {
+    public ArrayList<ContratoDTO> filtra(StatusContrato status, TiposOrdenacaoContrato ordenacao) throws LocatarioInvalidoException, SQLException {
         ArrayList<ContratoDTO> contratos = new ArrayList<>();
 
         try {

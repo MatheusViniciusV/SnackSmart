@@ -10,6 +10,7 @@ import br.cefetmg.snacksmart.exceptions.dao.ElementoNaoExisteException;
 import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
 import br.cefetmg.snacksmart.idao.IContratosDAO;
 import br.cefetmg.snacksmart.utils.enums.StatusContrato;
+import br.cefetmg.snacksmart.utils.enums.TiposOrdenacaoContrato;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -67,7 +68,7 @@ public class AcessarContratos {
             throw new RuntimeException(e);
         }
 
-        return dao.filtra(locatario);
+        return dao.filtra(locatario, TiposOrdenacaoContrato.MENOR_ID);
     }
     
     public void getPdf(long id, String locatarioCPF, OutputStream output)

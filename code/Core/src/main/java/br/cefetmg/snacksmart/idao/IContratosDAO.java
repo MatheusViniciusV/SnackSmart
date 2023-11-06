@@ -9,7 +9,7 @@ import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.exceptions.dao.ElementoNaoExisteException;
 import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
 import br.cefetmg.snacksmart.utils.enums.StatusContrato;
-import br.cefetmg.snacksmart.utils.enums.TiposOrdenacaContrato;
+import br.cefetmg.snacksmart.utils.enums.TiposOrdenacaoContrato;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,11 +25,11 @@ public interface IContratosDAO {
     
     ArrayList<ContratoDTO> listaTodos() throws SQLException;
     
-    ArrayList<ContratoDTO> filtra(LocatarioDTO locatario, TiposOrdenacaContrato ordenacao) throws LocatarioInvalidoException, SQLException;
+    ArrayList<ContratoDTO> filtra(LocatarioDTO locatario, TiposOrdenacaoContrato ordenacao) throws LocatarioInvalidoException, SQLException;
     
-    ArrayList<ContratoDTO> filtra(StatusContrato status, TiposOrdenacaContrato ordenacao) throws LocatarioInvalidoException, SQLException;
+    ArrayList<ContratoDTO> filtra(StatusContrato status, TiposOrdenacaoContrato ordenacao) throws LocatarioInvalidoException, SQLException;
 
-    ArrayList<ContratoDTO> filtra(LocatarioDTO locatario, StatusContrato status, TiposOrdenacaContrato ordenacao) throws LocatarioInvalidoException, SQLException;
+    ArrayList<ContratoDTO> filtra(LocatarioDTO locatario, StatusContrato status, TiposOrdenacaoContrato ordenacao) throws LocatarioInvalidoException, SQLException;
     
     ContratoDTO registraContrato(ContratoDTO contrato) throws SQLException;
     

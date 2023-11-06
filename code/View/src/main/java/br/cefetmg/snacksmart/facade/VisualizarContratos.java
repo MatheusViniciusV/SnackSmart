@@ -2,14 +2,16 @@ package br.cefetmg.snacksmart.facade;
 
 import br.cefetmg.snacksmart.dto.ContratoDTO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
+import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
 import br.cefetmg.snacksmart.service_gerente.ManterContratos;
+import br.cefetmg.snacksmart.service_gerente.ManterLocatarios;
 import br.cefetmg.snacksmart.service_locatario.AcessarContratos;
 import br.cefetmg.snacksmart.utils.enums.StatusContrato;
 import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
 import java.io.IOException;
 
-import br.cefetmg.snacksmart.utils.enums.TiposOrdenacaContrato;
+import br.cefetmg.snacksmart.utils.enums.TiposOrdenacaoContrato;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -50,23 +52,43 @@ public class VisualizarContratos extends HttpServlet {
                 ManterContratos acesso = new ManterContratos();
 
                 try {
-                    contratos = acesso.getContratos();
+                    contratos = acesso.filtraContratos(StatusContrato.VIGENTE, TiposOrdenacaoContrato.MENOR_ID);
                 } catch (LocatarioInvalidoException | SQLException ex) {
                     Logger.getLogger(VisualizarContratos.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         } else {
-            TiposOrdenacaContrato ordenacao = TiposOrdenacaContrato.valueOf(request.getParameter("ordenar_por"));
+            StatusContrato status = StatusContrato.valueOf(request.getParameter("status"));
+            TiposOrdenacaoContrato ordenacao = TiposOrdenacaoContrato.valueOf(request.getParameter("ordenacao"));
+            ManterContratos acesso = new ManterContratos();
+            
 
-            if(tipoUsuario == TipoUsuario.LOCATARIO) {
-                StatusContrato status = StatusContrato.valueOf(request.getParameter("status"));
+            if(tipoUsuario == TipoUsuario.LOCADOR) {
                 String locatarioCpf = request.getParameter("cpf");
-
-
+                
+                ManterLocatarios acessoLocatarios = new ManterLocatarios();
+                
+                try {
+                    LocatarioDTO locatario = acessoLocatarios.buscaPorCpf(locatarioCpf);
+                    contratos = acesso.filtraContratos(locatario, status, ordenacao);
+                } catch (LocatarioInvalidoException | SQLException | PersistenciaException ex) {
+                    Logger.getLogger(VisualizarContratos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if(tipoUsuario == TipoUsuario.LOCATARIO) {
+                LocatarioDTO locatario = (LocatarioDTO) session.getAttribute("usuario");
+                
+                try {
+                    contratos = acesso.filtraContratos(locatario, status, ordenacao);
+                } catch (LocatarioInvalidoException ex) {
+                    Logger.getLogger(VisualizarContratos.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(VisualizarContratos.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
 
-
+        request.setAttribute("tipoStatus", StatusContrato.values());
+        request.setAttribute("tipoOrdenacao", TiposOrdenacaoContrato.values());
         assert contratos != null;
         request.setAttribute("contratos", contratos);
         request.getRequestDispatcher("WEB-INF/paginas/visualizarContratos.jsp").forward(request, response);

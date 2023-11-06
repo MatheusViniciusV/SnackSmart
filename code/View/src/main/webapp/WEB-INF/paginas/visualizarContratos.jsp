@@ -29,8 +29,6 @@
             <!-- TODO fazer essa lista aparecer de maneira dinamica -->
             <h1>Contratos </h1>
             <section id="lista-contratos">
-
-
                 <c:forEach var="contrato" items="${contratos}">
 
                     <article class="contratos" id="contrato-${contrato.getId()}" data-id="${contrato.getId()}">
@@ -42,7 +40,7 @@
                         <div>Data fim: ${contrato.getDataFim()}</div>
                         <div>Dia do pagamento: ${contrato.getDataPagamento().getDia()}</div>
                         <div>Valor: ${contrato.printValorPagamento()}</div>
-                        <div>Status:
+                        <div>Estados:
                             <span class="${contrato.getStatus().toString().toLowerCase()}">
                                 ${contrato.getStatus().toString().toLowerCase()}
                             </span>
@@ -50,6 +48,34 @@
                     </article>
                 </c:forEach>
             </section>
+            
+            <form action="visualizarContratos" method="get">
+                <c:if test="${tipoUsuario == LOCADOR}">
+                    <label>
+                        CPF do Locatário:
+                        <input type="text" name="cpf">
+                    </label>
+                </c:if>
+                <label>
+                    Ordenar por:    
+                    <select name="ordenacao">
+                        <c:forEach var="tipo" items="${tipoOrdenacao}">
+                            <option value="${tipo.value()}">${tipo.toString()}</option>
+                        </c:forEach>
+                    </select>
+                </label>
+                <label>
+                    Exibir estado:    
+                    <select name="status">
+                        <c:forEach var="tipo" items="${tipoStatus}">
+                            <option value="${tipo.toString()}">${tipo.toString().toLowerCase()}</option>
+                        </c:forEach>
+                        <option value="todos">todos os estados</option>
+                    </select>
+                </label>
+                <button>Buscar</button>
+                <button><a href="visualizarContratos">Limpar busca</a></button>
+            </form>
             
             <c:if test="${tipoUsuario == LOCADOR}">
                 <section id="criar-contrato-form" class="oculto">
