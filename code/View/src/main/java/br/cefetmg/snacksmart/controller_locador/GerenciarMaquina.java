@@ -2,6 +2,7 @@ package br.cefetmg.snacksmart.controller_locador;
 
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.facade.GestaoMaquina;
+import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -67,18 +68,23 @@ public class GerenciarMaquina extends HttpServlet {
                 }
             default:               
                 break;
-        }         
-            try
-            {   
-                LocatarioDAO locatarioDAO = new LocatarioDAO();
-                request.setAttribute("listaLocatarios", locatarioDAO.listarTodos()); //Isso deve estar incorreto no modelo MVC por enquanto               
-                request.setAttribute("vetorMaquinas", acesso.getAllMaquinas());
-                request.getRequestDispatcher("WEB-INF/paginas/gestaoMaquina.jsp").forward(request, response);
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(GestaoMaquina.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (PersistenciaException ex) {
+        }      
+        
+        LocatarioDAO locatarioDAO = new LocatarioDAO();
+        try {
+            request.setAttribute("listaLocatarios", locatarioDAO.listarTodos()); //Isso deve estar incorreto no modelo MVC por enquanto               
+        } catch (PersistenciaException ex) {
             Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try {
+            request.setAttribute("vetorMaquinas", acesso.getAllMaquinas());
+        } catch (PersistenciaException | SQLException e) {
+            try {
+                throw new PersistenciaException(e.getMessage(), e);
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        request.getRequestDispatcher("WEB-INF/paginas/gestaoMaquina.jsp").forward(request, response);                
     }
 }

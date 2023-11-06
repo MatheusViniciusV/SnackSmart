@@ -1,6 +1,6 @@
 package br.cefetmg.snacksmart.service_gerente;
-import br.cefetmg.snacksmart.idao.IMaquinaDAO;
 import br.cefetmg.snacksmart.dao.MaquinaDAO;
+import br.cefetmg.snacksmart.idao.IMaquinaDAO;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.dao.LocatarioDAO;
@@ -10,7 +10,7 @@ import br.cefetmg.snacksmart.utils.enums.TipoMaquina;
 import java.util.ArrayList;
 //Exceptions
 import br.cefetmg.snacksmart.exceptions.service_maquinas.FormatoArquivoInvalidoException;
-import java.sql.SQLException;
+
 
 public class AcessarMaquinas {    
     private final IMaquinaDAO maquinaDAO;
@@ -18,8 +18,9 @@ public class AcessarMaquinas {
         maquinaDAO = new MaquinaDAO();
     }
     
-    public ArrayList<MaquinaDTO> getAllMaquinas() throws SQLException, PersistenciaException{
-        return maquinaDAO.acessarTodasMaquinas();
+    public ArrayList<MaquinaDTO> getAllMaquinas() throws PersistenciaException{
+        ArrayList maquinas = maquinaDAO.acessarTodasMaquinas();
+        return maquinas;
     }
     
     private int gerarCodigo() throws PersistenciaException{

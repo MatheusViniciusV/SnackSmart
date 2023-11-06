@@ -3,7 +3,6 @@ package br.cefetmg.snacksmart.dao;
 import br.cefetmg.snacksmart.utils.bd.ConnectionManager;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
-import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.idao.IMaquinaDAO;
 import java.util.ArrayList;
 import br.cefetmg.snacksmart.utils.enums.StatusMaquina;
@@ -11,16 +10,13 @@ import br.cefetmg.snacksmart.utils.enums.TipoMaquina;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 
 /* @author Arthur Milagres  */
 
 public class MaquinaDAO implements IMaquinaDAO {    
     @Override
-    public MaquinaDTO acessarMaquina(int codigo) throws PersistenciaException{            
+    public MaquinaDTO acessarMaquina(int codigo) throws PersistenciaException {            
         try {
             Connection conexao = ConnectionManager.getInstance().getConnection();
             
@@ -50,26 +46,23 @@ public class MaquinaDAO implements IMaquinaDAO {
                 
                 return maquinaDTO;
             }
-        } catch (SQLException e) {
-            System.out.print("Não foi possivel realizar tal ação: " + e);
-        } catch (ClassNotFoundException | PersistenciaException ex) {
-            Logger.getLogger(MaquinaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return null; 
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new PersistenciaException(e.getMessage(), e);
+        }       
+        return null;
     }    
     
     @Override
-    public ArrayList<MaquinaDTO> acessarTodasMaquinas() throws PersistenciaException{
+    public ArrayList<MaquinaDTO> acessarTodasMaquinas() throws PersistenciaException {
         try{
             Connection conexao = ConnectionManager.getInstance().getConnection();
             
-            String sql = "SELECT * FROM maquina WHERE status <> 'REMOVIDA'";
+            String sql = "SELECT * FROM maquina WHERE status != 'REMOVIDA'";
             PreparedStatement preparedStatement = conexao.prepareStatement(sql);
- 
-            ArrayList<MaquinaDTO> maquinasVetor = null;                      
+                                 
             ResultSet resultSet = preparedStatement.executeQuery();
-            
+            ArrayList<MaquinaDTO> maquinasVetor = null; 
             if (resultSet.next()) {
                 maquinasVetor = new ArrayList<>();
                 do {
@@ -88,23 +81,18 @@ public class MaquinaDAO implements IMaquinaDAO {
                     MaquinaDTO maquina = new MaquinaDTO(nome, codigo, imagem, tipo, localizacao, locatario, status);
                     maquinasVetor.add(maquina);
                 } while (resultSet.next());
-            }
-            
+            }           
             resultSet.close();
             preparedStatement.close();
-            conexao.close();
+            conexao.close();    
             
-            return maquinasVetor;           
-        } catch (SQLException e) {
-            System.out.print("Não foi possivel realizar tal ação: " + e);
-        } catch (ClassNotFoundException | PersistenciaException ex) {
-            Logger.getLogger(MaquinaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception e) {
+            return maquinasVetor; 
+            
+        }  catch (Exception e) {
             e.printStackTrace();
             throw new PersistenciaException(e.getMessage(), e);
         }
-        return null;  
-    }  
+    }   
     
     @Override
     public void adicionarMaquina(MaquinaDTO maquina) throws PersistenciaException {      
@@ -128,10 +116,6 @@ public class MaquinaDAO implements IMaquinaDAO {
             preparedStatement.close();
             conexao.close();
             
-        } catch (SQLException e) {
-            System.out.print("Não foi possivel realizar tal ação: " + e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MaquinaDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception e) {
             e.printStackTrace();
             throw new PersistenciaException(e.getMessage(), e);
@@ -162,10 +146,9 @@ public class MaquinaDAO implements IMaquinaDAO {
             preparedStatement.close();
             conexao.close();
             
-        } catch (SQLException e) {
-            System.out.print("Não foi possivel realizar tal ação: " + e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MaquinaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new PersistenciaException(e.getMessage(), e);
         }
     }
     
@@ -183,10 +166,9 @@ public class MaquinaDAO implements IMaquinaDAO {
             preparedStatement.close();
             conexao.close();
             
-        } catch (SQLException e) {
-            System.out.print("Não foi possivel realizar tal ação: " + e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MaquinaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new PersistenciaException(e.getMessage(), e);
         }
     }
     

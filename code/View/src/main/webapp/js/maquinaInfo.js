@@ -189,16 +189,12 @@ function exibirInformacaoMaquina(nomeMaquina, codeMaquina, statusMaquina, tipoMa
 }
 
 function ButtonIClick() {
-    try {
-        maquinaEncontrada = encontrarMaquinaPorCodigo(codigoInfoMaquina, vetorMaquinaArray);
-        if (maquinaEncontrada !== null) {
-            exibirInformacaoMaquina(maquinaEncontrada.nome, maquinaEncontrada.codigo, maquinaEncontrada.status, 
-            maquinaEncontrada.tipo, maquinaEncontrada.localizacao, maquinaEncontrada.locatario);
-        }
-    } catch { 
-        console.log("não foi possível exibir");
-        exibirInformacaoMaquina("Maquina Não Definida", 0000, "Não definido",
-    "Refrigerada", "Rua José de Bessas, Venda Nova, Belo Horizonte, MG - 93084-111", "Waldir Braz");//FUNÇAO TESTE
+    maquinaEncontrada = encontrarMaquinaPorCodigo(codigoInfoMaquina, vetorMaquinaArray);
+    if (maquinaEncontrada !== null) {
+        exibirInformacaoMaquina(maquinaEncontrada.nome, maquinaEncontrada.codigo, maquinaEncontrada.status, 
+        maquinaEncontrada.tipo, maquinaEncontrada.localizacao, maquinaEncontrada.locatario);
+    } else {
+        exibirInformacaoMaquina("Maquina Não Definida", 0000, "Não definido","Refrigerada", "Rua José de Bessas, Venda Nova, Belo Horizonte, MG - 93084-111", "Waldir Braz");//FUNÇAO TESTE
     }
     mostrarFormulario('informacaoMaquina');
 }
