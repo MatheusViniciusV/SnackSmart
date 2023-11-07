@@ -23,8 +23,8 @@ public class AcessarMaquinas {
         return maquinas;
     }
     
-    public MaquinaDTO getMaquinaPorCodigo(String codigo) {
-        
+    public MaquinaDTO getMaquinaPorCodigo(int codigo) throws PersistenciaException {
+        return maquinaDAO.acessarMaquina(codigo);
     }
     
     private int gerarCodigo() throws PersistenciaException{

@@ -20,8 +20,7 @@ public class MaquinaDAO implements IMaquinaDAO {
         try {
             Connection conexao = ConnectionManager.getInstance().getConnection();
             
-            String sql = "SELECT nome, imagem, tipo, localizacao, locatario__fk, status " +
-                     "FROM maquina WHERE codigo = ?";
+            String sql = "SELECT * FROM `maquina` WHERE pk = ?";
             
             PreparedStatement preparedStatement = conexao.prepareStatement(sql);
             
@@ -34,7 +33,7 @@ public class MaquinaDAO implements IMaquinaDAO {
                 TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
                 String localizacao = resultSet.getString("localizacao");
                 
-                int locatarioId = resultSet.getInt("locatario");               
+                int locatarioId = resultSet.getInt("locatario__fk");               
                 LocatarioDAO locatarioDAO = new LocatarioDAO();
                 LocatarioDTO locatario = locatarioDAO.consultarPorId(locatarioId);
                 StatusMaquina status = StatusMaquina.valueOf(resultSet.getString("status"));

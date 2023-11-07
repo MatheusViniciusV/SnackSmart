@@ -58,7 +58,7 @@ public class GestaoMaquina extends HttpServlet {
         LocatarioDAO locatarioDAO = new LocatarioDAO();
         try {
             vetorMaquinasSQL = acesso.getAllMaquinas();
-        } catch (SQLException | PersistenciaException ex) {
+        } catch (PersistenciaException ex) {
             Logger.getLogger(GestaoMaquina.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {

@@ -27,21 +27,20 @@ $inputCpfLocatario.on('input', function () {
 });
 
 const $inputCodigoMaquina = $('input[name=codigo-maquina]');
-$inputCpfLocatario.on('input', function () {
-    if ($inputCpfLocatario.val().length === 3) {
+$inputCodigoMaquina.on('input', function () {
         $.ajax({
             type: 'POST',
-            url: 'obterLocatario',
+            url: 'obterMaquina',
             data: {
-                locatarioCpf: $inputCpfLocatario.val()
+                codigoMaquina: $inputCodigoMaquina.val()
             },
             success: function (response) {
-                $('input[name=locatario-nome]').val(response.nome);
-                $('input[name=locatario-telefone]').val(response.telefone);
-                $('input[name=locatario-email]').val(response.email);
-            }
+                console.log(response)
+            },
+            error: function (response) {
+                console.log("aaaaa")
+            },
         });
-    }
 });
 
 const $cancelarContratoBtn = $('#cancelar-contrato');

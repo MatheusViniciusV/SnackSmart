@@ -128,7 +128,7 @@
                             </label>
                             <label>
                                 Código da máquina: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
-                                <input type="text" name="codigo-maquina">
+                                <input type="number" min="0" name="codigo-maquina">
                             </label>
                             <label>Data de inicio: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
                                 <input type="date" name="data-inicio">

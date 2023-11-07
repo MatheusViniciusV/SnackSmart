@@ -43,6 +43,7 @@ public class LoginServlet extends HttpServlet {
                     if(validador.validarGerente(cpf, senha)) {
                         response.sendRedirect("principal.jsp");
                         session.setAttribute("tipoUsuario", tipoUsuario);
+                        request.setAttribute("tipoUsuarioStr", tipoUsuario.toString());
                         session.setAttribute("usuario", validador.getGenrente());
                     } else {
                         response.sendRedirect("index.html");

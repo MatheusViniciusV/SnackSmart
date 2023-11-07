@@ -78,7 +78,7 @@ public class GerenciarMaquina extends HttpServlet {
         }
         try {
             request.setAttribute("vetorMaquinas", acesso.getAllMaquinas());
-        } catch (PersistenciaException | SQLException e) {
+        } catch (PersistenciaException e) {
             try {
                 throw new PersistenciaException(e.getMessage(), e);
             } catch (PersistenciaException ex) {
