@@ -1,15 +1,16 @@
 package br.cefetmg.snacksmart.idao;
 
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
+import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import java.util.ArrayList;
 /**
  *
  * @author Arthur Milagres
  */
 public interface IMaquinaDAO {
-    MaquinaDTO get(int codigo);
-    ArrayList<MaquinaDTO> getAll();
-    void set(MaquinaDTO novaMaquina);
-    void update(MaquinaDTO updatedMaquina);
-    void remove(int codigo);
+    MaquinaDTO acessarMaquina(int codigo) throws PersistenciaException;;
+    ArrayList<MaquinaDTO> acessarTodasMaquinas() throws PersistenciaException;;
+    void adicionarMaquina(MaquinaDTO novaMaquina) throws PersistenciaException;;
+    void atualizarMaquina(MaquinaDTO updatedMaquina) throws PersistenciaException;;
+    void removerMaquina(int codigo) throws PersistenciaException;;
 }

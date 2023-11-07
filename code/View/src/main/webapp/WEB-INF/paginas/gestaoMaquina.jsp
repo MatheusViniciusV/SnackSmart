@@ -40,29 +40,29 @@
             </script>
             
             <article id="formAddMaquina">               
-                <form action="/GerenciarMaquina" method="post" enctype="multipart/form-data">                                 
-                    <input type="hidden" name="formulario" value="formAddMaquina">
+                <form action="GerenciarMaquina" method="post" enctype="multipart/form-data">                                 
+                    <input name="formSelecionado" type="hidden" value="formAddMaquina">
                     
                     <h1 id="tituloForm">Adicionar nova máquina</h1>
                     <h2 id="subtituloForm">Preencha todos os campos abaixos</h2>
                     
-                    <label id="nomeDaMaquina" for="nome">Nome da Máquina:</label>
+                    <label id="nomeDaMaquina">Nome da Máquina:</label>
                     <input class="preencher" type="text" id="nome" name="nome" minlength="5" maxlength="32" required><br>
 
-                    <label id="tipoInput" for="tipo">Tipo da máquina:</label>                       
+                    <label id="tipoInput">Tipo da máquina:</label>                       
                     <select id="tipo" name="tipo" required>
-                        <option value="refrigerada">Refrigerada</option>
-                        <option value="nao refrigerada">Não refrigerada</option>
+                        <option value="REFRIGERADA">Refrigerada</option>
+                        <option value="NAO_REFRIGERADA">Não refrigerada</option>
                     </select><br>
                     
-                    <label id="labelImagem" class="imagem" for="imagem">Foto da máquina:</label>
-                    <input id="inputImagem" type="file" accept="image/png" class="imagem" name="imagem" required ><br>
+                    <label id="labelImagem" class="imagem">Foto da máquina:</label>
+                    <input type="file" name="imagem" id="inputImagem" accept="image/png" class="imagem"  required ><br>
                     
-                    <label id="locatarioInput" for="locatario">Locatário responsável:</label>
+                    <label id="locatarioInput">Locatário responsável:</label>
                     <select id="locatario" name="locatario" required>
                     </select><br>  
                 
-                    <label id="localizacaoText" for="localizacao">Localização (CEP):</label>
+                    <label id="localizacaoText">Localização (CEP):</label>
                     <input class="preencher" type="text" id="localizacao" name="localizacao" required><br>
                     
                     <input id="enviarformAddMaquina"class="botaoForm" type="submit" value="Enviar">
@@ -71,30 +71,30 @@
             </article>
                           
             <article id="formAtualizarMaquina">               
-                <form action="/GerenciarMaquina" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="formulario" value="formAtualizarMaquina">
+                <form action="GerenciarMaquina" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="formSelecionado" value="formAtualizarMaquina">
                     <input type="hidden" name="atualizarMaquinaCodigo" id="atualizarMaquinaCodigo">
                     <h1 id="tituloUpdate">Atualizar dados da máquina</h1>
                     
-                    <label id="novoNomeLabel" for="novoNome">Alterar nome da Máquina:</label>
+                    <label id="novoNomeLabel">Alterar nome da Máquina:</label>
                     <input type="text" id="novoNome" name="novoNome" minlength="5" maxlength="32"><br>
                     
-                    <label id="novaLocalizacaoLabel" for="novaLocalizacao">Nova localização (CEP):</label>
+                    <label id="novaLocalizacaoLabel">Nova localização (CEP):</label>
                     <input type="text" id="novaLocalizacao" name="novaLocalizacao"><br>
                     
-                    <label id="novoLocatarioInput" for="novoLocatario">Alterar locatário:</label>
+                    <label id="novoLocatarioInput">Alterar locatário:</label>
                     <select id="novoLocatario" name="novoLocatario">
                     </select><br>  
                     
-                    <label id="statusLabel" for="status">Alterar status da máquina:</label>
+                    <label id="statusLabel">Alterar status da máquina:</label>
                     <select id="status" name="status">
-                        <option value="Disponivel">Disponível</option>
-                        <option value="Em funcionamento">Em funcionamento</option>
-                        <option value="Em manutencao">Em manutenção</option>
-                        <option value="Aguardando manutencao">Aguardando manutenção</option>                       
+                        <option value="DISPONIVEL">Disponível</option>
+                        <option value="ALUGADA">Alugada</option>
+                        <option value="EM_MANUTANCAO">Em manutenção</option>
+                        <option value="AGUARDANDO_MANUTENCAO">Aguardando manutenção</option>                       
                     </select><br>    
                     
-                    <label id="labelNovaImagen" class="imagem" for="novaImagem">Alterar foto da máquina:</label>
+                    <label id="labelNovaImagen" class="imagem">Alterar foto da máquina:</label>
                     <input id="inputNovaImagen" type="file" accept="image/png" class="imagem" name="novaImagem"><br>
                                        
                     <input id="enviarformAtualizarMaquina"class="botaoForm" type="submit" value="Realizar Alterações">
@@ -107,15 +107,14 @@
                 <h2>Ao remover a máquina, todos os dados relacionados a ela serão excluídos!</h2>
                 <p>⚠ Dados relacionados à máquina e ao locatário não poderão serem acessados posteriormente.
                     Caso a máquina esteja ligada a algum cliente é importante que o locatário esteja ciente disso.</p>
-                <form action="/GerenciarMaquina" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="formulario" value="remocaoMaquina">
-                    <input type="hidden" name="removerMaquinaCodigo" id="removerMaquinaCodigo">
+                <form action="GerenciarMaquina" method="post">
+                    <input type="hidden" name="formSelecionado" value="remocaoMaquina">
+                    <input type="hidden" name="removerMaquinaCodigo" id="removerMaquinaCodigo" value="">
                     
                     <div class="botoesForm">
                         <input class="botaoForm" name="remover" type="submit" value="REMOVER MÁQUINA">
                         <div class="botaoForm cancelar">Cancelar</div>
                     </div>
-                    
                 </form>
             </article>
             
@@ -136,6 +135,19 @@
             </article>
         </main>             
         <script src="js/maquinaInfo.js"></script> 
+        <!-- Carrega os locatarios -->
+        <script>            
+            <c:forEach items="${listaLocatarios}" var="locatario">
+                var nome = "${locatario.nome}";
+                vetorNomes.push(nome);
+            </c:forEach>  
+            <c:forEach items="${listaLocatarios}" var="locatario">
+                var cpf = "${locatario.CPF}";
+                vetorCPF.push(cpf);
+            </c:forEach>
+        </script>
+        
+        <!-- Carrega os slots das maquinas -->
         <c:forEach var="item" items="${vetorMaquinas}">
                 <script>
                     try {

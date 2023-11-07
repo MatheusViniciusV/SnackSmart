@@ -3,7 +3,8 @@ package br.cefetmg.snacksmart.facade;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
 import br.cefetmg.snacksmart.service_gerente.AcessarMaquinas;
 import java.io.IOException;
-import java.io.PrintWriter;
+import br.cefetmg.snacksmart.dao.LocatarioDAO;
+import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -30,10 +31,12 @@ public class GestaoMaquina extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException, PersistenciaException {
         response.setContentType("text/html;charset=UTF-8");
         AcessarMaquinas acesso = new AcessarMaquinas();
         ArrayList<MaquinaDTO> vetorMaquinasSQL = acesso.getAllMaquinas();
+        LocatarioDAO locatarioDAO = new LocatarioDAO();
+        request.setAttribute("listaLocatarios", locatarioDAO.listarTodos()); //Isso deve estar incorreto no modelo MVC por enquanto             
         request.setAttribute("vetorMaquinas", vetorMaquinasSQL);
         request.getRequestDispatcher("WEB-INF/paginas/gestaoMaquina.jsp").forward(request, response);
     }
@@ -52,9 +55,15 @@ public class GestaoMaquina extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         AcessarMaquinas acesso = new AcessarMaquinas();
         ArrayList<MaquinaDTO> vetorMaquinasSQL = null;
+        LocatarioDAO locatarioDAO = new LocatarioDAO();
         try {
             vetorMaquinasSQL = acesso.getAllMaquinas();
-        } catch (SQLException ex) {
+        } catch (SQLException | PersistenciaException ex) {
+            Logger.getLogger(GestaoMaquina.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            request.setAttribute("listaLocatarios", locatarioDAO.listarTodos()); //Isso deve estar incorreto no modelo MVC por enquanto             
+        } catch (PersistenciaException ex) {
             Logger.getLogger(GestaoMaquina.class.getName()).log(Level.SEVERE, null, ex);
         }
         request.setAttribute("vetorMaquinas", vetorMaquinasSQL);
