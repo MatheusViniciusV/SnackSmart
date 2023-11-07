@@ -1,5 +1,4 @@
 //Botões
-let addMaquinaEL = document.querySelector("#addMaquina");
 let informacaoMaquinaEl = document.querySelector("#informacaoMaquina");
 let remocaoMaquinaEl = document.querySelector("#remocaoMaquina");
 let atualizarDadosEl = document.getElementById("atualizarDados");
@@ -18,7 +17,9 @@ let preencherEl = document.querySelectorAll(".preencher");
 //Codigo da máquina
 let removerMaquinaCodigoEl = document.getElementById("removerMaquinaCodigo");
 let atualizarMaquinaCodigoEl = document.getElementById("atualizarMaquinaCodigo");
+let feedbackMaquinaCodigoEl = document.getElementById("feedbackMaquinaCodigo");
 
+var usuarioAcessando; 
 var codigoInfoMaquina;
 var vetorMaquinaArray; 
 
@@ -94,17 +95,19 @@ function criarSlotMaquina(nome, codigo, status, img){
     let novaImg = document.createElement("img");
     let novoBotaoInfoEl = document.createElement("button");
     let novoBotaoRemoverEl = document.createElement("button");
+    let novoBotaoFeedbackEl = document.createElement("button");
     let novoBreak = document.createElement("br");
     
     
     novoSlot.classList.add("slot");
     novoBotaoInfoEl.classList.add("infoMaquina");
     novoBotaoRemoverEl.classList.add("removerMaquina");
+    novoBotaoFeedbackEl.classList.add("enviarFeedback");
     
     novoBotaoInfoEl.addEventListener("click", ButtonIClick);
     novoBotaoRemoverEl.addEventListener("click", ButtonRClick);
 
-   
+    novoBotaoFeedbackEl.innerHTML = "Enviar Feedback";
     novoBotaoInfoEl.innerHTML = "Informações da máquina";
     novoBotaoRemoverEl.innerHTML = "Remover Máquina";
     novoh2.innerHTML = nome;
@@ -121,8 +124,11 @@ function criarSlotMaquina(nome, codigo, status, img){
     novoSlot.appendChild(novaImg);
     novoSlot.appendChild(novoBreak);  
     novoSlot.appendChild(novoBotaoInfoEl);
-    novoSlot.appendChild(novoBotaoRemoverEl);
-   
+    if (usuarioAcessando === "LOCADOR")
+        novoSlot.appendChild(novoBotaoRemoverEl);
+    else 
+        novoSlot.appendChild(novoBotaoFeedbackEl);
+  
    let slot = document.getElementById("addMaquinaSlot");
    slot.remove();
    criarSlotAddMaquina();
@@ -208,7 +214,7 @@ function recuperaInfoSlotMaquina() {
    informacoeSlotMaquina[1] = this.parentNode.children[1].innerHTML;
    informacoeSlotMaquina[2] = this.parentNode.children[2].innerHTML;
    codigoInfoMaquina = informacoeSlotMaquina[1].replace("COD-", "");
-   return informacoeSlotMaquina; 
+   return informacoeSlotMaquina;  
 }
 
 function encontrarMaquinaPorCodigo(codigoInfoMaquina, maquinas) {
@@ -304,9 +310,10 @@ function Main(){
         status: "Em funcionamento",
         imagem: "img/NonePhoto.png"
     };      
-    criarSlotAddMaquina();
-    //criarSlotMaquina(maquina1.nome, maquina1.cod, maquina1.status, maquina1.imagem);
     
+    //criarSlotMaquina(maquina1.nome, maquina1.cod, maquina1.status, maquina1.imagem);
+    if (usuarioAcessando === "LOCADOR")
+        criarSlotAddMaquina();
     
     let removerMaquinaEl = document.querySelectorAll(".removerMaquina");
     removerMaquinaEl.forEach(function(botao) {
@@ -316,6 +323,13 @@ function Main(){
     });
     let infoMaquinaEl = document.querySelectorAll(".infoMaquina");
     infoMaquinaEl.forEach(function(botao) {
+        botao.addEventListener("click", function(event){
+            retornarCodigo(event.target, "rb");
+        });
+    });
+    
+    let enviarFeedbackEl = document.querySelectorAll(".enviarFeedback");
+    enviarFeedbackEl.forEach(function(botao) {
         botao.addEventListener("click", function(event){
             retornarCodigo(event.target, "rb");
         });

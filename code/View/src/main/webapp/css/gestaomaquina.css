@@ -173,7 +173,7 @@ nav{
 /*Fim - Estilo dos slots*/
 
 /*Início - Estilo dos formulários*/
-#formAddMaquina, #informacaoMaquina, #remocaoMaquina, #formAtualizarMaquina{
+#formAddMaquina, #informacaoMaquina, #remocaoMaquina, #formAtualizarMaquina, #feedbackMaquina{
     display: none;  
     position: fixed;
     left: 25%;

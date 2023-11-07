@@ -1,8 +1,6 @@
 package br.cefetmg.snacksmart.controller_locador;
 
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
-import br.cefetmg.snacksmart.facade.GestaoMaquina;
-import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,9 +9,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import br.cefetmg.snacksmart.service_gerente.AcessarMaquinas;
 import br.cefetmg.snacksmart.dao.LocatarioDAO;
+import br.cefetmg.snacksmart.dto.LocatarioDTO;
+import br.cefetmg.snacksmart.dto.MaquinaDTO;
+import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
 import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
-import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,21 +68,32 @@ public class GerenciarMaquina extends HttpServlet {
             }
                     break;
                 }
+            case "feedbackMaquina":{
+                String codigo = request.getParameter("feedbackMaquinaCodigo");
+                String titulo = request.getParameter("tituloFeedback");
+                String mensagem = request.getParameter("mensagemFeedback");
+                String manutencao = request.getParameter("solicitarManutencao");
+                    break;
+            }
             default:               
                 break;
         }      
         
         LocatarioDAO locatarioDAO = new LocatarioDAO();
-        try {
-            request.setAttribute("listaLocatarios", locatarioDAO.listarTodos()); //Isso deve estar incorreto no modelo MVC por enquanto               
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-            request.setAttribute("vetorMaquinas", acesso.getAllMaquinas());
-        } catch (PersistenciaException | SQLException e) {
+        HttpSession session = request.getSession();
+        TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario");
+        ArrayList<MaquinaDTO> vetorMaquinasSQL = null;
+        if (tipoUsuario == TipoUsuario.LOCADOR){
+            try {           
+                vetorMaquinasSQL =  acesso.getAllMaquinasGerente();
+                request.setAttribute("listaLocatarios", locatarioDAO.listarTodos()); //Isso deve estar incorreto no modelo MVC por enquanto   
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            LocatarioDTO locatario = (LocatarioDTO) session.getAttribute("usuario");
             try {
-                throw new PersistenciaException(e.getMessage(), e);
+                vetorMaquinasSQL = acesso.getAllMaquinasLocatario(locatario.getId());
             } catch (PersistenciaException ex) {
                 Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
             }

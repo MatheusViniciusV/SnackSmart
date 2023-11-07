@@ -95,6 +95,46 @@ public class MaquinaDAO implements IMaquinaDAO {
     }   
     
     @Override
+    public ArrayList<MaquinaDTO> acessarTodasMaquinas(int locatarioId) throws PersistenciaException {
+        try{
+            Connection conexao = ConnectionManager.getInstance().getConnection();
+            
+            String sql = "SELECT * FROM maquina WHERE locatario__fk == ?";
+            PreparedStatement preparedStatement = conexao.prepareStatement(sql);
+            preparedStatement.setInt(1, locatarioId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ArrayList<MaquinaDTO> maquinasVetor = null; 
+            if (resultSet.next()) {
+                maquinasVetor = new ArrayList<>();
+                do {
+                    int codigo = resultSet.getInt("codigo");
+                    String nome = resultSet.getString("nome");
+                    byte[] imagem = resultSet.getBytes("imagem");
+                    TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
+                    String localizacao = resultSet.getString("localizacao");
+
+                    LocatarioDAO locatarioDAO = new LocatarioDAO();
+                    LocatarioDTO locatario = locatarioDAO.consultarPorId(locatarioId);
+
+                    StatusMaquina status = StatusMaquina.valueOf(resultSet.getString("status"));
+
+                    MaquinaDTO maquina = new MaquinaDTO(nome, codigo, imagem, tipo, localizacao, locatario, status);
+                    maquinasVetor.add(maquina);
+                } while (resultSet.next());
+            }           
+            resultSet.close();
+            preparedStatement.close();
+            conexao.close();    
+            
+            return maquinasVetor; 
+            
+        }  catch (Exception e) {
+            e.printStackTrace();
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+    } 
+    
+    @Override
     public void adicionarMaquina(MaquinaDTO maquina) throws PersistenciaException {      
         try{
             Connection conexao = ConnectionManager.getInstance().getConnection();

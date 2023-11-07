@@ -18,8 +18,13 @@ public class AcessarMaquinas {
         maquinaDAO = new MaquinaDAO();
     }
     
-    public ArrayList<MaquinaDTO> getAllMaquinas() throws PersistenciaException{
+    public ArrayList<MaquinaDTO> getAllMaquinasGerente() throws PersistenciaException{
         ArrayList maquinas = maquinaDAO.acessarTodasMaquinas();
+        return maquinas;
+    }
+    
+    public ArrayList<MaquinaDTO> getAllMaquinasLocatario(int locatarioId) throws PersistenciaException{
+        ArrayList maquinas = maquinaDAO.acessarTodasMaquinas(locatarioId);
         return maquinas;
     }
     
