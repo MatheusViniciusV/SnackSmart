@@ -73,7 +73,7 @@
                         <option value="todos">todos os estados</option>
                     </select>
                 </label>
-                <button>Buscar</button>
+                <button id="filtrar">Buscar</button>
                 <button><a href="visualizarContratos">Limpar busca</a></button>
             </form>
             
@@ -121,8 +121,9 @@
                             <label>
                                 Tipo de máquina: <br>
                                 <select>
-                                    <option>Sla</option>
-                                    <option>Sla</option>
+                                    <c:forEach var="tipo" items="${tipoMaquina}">
+                                        <option value="${tipo.toString()}">${tipo.toString().toLowerCase().replace('_',' ')}</option>
+                                    </c:forEach>
                                 </select>
                             </label>
                             <label>
@@ -145,7 +146,7 @@
                             </label>
                         </div>
                         <div id="botoes-criar-contrato">
-                            <button type="button" id="enviar"><h3>Criar Contrato</h3></button>
+                            <button type="button" id="enviar-contrato"><h3>Criar Contrato</h3></button>
                             <button type="button" id="cancelar"><h3>Cancelar</h3></button>
                         </div>
                     </form>

@@ -26,6 +26,24 @@ $inputCpfLocatario.on('input', function () {
     }
 });
 
+const $inputCodigoMaquina = $('input[name=codigo-maquina]');
+$inputCpfLocatario.on('input', function () {
+    if ($inputCpfLocatario.val().length === 3) {
+        $.ajax({
+            type: 'POST',
+            url: 'obterLocatario',
+            data: {
+                locatarioCpf: $inputCpfLocatario.val()
+            },
+            success: function (response) {
+                $('input[name=locatario-nome]').val(response.nome);
+                $('input[name=locatario-telefone]').val(response.telefone);
+                $('input[name=locatario-email]').val(response.email);
+            }
+        });
+    }
+});
+
 const $cancelarContratoBtn = $('#cancelar-contrato');
 if($contratoSelecionado !== null) {
     $cancelarContratoBtn.click(function () {
@@ -49,26 +67,17 @@ if($contratoSelecionado !== null) {
 
                 console.log(`Contrato deletado com sucesso.`);
             }
-        })
-    })
+        });
+    });
 }
 
-$('#enviar').click(function() {
-
+$('#enviar-contrato').click(function() {
     let formCorreto = true;
     
     validarRegEx('input[name=locatario-cpf] .obrigatorio', cpfRegEx, formCorreto);
     validarRegEx('input[name=locatario-email] .obrigatorio', emailRegEx, formCorreto);
     validarRegEx('input[name=locatario-telefone] .obrigatorio', telRegEx, formCorreto);
 
-    $('input').each(function() {
-        if($(this).val() === '') {
-            $(this).addClass('errado');
-            formCorreto = false;
-        } else {
-            $(this).removeClass('errado');
-        }
-    });
 
 
 

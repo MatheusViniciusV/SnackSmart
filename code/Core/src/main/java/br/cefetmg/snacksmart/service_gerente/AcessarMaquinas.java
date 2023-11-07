@@ -20,6 +20,10 @@ public class AcessarMaquinas {
         return maquinaDAO.getAll();
     }
     
+    public MaquinaDTO getMaquinaPorCodigo(String codigo) {
+        
+    }
+    
     private int gerarCodigo(){
         int codigo = maquinaDAO.getAll().size() + 1;
         return codigo;

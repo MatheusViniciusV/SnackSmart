@@ -8,6 +8,7 @@ import br.cefetmg.snacksmart.service_gerente.ManterContratos;
 import br.cefetmg.snacksmart.service_gerente.ManterLocatarios;
 import br.cefetmg.snacksmart.service_locatario.AcessarContratos;
 import br.cefetmg.snacksmart.utils.enums.StatusContrato;
+import br.cefetmg.snacksmart.utils.enums.TipoMaquina;
 import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
 import java.io.IOException;
 
@@ -87,6 +88,7 @@ public class VisualizarContratos extends HttpServlet {
             }
         }
 
+        request.setAttribute("tipoMaquina", TipoMaquina.values());
         request.setAttribute("tipoStatus", StatusContrato.values());
         request.setAttribute("tipoOrdenacao", TiposOrdenacaoContrato.values());
         assert contratos != null;

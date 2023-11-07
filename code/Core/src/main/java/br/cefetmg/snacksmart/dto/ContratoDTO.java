@@ -129,7 +129,7 @@ public class ContratoDTO {
                 "dataInicio":"%s",
                 "dataFim":"%s",
                 "diaPagamento":"%s",
-                "valor":"%.2f",
+                "valor":%.2f,
                 "locatario":"%s",
                 "maquina":"",
                 "estado":"%s"
