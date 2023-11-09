@@ -1,11 +1,12 @@
 //Botões
-let informacaoMaquinaEl = document.querySelector("#informacaoMaquina");
-let remocaoMaquinaEl = document.querySelector("#remocaoMaquina");
 let atualizarDadosEl = document.getElementById("atualizarDados");
 let botoesCancelarEl = document.querySelectorAll(".cancelar");
 //Formularios
 let formAddMaquinaEl = document.querySelector("#formAddMaquina");
 let formAtualizarMaquinaEl = document.querySelector("#formAtualizarMaquina");
+let remocaoMaquinaEl = document.querySelector("#remocaoMaquina");
+let informacaoMaquinaEl = document.querySelector("#informacaoMaquina");
+let feedbackMaquinaEl = document.querySelector("#feedbackMaquina");
 let bloquearConteudoEl = document.getElementById("bloquearConteudo");
 //Verificações de CEP
 let localizacaoEl = document.getElementById("localizacao");
@@ -19,7 +20,6 @@ let removerMaquinaCodigoEl = document.getElementById("removerMaquinaCodigo");
 let atualizarMaquinaCodigoEl = document.getElementById("atualizarMaquinaCodigo");
 let feedbackMaquinaCodigoEl = document.getElementById("feedbackMaquinaCodigo");
 
-var usuarioAcessando; 
 var codigoInfoMaquina;
 var vetorMaquinaArray; 
 
@@ -53,10 +53,14 @@ function mostrarFormulario(tipoForm){
 }
 
 function fecharFormularios(){
-    formAddMaquinaEl.style.display = "none"; 
-    formAtualizarMaquinaEl.style.display = "none"; 
+    if (usuarioAcessando === "LOCADOR"){
+        formAddMaquinaEl.style.display = "none"; 
+        formAtualizarMaquinaEl.style.display = "none"; 
+        remocaoMaquinaEl.style.display = "none"; 
+    } else {      
+        feedbackMaquinaEl.style.display = "none"; 
+    }
     informacaoMaquinaEl.style.display = "none"; 
-    remocaoMaquinaEl.style.display = "none"; 
     bloquearConteudoEl.style.display = "none";
 }
 
@@ -103,10 +107,13 @@ function criarSlotMaquina(nome, codigo, status, img){
     novoBotaoInfoEl.classList.add("infoMaquina");
     novoBotaoRemoverEl.classList.add("removerMaquina");
     novoBotaoFeedbackEl.classList.add("enviarFeedback");
+    novoBotaoInfoEl.addEventListener("click", recuperaInfoSlotMaquina);
+    novoBotaoRemoverEl.addEventListener("click", recuperaInfoSlotMaquina);
     
     novoBotaoInfoEl.addEventListener("click", ButtonIClick);
     novoBotaoRemoverEl.addEventListener("click", ButtonRClick);
-
+    novoBotaoFeedbackEl.addEventListener("click", ButtonFClick);
+    
     novoBotaoFeedbackEl.innerHTML = "Enviar Feedback";
     novoBotaoInfoEl.innerHTML = "Informações da máquina";
     novoBotaoRemoverEl.innerHTML = "Remover Máquina";
@@ -114,7 +121,11 @@ function criarSlotMaquina(nome, codigo, status, img){
     novoh3.innerHTML = "COD-" + codigo;
     novoP.innerHTML = status; 
     
-    converterBytesEmImagem(img, novaImg);
+    if (img !== "")
+        converterBytesEmImagem(img, novaImg);
+    else 
+        novaImg.src = "img/NonePhoto.png";
+    
     novaImg.alt = "Imagem da "+ nome; 
     
     mainEl.insertBefore(novoSlot, articleBeforeEl);
@@ -130,12 +141,10 @@ function criarSlotMaquina(nome, codigo, status, img){
         novoSlot.appendChild(novoBotaoFeedbackEl);
   
    let slot = document.getElementById("addMaquinaSlot");
-   slot.remove();
-   criarSlotAddMaquina();
-   let infoEl = document.querySelectorAll(".infoMaquina");
-   infoEl.forEach(function(botao) {
-        botao.addEventListener("click", recuperaInfoSlotMaquina);
-   });
+   if (usuarioAcessando === "LOCADOR"){
+       slot.remove();
+       criarSlotAddMaquina();
+   }
 }
 
 function buscarCEP(cep, resposta) {
@@ -196,16 +205,18 @@ function exibirInformacaoMaquina(nomeMaquina, codeMaquina, statusMaquina, tipoMa
 
 function ButtonIClick() {
     maquinaEncontrada = encontrarMaquinaPorCodigo(codigoInfoMaquina, vetorMaquinaArray);
-    if (maquinaEncontrada !== null) {
-        exibirInformacaoMaquina(maquinaEncontrada.nome, maquinaEncontrada.codigo, maquinaEncontrada.status, 
-        maquinaEncontrada.tipo, maquinaEncontrada.localizacao, maquinaEncontrada.locatario);
-    } else {
-        exibirInformacaoMaquina("Maquina Não Definida", 0000, "Não definido","Refrigerada", "Rua José de Bessas, Venda Nova, Belo Horizonte, MG - 93084-111", "Waldir Braz");//FUNÇAO TESTE
-    }
+    exibirInformacaoMaquina(maquinaEncontrada.nome, maquinaEncontrada.codigo, maquinaEncontrada.status, 
+    maquinaEncontrada.tipo, maquinaEncontrada.localizacao, maquinaEncontrada.locatario);
     mostrarFormulario('informacaoMaquina');
 }
 function ButtonRClick() {
+    maquinaEncontrada = encontrarMaquinaPorCodigo(codigoInfoMaquina, vetorMaquinaArray);
+    removerMaquinaCodigoEl.value = maquinaEncontrada.codigo;
     mostrarFormulario('remocaoMaquina');
+}
+
+function ButtonFClick() {
+    mostrarFormulario('feedbackMaquina');
 }
 
 function recuperaInfoSlotMaquina() {
@@ -217,9 +228,9 @@ function recuperaInfoSlotMaquina() {
    return informacoeSlotMaquina;  
 }
 
-function encontrarMaquinaPorCodigo(codigoInfoMaquina, maquinas) {
+function encontrarMaquinaPorCodigo(codigo, maquinas) {
     for (let i = 0; i < maquinas.length; i++) {
-        if (maquinas[i].codigo === codigoInfoMaquina) {
+        if (maquinas[i].codigo === codigo) {
             return maquinas[i];
         }
     }
@@ -227,11 +238,13 @@ function encontrarMaquinaPorCodigo(codigoInfoMaquina, maquinas) {
 } 
 
 function retornarCodigo(botao, str) {
+    console.log('bingos');
     if (str === "rb"){
         let pai = botao.parentNode;
         let strCodigo = pai.children[1].textContent; 
         let codigo = strCodigo.slice(strCodigo.indexOf("-") + 1);
         removerMaquinaCodigoEl.value = codigo;
+        console.log(codigo);
         return codigo;
     } else {
         let avo = botao.parentNode.parentNode;
@@ -242,7 +255,7 @@ function retornarCodigo(botao, str) {
     }
 }
 
-function converterBytesEmImagem(bytes, imagemEl){
+/*function converterBytesEmImagem(bytes, imagemEl){
     try {
         let byteCharacters = atob(bytes);
         let byteNumbers = new Array(byteCharacters.length);
@@ -257,83 +270,41 @@ function converterBytesEmImagem(bytes, imagemEl){
     } catch(err){
         imagemEl.src = "img/NonePhoto.png";
     }  
+}*/
+function converterBytesEmImagem(bytes, imagemEl){
+    const blob = new Blob([new Uint8Array(bytes)]);
+    const url = URL.createObjectURL(blob);
+    imagemEl.src = url;
+    URL.revokeObjectURL(url);
 }
+function Main(){    
+    if (usuarioAcessando === "LOCADOR"){
+        preencherEl.forEach(function(botao) {
+            botao.addEventListener("blur", verificaPreenchido);
+        });
+
+        localizacaoEl.addEventListener("blur", function() {
+            buscarCEP(localizacaoEl, localizacaoTextEl);
+        });
+
+        novaLocalizacaoEl .addEventListener("blur", function() {
+            buscarCEP(novaLocalizacaoEl, novaLocalizacaoLabelEl);
+        });
+
+        atualizarDadosEl.addEventListener("click", function(event) {
+            fecharFormularios();
+            mostrarFormulario('formAtualizarMaquina'); 
+            retornarCodigo(event.target, "ab");
+        });  
+    }
 
 
-preencherEl.forEach(function(botao) {
-    botao.addEventListener("blur", verificaPreenchido);
-});
-
-localizacaoEl.addEventListener("blur", function() {
-    buscarCEP(localizacaoEl, localizacaoTextEl);
-});
-
-novaLocalizacaoEl .addEventListener("blur", function() {
-    buscarCEP(novaLocalizacaoEl, novaLocalizacaoLabelEl);
-});
-
-atualizarDadosEl.addEventListener("click", function(event) {
-    fecharFormularios();
-    mostrarFormulario('formAtualizarMaquina'); 
-    retornarCodigo(event.target, "ab");
-});;
-
-botoesCancelarEl.forEach(function(botao) {
-    botao.addEventListener("click", fecharFormularios);
-});
-
-
-
-function Main(){
-       
-    let maquina1 = {
-        nome: "Máquina de Salgadinhos",
-        cod: 2,
-        status: "Aguardando manutenção",
-        imagem: "img/NonePhoto.png"
-    };
-    let maquina2 = {
-        nome: "Máquina Coca-Cola",
-        cod: 4322,
-        status: "Em manutenção",
-        imagem: "img/NonePhoto.png"
-    };
-    let maquina3 = {
-        nome: "Promotional Machine",
-        cod: 3334,
-        status: "Disponível",
-        imagem: "img/NonePhoto.png"
-    };
-    let maquina4 = {
-        nome: "Máquina de Refrigerantes",
-        cod: 9302,
-        status: "Em funcionamento",
-        imagem: "img/NonePhoto.png"
-    };      
+    botoesCancelarEl.forEach(function(botao) {
+        botao.addEventListener("click", fecharFormularios);
+    });
     
-    //criarSlotMaquina(maquina1.nome, maquina1.cod, maquina1.status, maquina1.imagem);
     if (usuarioAcessando === "LOCADOR")
-        criarSlotAddMaquina();
-    
-    let removerMaquinaEl = document.querySelectorAll(".removerMaquina");
-    removerMaquinaEl.forEach(function(botao) {
-        botao.addEventListener("click", function(event){
-            retornarCodigo(event.target, "rb");
-        });
-    });
-    let infoMaquinaEl = document.querySelectorAll(".infoMaquina");
-    infoMaquinaEl.forEach(function(botao) {
-        botao.addEventListener("click", function(event){
-            retornarCodigo(event.target, "rb");
-        });
-    });
-    
-    let enviarFeedbackEl = document.querySelectorAll(".enviarFeedback");
-    enviarFeedbackEl.forEach(function(botao) {
-        botao.addEventListener("click", function(event){
-            retornarCodigo(event.target, "rb");
-        });
-    });
+        criarSlotAddMaquina();     
 }   
 
 Main(); 

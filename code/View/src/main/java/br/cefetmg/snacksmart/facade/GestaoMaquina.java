@@ -27,31 +27,28 @@ public class GestaoMaquina extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         AcessarMaquinas acesso = new AcessarMaquinas();
-        ArrayList<MaquinaDTO> vetorMaquinasSQL = null;
-        LocatarioDAO locatarioDAO = new LocatarioDAO();
         
+        ArrayList<MaquinaDTO> vetorMaquinasSQL = null;
+        LocatarioDAO locatarioDAO = new LocatarioDAO();     
         HttpSession session = request.getSession();
         TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario");
         
         if (tipoUsuario == TipoUsuario.LOCADOR){
             try {
                 vetorMaquinasSQL = acesso.getAllMaquinasGerente();
-            } catch (PersistenciaException ex) {
-                Logger.getLogger(GestaoMaquina.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
                 request.setAttribute("listaLocatarios", locatarioDAO.listarTodos()); //Isso deve estar incorreto no modelo MVC por enquanto             
             } catch (PersistenciaException ex) {
                 Logger.getLogger(GestaoMaquina.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            try {
-                LocatarioDTO locatario = (LocatarioDTO) session.getAttribute("usuario");
+            LocatarioDTO locatario = (LocatarioDTO) session.getAttribute("usuario");
+            try {               
                 vetorMaquinasSQL = acesso.getAllMaquinasLocatario(locatario.getId());
             } catch (PersistenciaException ex) {
                 Logger.getLogger(GestaoMaquina.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        request.setAttribute("usuarioAcessando", tipoUsuario);
         request.setAttribute("vetorMaquinas", vetorMaquinasSQL);
         request.getRequestDispatcher("WEB-INF/paginas/gestaoMaquina.jsp").forward(request, response);
     }

@@ -29,7 +29,7 @@ public class AcessarMaquinas {
     }
     
     private int gerarCodigo() throws PersistenciaException{
-        int codigo = maquinaDAO.acessarTodasMaquinas().size() + 1;
+        int codigo = maquinaDAO.acessarTodasMaquinasSemExcecoes().size() + 1;
         return codigo;
     }
     
@@ -47,7 +47,6 @@ public class AcessarMaquinas {
         try {
             MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, imagemBytes, tipo, localizacao, locatario, status); 
             maquinaDAO.adicionarMaquina(maquinaDTO);
-            throw new FormatoArquivoInvalidoException("O formato do arquivo é inválido.");
         } catch (FormatoArquivoInvalidoException e){
             MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, null, tipo, localizacao, locatario, status); 
             maquinaDAO.adicionarMaquina(maquinaDTO);
@@ -60,11 +59,11 @@ public class AcessarMaquinas {
 
     public void formAtualizarMaquina(int codigo, String novoNome, String novaLocalizacao, String novoLocatarioCPF, String statusStr, byte[]novaImagemBytes) throws PersistenciaException{              
         MaquinaDTO maquinaDTO = maquinaDAO.acessarMaquina(codigo); 
-        if (novoNome != null)
+        if (!"".equals(novoNome))
             maquinaDTO.setNome(novoNome);
-        if (novaLocalizacao != null)
+        if (!"".equals(novaLocalizacao))
             maquinaDTO.setLocalizacao(novaLocalizacao);             
-        if (novoLocatarioCPF != null){
+        if (!"".equals(novoLocatarioCPF)){
             LocatarioDAO locatarioDAO = new LocatarioDAO();
             LocatarioDTO novoLocatario = locatarioDAO.consultarPorCPF(novoLocatarioCPF);
             maquinaDTO.setLocatarioResponsavel(novoLocatario);
@@ -74,11 +73,10 @@ public class AcessarMaquinas {
 
         try {
             maquinaDTO.setImagem(novaImagemBytes);
-            maquinaDAO.atualizarMaquina(maquinaDTO);
-            throw new FormatoArquivoInvalidoException("O formato do arquivo é inválido.");
-        } catch (FormatoArquivoInvalidoException e){
-            maquinaDAO.atualizarMaquina(maquinaDTO);
-        }          
+        } catch (FormatoArquivoInvalidoException e) {
+            e.printStackTrace(); 
+        }
+        maquinaDAO.atualizarMaquina(maquinaDTO);
     } 
 }
  

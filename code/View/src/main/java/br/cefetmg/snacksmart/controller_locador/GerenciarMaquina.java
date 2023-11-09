@@ -46,7 +46,7 @@ public class GerenciarMaquina extends HttpServlet {
                 }
             case "remocaoMaquina":{               
                 String codigo = request.getParameter("removerMaquinaCodigo");
-            try {
+            try {   
                 acesso.remocaoMaquina( Integer.parseInt(codigo));
             } catch (PersistenciaException ex) {
                 Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
@@ -56,13 +56,13 @@ public class GerenciarMaquina extends HttpServlet {
             case "formAtualizarMaquina":{
                 String codigo = request.getParameter("atualizarMaquinaCodigo");
                 String novoNome = request.getParameter("novoNome");
-                String novoTipo = request.getParameter("novoTipo");
                 String novoLocatario = request.getParameter("novoLocatario");
-                String novaLocalizacao = request.getParameter("novaLocalizacao");        
+                String novaLocalizacao = request.getParameter("novaLocalizacao");  
+                String novoStatus = request.getParameter("status");  
                 Part imagemPart = request.getPart("novaImagem");
                 byte[] novaImagemBytes = imagemPart.getInputStream().readAllBytes();
             try {
-                acesso.formAtualizarMaquina(Integer.parseInt(codigo), novoNome, novoTipo, novoLocatario, novaLocalizacao, novaImagemBytes);
+                acesso.formAtualizarMaquina(Integer.parseInt(codigo), novoNome, novaLocalizacao, novoLocatario, novoStatus, novaImagemBytes);
             } catch (PersistenciaException ex) {
                 Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -77,12 +77,13 @@ public class GerenciarMaquina extends HttpServlet {
             }
             default:               
                 break;
-        }      
+        }   
         
-        LocatarioDAO locatarioDAO = new LocatarioDAO();
-        HttpSession session = request.getSession();
-        TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario");
         ArrayList<MaquinaDTO> vetorMaquinasSQL = null;
+        LocatarioDAO locatarioDAO = new LocatarioDAO();
+        HttpSession session = request.getSession();    
+        TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario");
+        
         if (tipoUsuario == TipoUsuario.LOCADOR){
             try {           
                 vetorMaquinasSQL =  acesso.getAllMaquinasGerente();
@@ -98,6 +99,8 @@ public class GerenciarMaquina extends HttpServlet {
                 Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        request.setAttribute("usuarioAcessando", tipoUsuario);
+        request.setAttribute("vetorMaquinas", vetorMaquinasSQL);
         request.getRequestDispatcher("WEB-INF/paginas/gestaoMaquina.jsp").forward(request, response);                
     }
 }

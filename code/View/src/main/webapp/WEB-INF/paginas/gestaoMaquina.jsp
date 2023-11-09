@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="br.cefetmg.snacksmart.dto.MaquinaDTO" %>
+ <%@page import="br.cefetmg.snacksmart.utils.enums.TipoUsuario"%>
 <%@page import="java.util.ArrayList" %>
 <%@include file="../../comuns/JSTL.jsp" %>
 <!DOCTYPE html>
@@ -17,8 +18,10 @@
         <h1 id="tituloDaPagina">Máquinas</h1>
         <div id="bloquearConteudo"></div>
         <main id="gestaoMaquinasMain">  
-            <% ArrayList<MaquinaDTO> listaMaquinas = (ArrayList<MaquinaDTO>) request.getAttribute("vetorMaquinas"); %>
-            <c:set var="usuarioAcessando" value="${tipoUsuario}" />
+            <% 
+                ArrayList<MaquinaDTO> listaMaquinas = (ArrayList<MaquinaDTO>) request.getAttribute("vetorMaquinas"); 
+                TipoUsuario tipoUsuario = (TipoUsuario) request.getAttribute("usuarioAcessando"); 
+            %>            
             <script>
                 var listaMaquinasJS = [
                     <c:forEach var="maquina" items="${listaMaquinas}">
@@ -124,33 +127,38 @@
                     <form action="GerenciarMaquina" method="post">
                         <input type="hidden" name="formSelecionado" value="feedbackMaquina">
                         <input type="hidden" name="feedbackMaquinaCodigo" id="feedbackMaquinaCodigo" value="">
-                        <input type="text" name="tituloFeedback" id="tituloFeedback" value="Título">
-                        <input type="text" name="mensagemFeedback" id="mensagemFeedback" value="Mensagem">
+                        <h1 id="h1Feedback">Enviar Feedback</h1>
+                        <textarea name="tituloFeedback" id="tituloFeedback" placeholder="Assunto"></textarea>
+                        <textarea name="mensagemFeedback" id="mensagemFeedback"  placeholder="Escreva a mensagem"></textarea>
                         <input type="checkbox" name="solicitarManutencao" id="solicitarManutencao"  value="solicitado" />
-                        <div class="botoesForm">
-                            <input class="botaoForm" name="remover" type="submit" value="ENVIAR FEEDBACK">
-                            <div class="botaoForm cancelar">Cancelar</div>
-                        </div>
+                        <label id="labelCheck">Solicitar manutenção da máquina</label>
+                        <input id="enviarFeedback" class="botaoForm" name="remover" type="submit" value="Enviar feedback">
+                        <div id="cancelarFeedback" class="botaoForm cancelar">Cancelar</div>
                     </form>
                 </article>
             </c:if>
             
             <article id="informacaoMaquina">       
                 
-                <h1 id="nomeMaquina">Máquina 01</h1>
-                <h1 id="codeMaquina">COD-001</h1>
-                <h2 id="locatarioMaquina">👤Locatário responsável: Geraldo Azeved</h2> 
-                <h2 id="LocalizacaoDaMaquina">📍Localização: Bahia, Salvador</h2>              
-                <h2 id="statusDinamicoH2">Status da Máquina: Disponível</h2> 
-                <h2 id="tipoMaquina">Tipo da Máquina: Refrigerada</h2>   
+                <h1 id="nomeMaquina"></h1>
+                <h1 id="codeMaquina"></h1>
+                <h2 id="locatarioMaquina"></h2> 
+                <h2 id="LocalizacaoDaMaquina"></h2>              
+                <h2 id="statusDinamicoH2"></h2> 
+                <h2 id="tipoMaquina"></h2>   
                 
                 <div class="botoesForm">
-                    <input class="botaoForm" id="atualizarDados" type="submit" value="Atualizar dados">
+                    <c:if test="${tipoUsuario == LOCADOR}">
+                        <input class="botaoForm" id="atualizarDados" type="submit" value="Atualizar dados">
+                    </c:if>
                     <div class="botaoForm cancelar">Voltar</div>
                 </div>
                 
             </article>
-        </main>             
+        </main>
+        <script>
+            var usuarioAcessando = '<c:out value="${tipoUsuario}"/>' ;
+        </script>    
         <script src="js/maquinaInfo.js"></script> 
         <!-- Carrega os locatarios -->
         <c:if test="${tipoUsuario == LOCADOR}">
@@ -184,7 +192,7 @@
                     {
                         nome: '${maquina.nome}',
                         codigo: '${maquina.codigo}',
-                        locatario: '${maquina.locatario}',
+                        locatario: '${maquina.locatario.nome}',
                         localizacao: '${maquina.localizacao}',
                         status: '${maquina.status}',
                         tipo: '${maquina.tipo}'
