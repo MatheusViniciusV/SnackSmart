@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="br.cefetmg.snacksmart.dto.MaquinaDTO" %>
- <%@page import="br.cefetmg.snacksmart.utils.enums.TipoUsuario"%>
+<%@page import="br.cefetmg.snacksmart.utils.enums.TipoUsuario"%>
 <%@page import="java.util.ArrayList" %>
 <%@include file="../../comuns/JSTL.jsp" %>
 <!DOCTYPE html>
@@ -19,29 +19,8 @@
         <div id="bloquearConteudo"></div>
         <main id="gestaoMaquinasMain">  
             <% 
-                ArrayList<MaquinaDTO> listaMaquinas = (ArrayList<MaquinaDTO>) request.getAttribute("vetorMaquinas"); 
                 TipoUsuario tipoUsuario = (TipoUsuario) request.getAttribute("usuarioAcessando"); 
             %>            
-            <script>
-                var listaMaquinasJS = [
-                    <c:forEach var="maquina" items="${listaMaquinas}">
-                        {
-                            nome: '<c:out value="${maquina.nome}" />',
-                            codigo: <c:out value="${maquina.codigo}" />,
-                            localizacao: '<c:out value="${maquina.localizacao}" />',
-                            locatario: '<c:out value="${maquina.locatario}" />',
-                            status: '<c:out value="${maquina.status}" />',
-                            tipo: '<c:out value="${maquina.tipo}" />',
-                            imagem: [
-                                <c:forEach var="onebyte" items="${maquina.imagem}">
-                                    '<c:out value="${onebyte}" />'<c:if test="${!loop.last}">,</c:if>
-                                </c:forEach>
-                            ]
-                        }<c:if test="${!loop.last}">, </c:if>
-                    </c:forEach>
-                ];
-
-            </script>
             <c:if test="${tipoUsuario == LOCADOR}">
                 <article id="formAddMaquina">               
                     <form action="GerenciarMaquina" method="post" enctype="multipart/form-data">                                 
@@ -60,7 +39,7 @@
                         </select><br>
 
                         <label id="labelImagem" class="imagem">Foto da máquina:</label>
-                        <input type="file" name="imagem" id="inputImagem" accept="image/png" class="imagem"  required ><br>
+                        <input type="file" name="imagem" id="inputImagem" accept="image/*" class="imagem"  required ><br>
 
                         <label id="locatarioInput">Locatário responsável:</label>
                         <select id="locatario" name="locatario" required>
@@ -94,12 +73,12 @@
                         <select id="status" name="status">
                             <option value="DISPONIVEL">Disponível</option>
                             <option value="ALUGADA">Alugada</option>
-                            <option value="EM_MANUTANCAO">Em manutenção</option>
+                            <option value="EM_MANUTENCAO">Em manutenção</option>
                             <option value="AGUARDANDO_MANUTENCAO">Aguardando manutenção</option>                       
                         </select><br>    
 
                         <label id="labelNovaImagen" class="imagem">Alterar foto da máquina:</label>
-                        <input id="inputNovaImagen" type="file" accept="image/png" class="imagem" name="novaImagem"><br>
+                        <input id="inputNovaImagen" type="file" accept="image/*" class="imagem" name="novaImagem"><br>
 
                         <input id="enviarformAtualizarMaquina"class="botaoForm" type="submit" value="Realizar Alterações">
                         <div id="cancelarformAtualizarMaquina" class="botaoForm cancelar">Cancelar</div>
@@ -178,7 +157,7 @@
         <c:forEach var="item" items="${vetorMaquinas}">
                 <script>
                     try {
-                        criarSlotMaquina("${item.nome}", "${item.codigo}", "${item.status}", "${item.imagem}");
+                        criarSlotMaquina("${item.nome}", "${item.codigo}", "${item.status}", "${item.getUrlImagem()}");
                     } catch (erro) {
                         console.log("Erro ao criar as máquinas: " + erro);
                     }

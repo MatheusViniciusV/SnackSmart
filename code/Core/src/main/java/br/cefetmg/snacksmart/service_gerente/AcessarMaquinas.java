@@ -10,6 +10,7 @@ import br.cefetmg.snacksmart.utils.enums.TipoMaquina;
 import java.util.ArrayList;
 //Exceptions
 import br.cefetmg.snacksmart.exceptions.service_maquinas.FormatoArquivoInvalidoException;
+import java.io.InputStream;
 
 
 public class AcessarMaquinas {    
@@ -33,17 +34,13 @@ public class AcessarMaquinas {
         return codigo;
     }
     
-    public void formAddMaquina(String nome, String tipoStr, String locatarioCPF, String localizacao, byte[] imagemBytes) throws PersistenciaException{
+    public void formAddMaquina(String nome, String tipoStr, String locatarioCPF, String localizacao, InputStream imagemBytes) throws PersistenciaException{
         int codigo = gerarCodigo();
         StatusMaquina status = StatusMaquina.DISPONIVEL;
         TipoMaquina tipo = TipoMaquina.fromString(tipoStr);
         LocatarioDTO locatario; 
         LocatarioDAO locatarioDAO = new LocatarioDAO();
-        if ("nenhum".equals(locatarioCPF))
-            locatario = null; 
-        else {    
-            locatario = locatarioDAO.consultarPorCPF(locatarioCPF);
-        }
+        locatario = locatarioDAO.consultarPorCPF(locatarioCPF);
         try {
             MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, imagemBytes, tipo, localizacao, locatario, status); 
             maquinaDAO.adicionarMaquina(maquinaDTO);
@@ -57,7 +54,7 @@ public class AcessarMaquinas {
         maquinaDAO.removerMaquina(codigo);
     }
 
-    public void formAtualizarMaquina(int codigo, String novoNome, String novaLocalizacao, String novoLocatarioCPF, String statusStr, byte[]novaImagemBytes) throws PersistenciaException{              
+    public void formAtualizarMaquina(int codigo, String novoNome, String novaLocalizacao, String novoLocatarioCPF, String statusStr, InputStream novaImagemBytes) throws PersistenciaException{              
         MaquinaDTO maquinaDTO = maquinaDAO.acessarMaquina(codigo); 
         if (!"".equals(novoNome))
             maquinaDTO.setNome(novoNome);
@@ -70,12 +67,11 @@ public class AcessarMaquinas {
         }
         StatusMaquina status = StatusMaquina.fromString(statusStr);
         maquinaDTO.setStatus(status);
-
-        try {
+        if (novaImagemBytes != null){    
             maquinaDTO.setImagem(novaImagemBytes);
-        } catch (FormatoArquivoInvalidoException e) {
-            e.printStackTrace(); 
-        }
+        } 
+        else 
+            maquinaDTO.setImagem(maquinaDTO.getImagem());
         maquinaDAO.atualizarMaquina(maquinaDTO);
     } 
 }

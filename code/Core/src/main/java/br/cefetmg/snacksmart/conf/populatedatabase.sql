@@ -26,6 +26,17 @@ VALUES(
 -- 
 -- Inserção de dados na tabela locatario
 -- 
+INSERT INTO `locatario`(
+    `nome`,
+    `senha`,
+    `cpf`
+)
+
+VALUES(
+    'Nenhum',
+    '0', 
+    '0',
+);
 
 INSERT INTO `locatario`(
     `nome`,

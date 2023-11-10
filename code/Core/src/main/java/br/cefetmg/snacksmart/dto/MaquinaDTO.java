@@ -1,16 +1,18 @@
 package br.cefetmg.snacksmart.dto;
 import br.cefetmg.snacksmart.utils.enums.StatusMaquina;
 import br.cefetmg.snacksmart.utils.enums.TipoMaquina;
+import java.io.InputStream;
 /* @author Arthur Milagres */
 public class MaquinaDTO {
     private String nome, localizacao;
     private LocatarioDTO locatarioResponsavel;
     private final int codigo;
     private final TipoMaquina tipo;
-    private byte[] imagem; 
+    private InputStream imagem; 
+    private String urlImagem;
     private StatusMaquina status;
 
-    public MaquinaDTO(String nome, int codigo, byte[] imagem, TipoMaquina tipo, String localizacao, LocatarioDTO locatario, StatusMaquina status){        
+    public MaquinaDTO(String nome, int codigo, InputStream imagem, TipoMaquina tipo, String localizacao, LocatarioDTO locatario, StatusMaquina status){        
         this.nome = nome;
         this.codigo = codigo;
         this.imagem = imagem;
@@ -38,7 +40,7 @@ public class MaquinaDTO {
         return codigo;
     }
     
-    public byte[] getImagem() {
+    public InputStream getImagem() {
         return imagem;
     }   
     
@@ -57,13 +59,19 @@ public class MaquinaDTO {
     public StatusMaquina getStatus() {
         return status;
     }
-      
+    public String getUrlImagem(){
+        return urlImagem;
+    }
     public void setNome(String novoNome) {
         nome = novoNome;
     }
     
-    public void setImagem(byte[] novaImagem) {
+    public void setImagem(InputStream novaImagem) {
         imagem = novaImagem;
+    }
+    
+    public void setUrlImagem(String imagem) {
+        urlImagem = imagem;
     }
     
     public void setLocalizacao(String novaLocalizacao) {

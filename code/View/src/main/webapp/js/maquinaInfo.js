@@ -23,8 +23,8 @@ let feedbackMaquinaCodigoEl = document.getElementById("feedbackMaquinaCodigo");
 var codigoInfoMaquina;
 var vetorMaquinaArray; 
 
-var vetorNomes = ["Nenhum"];
-var vetorCPF = ["0"];
+var vetorNomes = [];
+var vetorCPF = [];
 function selectDinamicoLocatario(){
     let locatarioEl = document.getElementById("locatario");
     let novoLocatarioEl = document.getElementById("novoLocatario");
@@ -119,13 +119,9 @@ function criarSlotMaquina(nome, codigo, status, img){
     novoBotaoRemoverEl.innerHTML = "Remover Máquina";
     novoh2.innerHTML = nome;
     novoh3.innerHTML = "COD-" + codigo;
-    novoP.innerHTML = status; 
+    novoP.innerHTML = formatarStatus(status); 
     
-    if (img !== "")
-        converterBytesEmImagem(img, novaImg);
-    else 
-        novaImg.src = "img/NonePhoto.png";
-    
+    converterBytesEmImagem(img, novaImg);
     novaImg.alt = "Imagem da "+ nome; 
     
     mainEl.insertBefore(novoSlot, articleBeforeEl);
@@ -205,8 +201,8 @@ function exibirInformacaoMaquina(nomeMaquina, codeMaquina, statusMaquina, tipoMa
 
 function ButtonIClick() {
     maquinaEncontrada = encontrarMaquinaPorCodigo(codigoInfoMaquina, vetorMaquinaArray);
-    exibirInformacaoMaquina(maquinaEncontrada.nome, maquinaEncontrada.codigo, maquinaEncontrada.status, 
-    maquinaEncontrada.tipo, maquinaEncontrada.localizacao, maquinaEncontrada.locatario);
+    exibirInformacaoMaquina(maquinaEncontrada.nome, maquinaEncontrada.codigo, formatarStatus(maquinaEncontrada.status), 
+    formatarTipo(maquinaEncontrada.tipo), maquinaEncontrada.localizacao, maquinaEncontrada.locatario);
     mostrarFormulario('informacaoMaquina');
 }
 function ButtonRClick() {
@@ -238,7 +234,6 @@ function encontrarMaquinaPorCodigo(codigo, maquinas) {
 } 
 
 function retornarCodigo(botao, str) {
-    console.log('bingos');
     if (str === "rb"){
         let pai = botao.parentNode;
         let strCodigo = pai.children[1].textContent; 
@@ -255,28 +250,14 @@ function retornarCodigo(botao, str) {
     }
 }
 
-/*function converterBytesEmImagem(bytes, imagemEl){
-    try {
-        let byteCharacters = atob(bytes);
-        let byteNumbers = new Array(byteCharacters.length);
-        for (let i = 0; i < byteCharacters.length; i++) {
-            byteNumbers[i] = byteCharacters.charCodeAt(i);
-        }
-        let byteArray = new Uint8Array(byteNumbers);
-        let blob = new Blob([byteArray], { type: 'image/png' }); 
-        let url = URL.createObjectURL(blob);
-
-        imagemEl.src = url;
-    } catch(err){
-        imagemEl.src = "img/NonePhoto.png";
+function converterBytesEmImagem(url, imagemEl){
+    if (url === "none" || url === ""){
+        imagemEl.src = "img/NonePhoto.png"; 
+    } else{
+        imagemEl.src = "data:image/*;base64," + url;
     }  
-}*/
-function converterBytesEmImagem(bytes, imagemEl){
-    const blob = new Blob([new Uint8Array(bytes)]);
-    const url = URL.createObjectURL(blob);
-    imagemEl.src = url;
-    URL.revokeObjectURL(url);
 }
+
 function Main(){    
     if (usuarioAcessando === "LOCADOR"){
         preencherEl.forEach(function(botao) {
@@ -294,6 +275,22 @@ function Main(){
         atualizarDadosEl.addEventListener("click", function(event) {
             fecharFormularios();
             mostrarFormulario('formAtualizarMaquina'); 
+            let statusLabelEl = document.getElementById('statusLabel'); 
+            let novoLocatarioInputEl = document.getElementById('novoLocatarioInput');
+            let locatarioMaquinaEl = document.getElementById("locatarioMaquina");
+            let statusMaquinaEl = document.getElementById("statusDinamicoH2");
+            statusLabelEl.textContent = "";
+            novoLocatarioInputEl.textContent = "";
+            let textoCompleto = statusMaquinaEl.textContent;
+            let posicaoInicio = textoCompleto.indexOf('Status da Máquina:') + 'Status da Máquina:'.length;
+            let parteDoTexto = textoCompleto.substring(posicaoInicio).trim();          
+            statusLabelEl.textContent += "Alterar status da máquina:" + "(" + parteDoTexto + ")";
+            
+            textoCompleto = locatarioMaquinaEl.textContent;
+            posicaoInicio = textoCompleto.indexOf('👤Locatário responsável:') + '👤Locatário responsável:'.length;
+            parteDoTexto = textoCompleto.substring(posicaoInicio).trim();  
+            novoLocatarioInputEl.textContent += "Alterar locatário:" + "(" + parteDoTexto + ")";
+            
             retornarCodigo(event.target, "ab");
         });  
     }
@@ -309,3 +306,30 @@ function Main(){
 
 Main(); 
 
+function formatarStatus(status) {
+    switch (status) {
+        case "ALUGADA":
+            return "Alugada";
+        case "EM_MANUTENCAO":
+            return "Em manutenção";
+        case "AGUARDANDO_MANUTENCAO":
+            return "Aguardando manutenção";
+        case "DISPONIVEL":
+            return "Disponível";
+        case "REMOVIDA":
+            return "Removida";
+        default:
+            return "Status Desconhecido";
+    }
+}
+
+function formatarTipo(tipo) {
+    switch (tipo) {
+        case "REFRIGERADA":
+            return "Refrigerada";
+        case "NAO_REFRIGERADA":
+            return "Não refrigerada";
+        default:
+            return "Status Desconhecido";
+    }
+}

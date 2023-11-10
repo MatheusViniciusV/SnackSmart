@@ -15,14 +15,16 @@ import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @WebServlet(name="GerenciarMaquina", urlPatterns={"/GerenciarMaquina"})
-@MultipartConfig(fileSizeThreshold = 1024 * 1024,  
-                 maxFileSize = 1024 * 1024 * 5,     
-                 maxRequestSize = 1024 * 1024 * 5 * 5)  
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1024,  
+                 maxFileSize = 1024 * 1024 * 25,     
+                 maxRequestSize = 1024 * 1024 * 125)  
 public class GerenciarMaquina extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,7 +38,7 @@ public class GerenciarMaquina extends HttpServlet {
                 String locatario = request.getParameter("locatario");
                 String localizacao = request.getParameter("localizacao");
                 Part imagemPart = request.getPart("imagem");
-                byte[] imagemBytes = imagemPart.getInputStream().readAllBytes();
+                InputStream imagemBytes = imagemPart.getInputStream();
             try {
                 acesso.formAddMaquina(nome, tipo, locatario, localizacao, imagemBytes);
             } catch (PersistenciaException ex) {
@@ -59,15 +61,23 @@ public class GerenciarMaquina extends HttpServlet {
                 String novoLocatario = request.getParameter("novoLocatario");
                 String novaLocalizacao = request.getParameter("novaLocalizacao");  
                 String novoStatus = request.getParameter("status");  
-                Part imagemPart = request.getPart("novaImagem");
-                byte[] novaImagemBytes = imagemPart.getInputStream().readAllBytes();
-            try {
-                acesso.formAtualizarMaquina(Integer.parseInt(codigo), novoNome, novaLocalizacao, novoLocatario, novoStatus, novaImagemBytes);
-            } catch (PersistenciaException ex) {
-                Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                    break;
+                Part novaImagemPart = request.getPart("novaImagem");
+                if (novaImagemPart != null && novaImagemPart.getSize() > 0) {
+                    InputStream novaImagemBytes = novaImagemPart.getInputStream();
+                    try {
+                        acesso.formAtualizarMaquina(Integer.parseInt(codigo), novoNome, novaLocalizacao, novoLocatario, novoStatus, novaImagemBytes);
+                    } catch (PersistenciaException ex) {
+                        Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else {
+                    try {
+                        acesso.formAtualizarMaquina(Integer.parseInt(codigo), novoNome, novaLocalizacao, novoLocatario, novoStatus, null);
+                    } catch (PersistenciaException ex) {
+                        Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+                    break;
+            }
             case "feedbackMaquina":{
                 String codigo = request.getParameter("feedbackMaquinaCodigo");
                 String titulo = request.getParameter("tituloFeedback");
@@ -100,6 +110,23 @@ public class GerenciarMaquina extends HttpServlet {
             }
         }
         request.setAttribute("usuarioAcessando", tipoUsuario);
+        for (MaquinaDTO maquina : vetorMaquinasSQL){
+            InputStream imagemStream = maquina.getImagem();
+            if (imagemStream != null){
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                byte[] buffer = new byte[1024];
+                int length;
+
+                while ((length = imagemStream.read(buffer)) != -1) {
+                    baos.write(buffer, 0, length);
+                }       
+                byte[] bytes = baos.toByteArray();
+                String base64String = java.util.Base64.getEncoder().encodeToString(bytes);
+                maquina.setUrlImagem(base64String);
+            } else {
+                maquina.setUrlImagem("none");
+            }
+        }
         request.setAttribute("vetorMaquinas", vetorMaquinasSQL);
         request.getRequestDispatcher("WEB-INF/paginas/gestaoMaquina.jsp").forward(request, response);                
     }

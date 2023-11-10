@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 /* @author Arthur Milagres  */
 
@@ -30,7 +32,7 @@ public class MaquinaDAO implements IMaquinaDAO {
             
             if (resultSet.next()) {
                 String nome = resultSet.getString("nome");
-                byte[] imagem = resultSet.getBytes("imagem");
+                InputStream imagem = resultSet.getBinaryStream("imagem");
                 TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
                 String localizacao = resultSet.getString("localizacao");
                 
@@ -68,7 +70,7 @@ public class MaquinaDAO implements IMaquinaDAO {
                 do {
                     int codigo = resultSet.getInt("codigo");
                     String nome = resultSet.getString("nome");
-                    byte[] imagem = resultSet.getBytes("imagem");
+                    InputStream imagem = resultSet.getBinaryStream("imagem");
                     TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
                     String localizacao = resultSet.getString("localizacao");
 
@@ -109,7 +111,7 @@ public class MaquinaDAO implements IMaquinaDAO {
                 do {
                     int codigo = resultSet.getInt("codigo");
                     String nome = resultSet.getString("nome");
-                    byte[] imagem = resultSet.getBytes("imagem");
+                    InputStream imagem = resultSet.getBinaryStream("imagem");
                     TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
                     String localizacao = resultSet.getString("localizacao");
 
@@ -148,7 +150,7 @@ public class MaquinaDAO implements IMaquinaDAO {
                 do {
                     int codigo = resultSet.getInt("codigo");
                     String nome = resultSet.getString("nome");
-                    byte[] imagem = resultSet.getBytes("imagem");
+                    InputStream imagem = resultSet.getBinaryStream("imagem");
                     TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
                     String localizacao = resultSet.getString("localizacao");
 
@@ -186,7 +188,7 @@ public class MaquinaDAO implements IMaquinaDAO {
                     
             preparedStatement.setString(1, maquina.getNome());
             preparedStatement.setInt(2, maquina.getCodigo());
-            preparedStatement.setBytes(3, maquina.getImagem());
+            preparedStatement.setBinaryStream(3, maquina.getImagem());
             preparedStatement.setString(4, maquina.getTipo().name());
             preparedStatement.setString(5, maquina.getLocalizacao());            
             preparedStatement.setInt(6, maquina.getLocatario().getId());           
@@ -214,7 +216,7 @@ public class MaquinaDAO implements IMaquinaDAO {
             PreparedStatement preparedStatement = conexao.prepareStatement(sql);
             
             preparedStatement.setString(1, updatedMaquina.getNome());
-            preparedStatement.setBytes(2, updatedMaquina.getImagem());
+            preparedStatement.setBinaryStream(2, updatedMaquina.getImagem());
             preparedStatement.setString(3, updatedMaquina.getTipo().name());
             preparedStatement.setString(4, updatedMaquina.getLocalizacao());
             preparedStatement.setInt(5, updatedMaquina.getLocatario().getId());
