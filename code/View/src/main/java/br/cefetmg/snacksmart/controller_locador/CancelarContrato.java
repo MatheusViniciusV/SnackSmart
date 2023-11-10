@@ -2,6 +2,8 @@ package br.cefetmg.snacksmart.controller_locador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -34,6 +36,8 @@ public class CancelarContrato extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "erro interno.");
         } catch (ClassNotFoundException ex) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "o contrato não existe.");
+        } catch (PersistenciaException e) {
+            throw new RuntimeException(e);
         }
     }
 }

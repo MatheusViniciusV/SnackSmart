@@ -6,12 +6,14 @@ package br.cefetmg.snacksmart.dao;
 
 import br.cefetmg.snacksmart.dto.ContratoDTO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
+import br.cefetmg.snacksmart.dto.MaquinaDTO;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
 import br.cefetmg.snacksmart.idao.IContratosDAO;
 import br.cefetmg.snacksmart.utils.DataManager;
 import br.cefetmg.snacksmart.utils.bd.ConnectionManager;
 import br.cefetmg.snacksmart.utils.enums.StatusContrato;
+import br.cefetmg.snacksmart.utils.enums.StatusMaquina;
 import br.cefetmg.snacksmart.utils.enums.TiposOrdenacaoContrato;
 
 import java.sql.*;
@@ -29,6 +31,7 @@ public class ContratosDAO implements IContratosDAO {
     public ContratoDTO consultarPorId(int id) throws SQLException {
         ConnectionManager conn = ConnectionManager.getInstance();
         ContratoDTO contrato = null;
+
         try {
             Connection conexao =  conn.getConnection();
 
@@ -46,14 +49,23 @@ public class ContratosDAO implements IContratosDAO {
                         rs.getInt("pk"),
                         rs.getDouble("valor"),
                         daoLocatario.consultarPorId(rs.getInt("locatario__fk")),
-                        null,
+                        daoMaquina.acessarMaquina(rs.getInt("maquina__fk")),
                         new DataManager(rs.getDate("data_inicio")),
                         new DataManager(rs.getDate("data_fim")),
                         new DataManager(rs.getDate("data_pagamento")),
                         rs.getString("observacoes"),
                         StatusContrato.valueOf(rs.getString("estado"))
                 );
+
+                if(contrato.getDataFim().antes(LocalDate.now())) {
+                    atualizarStatus(contrato.getId(), StatusContrato.EXPIRADO);
+
+                    MaquinaDTO maquina = contrato.getMaquina();
+                    maquina.setStatus(StatusMaquina.DISPONIVEL);
+                    daoMaquina.atualizarMaquina(maquina);
+                }
             }
+
 
             rs.close();
             pstmt.close();
@@ -72,20 +84,21 @@ public class ContratosDAO implements IContratosDAO {
         try {
             Connection conexao =  ConnectionManager.getInstance().getConnection();
 
-            String sql = "SELECT * FROM `contrato` WHERE `estado` = 'VIGENTE' ORDER BY `pk`";
+            String sql = "SELECT * FROM `contrato` ORDER BY `pk`";
 
             PreparedStatement pstmt = conexao.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 LocatarioDAO daoLocatario = new LocatarioDAO();
+                MaquinaDAO daoMaquina = new MaquinaDAO();
                 ContratoDTO contrato;
 
                 contrato = new ContratoDTO(
                         rs.getInt("pk"),
                         rs.getDouble("valor"),
                         daoLocatario.consultarPorId(rs.getInt("locatario__fk")),
-                        null,
+                        daoMaquina.acessarMaquina(rs.getInt("maquina__fk")),
                         new DataManager(rs.getDate("data_inicio")),
                         new DataManager(rs.getDate("data_fim")),
                         new DataManager(rs.getDate("data_pagamento")),
@@ -95,7 +108,10 @@ public class ContratosDAO implements IContratosDAO {
 
                 if(contrato.getDataFim().antes(LocalDate.now())) {
                     atualizarStatus(contrato.getId(), StatusContrato.EXPIRADO);
-                    continue;
+
+                    MaquinaDTO maquina = contrato.getMaquina();
+                    maquina.setStatus(StatusMaquina.DISPONIVEL);
+                    daoMaquina.atualizarMaquina(maquina);
                 }
 
                 contratos.add(contrato);
@@ -126,13 +142,14 @@ public class ContratosDAO implements IContratosDAO {
 
             while (rs.next()) {
                 LocatarioDAO daoLocatario = new LocatarioDAO();
+                MaquinaDAO daoMaquina = new MaquinaDAO();
                 ContratoDTO contrato;
 
                 contrato = new ContratoDTO(
                         rs.getInt("pk"),
                         rs.getDouble("valor"),
                         daoLocatario.consultarPorId(rs.getInt("locatario__fk")),
-                        null,
+                        daoMaquina.acessarMaquina(rs.getInt("maquina__fk")),
                         new DataManager(rs.getDate("data_inicio")),
                         new DataManager(rs.getDate("data_fim")),
                         new DataManager(rs.getDate("data_pagamento")),
@@ -142,7 +159,10 @@ public class ContratosDAO implements IContratosDAO {
 
                 if(contrato.getDataFim().antes(LocalDate.now())) {
                     atualizarStatus(contrato.getId(), StatusContrato.EXPIRADO);
-                    continue;
+
+                    MaquinaDTO maquina = contrato.getMaquina();
+                    maquina.setStatus(StatusMaquina.DISPONIVEL);
+                    daoMaquina.atualizarMaquina(maquina);
                 }
 
                 contratos.add(contrato);
@@ -175,13 +195,14 @@ public class ContratosDAO implements IContratosDAO {
 
             while (rs.next()) {
                 LocatarioDAO daoLocatario = new LocatarioDAO();
+                MaquinaDAO daoMaquina = new MaquinaDAO();
                 ContratoDTO contrato;
 
                 contrato = new ContratoDTO(
                         rs.getInt("pk"),
                         rs.getDouble("valor"),
                         daoLocatario.consultarPorId(rs.getInt("locatario__fk")),
-                        null,
+                        daoMaquina.acessarMaquina(rs.getInt("maquina__fk")),
                         new DataManager(rs.getDate("data_inicio")),
                         new DataManager(rs.getDate("data_fim")),
                         new DataManager(rs.getDate("data_pagamento")),
@@ -191,7 +212,13 @@ public class ContratosDAO implements IContratosDAO {
 
                 if(contrato.getDataFim().antes(LocalDate.now())) {
                     atualizarStatus(contrato.getId(), StatusContrato.EXPIRADO);
-                    continue;
+
+                    MaquinaDTO maquina = contrato.getMaquina();
+                    maquina.setStatus(StatusMaquina.DISPONIVEL);
+                    daoMaquina.atualizarMaquina(maquina);
+
+                    if(status != StatusContrato.EXPIRADO)
+                        continue;
                 }
 
                 contratos.add(contrato);
@@ -222,19 +249,81 @@ public class ContratosDAO implements IContratosDAO {
 
             while (rs.next()) {
                 LocatarioDAO daoLocatario = new LocatarioDAO();
+                MaquinaDAO daoMaquina = new MaquinaDAO();
                 ContratoDTO contrato;
 
                 contrato = new ContratoDTO(
                         rs.getInt("pk"),
                         rs.getDouble("valor"),
                         daoLocatario.consultarPorId(rs.getInt("locatario__fk")),
-                        null,
+                        daoMaquina.acessarMaquina(rs.getInt("maquina__fk")),
                         new DataManager(rs.getDate("data_inicio")),
                         new DataManager(rs.getDate("data_fim")),
                         new DataManager(rs.getDate("data_pagamento")),
                         rs.getString("observacoes"),
                         StatusContrato.valueOf(rs.getString("estado"))
                 );
+
+                if(contrato.getDataFim().antes(LocalDate.now())) {
+                    atualizarStatus(contrato.getId(), StatusContrato.EXPIRADO);
+
+                    MaquinaDTO maquina = contrato.getMaquina();
+                    maquina.setStatus(StatusMaquina.DISPONIVEL);
+                    daoMaquina.atualizarMaquina(maquina);
+
+                    if(status != StatusContrato.EXPIRADO)
+                        continue;
+                }
+
+                contratos.add(contrato);
+            }
+
+            rs.close();
+            pstmt.close();
+            conexao.close();
+        } catch (PersistenciaException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return contratos;
+    }
+
+    @Override
+    public ArrayList<ContratoDTO> filtra(TiposOrdenacaoContrato ordenacao) throws LocatarioInvalidoException, SQLException {
+        ArrayList<ContratoDTO> contratos = new ArrayList<>();
+
+        try {
+            Connection conexao =  ConnectionManager.getInstance().getConnection();
+
+            String sql = "SELECT *  FROM `contrato` " + ordenacao.toSql();
+
+            PreparedStatement pstmt = conexao.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                LocatarioDAO daoLocatario = new LocatarioDAO();
+                MaquinaDAO daoMaquina = new MaquinaDAO();
+                ContratoDTO contrato;
+
+                contrato = new ContratoDTO(
+                        rs.getInt("pk"),
+                        rs.getDouble("valor"),
+                        daoLocatario.consultarPorId(rs.getInt("locatario__fk")),
+                        daoMaquina.acessarMaquina(rs.getInt("maquina__fk")),
+                        new DataManager(rs.getDate("data_inicio")),
+                        new DataManager(rs.getDate("data_fim")),
+                        new DataManager(rs.getDate("data_pagamento")),
+                        rs.getString("observacoes"),
+                        StatusContrato.valueOf(rs.getString("estado"))
+                );
+
+                if(contrato.getDataFim().antes(LocalDate.now())) {
+                    atualizarStatus(contrato.getId(), StatusContrato.EXPIRADO);
+
+                    MaquinaDTO maquina = contrato.getMaquina();
+                    maquina.setStatus(StatusMaquina.DISPONIVEL);
+                    daoMaquina.atualizarMaquina(maquina);
+                }
 
                 contratos.add(contrato);
             }
@@ -278,8 +367,7 @@ public class ContratosDAO implements IContratosDAO {
             pstmt.setDouble(5, contrato.getValorPagamento());
             pstmt.setInt(6, 1);
             pstmt.setInt(7, contrato.getLocatario().getId());
-//            pstmt.setInt(8, contrato.getMaquina().getId);
-            pstmt.setInt(8, 1);
+            pstmt.setInt(8, contrato.getMaquina().getCodigo());
             pstmt.setString(9, contrato.getStatus().toString());
             pstmt.executeUpdate();
 
@@ -353,19 +441,29 @@ public class ContratosDAO implements IContratosDAO {
             preparedStatement.setLong(1, id);
             preparedStatement.setInt(2, locatario.getId());
             ResultSet rs = preparedStatement.executeQuery();
-            
+
+            MaquinaDAO daoMaquina = new MaquinaDAO();
+
             if(rs.next()) {
                 contrato = new ContratoDTO(
                         rs.getInt("pk"),
                         rs.getDouble("valor"),
                         locatario,
-                        null,
+                        daoMaquina.acessarMaquina(rs.getInt("maquina__fk")),
                         new DataManager(rs.getDate("data_inicio")),
                         new DataManager(rs.getDate("data_fim")),
                         new DataManager(rs.getDate("data_pagamento")),
                         rs.getString("observacoes"),
                         StatusContrato.valueOf(rs.getString("estado"))
                 );
+            }
+
+            if(contrato.getDataFim().antes(LocalDate.now())) {
+                atualizarStatus(contrato.getId(), StatusContrato.EXPIRADO);
+
+                MaquinaDTO maquina = contrato.getMaquina();
+                maquina.setStatus(StatusMaquina.DISPONIVEL);
+                daoMaquina.atualizarMaquina(maquina);
             }
             
             rs.close();

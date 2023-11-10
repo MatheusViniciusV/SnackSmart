@@ -3,7 +3,7 @@
     Author     : eloym
 */
 html, body {
-    overflow: hidden;
+    overflow: hidden !important;
 }
 
 main {
@@ -31,6 +31,61 @@ button.btn-confirmado {
     background-color: var(--cor-confimado); /* Cor verde */
     transition: background-color 0.2s; /* Duração da animação */
 }
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+header details {
+    position: relative;
+    margin: 3vh 5vw;
+    width: 6vw;
+}
+
+header details summary {
+    text-align: right;
+}
+
+header details summary h2 {
+    display: inline;
+    margin-left: .6rem
+}
+
+header details form{
+    background-color: var(--cor-principal);
+    border: .2rem solid var(--texto-cor-secundaria);
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: -10%;
+    top: 2rem;
+    width: 12vw;
+    align-items: stretch;
+    padding: 1rem;
+    border-radius: .6rem;
+    z-index: 3;
+
+}
+
+header details form input, header details form button, header details form select {
+    width: 95%;
+    box-sizing: content-box;
+    margin: .3rem 0;
+}
+
+header details form button {
+    padding: .2rem;
+    border-radius: .2rem;
+    border: none;
+
+}
+
+header details form a {
+    color: var(--cor-principal) !important;;
+}
+
 
 section#lista-contratos {
     display: flex;
@@ -60,7 +115,7 @@ article.contratos h3 {
 }
 
 article.contratos div {
-    margin: 9% auto;
+    margin: 6% auto;
     width: 80%;
     font-size: medium;
     font-weight: bold;
@@ -165,20 +220,20 @@ section#criar-contrato-form input.errado {
 }
 
 #criar-contrato-form #dados-locador, #criar-contrato-form #dados-locatario {
-    display: grid; 
-    grid-template-columns: 1.8fr 0.6fr; 
-    grid-template-rows: 0.4fr 1.6fr; 
-    gap: .6rem 3rem; 
+    display: grid;
+    grid-template-columns: 1.8fr 0.6fr;
+    grid-template-rows: 0.4fr 1.6fr;
+    gap: .6rem 3rem;
     grid-template-areas: 
         ". .";
-    height: 20%; 
+    height: 20%;
 }
 
 #criar-contrato-form #dados-contrato {
-    display: grid; 
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 0.4fr) 1.6fr;
-    gap: 2%; 
+    gap: 2%;
     grid-template-areas: 
     ". . ."
 }

@@ -1,15 +1,14 @@
 package br.cefetmg.snacksmart.utils.enums;
 
 public enum TiposOrdenacaoContrato {
-    MAIOR_ID("MAIOR_ID"),
     MENOR_ID("MENOR_ID"),
+    MAIOR_ID("MAIOR_ID"),
     MAIOR_VALOR("MAIOR_VALOR"),
     MENOR_VALOR("MENOR_VALOR"),
     FIM_MAIS_PROXIMO("FIM_MAIS_PROXIMO"),
     FIM_MAIS_DISTANTE("FIM_MAIS_DISTANTE"),
     INICIO_MAIS_RECENTE("INICIO_MAIS_RECENTE"),
-    INICIO_MAIS_DISTANTE("INICIO_MAIS_DISTANTE"),
-    TODOS("");
+    INICIO_MAIS_DISTANTE("INICIO_MAIS_DISTANTE");
 
     private final String tipo;
 

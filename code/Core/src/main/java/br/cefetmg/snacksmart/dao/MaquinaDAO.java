@@ -50,7 +50,81 @@ public class MaquinaDAO implements IMaquinaDAO {
             throw new PersistenciaException(e.getMessage(), e);
         }       
         return null;
-    }    
+    }
+
+    @Override
+    public MaquinaDTO acessarMaquina(int codigo, StatusMaquina status) throws PersistenciaException {
+        try {
+            Connection conexao = ConnectionManager.getInstance().getConnection();
+
+            String sql = "SELECT * FROM `maquina` WHERE `pk` = ? AND `status` = ?";
+
+            PreparedStatement preparedStatement = conexao.prepareStatement(sql);
+
+            preparedStatement.setInt(1, codigo);
+            preparedStatement.setString(2, status.toString());
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                String nome = resultSet.getString("nome");
+                byte[] imagem = resultSet.getBytes("imagem");
+                TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
+                String localizacao = resultSet.getString("localizacao");
+
+                int locatarioId = resultSet.getInt("locatario__fk");
+                LocatarioDAO locatarioDAO = new LocatarioDAO();
+                LocatarioDTO locatario = locatarioDAO.consultarPorId(locatarioId);
+                MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, imagem, tipo, localizacao, locatario, status);
+
+                resultSet.close();
+                preparedStatement.close();
+                conexao.close();
+
+                return maquinaDTO;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+        return null;
+    }
+
+    @Override
+    public MaquinaDTO acessarMaquinaTipoStatus(TipoMaquina tipo, StatusMaquina status) throws PersistenciaException {
+        try {
+            Connection conexao = ConnectionManager.getInstance().getConnection();
+
+            String sql = "SELECT * FROM `maquina` WHERE `tipo` = ? AND `status` = ?";
+
+            PreparedStatement preparedStatement = conexao.prepareStatement(sql);
+
+            preparedStatement.setString(1, tipo.toString());
+            preparedStatement.setString(2, status.toString());
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                int codigo = resultSet.getInt("pk");
+                String nome = resultSet.getString("nome");
+                byte[] imagem = resultSet.getBytes("imagem");
+                String localizacao = resultSet.getString("localizacao");
+
+                int locatarioId = resultSet.getInt("locatario__fk");
+                LocatarioDAO locatarioDAO = new LocatarioDAO();
+                LocatarioDTO locatario = locatarioDAO.consultarPorId(locatarioId);
+                MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, imagem, tipo, localizacao, locatario, status);
+
+                resultSet.close();
+                preparedStatement.close();
+                conexao.close();
+
+                return maquinaDTO;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+        return null;
+    }
     
     @Override
     public ArrayList<MaquinaDTO> acessarTodasMaquinas() throws PersistenciaException {

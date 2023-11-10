@@ -1,27 +1,32 @@
 let $contratoSelecionado;
 let $contratosMini = $('article.contratos');
-$contratosMini.click(function () {
-    let selecionado = $(this).hasClass('selecionado');
+function disponibilizarSelecaoDeContratos() {
+    $contratosMini = $('article.contratos');
+    $contratosMini.click(function () {
+        let selecionado = $(this).hasClass('selecionado');
 
-    $contratosMini.removeClass('selecionado');
+        $contratosMini.removeClass('selecionado');
 
-    if(!selecionado) {
-        $(this).addClass('selecionado');
-        $('#solicita-cancelar-contrato').removeClass('null');
-        $('#cancelar-contrato').removeClass('null');
-        $('#pdf-contrato').removeClass('null');
-        $('#pdf-contrato a').attr('href', 'PDFContrato?id=1');
-        $contratoSelecionado = $(this);
-    } else {
-        $('#solicita-cancelar-contrato').addClass('null');
-        $('#cancelar-contrato').addClass('null');
-        $('#pdf-contrato').addClass('null');
-        $('#pdf-contrato a').removeAttr('href');
-        $contratoSelecionado = null;
-    }
-        
-});
+        if(!selecionado) {
+            $(this).addClass('selecionado');
+            $('#solicita-cancelar-contrato').removeClass('null');
+            $('#cancelar-contrato').removeClass('null');
+            $('#pdf-contrato').removeClass('null');
+            $contratoSelecionado = $(this);
+            const urlDonwloadPDF = 'PDFContrato?id=' + $contratoSelecionado.data('id') + '&locatarioCPF=' + $contratoSelecionado.data('cpf');
+            $('#pdf-contrato a').attr('href', urlDonwloadPDF);
+        } else {
+            $('#solicita-cancelar-contrato').addClass('null');
+            $('#cancelar-contrato').addClass('null');
+            $('#pdf-contrato').addClass('null');
+            $('#pdf-contrato a').removeAttr('href');
+            $contratoSelecionado = null;
+        }
 
+    });
+}
+
+disponibilizarSelecaoDeContratos();
 
 let $solicitarCancelamentoBtn = $('#solicita-cancelar-contrato');
 
@@ -29,7 +34,7 @@ if($contratoSelecionado !== null) {
 
     $solicitarCancelamentoBtn.click(function () {
         const contratoData = {
-            locatarioCPF: "oi",
+            locatarioCPF: $contratoSelecionado.data('cpf'),
             id: $contratoSelecionado.data('id'),
         };
     

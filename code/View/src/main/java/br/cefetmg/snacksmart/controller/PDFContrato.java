@@ -1,6 +1,8 @@
 package br.cefetmg.snacksmart.controller;
 
 import java.io.IOException;
+
+import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,14 +29,12 @@ public class PDFContrato extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         AcessarContratos acessoContratos = new AcessarContratos();
-//        long contratoId =  Long.parseLong(request.getParameter("id"));
-//        String locatarioCPF = request.getParameter("locatarioCPF");
-        String locatarioCPF = "000.000.000-00";
-        long contratoId =  1;
+        int contratoId =  Integer.parseInt(request.getParameter("id"));
+        String locatarioCPF = request.getParameter("locatarioCPF");
         
         try {
             response.setContentType("application/pdf");
-            response.setHeader("Content-Disposition", "attachment; filename=contrato-" + request.getParameter("contratoId") + ".pdf");
+            response.setHeader("Content-Disposition", "attachment; filename=contrato-" + contratoId + ".pdf");
             acessoContratos.getPdf(contratoId, locatarioCPF, response.getOutputStream());
         } catch(ElementoNaoExisteException | LocatarioInvalidoException e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
@@ -42,7 +42,9 @@ public class PDFContrato extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro Interno.\n" + e.getMessage());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(PDFContrato.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (PersistenciaException e) {
+            throw new RuntimeException(e);
         }
-        
+
     }
 }

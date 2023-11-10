@@ -12,11 +12,15 @@ import java.time.LocalDate;
 import br.cefetmg.snacksmart.dto.ContratoDTO;
 import br.cefetmg.snacksmart.dto.GerenteDTO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
+import br.cefetmg.snacksmart.dto.MaquinaDTO;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
+import br.cefetmg.snacksmart.exceptions.dto.ParametroInvalidoException;
+import br.cefetmg.snacksmart.service_gerente.AcessarMaquinas;
 import br.cefetmg.snacksmart.service_gerente.ManterContratos;
 import br.cefetmg.snacksmart.service_gerente.ManterGerente;
 import br.cefetmg.snacksmart.service_gerente.ManterLocatarios;
 import br.cefetmg.snacksmart.utils.DataManager;
+import br.cefetmg.snacksmart.utils.enums.TipoMaquina;
 import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -36,12 +40,14 @@ public class CriarContrato extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        Gson gson = new Gson();
         ManterContratos service = new ManterContratos();
         ManterLocatarios acessoLocatarios = new ManterLocatarios();
         ManterGerente acessoGerente = new ManterGerente();
+        AcessarMaquinas acessoMaquinas = new AcessarMaquinas();
 
         String locatarioCPF = request.getParameter("cpfLocatario");
+        int codigoMaquina = Integer.parseInt(request.getParameter("codigoMaquina"));
+        TipoMaquina tipoMaquina = TipoMaquina.valueOf(request.getParameter("tipoMaquina"));
         DataManager dataInicio = new DataManager(request.getParameter("dataInicio"));
         DataManager dataFim = new DataManager(request.getParameter("dataFim"));
         DataManager dataPagamento = null;
@@ -59,11 +65,16 @@ public class CriarContrato extends HttpServlet {
         try {
             LocatarioDTO locatario = acessoLocatarios.buscaPorCpf(locatarioCPF);
             GerenteDTO gerente = acessoGerente.obterGerente();
+            MaquinaDTO maquina = acessoMaquinas.getMaquinaPorCodigo(codigoMaquina);
+
+            if(maquina.getTipo() != tipoMaquina) {
+                throw new ParametroInvalidoException("a máquina " + maquina.getCodigo() + " não é do tipo " + tipoMaquina);
+            }
 
             ContratoDTO contrato = new ContratoDTO(valor,
                     gerente,
                     locatario,
-                    null,
+                    maquina,
                     dataInicio, dataFim, dataPagamento,
                     observacoes);
 
@@ -75,6 +86,8 @@ public class CriarContrato extends HttpServlet {
 
         } catch (PersistenciaException e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "erro ao criar contrato");
+        } catch (ParametroInvalidoException e) {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }
     }
 }

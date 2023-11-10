@@ -59,7 +59,8 @@ public class VisualizarContratos extends HttpServlet {
                 }
             }
         } else {
-            StatusContrato status = StatusContrato.valueOf(request.getParameter("status"));
+            String filtroStatus = request.getParameter("status");
+            StatusContrato status = (filtroStatus.equals("TODOS")) ? null : StatusContrato.valueOf(filtroStatus);
             TiposOrdenacaoContrato ordenacao = TiposOrdenacaoContrato.valueOf(request.getParameter("ordenacao"));
             ManterContratos acesso = new ManterContratos();
             
@@ -80,9 +81,7 @@ public class VisualizarContratos extends HttpServlet {
                 
                 try {
                     contratos = acesso.filtraContratos(locatario, status, ordenacao);
-                } catch (LocatarioInvalidoException ex) {
-                    Logger.getLogger(VisualizarContratos.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SQLException ex) {
+                } catch (LocatarioInvalidoException | SQLException ex) {
                     Logger.getLogger(VisualizarContratos.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

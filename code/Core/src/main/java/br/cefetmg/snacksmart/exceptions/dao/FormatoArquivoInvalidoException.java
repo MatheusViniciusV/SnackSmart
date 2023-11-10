@@ -1,4 +1,4 @@
-package br.cefetmg.snacksmart.exceptions.service_maquinas;
+package br.cefetmg.snacksmart.exceptions.dao;
 
 public class FormatoArquivoInvalidoException extends RuntimeException{
     public FormatoArquivoInvalidoException() {

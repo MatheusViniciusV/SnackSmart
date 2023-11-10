@@ -26,12 +26,43 @@
     <body>
         <%@include file="../../comuns/retornarInicial.jsp" %>
         <main>
-            <!-- TODO fazer essa lista aparecer de maneira dinamica -->
-            <h1>Contratos </h1>
+            <header>
+                <h1>Contratos </h1>
+                <details>
+                    <summary><h2>Filtrar</h2></summary>
+                    <form id="filtrar-form" action="visualizarContratos" method="get">
+                        <c:if test="${tipoUsuario == LOCADOR}">
+                            <label>
+                                CPF do Locatário:
+                                <input type="text" name="cpf" placeholder="000.000.000-00" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
+                            </label>
+                        </c:if>
+                        <label>
+                            Ordenar por:
+                            <select name="ordenacao">
+                                <c:forEach var="tipo" items="${tipoOrdenacao}">
+                                    <option value="${tipo.value()}">${tipo.toString().toLowerCase()}</option>
+                                </c:forEach>
+                            </select>
+                        </label>
+                        <label>
+                            Exibir estado:
+                            <select name="status">
+                                <c:forEach var="tipo" items="${tipoStatus}">
+                                    <option value="${tipo.toString()}">${tipo.toString().toLowerCase()}</option>
+                                </c:forEach>
+                                <option value="TODOS">todos os estados</option>
+                            </select>
+                        </label>
+                        <button id="filtrar">Buscar</button>
+                        <button><a href="visualizarContratos">Limpar busca</a></button>
+                    </form>
+                </details>
+            </header>
             <section id="lista-contratos">
                 <c:forEach var="contrato" items="${contratos}">
 
-                    <article class="contratos" id="contrato-${contrato.getId()}" data-id="${contrato.getId()}">
+                    <article class="contratos" id="contrato-${contrato.getId()}" data-id="${contrato.getId()}" data-cpf="${contrato.getLocatario().getCPF()}">
                         <h3>Contrato ${contrato.getId()}</h3>
                         <c:if test="${tipoUsuario == LOCADOR}">
                             <div>Locatario: ${contrato.getLocatario()}</div>
@@ -40,6 +71,7 @@
                         <div>Data fim: ${contrato.getDataFim()}</div>
                         <div>Dia do pagamento: ${contrato.getDataPagamento().getDia()}</div>
                         <div>Valor: ${contrato.printValorPagamento()}</div>
+                        <div>Máquina: ${contrato.getMaquina().getCodigo()}</div>
                         <div>Estados:
                             <span class="${contrato.getStatus().toString().toLowerCase()}">
                                 ${contrato.getStatus().toString().toLowerCase()}
@@ -48,34 +80,6 @@
                     </article>
                 </c:forEach>
             </section>
-            
-            <form action="visualizarContratos" method="get">
-                <c:if test="${tipoUsuario == LOCADOR}">
-                    <label>
-                        CPF do Locatário:
-                        <input type="text" name="cpf">
-                    </label>
-                </c:if>
-                <label>
-                    Ordenar por:    
-                    <select name="ordenacao">
-                        <c:forEach var="tipo" items="${tipoOrdenacao}">
-                            <option value="${tipo.value()}">${tipo.toString()}</option>
-                        </c:forEach>
-                    </select>
-                </label>
-                <label>
-                    Exibir estado:    
-                    <select name="status">
-                        <c:forEach var="tipo" items="${tipoStatus}">
-                            <option value="${tipo.toString()}">${tipo.toString().toLowerCase()}</option>
-                        </c:forEach>
-                        <option value="todos">todos os estados</option>
-                    </select>
-                </label>
-                <button id="filtrar">Buscar</button>
-                <button><a href="visualizarContratos">Limpar busca</a></button>
-            </form>
             
             <c:if test="${tipoUsuario == LOCADOR}">
                 <section id="criar-contrato-form" class="oculto">
@@ -120,7 +124,7 @@
                             </label>
                             <label>
                                 Tipo de máquina: <br>
-                                <select>
+                                <select name="tipo-maquina">
                                     <c:forEach var="tipo" items="${tipoMaquina}">
                                         <option value="${tipo.toString()}">${tipo.toString().toLowerCase().replace('_',' ')}</option>
                                     </c:forEach>

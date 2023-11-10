@@ -29,6 +29,8 @@ public interface IContratosDAO {
     
     ArrayList<ContratoDTO> filtra(StatusContrato status, TiposOrdenacaoContrato ordenacao) throws LocatarioInvalidoException, SQLException;
 
+    ArrayList<ContratoDTO> filtra(TiposOrdenacaoContrato ordenacao) throws LocatarioInvalidoException, SQLException;
+
     ArrayList<ContratoDTO> filtra(LocatarioDTO locatario, StatusContrato status, TiposOrdenacaoContrato ordenacao) throws LocatarioInvalidoException, SQLException;
     
     ContratoDTO registraContrato(ContratoDTO contrato) throws SQLException;

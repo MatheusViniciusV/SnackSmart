@@ -9,7 +9,7 @@ import br.cefetmg.snacksmart.utils.enums.StatusMaquina;
 import br.cefetmg.snacksmart.utils.enums.TipoMaquina;
 import java.util.ArrayList;
 //Exceptions
-import br.cefetmg.snacksmart.exceptions.service_maquinas.FormatoArquivoInvalidoException;
+import br.cefetmg.snacksmart.exceptions.dao.FormatoArquivoInvalidoException;
 
 
 public class AcessarMaquinas {    
@@ -26,7 +26,15 @@ public class AcessarMaquinas {
     public MaquinaDTO getMaquinaPorCodigo(int codigo) throws PersistenciaException {
         return maquinaDAO.acessarMaquina(codigo);
     }
-    
+
+    public MaquinaDTO getMaquinaPorCodigoStatus(int codigo, StatusMaquina status) throws PersistenciaException {
+        return maquinaDAO.acessarMaquina(codigo, status);
+    }
+
+    public MaquinaDTO getMaquinaPorTipoStatus(TipoMaquina tipo, StatusMaquina status) throws PersistenciaException {
+        return maquinaDAO.acessarMaquinaTipoStatus(tipo, status);
+    }
+
     private int gerarCodigo() throws PersistenciaException{
         int codigo = maquinaDAO.acessarTodasMaquinas().size() + 1;
         return codigo;

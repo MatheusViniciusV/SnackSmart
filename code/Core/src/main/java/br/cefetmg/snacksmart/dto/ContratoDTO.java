@@ -7,6 +7,7 @@ import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.utils.DataManager;
 import br.cefetmg.snacksmart.utils.enums.StatusContrato;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  *
@@ -131,13 +132,14 @@ public class ContratoDTO {
                 "diaPagamento":"%s",
                 "valor":%.2f,
                 "locatario":"%s",
-                "maquina":"",
+                "maquina":%s,
                 "estado":"%s"
             }
         }
         """;
 
-        return String.format(forma,
+        return String.format(Locale.US,
+                forma,
                 id,
                 observacoes,
                 dataInicio,
@@ -145,6 +147,7 @@ public class ContratoDTO {
                 dataPagamento.getDia(),
                 valor,
                 locatario,
+                maquina.toJson(),
                 status);
     }
 }

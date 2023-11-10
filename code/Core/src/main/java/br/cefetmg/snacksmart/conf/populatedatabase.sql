@@ -121,7 +121,7 @@ VALUES (
 );
 
 
-INSERT INTO `maquina` (
+INSERT INTO `maquina`(
     `nome`,
     `codigo`, 
     `localizacao`,
