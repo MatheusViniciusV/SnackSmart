@@ -9,6 +9,7 @@ import br.cefetmg.snacksmart.utils.enums.StatusMaquina;
 import br.cefetmg.snacksmart.utils.enums.TipoMaquina;
 import java.util.ArrayList;
 //Exceptions
+import java.io.InputStream;
 import br.cefetmg.snacksmart.exceptions.dao.FormatoArquivoInvalidoException;
 
 
@@ -18,8 +19,13 @@ public class AcessarMaquinas {
         maquinaDAO = new MaquinaDAO();
     }
     
-    public ArrayList<MaquinaDTO> getAllMaquinas() throws PersistenciaException{
+    public ArrayList<MaquinaDTO> getAllMaquinasGerente() throws PersistenciaException{
         ArrayList maquinas = maquinaDAO.acessarTodasMaquinas();
+        return maquinas;
+    }
+    
+    public ArrayList<MaquinaDTO> getAllMaquinasLocatario(int locatarioId) throws PersistenciaException{
+        ArrayList maquinas = maquinaDAO.acessarTodasMaquinas(locatarioId);
         return maquinas;
     }
     
@@ -36,25 +42,20 @@ public class AcessarMaquinas {
     }
 
     private int gerarCodigo() throws PersistenciaException{
-        int codigo = maquinaDAO.acessarTodasMaquinas().size() + 1;
+        int codigo = maquinaDAO.acessarTodasMaquinasSemExcecoes().size() + 1;
         return codigo;
     }
     
-    public void formAddMaquina(String nome, String tipoStr, String locatarioCPF, String localizacao, byte[] imagemBytes) throws PersistenciaException{
+    public void formAddMaquina(String nome, String tipoStr, String locatarioCPF, String localizacao, InputStream imagemBytes) throws PersistenciaException{
         int codigo = gerarCodigo();
         StatusMaquina status = StatusMaquina.DISPONIVEL;
         TipoMaquina tipo = TipoMaquina.fromString(tipoStr);
         LocatarioDTO locatario; 
         LocatarioDAO locatarioDAO = new LocatarioDAO();
-        if ("nenhum".equals(locatarioCPF))
-            locatario = null; 
-        else {    
-            locatario = locatarioDAO.consultarPorCPF(locatarioCPF);
-        }
+        locatario = locatarioDAO.consultarPorCPF(locatarioCPF);
         try {
             MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, imagemBytes, tipo, localizacao, locatario, status); 
             maquinaDAO.adicionarMaquina(maquinaDTO);
-            throw new FormatoArquivoInvalidoException("O formato do arquivo é inválido.");
         } catch (FormatoArquivoInvalidoException e){
             MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, null, tipo, localizacao, locatario, status); 
             maquinaDAO.adicionarMaquina(maquinaDTO);
@@ -65,27 +66,25 @@ public class AcessarMaquinas {
         maquinaDAO.removerMaquina(codigo);
     }
 
-    public void formAtualizarMaquina(int codigo, String novoNome, String novaLocalizacao, String novoLocatarioCPF, String statusStr, byte[]novaImagemBytes) throws PersistenciaException{              
+    public void formAtualizarMaquina(int codigo, String novoNome, String novaLocalizacao, String novoLocatarioCPF, String statusStr, InputStream novaImagemBytes) throws PersistenciaException{              
         MaquinaDTO maquinaDTO = maquinaDAO.acessarMaquina(codigo); 
-        if (novoNome != null)
+        if (!"".equals(novoNome))
             maquinaDTO.setNome(novoNome);
-        if (novaLocalizacao != null)
+        if (!"".equals(novaLocalizacao))
             maquinaDTO.setLocalizacao(novaLocalizacao);             
-        if (novoLocatarioCPF != null){
+        if (!"".equals(novoLocatarioCPF)){
             LocatarioDAO locatarioDAO = new LocatarioDAO();
             LocatarioDTO novoLocatario = locatarioDAO.consultarPorCPF(novoLocatarioCPF);
             maquinaDTO.setLocatarioResponsavel(novoLocatario);
         }
         StatusMaquina status = StatusMaquina.fromString(statusStr);
         maquinaDTO.setStatus(status);
-
-        try {
+        if (novaImagemBytes != null){    
             maquinaDTO.setImagem(novaImagemBytes);
-            maquinaDAO.atualizarMaquina(maquinaDTO);
-            throw new FormatoArquivoInvalidoException("O formato do arquivo é inválido.");
-        } catch (FormatoArquivoInvalidoException e){
-            maquinaDAO.atualizarMaquina(maquinaDTO);
-        }          
+        } 
+        else 
+            maquinaDTO.setImagem(maquinaDTO.getImagem());
+        maquinaDAO.atualizarMaquina(maquinaDTO);
     } 
 }
  

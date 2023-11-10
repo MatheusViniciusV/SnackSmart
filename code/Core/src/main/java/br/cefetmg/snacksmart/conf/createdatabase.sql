@@ -87,7 +87,7 @@ CREATE TABLE `maquina` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `nome` VARCHAR(128) NULL,
     `codigo` INT, 
-    `imagem` BLOB NULL,
+    `imagem` LONGBLOB NULL,
     `localizacao` VARCHAR(256) NULL,
     `aluguel` FLOAT NOT NULL,
     `locatario__fk` INT NULL,
