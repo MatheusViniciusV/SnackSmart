@@ -33,18 +33,15 @@ public class MaquinaDAO implements IMaquinaDAO {
                 String nome = resultSet.getString("nome");
                 InputStream imagem = resultSet.getBinaryStream("imagem");
                 TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
+                int valor = 0;
                 String localizacao = resultSet.getString("localizacao");
                 
                 int locatarioId = resultSet.getInt("locatario__fk");               
                 LocatarioDAO locatarioDAO = new LocatarioDAO();
                 LocatarioDTO locatario = locatarioDAO.consultarPorId(locatarioId);
                 StatusMaquina status = StatusMaquina.valueOf(resultSet.getString("status"));
-                MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, imagem, tipo, localizacao, locatario, status);
-                
-                resultSet.close();
-                preparedStatement.close();
-                conexao.close();
-                
+                MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, imagem, tipo, valor, localizacao, locatario, status);
+                EstabelecerConexao.fecharConexao(conexao);
                 return maquinaDTO;
             }
         } catch (Exception e) {
@@ -71,6 +68,7 @@ public class MaquinaDAO implements IMaquinaDAO {
                 String nome = resultSet.getString("nome");
                 byte[] imagem = resultSet.getBytes("imagem");
                 TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
+                int valor = 0;
                 String localizacao = resultSet.getString("localizacao");
 
                 int locatarioId = resultSet.getInt("locatario__fk");
@@ -193,61 +191,17 @@ public class MaquinaDAO implements IMaquinaDAO {
 
                     StatusMaquina status = StatusMaquina.valueOf(resultSet.getString("status"));
 
-                    MaquinaDTO maquina = new MaquinaDTO(nome, codigo, imagem, tipo, localizacao, locatario, status);
-                    maquinasVetor.add(maquina);
-                } while (resultSet.next());
-            }           
-            resultSet.close();
-            preparedStatement.close();
-            conexao.close();    
-            
-            return maquinasVetor; 
-            
-        }  catch (Exception e) {
-            e.printStackTrace();
-            throw new PersistenciaException(e.getMessage(), e);
+                MaquinaDTO maquina = new MaquinaDTO(nome, codigo, imagem, tipo, localizacao, locatario, status);
+                maquinasVetor.add(maquina);
+            }
+            EstabelecerConexao.fecharConexao(conexao);       
+        } catch (SQLException e) {
+            System.out.print("Não foi possivel realizar tal ação: " + e);
+            EstabelecerConexao.fecharConexao(conexao); 
         }
-    } 
-    
-    public ArrayList<MaquinaDTO> acessarTodasMaquinasSemExcecoes() throws PersistenciaException {
-        try{
-            Connection conexao = ConnectionManager.getInstance().getConnection();
-            
-            String sql = "SELECT * FROM maquina";
-            PreparedStatement preparedStatement = conexao.prepareStatement(sql);
-                                 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            ArrayList<MaquinaDTO> maquinasVetor = null; 
-            if (resultSet.next()) {
-                maquinasVetor = new ArrayList<>();
-                do {
-                    int codigo = resultSet.getInt("codigo");
-                    String nome = resultSet.getString("nome");
-                    InputStream imagem = resultSet.getBinaryStream("imagem");
-                    TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
-                    String localizacao = resultSet.getString("localizacao");
-
-                    int locatarioId = resultSet.getInt("locatario__fk");
-                    LocatarioDAO locatarioDAO = new LocatarioDAO();
-                    LocatarioDTO locatario = locatarioDAO.consultarPorId(locatarioId);
-
-                    StatusMaquina status = StatusMaquina.valueOf(resultSet.getString("status"));
-
-                    MaquinaDTO maquina = new MaquinaDTO(nome, codigo, imagem, tipo, localizacao, locatario, status);
-                    maquinasVetor.add(maquina);
-                } while (resultSet.next());
-            }           
-            resultSet.close();
-            preparedStatement.close();
-            conexao.close();    
-            
-            return maquinasVetor; 
-            
-        }  catch (Exception e) {
-            e.printStackTrace();
-            throw new PersistenciaException(e.getMessage(), e);
-        }
-    }
+        EstabelecerConexao.fecharConexao(conexao);
+        return maquinasVetor;
+    }  
     
     @Override
     public void adicionarMaquina(MaquinaDTO maquina) throws PersistenciaException {      

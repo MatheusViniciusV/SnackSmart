@@ -37,6 +37,8 @@ public class GerFinanceiro extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
 
             double recebimento = 0.00, saldo, gasto = 0.00;
 
@@ -59,7 +61,7 @@ public class GerFinanceiro extends HttpServlet {
                 
                 for (MaquinaDTO m : listaMaquinas){
                 
-                    //gasto += m.getValor();
+                    gasto += m.getValor() ;
                 }
             }
             catch(Exception e){}
@@ -71,13 +73,13 @@ public class GerFinanceiro extends HttpServlet {
             String dados[] = new String[3];
             dados[0] = Double.toString(recebimento);
             dados[1] = Double.toString(gasto);
-            dados[2] = Double.toString(saldo);            
+            dados[2] = Double.toString(saldo);
 
             request.setAttribute("dados", dados);
             RequestDispatcher d = request.getRequestDispatcher("FinanceiroGerente.jsp");
             d.forward(request, response);
 
-        
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
