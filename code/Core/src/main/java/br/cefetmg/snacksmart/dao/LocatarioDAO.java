@@ -182,7 +182,7 @@ public class LocatarioDAO implements ILocatarioDAO {
         try {
             Connection connection = ConnectionManager.getInstance().getConnection();
 
-            String sql = "SELECT * FROM locatario WHERE cpf = ?";
+            String sql = "SELECT * FROM locatario WHERE `cpf` = ?";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, CPF);

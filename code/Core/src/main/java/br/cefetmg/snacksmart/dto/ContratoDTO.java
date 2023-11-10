@@ -7,6 +7,7 @@ import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.utils.DataManager;
 import br.cefetmg.snacksmart.utils.enums.StatusContrato;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class ContratoDTO {
     private int id;
-    private double valor;
+    private Double valor;
     private StatusContrato status;
     private DataManager dataInicio, dataExpiracao, dataPagamento;
     private String observacoes;
@@ -24,53 +25,14 @@ public class ContratoDTO {
 
     public ContratoDTO(int id,
                        double valor,
-//                       LocatarioDTO locatario,
-//            MaquinaDTO maquina,
-                       DataManager dataInicio, DataManager dataExpiracao, DataManager dataPagamento,
-                       String observacoes) throws PersistenciaException {
-
-        this.id = id;
-        this.valor = valor;
-        this.dataExpiracao = dataExpiracao;
-        this.dataInicio = dataInicio;
-        this.dataPagamento = dataPagamento;
-        this.observacoes = observacoes;
-//        this.locatario = locatario;
-
-        IGerenteDAO daoGerente = new GerenteDAO();
-        this.gerente = daoGerente.get();
-
-    }
-
-    // Construtor da classe Contrato
-    public ContratoDTO(int id,
-            double valor,
-            LocatarioDTO locatario,
-            MaquinaDTO maquina,
-            DataManager dataInicio, DataManager dataExpiracao, DataManager dataPagamento,
-            String observacoes) throws PersistenciaException {
-
-        this.id = id;
-        this.valor = (double) valor;
-        this.dataExpiracao = dataExpiracao;
-        this.dataInicio = dataInicio;
-        this.dataPagamento = dataPagamento;
-        this.observacoes = observacoes;
-        this.locatario = locatario;
-        this.maquina = maquina;
-
-        IGerenteDAO daoGerente = new GerenteDAO();
-        this.gerente = daoGerente.get();
-        
-    }
-
-    public ContratoDTO(double valor,
                        LocatarioDTO locatario,
                        MaquinaDTO maquina,
                        DataManager dataInicio, DataManager dataExpiracao, DataManager dataPagamento,
-                       String observacoes, StatusContrato status) throws PersistenciaException {
+                       String observacoes,
+                       StatusContrato status) throws PersistenciaException {
 
-        this.valor = (double) valor;
+        this.id = id;
+        this.valor = valor;
         this.dataExpiracao = dataExpiracao;
         this.dataInicio = dataInicio;
         this.dataPagamento = dataPagamento;
@@ -84,21 +46,27 @@ public class ContratoDTO {
 
     }
     
-    public ContratoDTO(LocatarioDTO locatario,
-            DataManager dataInicio, DataManager dataExpiracao, DataManager dataPagamento,
-            String observacoes) {
+    public ContratoDTO(double valor,
+                       GerenteDTO gerente,
+                       LocatarioDTO locatario,
+                       MaquinaDTO maquina,
+                       DataManager dataInicio, DataManager dataExpiracao, DataManager dataPagamento,
+                       String observacoes) {
         
         this.dataExpiracao = dataExpiracao;
         this.dataInicio = dataInicio;
         this.dataPagamento = dataPagamento;
         this.observacoes = observacoes;
+        this.valor = valor;
         this.locatario = locatario;
+        this.gerente = gerente;
+        this.maquina = maquina;
         status = StatusContrato.VIGENTE;
 
-        
+
     }
     
-    public long getId() {
+    public int getId() {
         return id;
     }
     
@@ -120,6 +88,10 @@ public class ContratoDTO {
     
     public double getValorPagamento() {
         return valor;
+    }
+
+    public String printValorPagamento() {
+        return String.format("R$ %.2f", valor);
     }
 
     public String getObservacoes() {
@@ -147,5 +119,35 @@ public class ContratoDTO {
     public String toString() {
         return String.format("Contrato %d, iniciado na data de %s com fim em %s",
                 id, dataInicio, dataExpiracao);
+    }
+
+    public String toJson() {
+        String forma = """
+        {
+            "contrato":{
+                "id":"%d",
+                "observacoes":"%s",
+                "dataInicio":"%s",
+                "dataFim":"%s",
+                "diaPagamento":"%s",
+                "valor":%.2f,
+                "locatario":"%s",
+                "maquina":%s,
+                "estado":"%s"
+            }
+        }
+        """;
+
+        return String.format(Locale.US,
+                forma,
+                id,
+                observacoes,
+                dataInicio,
+                dataExpiracao,
+                dataPagamento.getDia(),
+                valor,
+                locatario,
+                maquina.toJson(),
+                status);
     }
 }

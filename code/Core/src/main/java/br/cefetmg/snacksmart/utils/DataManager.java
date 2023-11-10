@@ -7,6 +7,7 @@ package br.cefetmg.snacksmart.utils;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.sql.Date;
+import java.time.temporal.ChronoUnit;
 
 /**
  *
@@ -37,8 +38,28 @@ public class DataManager {
         return formatador;
     }
 
-    public String getDia() {
-        return data.format(DateTimeFormatter.ofPattern("dd"));
+    public int getDia() {
+        return data.getDayOfMonth();
+    }
+
+    public int getMes() {
+        return data.getMonthValue();
+    }
+
+    public int getAno() {
+        return data.getYear();
+    }
+
+    public boolean apos(LocalDate data) {
+        return this.data.isAfter(data);
+    }
+
+    public boolean antes(LocalDate data) {
+        return this.data.isBefore(data);
+    }
+
+    public long diferencaMeses(DataManager dataAnterior) {
+        return ChronoUnit.MONTHS.between(dataAnterior.getData(), data);
     }
 
     public LocalDate getData() {

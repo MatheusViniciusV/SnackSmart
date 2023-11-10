@@ -2,6 +2,8 @@ package br.cefetmg.snacksmart.controller_locador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,14 +16,14 @@ import br.cefetmg.snacksmart.service_gerente.ManterContratos;
 /**
  * @author eloym
  */
-@WebServlet(name="CancelarContrato", urlPatterns={"/CancelarContrato"})
+@WebServlet(name="cancelarContrato", urlPatterns={"/cancelarContrato"})
 public class CancelarContrato extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         ManterContratos acesso = new ManterContratos(); 
         
-        int contratoId =  Integer.parseInt(request.getParameter("contratoId"));
+        int contratoId =  Integer.parseInt(request.getParameter("id"));
 
         
         try {
@@ -34,6 +36,8 @@ public class CancelarContrato extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "erro interno.");
         } catch (ClassNotFoundException ex) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "o contrato não existe.");
+        } catch (PersistenciaException e) {
+            throw new RuntimeException(e);
         }
     }
 }

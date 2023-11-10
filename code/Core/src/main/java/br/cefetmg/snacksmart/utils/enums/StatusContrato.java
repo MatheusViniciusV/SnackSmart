@@ -18,17 +18,6 @@ public enum StatusContrato {
         this.status = status;
     }
 
-    public static StatusContrato parse(String status) {
-        switch (status) {
-            case "VIGENTE": return VIGENTE;
-            case "EXPIRADO": return EXPIRADO;
-            case "INATIVO": return INATIVO;
-            case "CANCELADO": return CANCELADO;
-            case "CANCELAMENTO_SOLICITADO": return CANCELAMENTO_SOLICITADO;
-            default: return INVALIDO;
-        }
-    }
-
     @Override
     public String toString() {
         return status;

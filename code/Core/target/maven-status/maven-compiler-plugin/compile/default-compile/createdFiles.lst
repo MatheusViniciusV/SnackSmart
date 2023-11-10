@@ -15,16 +15,19 @@ br\cefetmg\snacksmart\exceptions\dto\FilaAteracoesVaziaException.class
 br\cefetmg\snacksmart\utils\bd\ConnectionTester.class
 br\cefetmg\snacksmart\dao\ContratosDAO.class
 br\cefetmg\snacksmart\exceptions\dao\LocatarioInvalidoException.class
+br\cefetmg\snacksmart\utils\Data.class
 br\cefetmg\snacksmart\exceptions\dto\NomeInvalidoTamanhoException.class
 br\cefetmg\snacksmart\dto\IUsuarioDTO.class
 br\cefetmg\snacksmart\utils\DataManager.class
 br\cefetmg\snacksmart\utils\enums\TipoUsuario.class
+br\cefetmg\snacksmart\service_gerente\ManterGerente.class
 br\cefetmg\snacksmart\exceptions\dto\SenhaInvalidaTamanhoException.class
 br\cefetmg\snacksmart\exceptions\bd\PersistenciaException.class
 br\cefetmg\snacksmart\service_gerente\ManterContratos.class
 br\cefetmg\snacksmart\dao\MaquinaDAO.class
 br\cefetmg\snacksmart\dto\LocatarioDTO.class
 br\cefetmg\snacksmart\services\ValidadorUsuario.class
+br\cefetmg\snacksmart\utils\enums\TiposOrdenacaoContrato.class
 br\cefetmg\snacksmart\utils\bd\ConnectionManager.class
 br\cefetmg\snacksmart\utils\enums\TipoMaquina$1.class
 br\cefetmg\snacksmart\utils\bd\MysqlConnection.class
@@ -37,4 +40,5 @@ br\cefetmg\snacksmart\utils\bd\ConnectionFactory.class
 br\cefetmg\snacksmart\utils\enums\TipoMaquina.class
 br\cefetmg\snacksmart\utils\enums\TipoUsuario$1.class
 br\cefetmg\snacksmart\exceptions\dto\CPFInvalidoException.class
+br\cefetmg\snacksmart\service_gerente\ManterLocatarios.class
 br\cefetmg\snacksmart\exceptions\dto\NomeNuloException.class

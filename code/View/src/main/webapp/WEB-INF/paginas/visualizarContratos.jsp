@@ -5,9 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="br.cefetmg.snacksmart.utils.enums.TipoUsuario" %>
-<%@page import="java.util.ArrayList" %>
-<%@page import="br.cefetmg.snacksmart.dto.ContratoDTO" %>
 <%@include file="../../comuns/taglibs.jsp" %>
 
 <%-- 
@@ -16,16 +13,6 @@
     da tela.
 --%>
 
-<% 
-    TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario"); 
-    TipoUsuario LOCADOR = (TipoUsuario) session.getAttribute("LOCADOR");
-    TipoUsuario LOCATARIO = (TipoUsuario) session.getAttribute("LOCATARIO");
-    TipoUsuario NAO_CADASTRADO = (TipoUsuario) session.getAttribute("NAO_CADASTRADO");
-
-    ArrayList<ContratoDTO> contratos = null;
-    if(tipoUsuario == LOCADOR)
-        contratos = (ArrayList<ContratoDTO>) session.getAttribute("contratos");
-%>
 
 <!DOCTYPE html>
 <html>
@@ -39,36 +26,59 @@
     <body>
         <%@include file="../../comuns/retornarInicial.jsp" %>
         <main>
-            <!-- TODO fazer essa lista aparecer de maneira dinamica -->
-            <h1>Contratos </h1>
+            <header>
+                <h1>Contratos </h1>
+                <details>
+                    <summary><h2>Filtrar</h2></summary>
+                    <form id="filtrar-form" action="visualizarContratos" method="get">
+                        <c:if test="${tipoUsuario == LOCADOR}">
+                            <label>
+                                CPF do Locatário:
+                                <input type="text" name="cpf" placeholder="000.000.000-00" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
+                            </label>
+                        </c:if>
+                        <label>
+                            Ordenar por:
+                            <select name="ordenacao">
+                                <c:forEach var="tipo" items="${tipoOrdenacao}">
+                                    <option value="${tipo.value()}">${tipo.toString().toLowerCase()}</option>
+                                </c:forEach>
+                            </select>
+                        </label>
+                        <label>
+                            Exibir estado:
+                            <select name="status">
+                                <c:forEach var="tipo" items="${tipoStatus}">
+                                    <option value="${tipo.toString()}">${tipo.toString().toLowerCase()}</option>
+                                </c:forEach>
+                                <option value="TODOS">todos os estados</option>
+                            </select>
+                        </label>
+                        <button id="filtrar">Buscar</button>
+                        <button><a href="visualizarContratos">Limpar busca</a></button>
+                    </form>
+                </details>
+            </header>
             <section id="lista-contratos">
-                <c:forEach items="${ contratos }" var="contrato">
-                    <article class="contratos" id="contrato-01" data-id="01">
-                        <h3>Contrato 1</h3>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                <c:forEach var="contrato" items="${contratos}">
+
+                    <article class="contratos" id="contrato-${contrato.getId()}" data-id="${contrato.getId()}" data-cpf="${contrato.getLocatario().getCPF()}">
+                        <h3>Contrato ${contrato.getId()}</h3>
+                        <c:if test="${tipoUsuario == LOCADOR}">
+                            <div>Locatario: ${contrato.getLocatario()}</div>
+                        </c:if>
+                        <div>Data inicio: ${contrato.getDataInicio()}</div>
+                        <div>Data fim: ${contrato.getDataFim()}</div>
+                        <div>Dia do pagamento: ${contrato.getDataPagamento().getDia()}</div>
+                        <div>Valor: ${contrato.printValorPagamento()}</div>
+                        <div>Máquina: ${contrato.getMaquina().getCodigo()}</div>
+                        <div>Estados:
+                            <span class="${contrato.getStatus().toString().toLowerCase()}">
+                                ${contrato.getStatus().toString().toLowerCase()}
+                            </span>
+                        </div>
                     </article>
                 </c:forEach>
-
-                <article class="contratos">
-                    <h3>Contrato 2</h3>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </article>
             </section>
             
             <c:if test="${tipoUsuario == LOCADOR}">
@@ -79,52 +89,68 @@
                         <h3>Dados do Locador</h3>
                         <div id="dados-locador">
                             <label>Nome: <br>
-                                <input type="text" name="locador-nome" readonly="readonly" value="Algum nome">
+                                <input type="text" name="locador-nome" readonly="readonly" value="${usuario.getNome()}">
                             </label>
                             <label class="cpf">CPF <br>
-                                <input type="text" name="locador-cpf" readonly="readonly" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" value="000.000.000-01">
+                                <input type="text" name="locador-cpf" readonly="readonly" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" value="${usuario.getCPF()}">
                             </label>
                             <label>Email: <br>
-                                <input type="email" name="locador-email">
+                                <input type="email" name="locador-email" readonly="readonly" value="${usuario.getEmail()}" class="obrigatorio">
                             </label>
                             <label class="telefone">Telefone: <br>
-                                <input type="tel" name="locador-telefone">
+                                <input type="tel" name="locador-telefone" readonly="readonly" value="${usuario.getTelefone()}" class="obrigatorio">
                             </label>
                         </div>
                         <h3>Dados do Locatário</h3>
                         <div id="dados-locatario">
-                            <label>Nome: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr>  <br>
-                                <input type="text" name="locatario-nome" id="">
+                            <label>Nome: <br>
+                                <input type="text" name="locatario-nome">
                             </label>
                             <label class="cpf">CPF: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
                                 <input type="text" name="locatario-cpf" placeholder="000.000.000-00" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
                             </label>
-                            <label>Email: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
-                                <input type="email" placeholder="emailexemplo@exemplo.com" name="locatario-email">
+                            <label>Email: <br>
+                                <input type="email" placeholder="emailexemplo@exemplo.com" name="locatario-email" class="obrigatorio">
                             </label>
-                            <label class="telefone">Telefone: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
-                                <input type="tel" placeholder="(00)000000000" name="locatario-telefone">
+                            <label class="telefone">Telefone: <br>
+                                <input type="tel" placeholder="(00)000000000" name="locatario-telefone" class="obrigatorio">
                             </label>
                         </div>
                         <h3>Dados do contrato</h3>
                         <div id="dados-contrato">
+                            <label>
+                                Valor mensal: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
+                                <input type="number" name="valor" min="0" step="0.01">
+                            </label>
+                            <label>
+                                Tipo de máquina: <br>
+                                <select name="tipo-maquina">
+                                    <c:forEach var="tipo" items="${tipoMaquina}">
+                                        <option value="${tipo.toString()}">${tipo.toString().toLowerCase().replace('_',' ')}</option>
+                                    </c:forEach>
+                                </select>
+                            </label>
+                            <label>
+                                Código da máquina: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
+                                <input type="number" min="0" name="codigo-maquina">
+                            </label>
                             <label>Data de inicio: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
-                                <input type="date" name="data-inicio" id="">
+                                <input type="date" name="data-inicio">
                             </label>
                             <label>Data de término: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
-                                <input type="date" name="data-termino" id="">
+                                <input type="date" name="data-termino">
                             </label>
-                            <label>Data mensal de pagamento: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
-                                <input type="date" name="data-pagamento" id="">
+                            <label>Dia de pagamento: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
+                                <input type="number" name="dia-pagamento" min="1" max="28">
                             </label>
                             <label>Observações: <br>
-                                <textarea name="observacoes" wrap="hard" cols="85" 
+                                <textarea name="observacoes" wrap="hard" cols="85" maxlength="510"
                                     placeholder="escreva informações adicionais que não estão contidas nos campos anteriores."
                                 ></textarea>
                             </label>
                         </div>
-                        <div id="boteos-criar-contrato">
-                            <button type="button" id="enviar"><h3>Criar Contrato</h3></button>
+                        <div id="botoes-criar-contrato">
+                            <button type="button" id="enviar-contrato"><h3>Criar Contrato</h3></button>
                             <button type="button" id="cancelar"><h3>Cancelar</h3></button>
                         </div>
                     </form>
@@ -135,7 +161,7 @@
                 <button id="pdf-contrato" class="null"><a><h2>Emitir PDF</h2></a></button>
                 <c:choose>
                     <c:when test="${tipoUsuario == LOCADOR}">
-                        <button id="solicita-cancelar-contrato" class="null" data-calcelar="CancelarContrato"><h2>Cancelar Contrato</h2></button>
+                        <button id="cancelar-contrato" class="null"><h2>Cancelar Contrato</h2></button>
                         <button id="criar-contrato"><h2>Criar Novo Contrato</h2></button>
                     </c:when>
                     <c:otherwise>

@@ -2,8 +2,8 @@
     Created on : 8 de out. de 2023, 12:14:10
     Author     : eloym
 */
-:root {
-    --cor-form: #bebcbc;
+html, body {
+    overflow: hidden !important;
 }
 
 main {
@@ -31,6 +31,61 @@ button.btn-confirmado {
     background-color: var(--cor-confimado); /* Cor verde */
     transition: background-color 0.2s; /* Duração da animação */
 }
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+header details {
+    position: relative;
+    margin: 3vh 5vw;
+    width: 6vw;
+}
+
+header details summary {
+    text-align: right;
+}
+
+header details summary h2 {
+    display: inline;
+    margin-left: .6rem
+}
+
+header details form{
+    background-color: var(--cor-principal);
+    border: .2rem solid var(--texto-cor-secundaria);
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: -10%;
+    top: 2rem;
+    width: 12vw;
+    align-items: stretch;
+    padding: 1rem;
+    border-radius: .6rem;
+    z-index: 3;
+
+}
+
+header details form input, header details form button, header details form select {
+    width: 95%;
+    box-sizing: content-box;
+    margin: .3rem 0;
+}
+
+header details form button {
+    padding: .2rem;
+    border-radius: .2rem;
+    border: none;
+
+}
+
+header details form a {
+    color: var(--cor-principal) !important;;
+}
+
 
 section#lista-contratos {
     display: flex;
@@ -60,16 +115,31 @@ article.contratos h3 {
 }
 
 article.contratos div {
-    margin: 9% auto;
-    height: 2%;
+    margin: 6% auto;
     width: 80%;
-    background-color: var(--texto-cor-principal);
+    font-size: medium;
+    font-weight: bold;
+    /*background-color: var(--texto-cor-principal);*/
 }
 
-article.contratos div:last-child {
-    margin: 20% 10%;
-    height: 2%;
-    width: 40%;
+span.vigente {
+    color: #31ce31;
+}
+
+span.expirado {
+    color: #66879d;
+}
+
+span.inativo {
+    color: #ece359;
+}
+
+span.cancelado {
+    color: #8f1b1b;
+}
+
+span.cancelamento_solicitado {
+    color: #ce8531;
 }
 
 article.selecionado {
@@ -150,26 +220,30 @@ section#criar-contrato-form input.errado {
 }
 
 #criar-contrato-form #dados-locador, #criar-contrato-form #dados-locatario {
-    display: grid; 
-    grid-template-columns: 1.8fr 0.6fr; 
-    grid-template-rows: 0.4fr 1.6fr; 
-    gap: .6rem 3rem; 
+    display: grid;
+    grid-template-columns: 1.8fr 0.6fr;
+    grid-template-rows: 0.4fr 1.6fr;
+    gap: .6rem 3rem;
     grid-template-areas: 
         ". .";
-    height: 20%; 
+    height: 20%;
 }
 
 #criar-contrato-form #dados-contrato {
-    display: grid; 
-    grid-template-columns: 1fr 1fr 1fr; 
-    grid-template-rows: 0.4fr 1.6fr; 
-    gap: 2%; 
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 0.4fr) 1.6fr;
+    gap: 2%;
     grid-template-areas: 
     ". . ."
 }
 
 #dados-contrato label {
     width: 12vw;
+}
+
+#dados-contrato label:not(:last-child) {
+    height: 3.3rem;
 }
 
 #criar-contrato-form #dados-contrato input {
@@ -199,7 +273,7 @@ section#criar-contrato-form button {
     border: none;
 }
 
-#criar-contrato-form #boteos-criar-contrato {
+#criar-contrato-form #botoes-criar-contrato {
     display: flex;
     justify-content: space-around;
     margin: 1vh;

@@ -1,6 +1,8 @@
 package br.cefetmg.snacksmart.dto;
 import br.cefetmg.snacksmart.utils.enums.StatusMaquina;
 import br.cefetmg.snacksmart.utils.enums.TipoMaquina;
+import com.google.gson.Gson;
+
 import java.io.InputStream;
 /* @author Arthur Milagres */
 public class MaquinaDTO {
@@ -84,5 +86,11 @@ public class MaquinaDTO {
     
     public void setStatus(StatusMaquina novoStatus) {
         status = novoStatus;   
+    }
+
+    public String toJson() {
+        Gson gson = new Gson();
+
+        return gson.toJson(this);
     }
 }
