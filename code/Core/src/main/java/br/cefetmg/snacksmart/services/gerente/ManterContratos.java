@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.cefetmg.snacksmart.service_gerente;
+package br.cefetmg.snacksmart.services.gerente;
 
 import br.cefetmg.snacksmart.dao.ContratosDAO;
 import br.cefetmg.snacksmart.dao.GerenteDAO;

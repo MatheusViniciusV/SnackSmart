@@ -1,4 +1,4 @@
-package br.cefetmg.snacksmart.controller_locador;
+package br.cefetmg.snacksmart.controller_gerente;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.sql.SQLException;
-import br.cefetmg.snacksmart.service_gerente.ManterContratos;
+import br.cefetmg.snacksmart.services.gerente.ManterContratos;
 
 /**
  * @author eloym

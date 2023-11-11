@@ -1,10 +1,9 @@
-package br.cefetmg.snacksmart.controller_locador;
+package br.cefetmg.snacksmart.controller_gerente;
 
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
-import br.cefetmg.snacksmart.service_gerente.AcessarMaquinas;
+import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
 import br.cefetmg.snacksmart.utils.enums.StatusMaquina;
-import br.cefetmg.snacksmart.utils.enums.TipoMaquina;
 import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

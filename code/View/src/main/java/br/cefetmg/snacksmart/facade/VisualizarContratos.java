@@ -4,9 +4,9 @@ import br.cefetmg.snacksmart.dto.ContratoDTO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
-import br.cefetmg.snacksmart.service_gerente.ManterContratos;
-import br.cefetmg.snacksmart.service_gerente.ManterLocatarios;
-import br.cefetmg.snacksmart.service_locatario.AcessarContratos;
+import br.cefetmg.snacksmart.services.gerente.ManterContratos;
+import br.cefetmg.snacksmart.services.gerente.ManterLocatarios;
+import br.cefetmg.snacksmart.services.locatario.AcessarContratos;
 import br.cefetmg.snacksmart.utils.enums.StatusContrato;
 import br.cefetmg.snacksmart.utils.enums.TipoMaquina;
 import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
@@ -42,10 +42,10 @@ public class VisualizarContratos extends HttpServlet {
             if(tipoUsuario == TipoUsuario.LOCATARIO) {
                 LocatarioDTO locatario = (LocatarioDTO) session.getAttribute("usuario");
 
-                AcessarContratos acesso = new AcessarContratos();
+                AcessarContratos acesso = new AcessarContratos(locatario);
 
                 try {
-                    contratos = acesso.getContratos(locatario.getCPF());
+                    contratos = acesso.getContratos(StatusContrato.VIGENTE);
                 } catch (LocatarioInvalidoException | SQLException ex) {
                     Logger.getLogger(VisualizarContratos.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -53,7 +53,8 @@ public class VisualizarContratos extends HttpServlet {
                 ManterContratos acesso = new ManterContratos();
 
                 try {
-                    contratos = acesso.filtraContratos(StatusContrato.VIGENTE, TiposOrdenacaoContrato.MENOR_ID);
+                    contratos = acesso.filtraContratos(StatusContrato.CANCELAMENTO_SOLICITADO, TiposOrdenacaoContrato.MENOR_ID);
+                    contratos.addAll(acesso.filtraContratos(StatusContrato.VIGENTE, TiposOrdenacaoContrato.MENOR_ID));
                 } catch (LocatarioInvalidoException | SQLException ex) {
                     Logger.getLogger(VisualizarContratos.class.getName()).log(Level.SEVERE, null, ex);
                 }

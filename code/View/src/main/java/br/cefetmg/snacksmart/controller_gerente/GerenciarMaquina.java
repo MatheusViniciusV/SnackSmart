@@ -1,19 +1,18 @@
-package br.cefetmg.snacksmart.controller_locador;
+package br.cefetmg.snacksmart.controller_gerente;
 
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
-import br.cefetmg.snacksmart.facade.GestaoMaquina;
-import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
+
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import br.cefetmg.snacksmart.service_gerente.AcessarMaquinas;
+import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
 import br.cefetmg.snacksmart.dao.LocatarioDAO;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.Part;
-import java.sql.SQLException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

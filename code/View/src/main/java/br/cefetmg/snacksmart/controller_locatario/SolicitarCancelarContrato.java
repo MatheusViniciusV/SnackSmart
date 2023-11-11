@@ -8,6 +8,7 @@ package br.cefetmg.snacksmart.controller_locatario;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import br.cefetmg.snacksmart.exceptions.dao.ElementoNaoExisteException;
 import br.cefetmg.snacksmart.exceptions.dao.LocatarioInvalidoException;
-import br.cefetmg.snacksmart.service_locatario.AcessarContratos;
+import br.cefetmg.snacksmart.services.locatario.AcessarContratos;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,14 +31,19 @@ public class SolicitarCancelarContrato extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        AcessarContratos acessoContratos = new AcessarContratos();
-        
-        int contratoId =  Integer.parseInt(request.getParameter("contratoId"));
+
+        int contratoId =  Integer.parseInt(request.getParameter("id"));
         String locatarioCPF = request.getParameter("locatarioCPF");
+        AcessarContratos acessoContratos = null;
+        try {
+            acessoContratos = new AcessarContratos(locatarioCPF);
+        } catch (PersistenciaException e) {
+            throw new RuntimeException(e);
+        }
 
 //                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "o locatario não tem acesso ao contrato" + contratoId + "."); 
         try {
-            acessoContratos.solicitarCancelamento(contratoId, locatarioCPF);
+            acessoContratos.solicitarCancelamento(contratoId);
             
             response.setContentType("text/plain");
             out.printf("cancelamento do contrato %d solicitada.", contratoId);     

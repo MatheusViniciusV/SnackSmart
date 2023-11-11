@@ -1,4 +1,4 @@
-package br.cefetmg.snacksmart.service_gerente;
+package br.cefetmg.snacksmart.services.gerente;
 
 import br.cefetmg.snacksmart.dao.GerenteDAO;
 import br.cefetmg.snacksmart.dto.GerenteDTO;
