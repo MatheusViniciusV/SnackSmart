@@ -29,13 +29,16 @@ VALUES(
 INSERT INTO `locatario`(
     `nome`,
     `senha`,
-    `cpf`
+    `cpf`,
+    `telefone`,
+    `email`
 )
-
 VALUES(
     'Nenhum',
-    '0', 
     '0',
+    '0',
+    '0',
+    '0'
 );
 
 INSERT INTO `locatario`(

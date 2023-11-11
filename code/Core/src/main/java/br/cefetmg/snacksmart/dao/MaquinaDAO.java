@@ -69,7 +69,7 @@ public class MaquinaDAO implements IMaquinaDAO {
 
             if (resultSet.next()) {
                 String nome = resultSet.getString("nome");
-                byte[] imagem = resultSet.getBytes("imagem");
+                InputStream imagem = resultSet.getBinaryStream("imagem");
                 TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
                 String localizacao = resultSet.getString("localizacao");
 
@@ -107,7 +107,7 @@ public class MaquinaDAO implements IMaquinaDAO {
             if (resultSet.next()) {
                 int codigo = resultSet.getInt("pk");
                 String nome = resultSet.getString("nome");
-                byte[] imagem = resultSet.getBytes("imagem");
+                InputStream imagem = resultSet.getBinaryStream("imagem");
                 String localizacao = resultSet.getString("localizacao");
 
                 int locatarioId = resultSet.getInt("locatario__fk");
