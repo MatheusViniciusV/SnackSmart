@@ -11,11 +11,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-
-import br.cefetmg.snacksmart.dao.MaquinaDAO;
-import br.cefetmg.snacksmart.dto.MaquinaDTO;
-import java.util.ArrayList;
 /**
  *
  * @author marco
@@ -23,20 +18,9 @@ import java.util.ArrayList;
 @WebServlet(name = "RelatorioGerente", urlPatterns = {"/RelatorioGerente"})
 public class RelatorioGerente extends HttpServlet {
 
-    public static String execute(HttpServletRequest request) {
-        String jsp = "";
-        try {
-            MaquinaDAO maquina = new MaquinaDAO();
-            ArrayList<MaquinaDTO> listMAquinas = maquina.getAll() ;
-            if (listMAquinas != null) {
-                request.setAttribute("listMaquinas", listMAquinas);
-                jsp = "/RelatorioGerente.jsp";
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            jsp = "";
-        }
-        return jsp;
+    static String execute(HttpServletRequest request) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
     
 }

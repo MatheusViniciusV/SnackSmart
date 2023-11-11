@@ -9,7 +9,7 @@
       
               <div>
                 <button id="backButton", class="botaoCalendar">Voltar</button>
-                <button id="nextButton", class="botaoCalendar">Prï¿½ximo</button>
+                <button id="nextButton", class="botaoCalendar">Próximo</button>
               </div>
                 
             </div>
@@ -17,11 +17,11 @@
             <div id="weekdays">
               <div>Domingo</div>
               <div>Segunda</div>
-              <div>Terï¿½a</div>
+              <div>Terça</div>
               <div>Quarta</div>
               <div>Quinta</div>
               <div>Sexta</div>
-              <div>Sï¿½bado</div>
+              <div>Sábado</div>
             </div>
       
       
