@@ -19,8 +19,7 @@ public class MaquinaDTO {
         this.codigo = codigo;
         this.imagem = imagem;
         this.localizacao = localizacao;
-        this.tipo = tipo;
-        this.valor = valor;
+        this.tipo = tipo; 
         this.status = status;
         this.locatarioResponsavel = locatario; 
     }
@@ -30,7 +29,6 @@ public class MaquinaDTO {
         this.imagem = null;
         this.localizacao = null;
         this.tipo = null; 
-        this.valor = 0;
         this.status = null;
         this.locatarioResponsavel = null; 
     }

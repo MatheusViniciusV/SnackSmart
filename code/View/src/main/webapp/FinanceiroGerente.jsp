@@ -9,38 +9,43 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="icon" href="/img/logotipo-removebg-preview.png" type="image/png">
+        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/financeiro.css">
         <link rel="stylesheet" href="css/Calendario.css">
-        
-        <title>Financeiro</title>
+
+
+        <title>JSP Page</title>
     </head>
 
     <body>
         <%@include file="comuns/retornarInicial.jsp" %>
-        <div class="div-head">
-            <h1>Financeiro</h1>
-            <div id="emitirRelatorio"><a href="RelatorioGerente.jsp">Emitir Relatorio Geral</a></div>
+        <div id="topo">
+            <h1 id ="titulo">Finaceiro</h1>
+            <input type="button" id="botaoRelatorio" onClick ="document.location.href = '/locadora/controller?pagina=EmitirRelatorio'" value="Emitir relatório geral"></input>
         </div>
-    <div class="div-principal">
-            <div class="div-segundo">
-                <%String dados[] = (String[])request.getAttribute("dados"); %>
-                <p>Recebimento previsto para o m�s:</p>
-                <p id="recebimento"><%= dados[0]%></p>
-                <p>Data de recebimento: <%= dados[1]%></p>
+
+        <div class="conteudo">
+            <div class="box">
+                <!-- <%String dados[] = (String[])request.getAttribute("dados");%>a -->
+                <p>Recebimento previsto para o mês:</p>
+                <p id="recebimento">123.45</p>
             </div>
-            <div class="div-segundo">
+            <div class="box">
                 <p>Gastos feitos neste mês:</p>
                 <p id="gastos">12.34</p>
 
             </div>
-            <div class="div-segundo">
+            <div class="box">
                 <p>Saldo total</p>
-                <p id="saldo">R$: <%= dados[3]%></p>
+                <p id="saldo">111.11</p>
+
+
             </div>
         </div>
         <br>
-        <%@include file="comuns/Calendario.jsp" %>
+        <div class="conteudo">
+                    <%@include file="comuns/Calendario.jsp" %>
+            </div>
     </body>
 
 </html>
