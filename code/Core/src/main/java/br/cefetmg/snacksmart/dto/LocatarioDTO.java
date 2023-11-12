@@ -4,6 +4,10 @@ package br.cefetmg.snacksmart.dto;
  *
  * @author eloym
  */
+
+import br.cefetmg.snacksmart.exceptions.dto.NomeNuloException;
+import br.cefetmg.snacksmart.exceptions.dto.CPFInvalidoException;
+
 public class LocatarioDTO implements IUsuarioDTO {
 
     private int id;
@@ -55,7 +59,10 @@ public class LocatarioDTO implements IUsuarioDTO {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(String nome) throws NomeNuloException {
+        if(nome.length() == 0)
+            throw new NomeNuloException("Nome do locatário não deve ser nulo.");
+
         this.nome = nome;
     }
 
@@ -63,12 +70,15 @@ public class LocatarioDTO implements IUsuarioDTO {
         return cpf;
     }
 
-    public void setCPF(String cpf) {
+    public void setCPF(String cpf) throws CPFInvalidoException{
+        if(!cpf.matches("\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}"))
+            throw new CPFInvalidoException("CPF do gerente invalido.");
+
         this.cpf = cpf;
     }
 
     public String getRG() {
-        return rg;
+        return (this.rg == null) ? "" : this.rg;
     }
 
     public void setRG(String rg) {
@@ -76,7 +86,7 @@ public class LocatarioDTO implements IUsuarioDTO {
     }
 
     public String getTelefone() {
-        return telefone;
+        return (this.telefone == null) ? "" : this.telefone;
     }
 
     public void setTelefone(String telefone) {
@@ -84,7 +94,7 @@ public class LocatarioDTO implements IUsuarioDTO {
     }
 
     public String getEmail() {
-        return email;
+        return (this.email == null) ? "" : this.email;
     }
 
     public void setEmail(String email) {

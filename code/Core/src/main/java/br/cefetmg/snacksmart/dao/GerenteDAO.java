@@ -59,8 +59,15 @@ public class GerenteDAO implements IGerenteDAO {
             delete();
 
             Connection conexao = ConnectionManager.getInstance().getConnection();
-
-            String sql = "INSERT INTO `gerente` (`pk`, `nome`, `senha`, `cpf`, `telefone`, `email`) VALUES ('1',?,?,?,?,?)";
+            
+            String sql = "UPDATE `gerente` "
+                    + "   SET `nome` = ?, "
+                    + "       `senha` = ?, "
+                    + "       `cpf` = ?, "
+                    + "       `telefone` = ?, "
+                    + "       `email` = ? "
+                    + " WHERE pk = 1;";
+            
             PreparedStatement pstmt = conexao.prepareStatement(sql);
             pstmt.setString(1, gerente.getNome());
             pstmt.setString(2, gerente.getSenha());
