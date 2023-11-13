@@ -337,6 +337,7 @@ nav{
     outline: none;
     resize: none;
     padding: 1vw 1vw;
+    font-size: 1.2vw;
 }
 #bloquearConteudo {        /*Quando estiver preenchendo um formulário desativa a página*/
     display: none;

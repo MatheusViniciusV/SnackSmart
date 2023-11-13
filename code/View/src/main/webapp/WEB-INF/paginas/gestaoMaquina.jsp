@@ -109,7 +109,7 @@
                         <h1 id="h1Feedback">Enviar Feedback</h1>
                         <textarea name="tituloFeedback" id="tituloFeedback" placeholder="Assunto"></textarea>
                         <textarea name="mensagemFeedback" id="mensagemFeedback"  placeholder="Escreva a mensagem"></textarea>
-                        <input type="checkbox" name="solicitarManutencao" id="solicitarManutencao"  value="solicitado" />
+                        <input type="checkbox" name="solicitarManutencao" id="solicitarManutencao"  value="ERRO" />
                         <label id="labelCheck">Solicitar manutenção da máquina</label>
                         <input id="enviarFeedback" class="botaoForm" name="remover" type="submit" value="Enviar feedback">
                         <div id="cancelarFeedback" class="botaoForm cancelar">Cancelar</div>

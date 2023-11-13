@@ -109,7 +109,7 @@ function criarSlotMaquina(nome, codigo, status, img){
     novoBotaoFeedbackEl.classList.add("enviarFeedback");
     novoBotaoInfoEl.addEventListener("click", recuperaInfoSlotMaquina);
     novoBotaoRemoverEl.addEventListener("click", recuperaInfoSlotMaquina);
-    
+    novoBotaoFeedbackEl.addEventListener("click", recuperaInfoSlotMaquina);
     novoBotaoInfoEl.addEventListener("click", ButtonIClick);
     novoBotaoRemoverEl.addEventListener("click", ButtonRClick);
     novoBotaoFeedbackEl.addEventListener("click", ButtonFClick);
@@ -212,6 +212,8 @@ function ButtonRClick() {
 }
 
 function ButtonFClick() {
+    maquinaEncontrada = encontrarMaquinaPorCodigo(codigoInfoMaquina, vetorMaquinaArray);
+    feedbackMaquinaCodigoEl.value = maquinaEncontrada.codigo;
     mostrarFormulario('feedbackMaquina');
 }
 
@@ -239,7 +241,6 @@ function retornarCodigo(botao, str) {
         let strCodigo = pai.children[1].textContent; 
         let codigo = strCodigo.slice(strCodigo.indexOf("-") + 1);
         removerMaquinaCodigoEl.value = codigo;
-        console.log(codigo);
         return codigo;
     } else {
         let avo = botao.parentNode.parentNode;

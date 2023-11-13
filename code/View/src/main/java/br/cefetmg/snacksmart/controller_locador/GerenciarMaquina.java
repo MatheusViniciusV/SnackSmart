@@ -11,6 +11,7 @@ import br.cefetmg.snacksmart.service_gerente.AcessarMaquinas;
 import br.cefetmg.snacksmart.dao.LocatarioDAO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
+import br.cefetmg.snacksmart.service_locatario.AcessarFeedback;
 import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpSession;
@@ -29,8 +30,8 @@ public class GerenciarMaquina extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String formulario = request.getParameter("formSelecionado");
-        AcessarMaquinas acesso = new AcessarMaquinas();
-        
+        AcessarMaquinas acessoMaquina = new AcessarMaquinas();
+        AcessarFeedback acessoFeedback = new AcessarFeedback();
         if (formulario != null) switch (formulario) {
             case "formAddMaquina":{
                 String nome = request.getParameter("nome");
@@ -40,7 +41,7 @@ public class GerenciarMaquina extends HttpServlet {
                 Part imagemPart = request.getPart("imagem");
                 InputStream imagemBytes = imagemPart.getInputStream();
             try {
-                acesso.formAddMaquina(nome, tipo, locatario, localizacao, imagemBytes);
+                acessoMaquina.formAddMaquina(nome, tipo, locatario, localizacao, imagemBytes);
             } catch (PersistenciaException ex) {
                 Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -49,7 +50,7 @@ public class GerenciarMaquina extends HttpServlet {
             case "remocaoMaquina":{               
                 String codigo = request.getParameter("removerMaquinaCodigo");
             try {   
-                acesso.remocaoMaquina( Integer.parseInt(codigo));
+                acessoMaquina.remocaoMaquina( Integer.parseInt(codigo));
             } catch (PersistenciaException ex) {
                 Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -65,13 +66,13 @@ public class GerenciarMaquina extends HttpServlet {
                 if (novaImagemPart != null && novaImagemPart.getSize() > 0) {
                     InputStream novaImagemBytes = novaImagemPart.getInputStream();
                     try {
-                        acesso.formAtualizarMaquina(Integer.parseInt(codigo), novoNome, novaLocalizacao, novoLocatario, novoStatus, novaImagemBytes);
+                        acessoMaquina.formAtualizarMaquina(Integer.parseInt(codigo), novoNome, novaLocalizacao, novoLocatario, novoStatus, novaImagemBytes);
                     } catch (PersistenciaException ex) {
                         Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }else {
                     try {
-                        acesso.formAtualizarMaquina(Integer.parseInt(codigo), novoNome, novaLocalizacao, novoLocatario, novoStatus, null);
+                        acessoMaquina.formAtualizarMaquina(Integer.parseInt(codigo), novoNome, novaLocalizacao, novoLocatario, novoStatus, null);
                     } catch (PersistenciaException ex) {
                         Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -82,11 +83,23 @@ public class GerenciarMaquina extends HttpServlet {
                 String codigo = request.getParameter("feedbackMaquinaCodigo");
                 String titulo = request.getParameter("tituloFeedback");
                 String mensagem = request.getParameter("mensagemFeedback");
-                String manutencao = request.getParameter("solicitarManutencao");
+                String solicitacao = request.getParameter("solicitarManutencao");
+                if (solicitacao == null){
+                    try {
+                        acessoFeedback.adicionarFeedback(Integer.parseInt(codigo), titulo, mensagem, "COMENTARIO");
+                    } catch (PersistenciaException ex) {
+                        Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                else {
+                    try {
+                        acessoFeedback.adicionarFeedback(Integer.parseInt(codigo), titulo, mensagem, "ERRO");
+                    } catch (PersistenciaException ex) {
+                        Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                     break;
             }
-            default:               
-                break;
         }   
         
         ArrayList<MaquinaDTO> vetorMaquinasSQL = null;
@@ -96,7 +109,7 @@ public class GerenciarMaquina extends HttpServlet {
         
         if (tipoUsuario == TipoUsuario.LOCADOR){
             try {           
-                vetorMaquinasSQL =  acesso.getAllMaquinasGerente();
+                vetorMaquinasSQL =  acessoMaquina.getAllMaquinasGerente();
                 request.setAttribute("listaLocatarios", locatarioDAO.listarTodos()); //Isso deve estar incorreto no modelo MVC por enquanto   
             } catch (PersistenciaException ex) {
                 Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
@@ -104,7 +117,7 @@ public class GerenciarMaquina extends HttpServlet {
         } else {
             LocatarioDTO locatario = (LocatarioDTO) session.getAttribute("usuario");
             try {
-                vetorMaquinasSQL = acesso.getAllMaquinasLocatario(locatario.getId());
+                vetorMaquinasSQL = acessoMaquina.getAllMaquinasLocatario(locatario.getId());
             } catch (PersistenciaException ex) {
                 Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
             }
