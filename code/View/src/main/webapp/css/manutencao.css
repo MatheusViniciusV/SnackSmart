@@ -6,7 +6,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Created on : 12 de nov. de 2023, 22:50:58
     Author     : VictorN77
 */
-
+#formVistoria{
+    
+    position: absolute;
+    
+}
 #busca{
     height: 2em;
     border-radius: 12px / 15px;
