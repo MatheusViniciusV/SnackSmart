@@ -20,18 +20,33 @@
     <body>
         <%@include file="../../comuns/retornarInicial.jsp" %>
         <h1>Manuteção Vistorias</h1>
-        <%
-            ArrayList<MaquinaDTO> listaMaquinas = (ArrayList<MaquinaDTO>) request.getAttribute("vetorMaquinas");
-            
-            Gson gson = new Gson();
-            String jsonMaquinas = gson.toJson(listaMaquinas);
-        %>
-        <script>
-            criarSlotMaquina(<%= jsonMaquinas %>);
-        </script>
+         <h1>Manuteção Vistorias</h1>
         <div id="menu">
-           <input type="text" id="termoPesquisa" name="Pesquisa" required>
+           <input type="text" id="Pesquisa" name="Pesquisa" required>
+           <button id="enviar">↻</button>
+           <div id="ListaMaquinas"></div>
         </div>
-         <script src="js/manutecaoVistorias.js"></script> 
+        <article id="informacoes">
+            <h1 id="nomeMaquina"></h1>
+            <h1 id="codeMaquina"></h1>
+            <div class="botoes">
+                <a></a>
+                <a></a>
+            </div>
+        </article>
+        <script>
+            var maquinasArray = [
+                <c:forEach items="${vetorMaquinas}" var="maquina">
+                    {
+                        nome: '${maquina.nome}',
+                        codigo: '${maquina.codigo}',
+                        locatario: '${maquina.locatario.nome}'
+                    },
+                </c:forEach>
+            ];
+            criarSlotMaquina(maquinasArray);
+        </script>
+        <script src="../../js/manutencaoVistorias.js"></script> 
+        <%@include file="../../comuns/Calendario.jsp" %>
     </body>
 </html>

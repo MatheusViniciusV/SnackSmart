@@ -31,7 +31,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   background-color:var(--header-button);
 }
 #container {
-    height: 20vw;
   width: 42vw;
   margin-left: 4vw;
   background-color: #fff; 

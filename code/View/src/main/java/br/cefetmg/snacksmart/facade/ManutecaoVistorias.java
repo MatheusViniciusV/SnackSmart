@@ -29,12 +29,18 @@ public class ManutecaoVistorias extends HttpServlet {
         AcessarMaquinas acesso = new AcessarMaquinas();
         
         ArrayList<MaquinaDTO> vetorMaquinasSQL = null;
+        ArrayList<MaquinaDTO> vetorMaquinas = new ArrayList<>();
          try {
              vetorMaquinasSQL = acesso.getAllMaquinasGerente();
+             for(MaquinaDTO maquina: vetorMaquinasSQL){
+                 if("EM_MANUTENCAO".equals(maquina.getStatus().toString()) ||  "AGUARDANDO_MANUTENCAO".equals(maquina.getStatus().toString())){
+                     vetorMaquinas.add(maquina);
+                 }
+             }
          } catch (PersistenciaException ex) {
              Logger.getLogger(ManutecaoVistorias.class.getName()).log(Level.SEVERE, null, ex);
          }
-         for (MaquinaDTO maquina : vetorMaquinasSQL){
+         for(MaquinaDTO maquina: vetorMaquinas){
             InputStream imagemStream = maquina.getImagem();
             if (imagemStream != null){
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -51,7 +57,7 @@ public class ManutecaoVistorias extends HttpServlet {
                 maquina.setUrlImagem("none");
             }
         }
-        request.setAttribute("vetorMaquinas", vetorMaquinasSQL);
+        request.setAttribute("vetorMaquinas", vetorMaquinas);
         request.getRequestDispatcher("WEB-INF/paginas/manutencaoVistorias.jsp").forward(request, response);
     }
 }
