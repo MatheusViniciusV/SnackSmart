@@ -37,7 +37,7 @@
 
             ContratosDAO Contratos = new ContratosDAO();
             try {
-                ArrayList<ContratoDTO> listaContratos = Contratos.getTodos();
+                ArrayList<ContratoDTO> listaContratos = Contratos.listaTodos();
 
                 for (ContratoDTO i : listaContratos) {
 
@@ -50,7 +50,7 @@
             
             try{
             
-                ArrayList<MaquinaDTO> listaMaquinas = Maquinas.getAll();
+                ArrayList<MaquinaDTO> listaMaquinas = Maquinas.acessarTodasMaquinas();
                 
                 for (MaquinaDTO m : listaMaquinas){
                 
@@ -63,7 +63,7 @@
             saldo = recebimento - gasto;
 %>
                 <p>Recebimento previsto para o mês:</p>
-                <p id="recebimento"><%= Double.toString(recebimento)%></p>
+                <p id="recebimento">R$: <%= Double.toString(recebimento)%></p>
             </div>
             <div class="box">
                 <p>Gastos feitos neste mês:</p>
