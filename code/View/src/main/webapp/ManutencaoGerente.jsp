@@ -14,7 +14,7 @@
 
     <body>
         <form id="formVistoria">
-            <p>Motivo</p>
+            <p>Descrição</p>
             <input type="text"></input>
             <p>Data</p>
             <input type="date">
