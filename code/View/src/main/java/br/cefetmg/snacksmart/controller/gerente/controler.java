@@ -1,9 +1,8 @@
 
-package br.cefetmg.snacksmart.controller_gerente;
+package br.cefetmg.snacksmart.controller.gerente;
 
 import java.io.IOException;
 
-import br.cefetmg.snacksmart.controller_gerente.RelatorioGerente;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

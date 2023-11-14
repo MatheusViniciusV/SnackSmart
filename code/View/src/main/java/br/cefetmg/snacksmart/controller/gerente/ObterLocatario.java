@@ -1,4 +1,4 @@
-package br.cefetmg.snacksmart.controller_gerente;
+package br.cefetmg.snacksmart.controller.gerente;
 
 import java.io.IOException;
 import java.io.PrintWriter;

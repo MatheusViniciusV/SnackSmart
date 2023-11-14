@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package br.cefetmg.snacksmart.controller_gerente;
+package br.cefetmg.snacksmart.controller.gerente;
 
 import java.io.IOException;
 import java.io.PrintWriter;

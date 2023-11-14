@@ -1,4 +1,4 @@
-package br.cefetmg.snacksmart.controller_gerente;
+package br.cefetmg.snacksmart.controller.gerente;
 
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 

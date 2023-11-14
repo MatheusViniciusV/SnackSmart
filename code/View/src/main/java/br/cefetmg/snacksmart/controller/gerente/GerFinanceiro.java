@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package br.cefetmg.snacksmart.controller_gerente;
+package br.cefetmg.snacksmart.controller.gerente;
 
 import br.cefetmg.snacksmart.dao.ContratosDAO;
 import br.cefetmg.snacksmart.dto.ContratoDTO;
