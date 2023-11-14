@@ -7,6 +7,8 @@
 <%@ page import= "br.cefetmg.snacksmart.dto.ContratoDTO" %>
 <%@ page import= "br.cefetmg.snacksmart.dto.MaquinaDTO" %>
 <%@ page import= "br.cefetmg.snacksmart.dao.MaquinaDAO" %>
+<%@ page import= "br.cefetmg.snacksmart.dao.VistoriaDTO" %>
+<%@ page import= "br.cefetmg.snacksmart.dao.VistoriaDAO" %>
 
 <%@ page import= "java.util.ArrayList" %>
 
@@ -46,15 +48,15 @@
                 }
             } catch (Exception a) {
             }
-            MaquinaDAO Maquinas = new MaquinaDAO();
+            VistoriaDAO Vistorias = new VistoriaDAO();
             
             try{
             
-                ArrayList<MaquinaDTO> listaMaquinas = Maquinas.acessarTodasMaquinas();
+                ArrayList<VistoriaDTO> listaVistorias = Vistorias.listarTodas();
                 
-                for (MaquinaDTO m : listaMaquinas){
+                for (VistoriaDTO v : listaVistorias){
                 
-                    //gasto += m.getValor();
+                    gasto += v.getValor();
                 }
             }
             catch(Exception e){}
