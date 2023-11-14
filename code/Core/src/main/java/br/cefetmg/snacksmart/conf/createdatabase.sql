@@ -87,7 +87,7 @@ CREATE TABLE `maquina` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `nome` VARCHAR(128) NULL,
     `codigo` INT, 
-    `imagem` BLOB NULL,
+    `imagem` LONGBLOB NULL,
     `localizacao` VARCHAR(256) NULL,
     `aluguel` FLOAT NOT NULL,
     `locatario__fk` INT NULL,
@@ -158,11 +158,10 @@ CREATE TABLE `contatos_locatario` (
 DROP TABLE IF EXISTS `feedback`;
 CREATE TABLE `feedback` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
-    `mensagem` VARCHAR(2048) NULL,
-    `gerente__fk` INT NOT NULL,
-    `locatario__fk` INT NOT NULL,
-    FOREIGN KEY (`gerente__fk`) REFERENCES `gerente` (`pk`),
-    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`)
+    `codigo` INT NOT NULL, 
+    `titulo` VARCHAR(2048) NOT NULL,
+    `mensagem` VARCHAR(2048) NOT NULL,
+    `tipoFeedback` ENUM('ERRO', 'COMENTARIO') NOT NULL
 );
 
 -- --------------------------------------------------------

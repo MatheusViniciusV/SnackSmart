@@ -1,12 +1,12 @@
 //Botões
-let addMaquinaEL = document.querySelector("#addMaquina");
-let informacaoMaquinaEl = document.querySelector("#informacaoMaquina");
-let remocaoMaquinaEl = document.querySelector("#remocaoMaquina");
 let atualizarDadosEl = document.getElementById("atualizarDados");
 let botoesCancelarEl = document.querySelectorAll(".cancelar");
 //Formularios
 let formAddMaquinaEl = document.querySelector("#formAddMaquina");
 let formAtualizarMaquinaEl = document.querySelector("#formAtualizarMaquina");
+let remocaoMaquinaEl = document.querySelector("#remocaoMaquina");
+let informacaoMaquinaEl = document.querySelector("#informacaoMaquina");
+let feedbackMaquinaEl = document.querySelector("#feedbackMaquina");
 let bloquearConteudoEl = document.getElementById("bloquearConteudo");
 //Verificações de CEP
 let localizacaoEl = document.getElementById("localizacao");
@@ -18,12 +18,13 @@ let preencherEl = document.querySelectorAll(".preencher");
 //Codigo da máquina
 let removerMaquinaCodigoEl = document.getElementById("removerMaquinaCodigo");
 let atualizarMaquinaCodigoEl = document.getElementById("atualizarMaquinaCodigo");
+let feedbackMaquinaCodigoEl = document.getElementById("feedbackMaquinaCodigo");
 
 var codigoInfoMaquina;
 var vetorMaquinaArray; 
 
-var vetorNomes = ["Nenhum"];
-var vetorCPF = ["0"];
+var vetorNomes = [];
+var vetorCPF = [];
 function selectDinamicoLocatario(){
     let locatarioEl = document.getElementById("locatario");
     let novoLocatarioEl = document.getElementById("novoLocatario");
@@ -52,10 +53,14 @@ function mostrarFormulario(tipoForm){
 }
 
 function fecharFormularios(){
-    formAddMaquinaEl.style.display = "none"; 
-    formAtualizarMaquinaEl.style.display = "none"; 
+    if (usuarioAcessando === "LOCADOR"){
+        formAddMaquinaEl.style.display = "none"; 
+        formAtualizarMaquinaEl.style.display = "none"; 
+        remocaoMaquinaEl.style.display = "none"; 
+    } else {      
+        feedbackMaquinaEl.style.display = "none"; 
+    }
     informacaoMaquinaEl.style.display = "none"; 
-    remocaoMaquinaEl.style.display = "none"; 
     bloquearConteudoEl.style.display = "none";
 }
 
@@ -94,22 +99,27 @@ function criarSlotMaquina(nome, codigo, status, img){
     let novaImg = document.createElement("img");
     let novoBotaoInfoEl = document.createElement("button");
     let novoBotaoRemoverEl = document.createElement("button");
+    let novoBotaoFeedbackEl = document.createElement("button");
     let novoBreak = document.createElement("br");
     
     
     novoSlot.classList.add("slot");
     novoBotaoInfoEl.classList.add("infoMaquina");
     novoBotaoRemoverEl.classList.add("removerMaquina");
-    
+    novoBotaoFeedbackEl.classList.add("enviarFeedback");
+    novoBotaoInfoEl.addEventListener("click", recuperaInfoSlotMaquina);
+    novoBotaoRemoverEl.addEventListener("click", recuperaInfoSlotMaquina);
+    novoBotaoFeedbackEl.addEventListener("click", recuperaInfoSlotMaquina);
     novoBotaoInfoEl.addEventListener("click", ButtonIClick);
     novoBotaoRemoverEl.addEventListener("click", ButtonRClick);
-
-   
+    novoBotaoFeedbackEl.addEventListener("click", ButtonFClick);
+    
+    novoBotaoFeedbackEl.innerHTML = "Enviar Feedback";
     novoBotaoInfoEl.innerHTML = "Informações da máquina";
     novoBotaoRemoverEl.innerHTML = "Remover Máquina";
     novoh2.innerHTML = nome;
     novoh3.innerHTML = "COD-" + codigo;
-    novoP.innerHTML = status; 
+    novoP.innerHTML = formatarStatus(status); 
     
     converterBytesEmImagem(img, novaImg);
     novaImg.alt = "Imagem da "+ nome; 
@@ -121,15 +131,16 @@ function criarSlotMaquina(nome, codigo, status, img){
     novoSlot.appendChild(novaImg);
     novoSlot.appendChild(novoBreak);  
     novoSlot.appendChild(novoBotaoInfoEl);
-    novoSlot.appendChild(novoBotaoRemoverEl);
-   
+    if (usuarioAcessando === "LOCADOR")
+        novoSlot.appendChild(novoBotaoRemoverEl);
+    else 
+        novoSlot.appendChild(novoBotaoFeedbackEl);
+  
    let slot = document.getElementById("addMaquinaSlot");
-   slot.remove();
-   criarSlotAddMaquina();
-   let infoEl = document.querySelectorAll(".infoMaquina");
-   infoEl.forEach(function(botao) {
-        botao.addEventListener("click", recuperaInfoSlotMaquina);
-   });
+   if (usuarioAcessando === "LOCADOR"){
+       slot.remove();
+       criarSlotAddMaquina();
+   }
 }
 
 function buscarCEP(cep, resposta) {
@@ -190,16 +201,20 @@ function exibirInformacaoMaquina(nomeMaquina, codeMaquina, statusMaquina, tipoMa
 
 function ButtonIClick() {
     maquinaEncontrada = encontrarMaquinaPorCodigo(codigoInfoMaquina, vetorMaquinaArray);
-    if (maquinaEncontrada !== null) {
-        exibirInformacaoMaquina(maquinaEncontrada.nome, maquinaEncontrada.codigo, maquinaEncontrada.status, 
-        maquinaEncontrada.tipo, maquinaEncontrada.localizacao, maquinaEncontrada.locatario);
-    } else {
-        exibirInformacaoMaquina("Maquina Não Definida", 0000, "Não definido","Refrigerada", "Rua José de Bessas, Venda Nova, Belo Horizonte, MG - 93084-111", "Waldir Braz");//FUNÇAO TESTE
-    }
+    exibirInformacaoMaquina(maquinaEncontrada.nome, maquinaEncontrada.codigo, formatarStatus(maquinaEncontrada.status), 
+    formatarTipo(maquinaEncontrada.tipo), maquinaEncontrada.localizacao, maquinaEncontrada.locatario);
     mostrarFormulario('informacaoMaquina');
 }
 function ButtonRClick() {
+    maquinaEncontrada = encontrarMaquinaPorCodigo(codigoInfoMaquina, vetorMaquinaArray);
+    removerMaquinaCodigoEl.value = maquinaEncontrada.codigo;
     mostrarFormulario('remocaoMaquina');
+}
+
+function ButtonFClick() {
+    maquinaEncontrada = encontrarMaquinaPorCodigo(codigoInfoMaquina, vetorMaquinaArray);
+    feedbackMaquinaCodigoEl.value = maquinaEncontrada.codigo;
+    mostrarFormulario('feedbackMaquina');
 }
 
 function recuperaInfoSlotMaquina() {
@@ -208,12 +223,12 @@ function recuperaInfoSlotMaquina() {
    informacoeSlotMaquina[1] = this.parentNode.children[1].innerHTML;
    informacoeSlotMaquina[2] = this.parentNode.children[2].innerHTML;
    codigoInfoMaquina = informacoeSlotMaquina[1].replace("COD-", "");
-   return informacoeSlotMaquina; 
+   return informacoeSlotMaquina;  
 }
 
-function encontrarMaquinaPorCodigo(codigoInfoMaquina, maquinas) {
+function encontrarMaquinaPorCodigo(codigo, maquinas) {
     for (let i = 0; i < maquinas.length; i++) {
-        if (maquinas[i].codigo === codigoInfoMaquina) {
+        if (maquinas[i].codigo === codigo) {
             return maquinas[i];
         }
     }
@@ -236,91 +251,86 @@ function retornarCodigo(botao, str) {
     }
 }
 
-function converterBytesEmImagem(bytes, imagemEl){
-    try {
-        let byteCharacters = atob(bytes);
-        let byteNumbers = new Array(byteCharacters.length);
-        for (let i = 0; i < byteCharacters.length; i++) {
-            byteNumbers[i] = byteCharacters.charCodeAt(i);
-        }
-        let byteArray = new Uint8Array(byteNumbers);
-        let blob = new Blob([byteArray], { type: 'image/png' }); 
-        let url = URL.createObjectURL(blob);
-
-        imagemEl.src = url;
-    } catch(err){
-        imagemEl.src = "img/NonePhoto.png";
+function converterBytesEmImagem(url, imagemEl){
+    if (url === "none" || url === ""){
+        imagemEl.src = "img/NonePhoto.png"; 
+    } else{
+        imagemEl.src = "data:image/*;base64," + url;
     }  
 }
 
-
-preencherEl.forEach(function(botao) {
-    botao.addEventListener("blur", verificaPreenchido);
-});
-
-localizacaoEl.addEventListener("blur", function() {
-    buscarCEP(localizacaoEl, localizacaoTextEl);
-});
-
-novaLocalizacaoEl .addEventListener("blur", function() {
-    buscarCEP(novaLocalizacaoEl, novaLocalizacaoLabelEl);
-});
-
-atualizarDadosEl.addEventListener("click", function(event) {
-    fecharFormularios();
-    mostrarFormulario('formAtualizarMaquina'); 
-    retornarCodigo(event.target, "ab");
-});;
-
-botoesCancelarEl.forEach(function(botao) {
-    botao.addEventListener("click", fecharFormularios);
-});
-
-
-
-function Main(){
-       
-    let maquina1 = {
-        nome: "Máquina de Salgadinhos",
-        cod: 2,
-        status: "Aguardando manutenção",
-        imagem: "img/NonePhoto.png"
-    };
-    let maquina2 = {
-        nome: "Máquina Coca-Cola",
-        cod: 4322,
-        status: "Em manutenção",
-        imagem: "img/NonePhoto.png"
-    };
-    let maquina3 = {
-        nome: "Promotional Machine",
-        cod: 3334,
-        status: "Disponível",
-        imagem: "img/NonePhoto.png"
-    };
-    let maquina4 = {
-        nome: "Máquina de Refrigerantes",
-        cod: 9302,
-        status: "Em funcionamento",
-        imagem: "img/NonePhoto.png"
-    };      
-    criarSlotAddMaquina();
-    //criarSlotMaquina(maquina1.nome, maquina1.cod, maquina1.status, maquina1.imagem);
-    
-    
-    let removerMaquinaEl = document.querySelectorAll(".removerMaquina");
-    removerMaquinaEl.forEach(function(botao) {
-        botao.addEventListener("click", function(event){
-            retornarCodigo(event.target, "rb");
+function Main(){    
+    if (usuarioAcessando === "LOCADOR"){
+        preencherEl.forEach(function(botao) {
+            botao.addEventListener("blur", verificaPreenchido);
         });
-    });
-    let infoMaquinaEl = document.querySelectorAll(".infoMaquina");
-    infoMaquinaEl.forEach(function(botao) {
-        botao.addEventListener("click", function(event){
-            retornarCodigo(event.target, "rb");
+
+        localizacaoEl.addEventListener("blur", function() {
+            buscarCEP(localizacaoEl, localizacaoTextEl);
         });
+
+        novaLocalizacaoEl .addEventListener("blur", function() {
+            buscarCEP(novaLocalizacaoEl, novaLocalizacaoLabelEl);
+        });
+
+        atualizarDadosEl.addEventListener("click", function(event) {
+            fecharFormularios();
+            mostrarFormulario('formAtualizarMaquina'); 
+            let statusLabelEl = document.getElementById('statusLabel'); 
+            let novoLocatarioInputEl = document.getElementById('novoLocatarioInput');
+            let locatarioMaquinaEl = document.getElementById("locatarioMaquina");
+            let statusMaquinaEl = document.getElementById("statusDinamicoH2");
+            statusLabelEl.textContent = "";
+            novoLocatarioInputEl.textContent = "";
+            let textoCompleto = statusMaquinaEl.textContent;
+            let posicaoInicio = textoCompleto.indexOf('Status da Máquina:') + 'Status da Máquina:'.length;
+            let parteDoTexto = textoCompleto.substring(posicaoInicio).trim();          
+            statusLabelEl.textContent += "Alterar status da máquina:" + "(" + parteDoTexto + ")";
+            
+            textoCompleto = locatarioMaquinaEl.textContent;
+            posicaoInicio = textoCompleto.indexOf('👤Locatário responsável:') + '👤Locatário responsável:'.length;
+            parteDoTexto = textoCompleto.substring(posicaoInicio).trim();  
+            novoLocatarioInputEl.textContent += "Alterar locatário:" + "(" + parteDoTexto + ")";
+            
+            retornarCodigo(event.target, "ab");
+        });  
+    }
+
+
+    botoesCancelarEl.forEach(function(botao) {
+        botao.addEventListener("click", fecharFormularios);
     });
+    
+    if (usuarioAcessando === "LOCADOR")
+        criarSlotAddMaquina();     
 }   
 
 Main(); 
 
+function formatarStatus(status) {
+    switch (status) {
+        case "ALUGADA":
+            return "Alugada";
+        case "EM_MANUTENCAO":
+            return "Em manutenção";
+        case "AGUARDANDO_MANUTENCAO":
+            return "Aguardando manutenção";
+        case "DISPONIVEL":
+            return "Disponível";
+        case "REMOVIDA":
+            return "Removida";
+        default:
+            return "Status Desconhecido";
+    }
+}
+
+function formatarTipo(tipo) {
+    switch (tipo) {
+        case "REFRIGERADA":
+            return "Refrigerada";
+        case "NAO_REFRIGERADA":
+            return "Não refrigerada";
+        default:
+            return "Status Desconhecido";
+    }
+}

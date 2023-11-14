@@ -11,6 +11,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 /* @author Arthur Milagres  */
 
@@ -29,7 +31,7 @@ public class MaquinaDAO implements IMaquinaDAO {
             
             if (resultSet.next()) {
                 String nome = resultSet.getString("nome");
-                byte[] imagem = resultSet.getBytes("imagem");
+                InputStream imagem = resultSet.getBinaryStream("imagem");
                 TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
                 String localizacao = resultSet.getString("localizacao");
                 
@@ -67,7 +69,7 @@ public class MaquinaDAO implements IMaquinaDAO {
 
             if (resultSet.next()) {
                 String nome = resultSet.getString("nome");
-                byte[] imagem = resultSet.getBytes("imagem");
+                InputStream imagem = resultSet.getBinaryStream("imagem");
                 TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
                 String localizacao = resultSet.getString("localizacao");
 
@@ -105,7 +107,7 @@ public class MaquinaDAO implements IMaquinaDAO {
             if (resultSet.next()) {
                 int codigo = resultSet.getInt("pk");
                 String nome = resultSet.getString("nome");
-                byte[] imagem = resultSet.getBytes("imagem");
+                InputStream imagem = resultSet.getBinaryStream("imagem");
                 String localizacao = resultSet.getString("localizacao");
 
                 int locatarioId = resultSet.getInt("locatario__fk");
@@ -141,11 +143,11 @@ public class MaquinaDAO implements IMaquinaDAO {
                 do {
                     int codigo = resultSet.getInt("codigo");
                     String nome = resultSet.getString("nome");
-                    byte[] imagem = resultSet.getBytes("imagem");
+                    InputStream imagem = resultSet.getBinaryStream("imagem");
                     TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
                     String localizacao = resultSet.getString("localizacao");
 
-                    int locatarioId = resultSet.getInt("locatario");
+                    int locatarioId = resultSet.getInt("locatario__fk");
                     LocatarioDAO locatarioDAO = new LocatarioDAO();
                     LocatarioDTO locatario = locatarioDAO.consultarPorId(locatarioId);
 
@@ -168,23 +170,104 @@ public class MaquinaDAO implements IMaquinaDAO {
     }   
     
     @Override
+    public ArrayList<MaquinaDTO> acessarTodasMaquinas(int locatarioId) throws PersistenciaException {
+        try{
+            Connection conexao = ConnectionManager.getInstance().getConnection();
+            
+            String sql = "SELECT * FROM maquina WHERE locatario__fk = ? AND status != 'REMOVIDA'";
+            PreparedStatement preparedStatement = conexao.prepareStatement(sql);
+            preparedStatement.setInt(1, locatarioId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ArrayList<MaquinaDTO> maquinasVetor = null; 
+            if (resultSet.next()) {
+                maquinasVetor = new ArrayList<>();
+                do {
+                    int codigo = resultSet.getInt("codigo");
+                    String nome = resultSet.getString("nome");
+                    InputStream imagem = resultSet.getBinaryStream("imagem");
+                    TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
+                    String localizacao = resultSet.getString("localizacao");
+
+                    LocatarioDAO locatarioDAO = new LocatarioDAO();
+                    LocatarioDTO locatario = locatarioDAO.consultarPorId(locatarioId);
+
+                    StatusMaquina status = StatusMaquina.valueOf(resultSet.getString("status"));
+
+                    MaquinaDTO maquina = new MaquinaDTO(nome, codigo, imagem, tipo, localizacao, locatario, status);
+                    maquinasVetor.add(maquina);
+                } while (resultSet.next());
+            }           
+            resultSet.close();
+            preparedStatement.close();
+            conexao.close();    
+            
+            return maquinasVetor; 
+            
+        }  catch (Exception e) {
+            e.printStackTrace();
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+    } 
+    
+    public ArrayList<MaquinaDTO> acessarTodasMaquinasSemExcecoes() throws PersistenciaException {
+        try{
+            Connection conexao = ConnectionManager.getInstance().getConnection();
+            
+            String sql = "SELECT * FROM maquina";
+            PreparedStatement preparedStatement = conexao.prepareStatement(sql);
+                                 
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ArrayList<MaquinaDTO> maquinasVetor = null; 
+            if (resultSet.next()) {
+                maquinasVetor = new ArrayList<>();
+                do {
+                    int codigo = resultSet.getInt("codigo");
+                    String nome = resultSet.getString("nome");
+                    InputStream imagem = resultSet.getBinaryStream("imagem");
+                    TipoMaquina tipo = TipoMaquina.valueOf(resultSet.getString("tipo"));
+                    String localizacao = resultSet.getString("localizacao");
+
+                    int locatarioId = resultSet.getInt("locatario__fk");
+                    LocatarioDAO locatarioDAO = new LocatarioDAO();
+                    LocatarioDTO locatario = locatarioDAO.consultarPorId(locatarioId);
+
+                    StatusMaquina status = StatusMaquina.valueOf(resultSet.getString("status"));
+
+                    MaquinaDTO maquina = new MaquinaDTO(nome, codigo, imagem, tipo, localizacao, locatario, status);
+                    maquinasVetor.add(maquina);
+                } while (resultSet.next());
+            }           
+            resultSet.close();
+            preparedStatement.close();
+            conexao.close();    
+            
+            return maquinasVetor; 
+            
+        }  catch (Exception e) {
+            e.printStackTrace();
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+    }
+    
+    @Override
     public void adicionarMaquina(MaquinaDTO maquina) throws PersistenciaException {      
         try{
             Connection conexao = ConnectionManager.getInstance().getConnection();
             
             String sql = "INSERT INTO maquina (nome, codigo, imagem, tipo, localizacao, locatario__fk, status, aluguel) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, 0)";
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             
             PreparedStatement preparedStatement = conexao.prepareStatement(sql);
                     
             preparedStatement.setString(1, maquina.getNome());
             preparedStatement.setInt(2, maquina.getCodigo());
-            preparedStatement.setBytes(3, maquina.getImagem());
+            preparedStatement.setBinaryStream(3, maquina.getImagem());
             preparedStatement.setString(4, maquina.getTipo().name());
             preparedStatement.setString(5, maquina.getLocalizacao());            
             preparedStatement.setInt(6, maquina.getLocatario().getId());           
             preparedStatement.setString(7, maquina.getStatus().name());
-
+            preparedStatement.setDouble(8, 1);
+            
             preparedStatement.executeUpdate();
             preparedStatement.close();
             conexao.close();
@@ -196,9 +279,7 @@ public class MaquinaDAO implements IMaquinaDAO {
     }
     
     @Override
-    public void atualizarMaquina(MaquinaDTO updatedMaquina) throws PersistenciaException{        
-        
-        
+    public void atualizarMaquina(MaquinaDTO updatedMaquina) throws PersistenciaException{               
         try{
             Connection conexao = ConnectionManager.getInstance().getConnection();
             
@@ -208,7 +289,7 @@ public class MaquinaDAO implements IMaquinaDAO {
             PreparedStatement preparedStatement = conexao.prepareStatement(sql);
             
             preparedStatement.setString(1, updatedMaquina.getNome());
-            preparedStatement.setBytes(2, updatedMaquina.getImagem());
+            preparedStatement.setBinaryStream(2, updatedMaquina.getImagem());
             preparedStatement.setString(3, updatedMaquina.getTipo().name());
             preparedStatement.setString(4, updatedMaquina.getLocalizacao());
             preparedStatement.setInt(5, updatedMaquina.getLocatario().getId());
