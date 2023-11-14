@@ -33,7 +33,6 @@ public class AlterarDadosLocatario extends HttpServlet {
         LocatarioDTO locatarioDTO = (LocatarioDTO) session.getAttribute("usuario");
             
         locatarioDTO.setNome(request.getParameter("nome"));
-        locatarioDTO.setCPF(request.getParameter("cpf"));
         locatarioDTO.setRG(request.getParameter("rg"));
         locatarioDTO.setEmail(request.getParameter("email"));
         locatarioDTO.setTelefone(request.getParameter("telefone"));

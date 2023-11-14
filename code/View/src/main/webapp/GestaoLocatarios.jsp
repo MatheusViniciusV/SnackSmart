@@ -14,6 +14,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Gestão de Locatários</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/gestaolocatarios.css">
     </head>
     <body>
         <%@include file="comuns/retornarInicial.jsp" %>
@@ -90,13 +92,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td colspan="2">
                             <button type="submit" name="submitType" value="adicionar">Adicionar locatário</button>
-                        </td>
-                        <td>
                             <button type="submit" name="submitType" value="deletar">Deletar locatário</button>
-                        </td>
-                        <td>
                             <button type="submit" name="submitType" value="atualizar">Atualizar locatário</button>
                         </td>
                     </tr>

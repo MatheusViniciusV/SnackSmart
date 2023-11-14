@@ -71,8 +71,8 @@ public class LocatarioDTO implements IUsuarioDTO {
     }
 
     public void setCPF(String cpf) throws CPFInvalidoException{
-        if(!cpf.matches("\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}"))
-            throw new CPFInvalidoException("CPF do gerente invalido.");
+        /*if(!cpf.matches("\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}"))
+            throw new CPFInvalidoException("CPF do gerente invalido.");*/
 
         this.cpf = cpf;
     }
