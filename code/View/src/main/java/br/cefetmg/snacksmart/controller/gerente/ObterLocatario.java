@@ -1,11 +1,11 @@
-package br.cefetmg.snacksmart.controller_locador;
+package br.cefetmg.snacksmart.controller.gerente;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
-import br.cefetmg.snacksmart.service_gerente.ManterLocatarios;
+import br.cefetmg.snacksmart.services.gerente.ManterLocatarios;
 import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

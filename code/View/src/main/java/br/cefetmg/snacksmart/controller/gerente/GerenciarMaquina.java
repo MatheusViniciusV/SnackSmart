@@ -1,4 +1,4 @@
-package br.cefetmg.snacksmart.controller_locador;
+package br.cefetmg.snacksmart.controller.gerente;
 
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import java.io.IOException;
@@ -7,10 +7,11 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import br.cefetmg.snacksmart.service_gerente.AcessarMaquinas;
+import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
 import br.cefetmg.snacksmart.dao.LocatarioDAO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
+import br.cefetmg.snacksmart.services.locatario.AcessarFeedback;
 import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpSession;
@@ -22,15 +23,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @WebServlet(name="GerenciarMaquina", urlPatterns={"/GerenciarMaquina"})
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1024,  
-                 maxFileSize = 1024 * 1024 * 25,     
-                 maxRequestSize = 1024 * 1024 * 125)  
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1024,
+        maxFileSize = 1024 * 1024 * 25,
+        maxRequestSize = 1024 * 1024 * 125)
 public class GerenciarMaquina extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String formulario = request.getParameter("formSelecionado");
-        AcessarMaquinas acesso = new AcessarMaquinas();
-        
+        AcessarMaquinas acessoMaquina = new AcessarMaquinas();
+        AcessarFeedback acessoFeedback = new AcessarFeedback();
         if (formulario != null) switch (formulario) {
             case "formAddMaquina":{
                 String nome = request.getParameter("nome");
@@ -39,72 +40,84 @@ public class GerenciarMaquina extends HttpServlet {
                 String localizacao = request.getParameter("localizacao");
                 Part imagemPart = request.getPart("imagem");
                 InputStream imagemBytes = imagemPart.getInputStream();
-            try {
-                acesso.formAddMaquina(nome, tipo, locatario, localizacao, imagemBytes);
-            } catch (PersistenciaException ex) {
-                Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                    break;
+                try {
+                    acessoMaquina.formAddMaquina(nome, tipo, locatario, localizacao, imagemBytes);
+                } catch (PersistenciaException ex) {
+                    Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            case "remocaoMaquina":{               
+                break;
+            }
+            case "remocaoMaquina":{
                 String codigo = request.getParameter("removerMaquinaCodigo");
-            try {   
-                acesso.remocaoMaquina( Integer.parseInt(codigo));
-            } catch (PersistenciaException ex) {
-                Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
-            }
-                    break;
+                try {
+                    acessoMaquina.remocaoMaquina( Integer.parseInt(codigo));
+                } catch (PersistenciaException ex) {
+                    Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                break;
+            }
             case "formAtualizarMaquina":{
                 String codigo = request.getParameter("atualizarMaquinaCodigo");
                 String novoNome = request.getParameter("novoNome");
                 String novoLocatario = request.getParameter("novoLocatario");
-                String novaLocalizacao = request.getParameter("novaLocalizacao");  
-                String novoStatus = request.getParameter("status");  
+                String novaLocalizacao = request.getParameter("novaLocalizacao");
+                String novoStatus = request.getParameter("status");
                 Part novaImagemPart = request.getPart("novaImagem");
                 if (novaImagemPart != null && novaImagemPart.getSize() > 0) {
                     InputStream novaImagemBytes = novaImagemPart.getInputStream();
                     try {
-                        acesso.formAtualizarMaquina(Integer.parseInt(codigo), novoNome, novaLocalizacao, novoLocatario, novoStatus, novaImagemBytes);
+                        acessoMaquina.formAtualizarMaquina(Integer.parseInt(codigo), novoNome, novaLocalizacao, novoLocatario, novoStatus, novaImagemBytes);
                     } catch (PersistenciaException ex) {
                         Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }else {
                     try {
-                        acesso.formAtualizarMaquina(Integer.parseInt(codigo), novoNome, novaLocalizacao, novoLocatario, novoStatus, null);
+                        acessoMaquina.formAtualizarMaquina(Integer.parseInt(codigo), novoNome, novaLocalizacao, novoLocatario, novoStatus, null);
                     } catch (PersistenciaException ex) {
                         Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                    break;
+                break;
             }
             case "feedbackMaquina":{
                 String codigo = request.getParameter("feedbackMaquinaCodigo");
                 String titulo = request.getParameter("tituloFeedback");
                 String mensagem = request.getParameter("mensagemFeedback");
-                String manutencao = request.getParameter("solicitarManutencao");
-                    break;
-            }
-            default:               
+                String solicitacao = request.getParameter("solicitarManutencao");
+                if (solicitacao == null){
+                    try {
+                        acessoFeedback.adicionarFeedback(Integer.parseInt(codigo), titulo, mensagem, "COMENTARIO");
+                    } catch (PersistenciaException ex) {
+                        Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                else {
+                    try {
+                        acessoFeedback.adicionarFeedback(Integer.parseInt(codigo), titulo, mensagem, "ERRO");
+                    } catch (PersistenciaException ex) {
+                        Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                 break;
-        }   
-        
+            }
+        }
+
         ArrayList<MaquinaDTO> vetorMaquinasSQL = null;
         LocatarioDAO locatarioDAO = new LocatarioDAO();
-        HttpSession session = request.getSession();    
+        HttpSession session = request.getSession();
         TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario");
-        
+
         if (tipoUsuario == TipoUsuario.LOCADOR){
-            try {           
-                vetorMaquinasSQL =  acesso.getAllMaquinasGerente();
-                request.setAttribute("listaLocatarios", locatarioDAO.listarTodos()); //Isso deve estar incorreto no modelo MVC por enquanto   
+            try {
+                vetorMaquinasSQL =  acessoMaquina.getAllMaquinasGerente();
+                request.setAttribute("listaLocatarios", locatarioDAO.listarTodos()); //Isso deve estar incorreto no modelo MVC por enquanto
             } catch (PersistenciaException ex) {
                 Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             LocatarioDTO locatario = (LocatarioDTO) session.getAttribute("usuario");
             try {
-                vetorMaquinasSQL = acesso.getAllMaquinasLocatario(locatario.getId());
+                vetorMaquinasSQL = acessoMaquina.getAllMaquinasLocatario(locatario.getId());
             } catch (PersistenciaException ex) {
                 Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -119,7 +132,7 @@ public class GerenciarMaquina extends HttpServlet {
 
                 while ((length = imagemStream.read(buffer)) != -1) {
                     baos.write(buffer, 0, length);
-                }       
+                }
                 byte[] bytes = baos.toByteArray();
                 String base64String = java.util.Base64.getEncoder().encodeToString(bytes);
                 maquina.setUrlImagem(base64String);
@@ -128,6 +141,6 @@ public class GerenciarMaquina extends HttpServlet {
             }
         }
         request.setAttribute("vetorMaquinas", vetorMaquinasSQL);
-        request.getRequestDispatcher("WEB-INF/paginas/gestaoMaquina.jsp").forward(request, response);                
+        request.getRequestDispatcher("WEB-INF/paginas/gestaoMaquina.jsp").forward(request, response);
     }
 }

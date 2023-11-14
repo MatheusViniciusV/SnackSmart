@@ -1,7 +1,7 @@
 package br.cefetmg.snacksmart.facade;
 
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
-import br.cefetmg.snacksmart.service_gerente.AcessarMaquinas;
+import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
 import java.io.IOException;
 import br.cefetmg.snacksmart.dao.LocatarioDAO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;

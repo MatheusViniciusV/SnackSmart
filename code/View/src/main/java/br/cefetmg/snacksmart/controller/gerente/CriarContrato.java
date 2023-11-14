@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package br.cefetmg.snacksmart.controller_locador;
+package br.cefetmg.snacksmart.controller.gerente;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,13 +15,12 @@ import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.exceptions.dto.ParametroInvalidoException;
-import br.cefetmg.snacksmart.service_gerente.AcessarMaquinas;
-import br.cefetmg.snacksmart.service_gerente.ManterContratos;
-import br.cefetmg.snacksmart.service_gerente.ManterGerente;
-import br.cefetmg.snacksmart.service_gerente.ManterLocatarios;
+import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
+import br.cefetmg.snacksmart.services.gerente.ManterContratos;
+import br.cefetmg.snacksmart.services.gerente.ManterGerente;
+import br.cefetmg.snacksmart.services.gerente.ManterLocatarios;
 import br.cefetmg.snacksmart.utils.DataManager;
 import br.cefetmg.snacksmart.utils.enums.TipoMaquina;
-import com.google.gson.Gson;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

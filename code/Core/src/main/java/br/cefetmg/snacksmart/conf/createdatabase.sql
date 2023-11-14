@@ -16,7 +16,7 @@ CREATE TABLE `gerente` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `nome` VARCHAR(256) NOT NULL,
     `senha` VARCHAR(256) NOT NULL,
-    `cpf` CHAR(11) NOT NULL,
+    `cpf` CHAR(15) NOT NULL,
     `rg` CHAR(10) NULL,
     `telefone` VARCHAR(14) NULL,
     `email` VARCHAR(128) NULL,
@@ -34,7 +34,7 @@ CREATE TABLE `locatario` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `nome` VARCHAR(256) NOT NULL,
     `senha` VARCHAR(256) NOT NULL,
-    `cpf` CHAR(11) NOT NULL,
+    `cpf` CHAR(15) NOT NULL,
     `rg` CHAR(10) NULL,
     `telefone` VARCHAR(14) NULL,
     `email` VARCHAR(128) NULL,
@@ -158,11 +158,10 @@ CREATE TABLE `contatos_locatario` (
 DROP TABLE IF EXISTS `feedback`;
 CREATE TABLE `feedback` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
-    `mensagem` VARCHAR(2048) NULL,
-    `gerente__fk` INT NOT NULL,
-    `locatario__fk` INT NOT NULL,
-    FOREIGN KEY (`gerente__fk`) REFERENCES `gerente` (`pk`) ON DELETE CASCADE,
-    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`) ON DELETE CASCADE
+    `codigo` INT NOT NULL, 
+    `titulo` VARCHAR(2048) NOT NULL,
+    `mensagem` VARCHAR(2048) NOT NULL,
+    `tipoFeedback` ENUM('ERRO', 'COMENTARIO') NOT NULL
 );
 
 -- --------------------------------------------------------
