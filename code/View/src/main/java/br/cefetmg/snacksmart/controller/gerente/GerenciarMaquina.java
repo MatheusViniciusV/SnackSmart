@@ -11,7 +11,7 @@ import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
 import br.cefetmg.snacksmart.dao.LocatarioDAO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
-import br.cefetmg.snacksmart.service_locatario.AcessarFeedback;
+import br.cefetmg.snacksmart.services.locatario.AcessarFeedback;
 import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpSession;
