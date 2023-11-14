@@ -1,4 +1,3 @@
-br\cefetmg\snacksmart\controller_locador\ObterMaquinaDisponivel.class
 br\cefetmg\snacksmart\service\GerFinanceiro.class
 br\cefetmg\snacksmart\controller_locador\GerenciarMaquina.class
 br\cefetmg\snacksmart\facade\LoginServlet.class

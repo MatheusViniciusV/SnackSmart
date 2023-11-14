@@ -29,6 +29,7 @@
             <div id="pesquisarMaquina" class="slot">
                 <input type="text" placeholder="procurar máquina" id="busca"></input>
                 <div id="resultMaquina" ></div>
+                <!-- Cria os vetores das consultas SQL -->
                 <script>
                     var vetorMaquinaArray = [
                         <c:forEach items="${vetorMaquinas}" var="maquina">
@@ -39,17 +40,27 @@
                             },
                         </c:forEach>
                     ];
-                    var vetorFeebackArray = [
+                    var vetorFeedbackArray = [
                         <c:forEach items="${vetorFeedback}" var="feedback">
                             {
-                                nome: '${maquina.nome}',
-                                codigo: '${maquina.codigo}',
-                                locatario: '${maquina.locatario.nome}'
+                                titulo: '${feedback.titulo}',
+                                mensagem: '${feedback.mensagem}',
+                                codigo: '${feedback.codigo}',
+                                tipo: '${feedback.getTipoFeedback()}'
                             },
                         </c:forEach>
                     ];
-                </script>
-                
+                    var vetorManutencaoArray = [
+                        <c:forEach items="${vetorFeedbackManutencao}" var="feedback">
+                            {
+                                titulo: '${feedback.titulo}',
+                                mensagem: '${feedback.mensagem}',
+                                codigo: '${feedback.codigo}',
+                                tipo: '${feedback.getTipoFeedback()}'
+                            },
+                        </c:forEach>
+                    ];
+                </script>             
             </div>
             <div id="boxInfo" class="slot">
                 <img id="imagemMaquina" src="img/NonePhoto.png" alt="">
@@ -57,20 +68,10 @@
                     <p id="nomeMaquina">Nome da Maquina: -SELECIONE-</p>
                     <p id="locatarioMaquina">Alugada por: -SELECIONE- </p>
                 </div>
-                <input type="button" class="botaoRelatorio" id="botaoAgenda" onClick ="document.getElementById('formVistoria').display ='none' " value="Agendar vistoria">
+                <input type="button" class="botaoRelatorio" id="botaoAgenda" value="Agendar vistoria">
                 <input type="button" class="botaoRelatorio" id="botaoFeedback" value="Verificar Feedbacks">
             </div>
-            <script src="js/manutencaoVistorias.js"></script>
             
-            <c:forEach var="item" items="${vetorMaquinas}">
-                <script>
-                    try {
-                        criarSlotMaquina("${item.nome}", "${item.codigo}", "${item.getUrlImagem()}");
-                    } catch (erro) {
-                        console.log("Erro ao criar as máquinas: " + erro);
-                    }
-                </script>  
-            </c:forEach>
             <div id="calendario">
                 <%@include file="../../comuns/Calendario.jsp" %>
             </div>   
@@ -88,13 +89,32 @@
                 <label id="dataInput">Data:</label>
                 <input id="data" type="date" name="data">
                 
-                <input id="enviar" type="submit">
+                <input id="enviar" type="submit">    
             </form>
+            <button id="cancelar">Cancelar</button>
         </article>    
             
         <article id="feedbackRetornado">
         </article>
-            
-        
+        <script src="js/manutencaoVistorias.js"></script>
+        <!-- Cria os slots das máquinas -->
+        <c:forEach var="item" items="${vetorMaquinas}">
+            <script>
+                try {
+                    criarSlotMaquina("${item.nome}", "${item.codigo}", "${item.getUrlImagem()}");
+                } catch (erro) {
+                    console.log("Erro ao criar as máquinas: " + erro);
+                }
+            </script>  
+        </c:forEach>
+        <c:forEach var="item" items="${vetorFeedbackManutencao}">
+            <script>
+                try {
+                    criarNotificacao("${item.codigo}", "${item.titulo}", "${item.mensagem}");
+                } catch (erro) {
+                    console.log("Erro ao criar as máquinas: " + erro);
+                }
+            </script>  
+        </c:forEach>
     </body>
 </html>

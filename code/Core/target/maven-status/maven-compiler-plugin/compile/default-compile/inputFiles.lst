@@ -7,13 +7,16 @@ C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\ce
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\VistoriaDTO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\service_gerente\ManterContratos.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IContratosDAO.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IFeedbackDAO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IMaquinaDAO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\SenhaInvalidaTamanhoException.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd\ConnectionTester.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\GerenteDTO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IGerenteDAO.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\FeedbackDTO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\MaquinaDTO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\FilaAteracoesVaziaException.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\TiposFeedback.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\TiposOrdenacaoContrato.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\NomeNuloException.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\ParametroInvalidoException.java
@@ -24,7 +27,9 @@ C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\ce
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\bd\PersistenciaException.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\ILocatarioDAO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\LocatarioDTO.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dao\FeedbackDAO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dao\ContratosDAO.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\service_locatario\AcessarFeedback.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\TipoUsuario.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd\ConnectionManager.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\IUsuarioDTO.java
