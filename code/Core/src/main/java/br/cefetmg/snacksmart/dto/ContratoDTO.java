@@ -115,6 +115,10 @@ public class ContratoDTO {
         this.gerente = gerente;
     }
 
+    public void setStatus(StatusContrato status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return String.format("Contrato %d, iniciado na data de %s com fim em %s",

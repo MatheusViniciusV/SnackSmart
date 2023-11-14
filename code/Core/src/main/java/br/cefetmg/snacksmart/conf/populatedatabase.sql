@@ -26,20 +26,6 @@ VALUES(
 -- 
 -- Inserção de dados na tabela locatario
 -- 
-INSERT INTO `locatario`(
-    `nome`,
-    `senha`,
-    `cpf`,
-    `telefone`,
-    `email`
-)
-VALUES(
-    'Nenhum',
-    '0',
-    '0',
-    '0',
-    '0'
-);
 
 INSERT INTO `locatario`(
     `nome`,
@@ -221,6 +207,29 @@ INSERT INTO `contrato`(
 VALUES (
     'contrato para desenvolvimento 3',
     '2023-07-01',
+    '2024-10-01',
+    '2023-07-08',
+    '420',
+    '1',
+    '2',
+    '3',
+    'VIGENTE'
+);
+
+INSERT INTO `contrato`(
+    `observacoes`,
+    `data_inicio`,
+    `data_fim`,
+    `data_pagamento`,
+    `valor`,
+    `gerente__fk`,
+    `locatario__fk`,
+    `maquina__fk`,
+    `estado`
+)
+VALUES (
+    'contrato para desenvolvimento expirado',
+    '2023-07-01',
     '2023-10-01',
     '2023-07-08',
     '420',
@@ -229,6 +238,29 @@ VALUES (
     '3',
     'VIGENTE'
 );
+
+INSERT INTO `contrato`(
+    `observacoes`,
+    `data_inicio`,
+    `data_fim`,
+    `data_pagamento`,
+    `valor`,
+    `gerente__fk`,
+    `locatario__fk`,
+    `maquina__fk`,
+    `estado`
+)
+VALUES (
+           'contrato para desenvolvimento cancelamento solicitado',
+           '2023-07-01',
+           '2024-01-01',
+           '2023-07-08',
+           '320',
+           '1',
+           '2',
+           '3',
+           'CANCELAMENTO_SOLICITADO'
+       );
 
 INSERT INTO `contrato`(
     `observacoes`,
