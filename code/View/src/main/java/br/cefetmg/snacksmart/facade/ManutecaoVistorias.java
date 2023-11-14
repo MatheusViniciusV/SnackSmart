@@ -13,10 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.util.Base64;
 /**
  *
  * @author marco
@@ -29,6 +27,7 @@ public class ManutecaoVistorias extends HttpServlet {
         AcessarMaquinas acesso = new AcessarMaquinas();
         
         ArrayList<MaquinaDTO> vetorMaquinasSQL = null;
+        //ArrayList<FeedbackDTO> vetorFeedbackSQL = null;
          try {
              vetorMaquinasSQL = acesso.getAllMaquinasGerente();
          } catch (PersistenciaException ex) {
@@ -51,6 +50,7 @@ public class ManutecaoVistorias extends HttpServlet {
                 maquina.setUrlImagem("none");
             }
         }
+        //request.setAttribute("vetorFeedback", vetorFeedbackSQL);
         request.setAttribute("vetorMaquinas", vetorMaquinasSQL);
         request.getRequestDispatcher("WEB-INF/paginas/manutencaoVistorias.jsp").forward(request, response);
     }

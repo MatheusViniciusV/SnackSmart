@@ -16,8 +16,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name="obterMaquinaDisponivel", urlPatterns={"/obterMaquinaDisponivel"})
-public class ObterMaquinaDisponivel extends HttpServlet {
+@WebServlet(name="GerenciarManutencaoVistoria", urlPatterns={"/GerenciarManutencaoVistoria"})
+public class GerenciarManutencaoVistoria extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

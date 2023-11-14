@@ -4,6 +4,7 @@ C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\ce
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dao\GerenteDAO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\service_gerente\ManterGerente.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\ContratoDTO.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\VistoriaDTO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\service_gerente\ManterContratos.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IContratosDAO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IMaquinaDAO.java
@@ -19,6 +20,7 @@ C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\ce
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dao\MaquinaDAO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dto\CPFInvalidoException.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\TipoMaquina.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IVistoriaDAO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\bd\PersistenciaException.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\ILocatarioDAO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\LocatarioDTO.java
@@ -31,6 +33,7 @@ C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\ce
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\services\ValidadorUsuario.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\DataManager.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd\ConnectionFactory.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dao\VistoriaDAO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\service_gerente\AcessarMaquinas.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dao\FormatoArquivoInvalidoException.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dao\ElementoNaoExisteException.java
