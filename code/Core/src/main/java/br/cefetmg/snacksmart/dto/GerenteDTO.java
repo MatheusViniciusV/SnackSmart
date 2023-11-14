@@ -45,11 +45,11 @@ public class GerenteDTO implements IUsuarioDTO {
         return cpf;
     }
 
-    public String getEmail() { return email; }
+    public String getEmail() { return (email == null) ? "" : email; }
 
-    public String getTelefone() { return telefone; }
+    public String getTelefone() { return (telefone == null) ? "" : telefone; }
 
-    public String getRG() { return rg; }
+    public String getRG() { return (rg == null) ? "" : rg; }
 
     public String getSenha() {
         return senha;

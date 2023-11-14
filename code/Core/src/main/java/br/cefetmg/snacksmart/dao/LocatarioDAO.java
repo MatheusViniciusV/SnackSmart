@@ -109,7 +109,7 @@ public class LocatarioDAO implements ILocatarioDAO {
         try {
             Connection connection = ConnectionManager.getInstance().getConnection();
 
-            String sql = "SELECT * FROM locatario ORDER BY nome";
+            String sql = "SELECT * FROM locatario ORDER BY pk";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
