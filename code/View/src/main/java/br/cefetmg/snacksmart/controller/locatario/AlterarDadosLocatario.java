@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package br.cefetmg.snacksmart.controller_locatario;
+package br.cefetmg.snacksmart.controller.locatario;
 
 import java.io.IOException;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
