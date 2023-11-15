@@ -1,4 +1,4 @@
-package br.cefetmg.snacksmart.exceptions.dto;
+package br.cefetmg.snacksmart.exceptions.services;
 
 public class ParametroInvalidoException extends RuntimeException {
     /**

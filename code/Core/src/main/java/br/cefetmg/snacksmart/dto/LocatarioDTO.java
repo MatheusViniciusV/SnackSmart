@@ -5,8 +5,8 @@ package br.cefetmg.snacksmart.dto;
  * @author eloym
  */
 
-import br.cefetmg.snacksmart.exceptions.dto.NomeNuloException;
-import br.cefetmg.snacksmart.exceptions.dto.CPFInvalidoException;
+import br.cefetmg.snacksmart.exceptions.services.NomeNuloException;
+import br.cefetmg.snacksmart.exceptions.services.CPFInvalidoException;
 
 public class LocatarioDTO implements IUsuarioDTO {
 

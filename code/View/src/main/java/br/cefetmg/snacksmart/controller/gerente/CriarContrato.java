@@ -14,7 +14,7 @@ import br.cefetmg.snacksmart.dto.GerenteDTO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
-import br.cefetmg.snacksmart.exceptions.dto.ParametroInvalidoException;
+import br.cefetmg.snacksmart.exceptions.services.ParametroInvalidoException;
 import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
 import br.cefetmg.snacksmart.services.gerente.ManterContratos;
 import br.cefetmg.snacksmart.services.gerente.ManterGerente;

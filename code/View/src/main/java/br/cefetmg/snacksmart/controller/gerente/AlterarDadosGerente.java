@@ -5,6 +5,7 @@ import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.idao.IGerenteDAO;
 import br.cefetmg.snacksmart.dao.GerenteDAO;
 import br.cefetmg.snacksmart.dto.GerenteDTO;
+import br.cefetmg.snacksmart.utils.SenhaManager;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,27 +31,15 @@ public class AlterarDadosGerente extends HttpServlet {
             String email = request.getParameter("email");
             String telefone = request.getParameter("telefone");
             
-            MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
-            byte hash[] = algorithm.digest(senha.getBytes("UTF-8"));
-            
-            StringBuilder aux = new StringBuilder();
-            for (byte b : hash) {
-                aux.append(String.format("%02X", 0xFF & b));
-            }
-            
-            senha = aux.toString();
+            senha = SenhaManager.fazHash(senha);
             
             GerenteDTO gerenteDTO = new GerenteDTO(nome, cpf, senha, rg, email, telefone);
             IGerenteDAO gerenteDAO = new GerenteDAO();
-            
-            try {
-                gerenteDAO.set(gerenteDTO);
-                response.sendRedirect("MeusDadosGerente.jsp");
-            } catch(PersistenciaException e) {
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
-            }
-        } catch(NoSuchAlgorithmException ex) {
-            Logger.getLogger(AlterarDadosGerente.class.getName()).log(Level.SEVERE, null, ex);
-        }   
+
+            gerenteDAO.set(gerenteDTO);
+            response.setStatus(HttpServletResponse.SC_OK);
+        } catch(PersistenciaException e) {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+        }
     }
 }
