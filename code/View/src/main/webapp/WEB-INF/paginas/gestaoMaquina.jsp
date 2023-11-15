@@ -2,12 +2,12 @@
 <%@page import="br.cefetmg.snacksmart.dto.MaquinaDTO" %>
 <%@page import="br.cefetmg.snacksmart.utils.enums.TipoUsuario"%>
 <%@page import="java.util.ArrayList" %>
-<%@include file="../../comuns/JSTL.jsp" %>
+<%@include file="../../comuns/taglibs.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/base.css">
         <link rel="stylesheet" href="css/gestaomaquina.css">
         <title>Gestão de Máquinas</title>
         <%@include file="../../comuns/jqueryLink.jsp" %>

@@ -20,8 +20,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/principal.css">
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/telaPrincipal.css">
         <title>Tela principal</title>
     </head>
     <body>

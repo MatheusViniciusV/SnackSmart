@@ -4,7 +4,8 @@
 <%@page import="java.util.ArrayList" %>
 <%@include file="comuns/taglibs.jsp" %>
 
-<% 
+<%--TODO criar uma fachada para acessar essa pagina não usar dao na view--%>
+<%
     LocatarioDAO locatarioDAO = new LocatarioDAO();
     ArrayList<LocatarioDTO> locatarios = locatarioDAO.listarTodos();
 %>
@@ -14,8 +15,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Gestão de Locatários</title>
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/gestaolocatarios.css">
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/gestaoLocatarios.css">
     </head>
     <body>
         <%@include file="comuns/retornarInicial.jsp" %>

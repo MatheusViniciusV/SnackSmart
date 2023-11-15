@@ -19,7 +19,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/contratos.css">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/base.css">
         <title>Contratos</title>
     </head>
     <!-- TODO fazer opção de filtro e busca de contratos -->
@@ -34,7 +34,7 @@
                         <c:if test="${tipoUsuario == LOCADOR}">
                             <label>
                                 CPF do Locatário:
-                                <input type="text" name="cpf" placeholder="000.000.000-00" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
+                                <input type="text" name="cpf" class="cpf-input"  placeholder="000.000.000-00" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
                             </label>
                         </c:if>
                         <label>
@@ -107,7 +107,7 @@
                                 <input type="text" name="locatario-nome">
                             </label>
                             <label class="cpf">CPF: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
-                                <input type="text" name="locatario-cpf" placeholder="000.000.000-00" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
+                                <input type="text" name="locatario-cpf" class="cpf-input" placeholder="000.000.000-00" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}">
                             </label>
                             <label>Email: <br>
                                 <input type="email" placeholder="emailexemplo@exemplo.com" name="locatario-email" class="obrigatorio">
@@ -171,8 +171,8 @@
             </div>
         </main>
 
-        <%@include file="../../comuns/validarRegEx.jsp" %>
         <%@include file="../../comuns/jqueryLink.jsp" %>
+        <%@include file="../../comuns/inputs.jsp" %>
         <script src="js/contratos.js"></script>
         <c:if test="${tipoUsuario == LOCADOR}">
             <script src="js/criarContrato.js"></script>
