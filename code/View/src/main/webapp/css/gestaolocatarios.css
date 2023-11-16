@@ -1,0 +1,24 @@
+h1 {
+    margin-left: 5%;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    padding: 15px;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+}
+
+td {
+    padding: 5px;
+}
+
+input, button, select {
+    color: #3D3D3D;
+}

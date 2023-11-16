@@ -10,7 +10,7 @@ $('#cancelar').click(function () {
 
 const $inputCpfLocatario = $('input[name=locatario-cpf]');
 $inputCpfLocatario.on('input', function () {
-    if ($inputCpfLocatario.val().length === 3) {
+    if ($inputCpfLocatario.val().length === 14) {
         $.ajax({
             type: 'POST',
             url: 'obterLocatario',

@@ -59,6 +59,7 @@ public class ContratosDAO implements IContratosDAO {
 
                 if(contrato.getDataFim().antes(LocalDate.now())) {
                     atualizarStatus(contrato.getId(), StatusContrato.EXPIRADO);
+                    contrato.setStatus(StatusContrato.EXPIRADO);
 
                     MaquinaDTO maquina = contrato.getMaquina();
                     maquina.setStatus(StatusMaquina.DISPONIVEL);
@@ -108,6 +109,7 @@ public class ContratosDAO implements IContratosDAO {
 
                 if(contrato.getDataFim().antes(LocalDate.now())) {
                     atualizarStatus(contrato.getId(), StatusContrato.EXPIRADO);
+                    contrato.setStatus(StatusContrato.EXPIRADO);
 
                     MaquinaDTO maquina = contrato.getMaquina();
                     maquina.setStatus(StatusMaquina.DISPONIVEL);
@@ -159,6 +161,7 @@ public class ContratosDAO implements IContratosDAO {
 
                 if(contrato.getDataFim().antes(LocalDate.now())) {
                     atualizarStatus(contrato.getId(), StatusContrato.EXPIRADO);
+                    contrato.setStatus(StatusContrato.EXPIRADO);
 
                     MaquinaDTO maquina = contrato.getMaquina();
                     maquina.setStatus(StatusMaquina.DISPONIVEL);
@@ -212,6 +215,7 @@ public class ContratosDAO implements IContratosDAO {
 
                 if(contrato.getDataFim().antes(LocalDate.now())) {
                     atualizarStatus(contrato.getId(), StatusContrato.EXPIRADO);
+                    contrato.setStatus(StatusContrato.EXPIRADO);
 
                     MaquinaDTO maquina = contrato.getMaquina();
                     maquina.setStatus(StatusMaquina.DISPONIVEL);
@@ -266,6 +270,7 @@ public class ContratosDAO implements IContratosDAO {
 
                 if(contrato.getDataFim().antes(LocalDate.now())) {
                     atualizarStatus(contrato.getId(), StatusContrato.EXPIRADO);
+                    contrato.setStatus(StatusContrato.EXPIRADO);
 
                     MaquinaDTO maquina = contrato.getMaquina();
                     maquina.setStatus(StatusMaquina.DISPONIVEL);
@@ -319,6 +324,7 @@ public class ContratosDAO implements IContratosDAO {
 
                 if(contrato.getDataFim().antes(LocalDate.now())) {
                     atualizarStatus(contrato.getId(), StatusContrato.EXPIRADO);
+                    contrato.setStatus(StatusContrato.EXPIRADO);
 
                     MaquinaDTO maquina = contrato.getMaquina();
                     maquina.setStatus(StatusMaquina.DISPONIVEL);
@@ -460,6 +466,7 @@ public class ContratosDAO implements IContratosDAO {
 
             if(contrato.getDataFim().antes(LocalDate.now())) {
                 atualizarStatus(contrato.getId(), StatusContrato.EXPIRADO);
+                contrato.setStatus(StatusContrato.EXPIRADO);
 
                 MaquinaDTO maquina = contrato.getMaquina();
                 maquina.setStatus(StatusMaquina.DISPONIVEL);

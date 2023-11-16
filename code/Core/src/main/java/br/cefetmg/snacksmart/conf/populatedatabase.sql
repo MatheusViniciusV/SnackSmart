@@ -16,7 +16,7 @@ INSERT INTO `gerente`(
 VALUES(
     'Gerente',
     'F59EFF44A211FA33E2513758C4C3BB13582678C5FF8B64D6C6338A0C6512A4AD', -- ger
-    '000',
+    '000.000.000-00',
     '(00)999999999',
     'gerente.desenvolvimento@dev.mail'
 );
@@ -26,20 +26,6 @@ VALUES(
 -- 
 -- Inserção de dados na tabela locatario
 -- 
-INSERT INTO `locatario`(
-    `nome`,
-    `senha`,
-    `cpf`,
-    `telefone`,
-    `email`
-)
-VALUES(
-    'Nenhum',
-    '0',
-    '0',
-    '0',
-    '0'
-);
 
 INSERT INTO `locatario`(
     `nome`,
@@ -51,7 +37,7 @@ INSERT INTO `locatario`(
 VALUES(
     'Locatario de desenvolvimento',
     'A7F32380CF333659452317BD08B287067AC939609B81D093391A047818A38960', -- loc
-    '111',
+    '111.111.111-11',
     '(00)111111111',
     'locatario.desenvolvimento@dev.mail'
 );
@@ -66,7 +52,7 @@ INSERT INTO `locatario`(
 VALUES(
     'Locatario de desenvolvimento 2',
     'B854FDBC58E2AAE8FDF4022A2FCC560D9187982E250E9F25075A70D0919BFE77', -- loc2
-    '222',
+    '222.222.222-22',
     '(00)222222222',
     'locatario.desenvolvimento2@dev.mail'
 );
@@ -221,6 +207,29 @@ INSERT INTO `contrato`(
 VALUES (
     'contrato para desenvolvimento 3',
     '2023-07-01',
+    '2024-10-01',
+    '2023-07-08',
+    '420',
+    '1',
+    '2',
+    '3',
+    'VIGENTE'
+);
+
+INSERT INTO `contrato`(
+    `observacoes`,
+    `data_inicio`,
+    `data_fim`,
+    `data_pagamento`,
+    `valor`,
+    `gerente__fk`,
+    `locatario__fk`,
+    `maquina__fk`,
+    `estado`
+)
+VALUES (
+    'contrato para desenvolvimento expirado',
+    '2023-07-01',
     '2023-10-01',
     '2023-07-08',
     '420',
@@ -229,6 +238,29 @@ VALUES (
     '3',
     'VIGENTE'
 );
+
+INSERT INTO `contrato`(
+    `observacoes`,
+    `data_inicio`,
+    `data_fim`,
+    `data_pagamento`,
+    `valor`,
+    `gerente__fk`,
+    `locatario__fk`,
+    `maquina__fk`,
+    `estado`
+)
+VALUES (
+           'contrato para desenvolvimento cancelamento solicitado',
+           '2023-07-01',
+           '2024-01-01',
+           '2023-07-08',
+           '320',
+           '1',
+           '2',
+           '3',
+           'CANCELAMENTO_SOLICITADO'
+       );
 
 INSERT INTO `contrato`(
     `observacoes`,
@@ -249,6 +281,6 @@ VALUES (
     '110.99',
     '1',
     '2',
-    '4',
-    'VIGENTE'
+    '3',
+    'CANCELADO'
 );
