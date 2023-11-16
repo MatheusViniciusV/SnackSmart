@@ -1,0 +1,107 @@
+#manutencaoMain{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 2% 5%;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "Titulo Titulo"
+      "pesquisarMaquina boxInfo"
+      "calendario notificacoes";
+    
+
+    #tituloDaPagina { grid-area: Titulo; }
+    #calendario { grid-area: calendario; }
+    #pesquisarMaquina { grid-area: pesquisarMaquina; }
+    #boxInfo { grid-area: boxInfo; }
+    #notificacoes { grid-area: notificacoes; }
+}
+#formVistoria {
+    display: none;
+}
+#formVistoria form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 2% 5%;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "descricaoInput dataInput"
+      "descricao data"
+      "enviar enviar";  
+    
+    #descricaoInput { grid-area: descricaoInput; }
+    #descricao { grid-area: descricao; }
+    #dataInput { grid-area: dataInput; }
+    #data { grid-area: data; }
+    #enviar { grid-area: enviar; }
+}
+
+#busca{
+    height: 2em;
+    border-radius: 12px / 15px;
+    background-color: #e7e3e3;
+    border: none;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.botaoRelatorio{
+    color: #FECCCB;
+    width: 12em;
+    height: 3em;
+    padding: 0em 1em 0em 1em;
+    background-color: #ff0000;
+    font-size: 1em;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+
+}
+
+#calendario{
+    padding-left: 6em;
+    padding-right: 6em;
+    display: flex;
+    justify-content: space-around;
+    gap: 8%;
+    height: 30%;
+}
+
+#texto{
+    font-size: 1.5em;
+    padding: 1em 1em 1em 1em;
+    height: 11em;
+    width: 35em;
+    background-color: #FFFFFF;
+    border-radius: 10%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.slot{
+    background-color: whitesmoke;
+    border-radius: 2vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.slotClick {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-self: end;
+}
+#pesquisarMaquina {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2% 5%;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "pesquisarmaquina"
+      "resultMaquina";  
+    
+    #pesquisarMaquina { grid-area: pesquisarmaquina; }
+    #resultMaquina { grid-area: resultMaquina; }
+    width: 50vw; 
+    height: 30vh; 
+    overflow: auto; 
+}

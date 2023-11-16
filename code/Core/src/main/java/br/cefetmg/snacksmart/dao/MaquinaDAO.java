@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 /* @author Arthur Milagres  */
