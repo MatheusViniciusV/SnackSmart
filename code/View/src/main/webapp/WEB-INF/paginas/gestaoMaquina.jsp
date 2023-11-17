@@ -39,7 +39,7 @@
                         </select><br>
 
                         <label id="labelImagem" class="imagem">Foto da máquina:</label>
-                        <input type="file" name="imagem" id="inputImagem" accept="image/*" class="imagem"  required ><br>
+                        <input type="file" name="imagem" id="inputImagem" accept="image/*" class="imagem"><br>
 
                         <label id="locatarioInput">Locatário responsável:</label>
                         <select id="locatario" name="locatario" required>
@@ -178,6 +178,14 @@
                     },
                 </c:forEach>
             ];
+        </script>
+        <script>
+            if (vetorMaquinaArray[0] === undefined){
+                let erro = document.createElement("h1");
+                erro.textContent = "Não há máquinas cadastradas";
+                let main = document.getElementById("gestaoMaquinasMain");
+                main.appendChild(erro);
+            }
         </script>
     </body>
 </html>

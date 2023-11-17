@@ -52,7 +52,10 @@ public class AcessarMaquinas {
         TipoMaquina tipo = TipoMaquina.fromString(tipoStr);
         LocatarioDTO locatario; 
         LocatarioDAO locatarioDAO = new LocatarioDAO();
-        locatario = locatarioDAO.consultarPorCPF(locatarioCPF);
+        if ("none".equals(locatarioCPF))
+            locatario = null;
+        else 
+            locatario = locatarioDAO.consultarPorCPF(locatarioCPF);
         try {
             MaquinaDTO maquinaDTO = new MaquinaDTO(nome, codigo, imagemBytes, tipo, localizacao, locatario, status); 
             maquinaDAO.adicionarMaquina(maquinaDTO);
@@ -77,6 +80,9 @@ public class AcessarMaquinas {
             LocatarioDTO novoLocatario = locatarioDAO.consultarPorCPF(novoLocatarioCPF);
             maquinaDTO.setLocatarioResponsavel(novoLocatario);
         }
+        if ("none".equals(novoLocatarioCPF)){
+            maquinaDTO.setLocatarioResponsavel(null);
+        }
         StatusMaquina status = StatusMaquina.fromString(statusStr);
         maquinaDTO.setStatus(status);
         if (novaImagemBytes != null){    
@@ -84,6 +90,7 @@ public class AcessarMaquinas {
         } 
         else 
             maquinaDTO.setImagem(maquinaDTO.getImagem());
+        
         maquinaDAO.atualizarMaquina(maquinaDTO);
     } 
 }

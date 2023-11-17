@@ -3,10 +3,11 @@ package br.cefetmg.snacksmart.facade;
 
 import br.cefetmg.snacksmart.dto.FeedbackDTO;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
-import br.cefetmg.snacksmart.service_gerente.AcessarMaquinas;
+import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
+import br.cefetmg.snacksmart.services.locatario.AcessarFeedback;
 import java.io.IOException;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
-import br.cefetmg.snacksmart.service_locatario.AcessarFeedback;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,30 +36,33 @@ public class ManutecaoVistorias extends HttpServlet {
         try {
             vetorFeedbackSQL = acessoFeedback.getAllFeedback();
             vetorMaquinasSQL = acessoMaquinas.getAllMaquinasGerente();
-            for(FeedbackDTO feedback: vetorFeedbackSQL){
-                if("ERRO".equals(feedback.getTipoFeedback().toString())){
-                    vetorFeedback.add(feedback);
+            if (vetorFeedbackSQL != null){
+                for(FeedbackDTO feedback: vetorFeedbackSQL){
+                    if("ERRO".equals(feedback.getTipoFeedback().toString())){
+                        vetorFeedback.add(feedback);
+                    }
                 }
             }
         } catch (PersistenciaException ex) {
             Logger.getLogger(ManutecaoVistorias.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        for(MaquinaDTO maquina: vetorMaquinasSQL){
-            InputStream imagemStream = maquina.getImagem();
-            if (imagemStream != null){
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                byte[] buffer = new byte[1024];
-                int length;
+        if (vetorMaquinasSQL != null){
+            for(MaquinaDTO maquina: vetorMaquinasSQL){
+                InputStream imagemStream = maquina.getImagem();
+                if (imagemStream != null){
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    byte[] buffer = new byte[1024];
+                    int length;
 
-                while ((length = imagemStream.read(buffer)) != -1) {
-                    baos.write(buffer, 0, length);
-                }       
-                byte[] bytes = baos.toByteArray();
-                String base64String = java.util.Base64.getEncoder().encodeToString(bytes);
-                maquina.setUrlImagem(base64String);
-            } else {
-                maquina.setUrlImagem("none");
+                    while ((length = imagemStream.read(buffer)) != -1) {
+                        baos.write(buffer, 0, length);
+                    }       
+                    byte[] bytes = baos.toByteArray();
+                    String base64String = java.util.Base64.getEncoder().encodeToString(bytes);
+                    maquina.setUrlImagem(base64String);
+                } else {
+                    maquina.setUrlImagem("none");
+                }
             }
         }
         request.setAttribute("vetorFeedback", vetorFeedbackSQL);

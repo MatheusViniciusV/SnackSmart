@@ -105,4 +105,22 @@ public class FeedbackDAO implements IFeedbackDAO {
         }
     }
     
+    @Override
+    public void remove(String feedbackNome) throws PersistenciaException{    
+        try{
+            Connection conexao = ConnectionManager.getInstance().getConnection();
+            
+            String sql = "DELETE FROM feedback WHERE titulo = ?";
+            PreparedStatement preparedStatement = conexao.prepareStatement(sql);
+            preparedStatement.setString(1, feedbackNome);
+            
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            conexao.close();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+    }
 }

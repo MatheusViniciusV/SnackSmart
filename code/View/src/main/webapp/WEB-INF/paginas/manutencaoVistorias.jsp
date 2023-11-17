@@ -22,12 +22,11 @@
     </head>
     <body>      
         <%@include file="../../comuns/retornarInicial.jsp" %>
-        <main id="manutencaoMain">
-            
-            <h1 id="tituloDaPagina">Manuteção Vistorias</h1>   
-            
+        <main id="manutencaoMain">     
+            <h1 id="tituloDaPagina">Manuteção e Vistorias</h1>   
+            <div id="bloquearConteudo"></div>
             <div id="pesquisarMaquina" class="slot">
-                <input type="text" placeholder="procurar máquina" id="busca"></input>
+                <input type="text" placeholder="Procurar por máquina" id="busca"></input>
                 <div id="resultMaquina" ></div>
                 <!-- Cria os vetores das consultas SQL -->
                 <script>
@@ -64,20 +63,20 @@
             </div>
             <div id="boxInfo" class="slot">
                 <img id="imagemMaquina" src="img/NonePhoto.png" alt="">
-                <div>
-                    <p id="nomeMaquina">Nome da Maquina: -SELECIONE-</p>
-                    <p id="locatarioMaquina">Alugada por: -SELECIONE- </p>
+                <div id="textosMaquina">
+                    <p id="nomeMaquina">SELECIONE UMA MÁQUINA</p>
+                    <p id="locatarioMaquina"></p>
                 </div>
                 <input type="button" class="botaoRelatorio" id="botaoAgenda" value="Agendar vistoria">
                 <input type="button" class="botaoRelatorio" id="botaoFeedback" value="Verificar Feedbacks">
             </div>
             
-            <div id="calendario">
+            <div id="calendario" >
                 <%@include file="../../comuns/Calendario.jsp" %>
             </div>   
 
             <div id="notificacoes" class="slot">
-                
+                <h1>Manutenções Solicitadas</h1>
             </div>
         </main>
             
@@ -95,6 +94,7 @@
         </article>    
             
         <article id="feedbackRetornado">
+            <button class="cancelarFeedback">Cancelar</button>
         </article>
         <script src="js/manutencaoVistorias.js"></script>
         <!-- Cria os slots das máquinas -->

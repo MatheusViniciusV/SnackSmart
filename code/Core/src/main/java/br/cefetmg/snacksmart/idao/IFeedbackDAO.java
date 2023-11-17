@@ -16,4 +16,5 @@ public interface IFeedbackDAO {
     FeedbackDTO get(int codigo) throws PersistenciaException;
     ArrayList<FeedbackDTO> getAll() throws PersistenciaException;
     void set(FeedbackDTO feedback) throws PersistenciaException;
+    void remove(String feedbackNome) throws PersistenciaException;
 }
