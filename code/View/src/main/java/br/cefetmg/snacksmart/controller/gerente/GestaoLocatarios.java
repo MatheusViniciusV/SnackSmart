@@ -70,8 +70,6 @@ public class GestaoLocatarios extends HttpServlet {
                     break;
                 case "atualizar":
                     
-                    boolean senhavazia;
-                    
                     locatarios = locatarioDAO.listarTodos();
                     locatario = locatarios.get(Integer.parseInt(request.getParameter("lista")));
                     locatario.setNome(request.getParameter("nome"));

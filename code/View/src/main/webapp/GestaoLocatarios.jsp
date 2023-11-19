@@ -64,7 +64,7 @@
                             Senha:
                         </td>
                         <td>
-                            <input id='senhaInput' type='text' name='senha' value=''>
+                            <input id='senhaInput' type='password' name='senha' value=''>
                         </td>
                     </tr>
                     <tr>
