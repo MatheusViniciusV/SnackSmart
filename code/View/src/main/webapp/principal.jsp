@@ -46,7 +46,7 @@
                             <li><a href="FinanceiroGerente.jsp"><button><h2>Financeiro</h2></button></a></li>
                             <li><a href="GestaoLocatarios.jsp"><button><h2>Gestão de Locatários</h2></button></a></li>
                             <li><a href="manutecaoVistorias"><button><h2>Manuteção Vistorias</h2></button></a></li>
-                            <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
+                            <li><a href="relatorioGerente"><button><h2>Emissão Relatorios</h2></button></a></li>
                             <li><a href="MeusDadosGerente.jsp"><button><h2>Meus dados</h2></button></a></li>
                         </c:otherwise>
                     </c:choose>                    
