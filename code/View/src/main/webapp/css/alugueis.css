@@ -29,3 +29,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     justify-content: space-around;
     gap: 8%;
 }
+
+#listaOculta{
+    
+    display:none; 
+}
