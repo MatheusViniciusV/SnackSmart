@@ -37,7 +37,7 @@
                             <li><a href="visualizarContratos"><button><h2>blablabla</h2></button></a></li>
                             <li><a href="gestaoMaquina"><button><h2>Gestão Máquina</h2></button></a></li>
                             <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
-                            <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
+                            <li><a href="GestaoAlugueis.jsp"><button><h2>aluguéis</h2></button></a></li>
                             <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
                             <li><a href="MeusDadosLocatario.jsp"><button><h2>Meus dados</h2></button></a></li>
                         </c:when>
