@@ -1,85 +1,176 @@
-
-function criarSlotMaquina(maquinasArray){
+function criarNotificacao(codigo, titulo, mensagem){  
+    let notificacoesEl = document.getElementById("notificacoes");
+    let novoSlot = document.createElement("div");
+    let codigoEl = document.createElement("h2");
+    let tituloEl = document.createElement("p");
+    let mensagemEl = document.createElement("p");
     
-    maquinasArray.forEach(function(maquina) {
+    novoSlot.classList.add("mensagem");
+    codigoEl.innerHTML = "COD_" + codigo;
+    tituloEl.innerHTML = "Assunto: " + titulo;
+    mensagemEl.innerHTML = mensagem;
 
-        let menuEl = document.getElementById("menu");
-        let ListaMaquinasEl = document.getElementById("ListaMaquinas");
-        let novoSlot = document.createElement("div");
-        let novoh2 = document.createElement("h2");
-        let novoh3 = document.createElement("h3");
-        let novaImg = document.createElement("img");
-
-        novoSlot.classList.add("slot"); 
-        let novoId = 'id-' + contadorIds++;
-        novoSlot.id = novoId;
-
-        novoh2.innerHTML = maquina.nome;
-        novoh3.innerHTML = maquina.codigo;
-
-        converterBytesEmImagem(maquina.img, novaImg);
-        novaImg.alt = "Imagem da "+ maquina.nome; 
-
-        menuEl.insertBefore(novoSlot,ListaMaquinasEl);
-        novoSlot.appendChild(novaImg);
-        novoSlot.appendChild(novoh2);
-        novoSlot.appendChild(novoh3);
-        novoSlot.onclick = function() {
-            mostrarInformacoes(this);
-         };
-    }); 
+    notificacoesEl.appendChild(novoSlot);
+    novoSlot.appendChild(codigoEl);
+    novoSlot.appendChild(tituloEl);
+    novoSlot.appendChild(mensagemEl);  
 }
-let contadorIds = 1;
-function mostrarInformacoes(elemento) {
+
+function criarSlotMaquina(nome, codigo, url){  
+    let resultadoEl = document.getElementById("resultMaquina");
+    let novoSlot = document.createElement("div");
+    let novoh2 = document.createElement("h2");
+    let novaImg = document.createElement("img");
     
-  let imgSrc = elemento.querySelector('img').src;
-  let h2Text = elemento.querySelector('h2').innerText;
-  let h3Text = elemento.querySelector('h3').innerText;
+    novoSlot.classList.add("slotClick");
+    novoh2.innerHTML = nome + '<br>' + "COD_" + codigo;;
 
+    converterBytesEmImagem(url, novaImg);
+    novaImg.alt = "Imagem da "+ nome; 
 
-  let informacoesDiv = document.getElementById('informacoes');
-  informacoesDiv.innerHTML = `
-    <img src="${imgSrc}" alt="Imagem">
-    <h2>${h2Text}</h2>
-    <h3>${h3Text}</h3>
-  `;
+    resultadoEl.appendChild(novoSlot);
+    novoSlot.appendChild(novaImg);
+    novoSlot.appendChild(novoh2);
+      
+    
+    novoSlot.addEventListener("click", slotSelecionado);
 }
 
-function PesquisarPorCodigo() {
-  let codigoDigitado = document.getElementById('Pesquisa').value;
-  let maquinasArray = document.querySelectorAll('.slot');
-  let elementosOcultos = [];
+function converterBytesEmImagem(url, imagemEl){
+    if (url === "none" || url === ""){
+        imagemEl.src = "img/NonePhoto.png"; 
+    } else{
+        imagemEl.src = "data:image/*;base64," + url;
+    }  
+}
+function mostrarInfo(codigo, nome, locatario, imagem){
+    let nomeMaquinaEl = document.getElementById('nomeMaquina');
+    let locatarioMaquinaEl = document.getElementById('locatarioMaquina');
+    let imagemMaquinaEl = document.getElementById('imagemMaquina');
+    nomeMaquinaEl.innerHTML = "Nome da Maquina:" + '<br>' + nome + '<br>' +"COD-" + codigo;
+    if (locatario === "")
+        locatario = "Ninguém";
+    locatarioMaquinaEl.innerHTML = "Alugada por:" + '<br>' + locatario;
+    imagemMaquinaEl.src = imagem;
+}
 
-  maquinasArray.forEach(function(elemento) {
-    let codigoNoElemento = elemento.querySelector('h3').innerText;
-    if (codigoDigitado === codigoNoElemento) {
-      console.log('Código encontrado!');
-    } else {
-      elemento.style.display = 'none';
-      elementosOcultos.push(elemento);
+function slotSelecionado(){
+    let cod = this.children[1].innerHTML;
+    let url = this.children[0].src;
+    cod = cod.split('_');
+    cod = parseInt(cod[1]);
+    for (var i = 0; i < vetorMaquinaArray.length; i++) {
+        let objetoAtual = vetorMaquinaArray[i];           
+        if (objetoAtual.codigo == cod) {
+            mostrarInfo(objetoAtual.codigo, objetoAtual.nome, objetoAtual.locatario, url);
+        }
     }
-  });
-
-  if (codigoDigitado === '') {
-    if (elementosOcultos.length === maquinasArray.length) {
-      maquinasArray.forEach(function(elemento) {
-        elemento.style.display = 'block';
-      });
+    
+}
+function mostrarFormFeedback (feedback){
+    let divEl = document.createElement("div");
+    divEl.style.overflow = "auto";
+    let concluirEl = document.createElement("input");
+    let hiddenEl = document.createElement("input"); 
+    hiddenEl.name = "removerFeedback";  
+    hiddenEl.type = "text";
+    hiddenEl.value = feedback.titulo;
+    hiddenEl.hidden = true;
+    let form = document.createElement("form");
+    concluirEl.type = "submit";
+    form.action = "/GerenciarManutencaoVistoria";
+    form.method = "post";
+    concluirEl.value = "🗑️";
+    let novoh2 = document.createElement("h2");
+    let novop = document.createElement("p");
+    let feedbackRetornadoEl = document.getElementById('feedbackRetornado'); 
+    if (feedback === "nada"){
+        let novoh1 = document.createElement("h1");
+        novoh1.innerHTML = "Não há feedbacks para esta máquina";
+        feedbackRetornadoEl.appendChild(novoh1);
     } else {
-      elementosOcultos.forEach(function(elemento) {
-        elemento.style.display = 'block';
-      });
+        novop.innerHTML = feedback.mensagem;
+        if (feedback.tipo === "ERRO")
+            novoh2.innerHTML = "Assunto: " + feedback.titulo + " (Erro) ";
+        else 
+            novoh2.innerHTML = "Assunto: " + feedback.titulo + " (Comentário) ";
+        divEl.appendChild(novoh2);
+        divEl.appendChild(novop);
+        form.appendChild(concluirEl);
+        form.appendChild(hiddenEl);
+        divEl.appendChild(form);
+        feedbackRetornadoEl.appendChild(divEl);
+         
     }
-  }
+    feedbackRetornadoEl.style.display = "grid";
+    let blockerEl = document.getElementById('bloquearConteudo');
+    blockerEl.style.display = "block";
 }
 
-function converterBytesEmImagem(url, imagemEl) {
-  if (url === 'none' || url === '') {
-    imagemEl.src = 'img/NonePhoto.png';
-  } else {
-    imagemEl.src = url;
-  }
+function relatorioFeedback(event){
+    let str = event.target.parentNode.children[1].children[0].innerHTML;
+    if (str.match(/COD-(\d+)/) !== null){          
+        let cod = str.match(/COD-(\d+)/)[1];
+        let feedbackRetornadoEl = document.getElementById('feedbackRetornado');
+        feedbackRetornadoEl.innerHTML = ""; 
+        let naoEncontrado = true; 
+        for (var i = 0; i < vetorFeedbackArray.length; i++) {
+            let objetoAtual = vetorFeedbackArray[i];           
+            if (objetoAtual.codigo == cod) {
+                mostrarFormFeedback(objetoAtual);
+                naoEncontrado = false;
+            }
+        }
+        if (naoEncontrado === true)
+            mostrarFormFeedback("nada");
+        let botao = document.createElement("button");
+        botao.classList.add("cancelarFeedback");
+        botao.addEventListener('click', fecharFormFeedback);
+        botao.innerHTML = "Cancelar";
+        feedbackRetornadoEl.appendChild(botao);   
+    }
 }
 
-let EnviarEl = document.getElementById('enviar');
-EnviarEl.addEventListener('click', PesquisarPorCodigo);
+function mostrarFormAgenda(){ 
+    let formVistoriaEl = document.getElementById('formVistoria');
+    formVistoriaEl.style.display = "grid";
+}
+function fecharFormAgenda(){
+    let formVistoriaEl = document.getElementById('formVistoria');
+    formVistoriaEl.style.display = "none";
+}
+function fecharFormFeedback(){
+    let feedbackRetornadoEl = document.getElementById('feedbackRetornado');
+    let blockerEl = document.getElementById('bloquearConteudo');
+    blockerEl.style.display = "none";
+    feedbackRetornadoEl.style.display = "none";
+}
+
+function pesquisarElementos(){
+    let stringProcura = this.value;
+    let slots = document.querySelectorAll('.slotClick');
+    
+    slots.forEach(function(slot) {
+        let nome = slot.children[1].innerHTML;
+        if (!nome.toLowerCase().includes(stringProcura.toLowerCase()) && stringProcura !== "") {
+            slot.style.display = 'none';
+        } else 
+            slot.style.display = 'flex';
+    });
+}
+
+let botaoRelatorioEl = document.getElementById('botaoFeedback');
+botaoRelatorioEl.addEventListener('click', relatorioFeedback);
+
+let botaoAgendaEl = document.getElementById('botaoAgenda');
+botaoAgendaEl.addEventListener('click', mostrarFormAgenda);
+
+
+let cancelarEl = document.getElementById('cancelar');
+cancelarEl.addEventListener('click', fecharFormAgenda);
+
+let cancelarFeedbackEl = document.querySelector(".cancelarFeedback");
+cancelarFeedbackEl.addEventListener('click', fecharFormFeedback);
+
+let buscaEl = document.getElementById('busca');
+buscaEl.addEventListener('input', pesquisarElementos);

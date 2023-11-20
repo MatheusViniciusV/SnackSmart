@@ -16,11 +16,11 @@ CREATE TABLE `gerente` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `nome` VARCHAR(256) NOT NULL,
     `senha` VARCHAR(256) NOT NULL,
-    `cpf` CHAR(11) NOT NULL,
+    `cpf` CHAR(15) NOT NULL,
     `rg` CHAR(10) NULL,
     `telefone` VARCHAR(14) NULL,
     `email` VARCHAR(128) NULL,
-    CONSTRAINT `uk_cpf` UNIQUE (`cpf`)
+    CONSTRAINT `uk_cpf` UNIQUE (`cpf`) 
 );
 
 -- --------------------------------------------------------
@@ -34,7 +34,7 @@ CREATE TABLE `locatario` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `nome` VARCHAR(256) NOT NULL,
     `senha` VARCHAR(256) NOT NULL,
-    `cpf` CHAR(11) NOT NULL,
+    `cpf` CHAR(15) NOT NULL,
     `rg` CHAR(10) NULL,
     `telefone` VARCHAR(14) NULL,
     `email` VARCHAR(128) NULL,
@@ -70,8 +70,8 @@ CREATE TABLE `lote` (
     `preco_venda` FLOAT NOT NULL,
     `fornecedor__fk` INT NOT NULL,
     `locatario__fk` INT NOT NULL,
-    FOREIGN KEY (`fornecedor__fk`) REFERENCES `fornecedor` (`pk`),
-    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`)
+    FOREIGN KEY (`fornecedor__fk`) REFERENCES `fornecedor` (`pk`) ON DELETE CASCADE,
+    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`) ON DELETE CASCADE
 );
 
 -- Observação: Preço de compra e venda são relativos a uma unidade do produto
@@ -90,10 +90,10 @@ CREATE TABLE `maquina` (
     `imagem` LONGBLOB NULL,
     `localizacao` VARCHAR(256) NULL,
     `aluguel` FLOAT NOT NULL,
-    `locatario__fk` INT NULL,
+    `locatario__fk` INT,
     `status` ENUM('ALUGADA', 'EM_MANUTENCAO', 'AGUARDANDO_MANUTENCAO', 'DISPONIVEL', 'REMOVIDA') NOT NULL,
     `tipo` ENUM('REFRIGERADA', 'NAO_REFRIGERADA') NOT NULL,    
-    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`)
+    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`) ON DELETE CASCADE
 );
 
 -- --------------------------------------------------------
@@ -114,9 +114,9 @@ CREATE TABLE `contrato` (
     `locatario__fk` INT NOT NULL,
     `maquina__fk` INT NOT NULL,
     `estado` ENUM('VIGENTE', 'EXPIRADO', 'INATIVO', 'CANCELADO', 'CANCELAMENTO_SOLICITADO') NOT NULL,
-    FOREIGN KEY (`gerente__fk`) REFERENCES `gerente` (`pk`),
-    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`),
-    FOREIGN KEY (`maquina__fk`) REFERENCES `maquina` (`pk`)
+    FOREIGN KEY (`gerente__fk`) REFERENCES `gerente` (`pk`) ON DELETE CASCADE,
+    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`) ON DELETE CASCADE,
+    FOREIGN KEY (`maquina__fk`) REFERENCES `maquina` (`pk`) ON DELETE CASCADE
 );
 
 -- --------------------------------------------------------
@@ -130,8 +130,8 @@ CREATE TABLE `contatos_gerente` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `gerente__fk` INT NOT NULL,
     `locatario__fk` INT NOT NULL,
-    FOREIGN KEY (`gerente__fk`) REFERENCES `gerente` (`pk`),
-    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`)
+    FOREIGN KEY (`gerente__fk`) REFERENCES `gerente` (`pk`) ON DELETE CASCADE,
+    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`) ON DELETE CASCADE
 );
 
 -- --------------------------------------------------------
@@ -145,8 +145,8 @@ CREATE TABLE `contatos_locatario` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `fornecedor__fk` INT NOT NULL,
     `locatario__fk` INT NOT NULL,
-    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`),
-    FOREIGN KEY (`fornecedor__fk`) REFERENCES `fornecedor` (`pk`)
+    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`) ON DELETE CASCADE,
+    FOREIGN KEY (`fornecedor__fk`) REFERENCES `fornecedor` (`pk`) ON DELETE CASCADE
 );
 
 -- --------------------------------------------------------
@@ -176,7 +176,7 @@ CREATE TABLE `notas_locatario` (
     `mensagem` VARCHAR(1024) NULL,
     `dia` DATE NOT NULL,
     `locatario__fk` INT NOT NULL,
-    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`)
+    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`) ON DELETE CASCADE
 );
 
 -- --------------------------------------------------------
@@ -191,5 +191,5 @@ CREATE TABLE `notas_gerente` (
     `mensagem` VARCHAR(1024) NULL,
     `dia` DATE NOT NULL,
     `gerente__fk` INT NOT NULL,
-    FOREIGN KEY (`gerente__fk`) REFERENCES `gerente` (`pk`)
+    FOREIGN KEY (`gerente__fk`) REFERENCES `gerente` (`pk`) ON DELETE CASCADE
 );

@@ -23,8 +23,8 @@ let feedbackMaquinaCodigoEl = document.getElementById("feedbackMaquinaCodigo");
 var codigoInfoMaquina;
 var vetorMaquinaArray; 
 
-var vetorNomes = [];
-var vetorCPF = [];
+var vetorNomes = ["Nenhum"];
+var vetorCPF = ["none"];
 function selectDinamicoLocatario(){
     let locatarioEl = document.getElementById("locatario");
     let novoLocatarioEl = document.getElementById("novoLocatario");
@@ -195,6 +195,8 @@ function exibirInformacaoMaquina(nomeMaquina, codeMaquina, statusMaquina, tipoMa
     codeMaquinaEl.textContent = "COD-" + codeMaquina;
     statusMaquinaEl.textContent = "Status da Máquina: " + statusMaquina;
     tipoMaquinaEl.textContent = "Tipo da Máquina: " + tipoMaquina;
+    if (locatarioResponsavel === "")
+        locatarioResponsavel = "Nenhum";
     LocalizacaoDaMaquinaEl.textContent = "📍Localização: " + LocalizacaoDaMaquina;
     locatarioMaquinaEl.textContent = "👤Locatário responsável: " + locatarioResponsavel;
 }
@@ -285,12 +287,12 @@ function Main(){
             let textoCompleto = statusMaquinaEl.textContent;
             let posicaoInicio = textoCompleto.indexOf('Status da Máquina:') + 'Status da Máquina:'.length;
             let parteDoTexto = textoCompleto.substring(posicaoInicio).trim();          
-            statusLabelEl.textContent += "Alterar status da máquina:" + "(" + parteDoTexto + ")";
+            statusLabelEl.textContent += "Alterar status da máquina " + "(" + parteDoTexto + ")";
             
             textoCompleto = locatarioMaquinaEl.textContent;
             posicaoInicio = textoCompleto.indexOf('👤Locatário responsável:') + '👤Locatário responsável:'.length;
             parteDoTexto = textoCompleto.substring(posicaoInicio).trim();  
-            novoLocatarioInputEl.textContent += "Alterar locatário:" + "(" + parteDoTexto + ")";
+            novoLocatarioInputEl.textContent += "Alterar locatário " + "(" + parteDoTexto + ")";
             
             retornarCodigo(event.target, "ab");
         });  

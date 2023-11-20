@@ -1,7 +1,7 @@
 package br.cefetmg.snacksmart.facade;
 
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
-import br.cefetmg.snacksmart.service_gerente.AcessarMaquinas;
+import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
 import java.io.IOException;
 import br.cefetmg.snacksmart.dao.LocatarioDAO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
@@ -53,21 +53,23 @@ public class GestaoMaquina extends HttpServlet {
             }
         }
         request.setAttribute("usuarioAcessando", tipoUsuario);
-        for (MaquinaDTO maquina : vetorMaquinasSQL){
-            InputStream imagemStream = maquina.getImagem();
-            if (imagemStream != null){
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                byte[] buffer = new byte[1024];
-                int length;
+        if (vetorMaquinasSQL != null){
+            for (MaquinaDTO maquina : vetorMaquinasSQL){
+                InputStream imagemStream = maquina.getImagem();
+                if (imagemStream != null){
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    byte[] buffer = new byte[1024];
+                    int length;
 
-                while ((length = imagemStream.read(buffer)) != -1) {
-                    baos.write(buffer, 0, length);
-                }       
-                byte[] bytes = baos.toByteArray();
-                String base64String = java.util.Base64.getEncoder().encodeToString(bytes);
-                maquina.setUrlImagem(base64String);
-            } else {
-                maquina.setUrlImagem("none");
+                    while ((length = imagemStream.read(buffer)) != -1) {
+                        baos.write(buffer, 0, length);
+                    }       
+                    byte[] bytes = baos.toByteArray();
+                    String base64String = java.util.Base64.getEncoder().encodeToString(bytes);
+                    maquina.setUrlImagem(base64String);
+                } else {
+                    maquina.setUrlImagem("none");
+                }
             }
         }
         request.setAttribute("vetorMaquinas", vetorMaquinasSQL);
