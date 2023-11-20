@@ -1,12 +1,11 @@
-
 package br.cefetmg.snacksmart.facade;
 
 import br.cefetmg.snacksmart.dto.FeedbackDTO;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
-import br.cefetmg.snacksmart.service_gerente.AcessarMaquinas;
-import java.io.IOException;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
-import br.cefetmg.snacksmart.service_locatario.AcessarFeedback;
+import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
+import br.cefetmg.snacksmart.services.locatario.AcessarFeedback;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,11 +19,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Base64;
 /**
+
+/**
  *
  * @author marco
  */
-@WebServlet(name = "RelatorioGerente", urlPatterns = {"/relatorioGerente"})
-public class RelatorioGerente extends HttpServlet {
+@WebServlet(name = "EmissaoRelatorio", urlPatterns = {"/EmissaoRelatorio"})
+public class EmissaoRelatorio extends HttpServlet {
      @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
