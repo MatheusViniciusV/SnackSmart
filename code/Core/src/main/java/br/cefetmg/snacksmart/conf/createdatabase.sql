@@ -52,7 +52,9 @@ CREATE TABLE `fornecedor` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `nome` VARCHAR(256) NOT NULL,
     `telefone` VARCHAR(14) NULL,
-    `email` VARCHAR(128) NULL
+    `email` VARCHAR(128) NULL,
+    `locatario__fk` INT NOT NULL,
+    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`) ON DELETE CASCADE
 );
 
 -- --------------------------------------------------------
