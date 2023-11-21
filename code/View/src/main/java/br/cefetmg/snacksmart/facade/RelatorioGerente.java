@@ -3,10 +3,10 @@ package br.cefetmg.snacksmart.facade;
 
 import br.cefetmg.snacksmart.dto.FeedbackDTO;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
-import br.cefetmg.snacksmart.service_gerente.AcessarMaquinas;
 import java.io.IOException;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
-import br.cefetmg.snacksmart.service_locatario.AcessarFeedback;
+import br.cefetmg.snacksmart.services.locatario.AcessarFeedback;
+import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
