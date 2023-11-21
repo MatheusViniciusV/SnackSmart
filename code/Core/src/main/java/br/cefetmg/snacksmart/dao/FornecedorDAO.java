@@ -54,19 +54,13 @@ public class FornecedorDAO implements IFornecedorDAO {
 
             Connection connection = ConnectionManager.getInstance().getConnection();
 
-                String sql = "UPDATE fornecedor "
-                        + "   SET nome = ?, "
-                        + "       telefone = ?, "
-                        + "       email = ?, "
-                        + "       locatario__fk = ?, "
-                        + " WHERE pk = ?";
+                String sql = "UPDATE fornecedor SET nome = ?, telefone = ?, email = ? WHERE pk = ?";
 
                 PreparedStatement pstmt = connection.prepareStatement(sql);
                 pstmt.setString(1, fornecedorDTO.getNome());
                 pstmt.setString(2, fornecedorDTO.getTelefone());
                 pstmt.setString(3, fornecedorDTO.getEmail());
-                pstmt.setInt(4, fornecedorDTO.getLocatario().getId());
-                pstmt.setInt(5, fornecedorDTO.getId());
+                pstmt.setInt(4, fornecedorDTO.getId());
             pstmt.executeUpdate();
 
             pstmt.close();
@@ -80,14 +74,14 @@ public class FornecedorDAO implements IFornecedorDAO {
     }
     
     @Override
-    public boolean delete(FornecedorDTO fornecedorDTO) throws PersistenciaException {
+    public boolean delete(int id) throws PersistenciaException {
         try {
             Connection connection = ConnectionManager.getInstance().getConnection();
 
             String sql = "DELETE FROM fornecedor WHERE pk = ?";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setInt(1, fornecedorDTO.getId());
+            pstmt.setInt(1, id);
             pstmt.executeUpdate();
 
             pstmt.close();

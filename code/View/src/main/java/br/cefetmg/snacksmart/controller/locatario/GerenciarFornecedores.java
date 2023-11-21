@@ -24,34 +24,44 @@ public class GerenciarFornecedores extends HttpServlet {
         AcessarFornecedores acessoFornecedores = new AcessarFornecedores();
         ManterLocatarios acessoLocatario = new ManterLocatarios();
         String form = request.getParameter("addForm");
-            if ("addForm".equals(form)){
-                String nome = request.getParameter("nome");
-                String telefone = request.getParameter("telefone");
-                String email = request.getParameter("email");
-                String locatarioCPF = request.getParameter("locatario");
-                LocatarioDTO locatario;
-                try {
-                    locatario = acessoLocatario.buscaPorCpf(locatarioCPF);
-                    acessoFornecedores.adicionarFornecedor(nome, telefone, email, locatario);
-                } catch (PersistenciaException ex) {
-                    Logger.getLogger(GerenciarFornecedores.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } else {
-                String nome = request.getParameter("nomeExibido");
-                String telefone = request.getParameter("telefoneExibido");
-                String email = request.getParameter("emailExibido");
-                String locatarioCPF = request.getParameter("locatarioExibido");
-                String id = request.getParameter("idFornecedor");             
-                LocatarioDTO locatario;
-                try {
-                    locatario = acessoLocatario.buscaPorCpf(locatarioCPF);
-                    FornecedorDTO fornecedor = new FornecedorDTO (Integer.parseInt(id), nome, telefone, email, locatario);
-                    acessoFornecedores.atualizarFornecedor(fornecedor);
-                } catch (PersistenciaException ex) {
-                    Logger.getLogger(GerenciarFornecedores.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        String remocao = request.getParameter("remocao");
+        
+        if ("addForm".equals(form)){
+            String nome = request.getParameter("nome");
+            String telefone = request.getParameter("telefone");
+            String email = request.getParameter("email");
+            String locatarioCPF = request.getParameter("locatario");
+            LocatarioDTO locatario;
+            try {
+                locatario = acessoLocatario.buscaPorCpf(locatarioCPF);
+                acessoFornecedores.adicionarFornecedor(nome, telefone, email, locatario);
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(GerenciarFornecedores.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+        } else if ("solicitado".equals(remocao)){ 
+           try {
+                String id = request.getParameter("idFornecedor");
+                acessoFornecedores.removerFornecedor(Integer.parseInt(id));
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(GerenciarFornecedores.class.getName()).log(Level.SEVERE, null, ex);
+            }              
+        }
+        else {
+            String nome = request.getParameter("nomeExibido");
+            String telefone = request.getParameter("telefoneExibido");
+            String email = request.getParameter("emailExibido");
+            String locatarioCPF = request.getParameter("locatarioExibido");
+            String id = request.getParameter("idFornecedor");             
+            LocatarioDTO locatario;
+            try {
+                locatario = acessoLocatario.buscaPorCpf(locatarioCPF);
+                FornecedorDTO fornecedor = new FornecedorDTO (Integer.parseInt(id), nome, telefone, email, locatario);
+                acessoFornecedores.atualizarFornecedor(fornecedor);
+            } catch (PersistenciaException ex) {   
+                Logger.getLogger(GerenciarFornecedores.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }    
+        
         ArrayList<FornecedorDTO> vetorFornecedorSQL = null;
         HttpSession session = request.getSession();
         LocatarioDTO locatario = (LocatarioDTO) session.getAttribute("usuario");
@@ -62,7 +72,6 @@ public class GerenciarFornecedores extends HttpServlet {
         }
         request.setAttribute("usuarioResponsavel", locatario);
         request.setAttribute("vetorFornecedores", vetorFornecedorSQL);
-        request.getRequestDispatcher("WEB-INF/paginas/gestaoFornecedor.jsp").forward(request, response);
-            
+        request.getRequestDispatcher("WEB-INF/paginas/gestaoFornecedor.jsp").forward(request, response);           
     }
 }

@@ -10,7 +10,7 @@ public interface IFornecedorDAO {
 
     boolean atualizar(FornecedorDTO fornecedorDTO) throws PersistenciaException;
 
-    boolean delete(FornecedorDTO fornecedorDTO) throws PersistenciaException;
+    boolean delete(int id) throws PersistenciaException;
 
     ArrayList<FornecedorDTO> listarTodos() throws PersistenciaException;
     

@@ -11,6 +11,7 @@ public class FornecedorDTO {
     public FornecedorDTO() {}
     
     public FornecedorDTO(int id, String nome, String telefone, String email, LocatarioDTO locatario){
+        this.id = id;
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;

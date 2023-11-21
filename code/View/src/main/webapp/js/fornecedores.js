@@ -1,9 +1,8 @@
 function pesquisarElementos(){
     let stringProcura = this.value;
     let slots = document.querySelectorAll('.slotClick');
-    
     slots.forEach(function(slot) {
-        let nome = slot.children[1].innerHTML;
+        let nome = slot.children[0].innerHTML;
         if (!nome.toLowerCase().includes(stringProcura.toLowerCase()) && stringProcura !== "") {
             slot.style.display = 'none';
         } else 
@@ -38,14 +37,16 @@ function mostrarInfo(nome, telefone, email, id){
     let nomeExibidoEl = document.getElementById('nomeExibido');
     let telefoneExibidoEl = document.getElementById('telefoneExibido');
     let emailExibidoEl = document.getElementById('emailExibido');
-    let idFornecedor = document.getElementById('idFornecedor');
+    let idFornecedorEl = document.querySelectorAll('.idFornecedor');
     nomeReverta = nome;
     emailReverta = email;
     telefoneReverta = telefone;
     nomeExibidoEl.value = nome;
     telefoneExibidoEl.value = telefone;
     emailExibidoEl.value = email;
-    idFornecedor.value = id;
+    idFornecedorEl.forEach(function(botao) {
+        botao.value = id;
+    });
 }
 
 function criarSlot(nome, telefone, email){  
@@ -87,8 +88,12 @@ cancelaEl.forEach(function(botao) {
 let locatarioEl = document.getElementById('locatario');
 locatarioEl.value = usuario.cpf;
 
+let locatarioExibidoEl = document.getElementById('locatarioExibido');
+locatarioExibidoEl.value = usuario.cpf;
+
 let reverterEl = document.getElementById('reverter');
 reverterEl.addEventListener('click', reverte);
+
 //Global VAR - Reverter
 var nomeReverta;
 var telefoneReverta;

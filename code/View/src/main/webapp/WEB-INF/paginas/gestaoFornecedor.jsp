@@ -48,8 +48,14 @@
                     <input id="nomeExibido" type="text" name="nomeExibido">
                     <input id="telefoneExibido" type="tel" name="telefoneExibido">
                     <input id="emailExibido" type="email" name="emailExibido">   
-                    <input id="idFornecedor" type="hidden" name="idFornecedor">  
-                    <input type="submit" id="atualizarDados" value="Realizar Alterações">                  
+                    <input class="idFornecedor" type="hidden" name="idFornecedor">  
+                    <input type="hidden" name="locatarioExibido" id="locatarioExibido">
+                    <input type="submit" id="atualizarDados" value="Realizar Alterações">  
+                </form>
+                <form action="GerenciarFornecedores" method="post">
+                    <input class="idFornecedor" type="hidden" name="idFornecedor">  
+                    <input type="hidden" name="remocao" value="solicitado">  
+                    <input type="submit" id="remover" value="Remover fornecedor" >  
                 </form>
                 <button id="reverter">Reverter Alterações</button>
             </div>
@@ -60,13 +66,13 @@
             <form action="GerenciarFornecedores" method="post">
                 <input type="hidden" name="addForm" value="addForm">
                 <label id="nomeInput">Nome completo do fornecedor:</label>
-                <input id="nome" type="text" name="nome">
+                <input id="nome" type="text" name="nome" required>
                 
                 <label id="telefoneInput">Telefone de contato:</label>
-                <input type="tel" id="telefone" name="telefone">
+                <input type="tel" id="telefone" name="telefone" required>
                 
                 <label id="emailInput">E-mail do Fornecedor:</label>
-                <input id="email" type="email" name="email">
+                <input id="email" type="email" name="email" required>
                 
                 <input id="locatario" type="hidden" name="locatario"> 
                 

@@ -38,7 +38,7 @@ public class AcessarFornecedores {
         fornecedorDAO.inserir(fornecedorDTO);
     }
     
-    public void removerFornecedor(FornecedorDTO fornecedor) throws PersistenciaException{
-        fornecedorDAO.delete(fornecedor);
+    public void removerFornecedor(int id) throws PersistenciaException{
+        fornecedorDAO.delete(id);
     }
 }
