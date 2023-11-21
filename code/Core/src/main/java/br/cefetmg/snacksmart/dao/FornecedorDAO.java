@@ -54,19 +54,19 @@ public class FornecedorDAO implements IFornecedorDAO {
 
             Connection connection = ConnectionManager.getInstance().getConnection();
 
-            String sql = "UPDATE fornecedor "
-                    + "   SET nome = ?, "
-                    + "       telefone = ?, "
-                    + "       email = ?, "
-                    + "       locatario__fk = ?, "
-                    + " WHERE pk = ?;";
+                String sql = "UPDATE fornecedor "
+                        + "   SET nome = ?, "
+                        + "       telefone = ?, "
+                        + "       email = ?, "
+                        + "       locatario__fk = ?, "
+                        + " WHERE pk = ?";
 
-            PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setString(1, fornecedorDTO.getNome());
-            pstmt.setString(2, fornecedorDTO.getTelefone());
-            pstmt.setString(3, fornecedorDTO.getEmail());
-            pstmt.setInt(4, fornecedorDTO.getLocatario().getId());
-            pstmt.setInt(5, fornecedorDTO.getId());
+                PreparedStatement pstmt = connection.prepareStatement(sql);
+                pstmt.setString(1, fornecedorDTO.getNome());
+                pstmt.setString(2, fornecedorDTO.getTelefone());
+                pstmt.setString(3, fornecedorDTO.getEmail());
+                pstmt.setInt(4, fornecedorDTO.getLocatario().getId());
+                pstmt.setInt(5, fornecedorDTO.getId());
             pstmt.executeUpdate();
 
             pstmt.close();

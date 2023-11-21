@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/manutencao.css">
         <link rel="stylesheet" href="css/Calendario.css">    
-        <title>Manuteção Vistorias</title>
+        <title>Manuteção e Vistorias</title>
         
     </head>
     <body>      

@@ -11,6 +11,7 @@ C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\ce
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\services\CPFInvalidoException.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dao\MaquinaDAO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\services\gerente\ManterGerente.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\services\locatario\AcessarFornecedores.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IVistoriaDAO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\bd\PersistenciaException.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\services\SenhaInvalidaTamanhoException.java
@@ -24,6 +25,7 @@ C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\ce
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\DataManager.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dao\LocatarioInvalidoException.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\SenhaManager.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dao\FornecedorDAO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\services\ParametroInvalidoException.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\services\NomeNuloException.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\StatusMaquina.java
@@ -31,6 +33,7 @@ C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\ce
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\VistoriaDTO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IFeedbackDAO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd\ConnectionTester.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IFornecedorDAO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\GerenteDTO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\services\locatario\AcessarFeedback.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\FeedbackDTO.java
@@ -39,6 +42,7 @@ C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\ce
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\services\NomeInvalidoTamanhoException.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\TipoMaquina.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\services\locatario\AcessarContratos.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dto\FornecedorDTO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\dao\ContratosDAO.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd\ConnectionManager.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\StatusContrato.java
