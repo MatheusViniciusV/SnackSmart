@@ -27,6 +27,10 @@ public class AcessarFeedback {
         FeedbackDTO feedbackDTO = new FeedbackDTO(codigo, titulo, mensagem, solicitacao);
         feedbackDAO.set(feedbackDTO);
     }
+    
+    public void removerFeedback(String nomeFeedback) throws PersistenciaException{
+        feedbackDAO.remove(nomeFeedback);
+    }
 }
  
     

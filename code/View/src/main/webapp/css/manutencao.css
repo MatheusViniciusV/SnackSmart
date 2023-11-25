@@ -1,0 +1,237 @@
+#manutencaoMain{
+    display:grid;
+    grid-template-columns: 40vw 40vw;
+    grid-template-rows: auto auto auto;
+    gap: 4% 6%;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "Titulo Titulo"
+      "pesquisarMaquina boxInfo"
+      "calendario notificacoes";
+    
+
+    #tituloDaPagina {
+        grid-area: Titulo; 
+        font-size: 8vh;
+    }
+    #calendario { grid-area: calendario; }
+    #pesquisarMaquina { grid-area: pesquisarMaquina; }
+    #boxInfo { grid-area: boxInfo; }
+    #notificacoes { grid-area: notificacoes; }
+}
+main {
+  margin-right: 10vw;
+  margin-left: 10vw;
+}
+
+
+.slot{
+    background-color: whitesmoke;
+    border-radius: 2vw;
+    display: flex;
+    flex-direction: row;
+    width: 30vw;
+    height: 38vh;
+    box-shadow: 5px 4px 14px 0px rgb(53, 53, 53);
+}
+
+/*Estilo do form vistoria */
+#formVistoria {
+    display: none;
+}
+#formVistoria form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 2% 5%;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "descricaoInput dataInput"
+      "descricao data"
+      "enviar enviar";  
+    
+    #descricaoInput { grid-area: descricaoInput; }
+    #descricao { grid-area: descricao; }
+    #dataInput { grid-area: dataInput; }
+    #data { grid-area: data; }
+    #enviar { grid-area: enviar; }
+}
+/* Estilo form feedback */
+#feedbackRetornado{
+    display: none;  
+    position: fixed;
+    left: 25%;
+    top: 12.5%;
+    background-color: var(--cor-principal);
+    padding: 10px 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px gray;
+    width: 50vw;
+    height: 80vh;
+    z-index: 3;
+    
+    flex-direction: column;
+    flex-wrap: wrap; 
+    justify-content: space-around; 
+    align-items: center;
+    overflow: auto; 
+}
+
+#feedbackRetornado div{
+    background-color: white;
+    border-radius: 1vw;
+    box-shadow: 2px 2px 2px;
+    padding: 1vw;
+    width: 40vw;
+    height: 13vw;
+    margin: 2vw;
+}
+
+.cancelarFeedback{
+    color: var(--cor-principal);
+    width: 12em;
+    height: 3em;
+    padding: 0em 1em 0em 1em;
+    background-color: #ff0000;
+    font-size: 1em;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px gray;
+    justify-self: center;
+}
+.cancelarFeedback:hover{
+    cursor: pointer;
+    box-shadow: 3px 3px 3px gray;
+}
+
+/*Estilo do pesquisar máquina*/ 
+#busca{
+    height: 2em;
+    border-radius: 12px / 15px;
+    background-color: #e7e3e3;
+    border: none;
+    color: rgba(0, 0, 0, 0.4);
+    padding: 0.8vw;
+}
+.slotClick {
+    border: ridge gray 2px;
+    border-radius: 1vw;
+    padding: 1vh;
+    margin: 1vh;
+    display:flex;
+}
+
+#pesquisarMaquina {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 2% 5%;
+    grid-auto-flow: row;
+    padding: 1vw;
+    grid-template-areas:
+      "pesquisarmaquina"
+      "resultMaquina";  
+    
+    #pesquisarMaquina { grid-area: pesquisarmaquina; }
+    #resultMaquina { grid-area: resultMaquina; }
+    overflow: auto; 
+}
+
+.slotClick:hover{
+    cursor: pointer;
+    box-shadow: 3px 3px;
+    transition: 200ms;
+}
+.slotClick:active{
+    border: ridge gainsboro 3px;
+    box-shadow: 3px 3px;
+}
+
+.slotClick img{
+    padding: 3px;
+    border: ridge 1px gray;
+    border-radius: 50%;
+}
+.slotClick h2 {
+    font-size: 3vh;
+    margin-left: 1vw;
+}
+
+/*Estilo do box */
+
+#boxInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    gap: 2% 5%;
+    grid-auto-flow: row;
+    padding: 1vw;
+    grid-template-areas:
+      "imagemMaquina textosMaquina"
+      "botaoFeedback botaoFeedback";  
+    
+    #imagemMaquina {
+        grid-area: imagemMaquina; 
+        width: 10vw;
+        height: 10vw;
+        border-radius: 50%;
+        border: solid gray 0.2vw;
+    }
+    #textosMaquina { grid-area: textosMaquina; }
+    #botaoFeedback { grid-area: botaoFeedback; }
+}
+.botaoRelatorio{
+    color: var(--cor-principal);
+    width: 12em;
+    height: 3em;
+    padding: 0em 1em 0em 1em;
+    background-color: #ff0000;
+    font-size: 1em;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px gray;
+}
+.botaoRelatorio:hover{
+    box-shadow: 3px 3px 3px gray;
+    cursor: pointer;
+}
+/*Estilo das notificações */
+#notificacoes{
+    padding: 1vw;
+    flex-wrap: wrap; 
+    align-items: center;
+    overflow: auto;
+}
+
+#container {
+    margin-left: 0 !important;
+    width: 30vw !important;
+    height: 38vh !important;
+    padding: 1vw !important;
+}
+.day{
+    width: 3.5vw !important;
+    height: 5.5vh !important;
+}
+#newEventModal, #deleteEventModal {
+    position: fixed !important;
+}
+#modalBackDrop {
+    width: 180vw !important;
+    position: fixed !important;
+    left: 0vw;
+}
+
+
+#bloquearConteudo {        
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}

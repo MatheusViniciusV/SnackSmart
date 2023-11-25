@@ -1,12 +1,13 @@
+
 package br.cefetmg.snacksmart.facade;
 
+import br.cefetmg.snacksmart.dto.FeedbackDTO;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
 import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
+import br.cefetmg.snacksmart.services.locatario.AcessarFeedback;
 import java.io.IOException;
-import br.cefetmg.snacksmart.dao.LocatarioDAO;
-import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
-import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,46 +16,38 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.util.Base64;
-
-
 /**
  *
- * @author Aluno
+ * @author marco
  */
-@WebServlet(name = "GestaoMaquina", urlPatterns = {"/gestaoMaquina"})
-public class GestaoMaquina extends HttpServlet {
-    @Override
+@WebServlet(name = "ManutecaoVistorias", urlPatterns = {"/manutecaoVistorias"})
+public class ManutecaoVistorias extends HttpServlet {
+     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        AcessarMaquinas acesso = new AcessarMaquinas();
+        AcessarMaquinas acessoMaquinas = new AcessarMaquinas();
+        AcessarFeedback acessoFeedback = new AcessarFeedback();
         
         ArrayList<MaquinaDTO> vetorMaquinasSQL = null;
-        LocatarioDAO locatarioDAO = new LocatarioDAO();     
-        HttpSession session = request.getSession();
-        TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario");
-        
-        if (tipoUsuario == TipoUsuario.LOCADOR){
-            try {
-                vetorMaquinasSQL = acesso.getAllMaquinasGerente();
-                request.setAttribute("listaLocatarios", locatarioDAO.listarTodos()); //Isso deve estar incorreto no modelo MVC por enquanto             
-            } catch (PersistenciaException ex) {
-                Logger.getLogger(GestaoMaquina.class.getName()).log(Level.SEVERE, null, ex);
+        ArrayList<FeedbackDTO> vetorFeedbackSQL = null;
+        ArrayList<FeedbackDTO> vetorFeedback = new ArrayList<>();
+        try {
+            vetorFeedbackSQL = acessoFeedback.getAllFeedback();
+            vetorMaquinasSQL = acessoMaquinas.getAllMaquinasGerente();
+            if (vetorFeedbackSQL != null){
+                for(FeedbackDTO feedback: vetorFeedbackSQL){
+                    if("ERRO".equals(feedback.getTipoFeedback().toString())){
+                        vetorFeedback.add(feedback);
+                    }
+                }
             }
-        } else {
-            LocatarioDTO locatario = (LocatarioDTO) session.getAttribute("usuario");
-            try {               
-                vetorMaquinasSQL = acesso.getAllMaquinasLocatario(locatario.getId());
-            } catch (PersistenciaException ex) {
-                Logger.getLogger(GestaoMaquina.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(ManutecaoVistorias.class.getName()).log(Level.SEVERE, null, ex);
         }
-        request.setAttribute("usuarioAcessando", tipoUsuario);
         if (vetorMaquinasSQL != null){
-            for (MaquinaDTO maquina : vetorMaquinasSQL){
+            for(MaquinaDTO maquina: vetorMaquinasSQL){
                 InputStream imagemStream = maquina.getImagem();
                 if (imagemStream != null){
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -72,7 +65,9 @@ public class GestaoMaquina extends HttpServlet {
                 }
             }
         }
+        request.setAttribute("vetorFeedback", vetorFeedbackSQL);
+        request.setAttribute("vetorFeedbackManutencao", vetorFeedback);
         request.setAttribute("vetorMaquinas", vetorMaquinasSQL);
-        request.getRequestDispatcher("WEB-INF/paginas/gestaoMaquina.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/paginas/manutencaoVistorias.jsp").forward(request, response);
     }
 }

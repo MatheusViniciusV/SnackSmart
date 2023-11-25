@@ -11,7 +11,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 /* @author Arthur Milagres  */
@@ -263,8 +262,12 @@ public class MaquinaDAO implements IMaquinaDAO {
             preparedStatement.setInt(2, maquina.getCodigo());
             preparedStatement.setBinaryStream(3, maquina.getImagem());
             preparedStatement.setString(4, maquina.getTipo().name());
-            preparedStatement.setString(5, maquina.getLocalizacao());            
-            preparedStatement.setInt(6, maquina.getLocatario().getId());           
+            preparedStatement.setString(5, maquina.getLocalizacao());  
+            LocatarioDTO locatario = maquina.getLocatario();
+            if (locatario != null) {
+                preparedStatement.setInt(6, locatario.getId());  
+            } else 
+                preparedStatement.setNull(6, java.sql.Types.INTEGER);
             preparedStatement.setString(7, maquina.getStatus().name());
             preparedStatement.setDouble(8, 1);
             
@@ -292,7 +295,11 @@ public class MaquinaDAO implements IMaquinaDAO {
             preparedStatement.setBinaryStream(2, updatedMaquina.getImagem());
             preparedStatement.setString(3, updatedMaquina.getTipo().name());
             preparedStatement.setString(4, updatedMaquina.getLocalizacao());
-            preparedStatement.setInt(5, updatedMaquina.getLocatario().getId());
+            LocatarioDTO locatario = updatedMaquina.getLocatario();
+            if (locatario != null) {
+                preparedStatement.setInt(5, locatario.getId());  
+            } else 
+                preparedStatement.setNull(5, java.sql.Types.INTEGER);
             preparedStatement.setString(6, updatedMaquina.getStatus().name());
             preparedStatement.setInt(7, updatedMaquina.getCodigo());
 

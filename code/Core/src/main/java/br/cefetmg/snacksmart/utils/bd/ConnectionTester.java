@@ -31,7 +31,7 @@ public class ConnectionTester {
 
             ContratosDAO contratosDAO = new ContratosDAO();
             LocatarioDAO locatarioDAO = new LocatarioDAO();
-            LocatarioDTO loc = locatarioDAO.consultarPorCPF("111");
+            LocatarioDTO loc = locatarioDAO.consultarPorCPF("111.111.111-11");
 
             System.out.println(loc.getNome());
 
