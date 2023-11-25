@@ -32,17 +32,16 @@
             <div id="menu">
                 <ul>
                     <li><a href="visualizarContratos"><button><h2>Visualizar Contrato</h2></button></a></li>
+                    <li><a href="gestaoMaquina"><button><h2>Gestão Máquina</h2></button></a></li>
                     <c:choose>
                         <c:when test="${tipoUsuario == TipoUsuario.LOCATARIO}">
-                            <li><a href="visualizarContratos"><button><h2>blablabla</h2></button></a></li>
-                            <li><a href="gestaoMaquina"><button><h2>Gestão Máquina</h2></button></a></li>
+                            <li><a href="gestaoFornecedores"><button><h2>Fornecedor</h2></button></a></li>                         
                             <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
                             <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
                             <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
                             <li><a href="MeusDadosLocatario.jsp"><button><h2>Meus dados</h2></button></a></li>
                         </c:when>
                         <c:otherwise>
-                            <li><a href="gestaoMaquina"><button><h2>Gestão Máquina</h2></button></a></li>
                             <li><a href="FinanceiroGerente.jsp"><button><h2>Financeiro</h2></button></a></li>
                             <li><a href="GestaoLocatarios.jsp"><button><h2>Gestão de Locatários</h2></button></a></li>
                             <li><a href="manutecaoVistorias"><button><h2>Manuteção Vistorias</h2></button></a></li>
