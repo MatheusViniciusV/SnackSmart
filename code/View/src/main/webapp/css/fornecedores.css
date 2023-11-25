@@ -77,31 +77,53 @@ main {
     height: 60vh;
     box-shadow: 5px 4px 14px 0px rgb(53, 53, 53);
 }
-
-#boxInfo {
+#boxInfo{
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    align-items: center;
-    justify-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
     gap: 2% 5%;
     grid-auto-flow: row;
     padding: 1vw;
+    align-items: center;
+    justify-items: center;
     grid-template-areas:
-      "imagemMaquina textosMaquina"
-      "botaoAgenda botaoFeedback";  
+      "formAtualizar"
+      "reverter"
+      "formRemover";
     
-    #imagemMaquina {
-        grid-area: imagemMaquina; 
-        width: 10vw;
-        height: 10vw;
-        border-radius: 50%;
-        border: solid gray 0.2vw;
-    }
-    #textosMaquina { grid-area: textosMaquina; }
-    #botaoAgenda { grid-area: botaoAgenda; }
-    #botaoFeedback { grid-area: botaoFeedback; }
+    #formAtualizar { grid-area: formAtualizar; }
+    #reverter { grid-area: reverter; }
+    #formRemover { grid-area: formRemover; }
 }
+#formAtualizar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    gap: 2% 5%;
+    grid-auto-flow: row;
+    padding: 1vw;
+    align-items: center;
+    justify-items: center;
+    grid-template-areas:
+      "nomeExibidoInput nomeExibido"
+      "telefoneExibidoInput telefoneExibido"
+      "emailExibidoInput emailExibido"
+      ". ."
+      "atualizarDados atualizarDados";
+    
+    #nomeExibidoInput { grid-area: nomeExibidoInput; }
+    #nomeExibido { grid-area: nomeExibido; }
+    #telefoneExibidoInput { grid-area: telefoneExibidoInput; }
+    #telefoneExibido { grid-area: telefoneExibido; }
+    #emailExibidoInput { grid-area: emailExibidoInput; }
+    #emailExibido { grid-area: emailExibido; }
+    #atualizarDados { grid-area: atualizarDados; }
+}
+
+#formAtualizar input{
+    padding: 0.4vw;
+}
+
 
 #bloquearConteudo {        
     display: none;
@@ -117,8 +139,8 @@ main {
 #addContato{
     display: none;
     position: fixed;
-    left: 25%;
-    top: 12.5%;
+    left: 37%;
+    top: 35%;
     background-color: var(--cor-principal);
     padding: 10px 10px;
     border-radius: 10px;
@@ -139,7 +161,7 @@ main {
     flex-wrap: wrap;
 }
 
-#AddFonercedor, .cancelar{
+#AddFonercedor, .cancelar, #remover, #atualizarDados, #reverter{
     color: var(--cor-principal);
     width: 12em;
     height: 3em;

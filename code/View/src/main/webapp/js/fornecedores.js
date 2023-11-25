@@ -1,3 +1,28 @@
+function formatarTelefone(input) {
+    let digitos = input.value.replace(/\D/g, '');
+    let formatoTelefone = '(' + digitos.substring(0, 2) + ')';
+    if (digitos.length > 2) {
+        if (digitos.length > 6) {
+            formatoTelefone += digitos.substring(2, 6) + '-' + digitos.substring(6, 10);
+        } else {
+            formatoTelefone += digitos.substring(2);
+        }
+    }
+    if (formatoTelefone.length === 13 || formatoTelefone.length === 14) {
+        input.value = formatoTelefone;
+    } else {
+        input.value = '';
+    }
+}
+function validarEmail(input) {
+    let email = input.value;
+    let regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (regexEmail.test(email) === false) {
+        console.log('Email válido:', email);       
+        input.value = "";
+    } 
+}
 function pesquisarElementos(){
     let stringProcura = this.value;
     let slots = document.querySelectorAll('.slotClick');
@@ -94,6 +119,23 @@ locatarioExibidoEl.value = usuario.cpf;
 let reverterEl = document.getElementById('reverter');
 reverterEl.addEventListener('click', reverte);
 
+let telefoneEl = document.getElementById('telefone');
+let telefoneExibidoEl = document.getElementById('telefoneExibido');
+let emailEl = document.getElementById('email');
+let emailExibidoEl = document.getElementById('emailExibido');
+
+emailEl.addEventListener('blur', function() {
+    validarEmail(emailEl);
+});
+emailExibidoEl.addEventListener('blur', function() {
+    validarEmail(emailExibidoEl);
+});
+telefoneEl.addEventListener('blur', function() {
+    formatarTelefone(telefoneEl);
+});
+telefoneExibidoEl.addEventListener('blur', function() {
+    formatarTelefone(telefoneExibidoEl);
+});
 //Global VAR - Reverter
 var nomeReverta;
 var telefoneReverta;

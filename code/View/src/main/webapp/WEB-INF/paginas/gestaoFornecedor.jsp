@@ -43,21 +43,27 @@
                 </script>             
             </div>
             
-            <div id="boxInfo" class="slot">
-                <form action="GerenciarFornecedores" method="post">
-                    <input id="nomeExibido" type="text" name="nomeExibido">
-                    <input id="telefoneExibido" type="tel" name="telefoneExibido">
-                    <input id="emailExibido" type="email" name="emailExibido">   
-                    <input class="idFornecedor" type="hidden" name="idFornecedor">  
-                    <input type="hidden" name="locatarioExibido" id="locatarioExibido">
+            <div id="boxInfo" class="slot">              
+                <form action="GerenciarFornecedores" method="post" id="formAtualizar">
+                    <label id="nomeExibidoInput">Nome do fornecedor:</label>
+                    <input type="text" id="nomeExibido"  name="nomeExibido" required>
+                    <br>
+                    <label id="telefoneExibidoInput">Telefone de contato:</label>
+                    <input type="tel" id="telefoneExibido"  name="telefoneExibido" required>
+                    <br>
+                    <label id="emailExibidoInput">E-mail do Fornecedor:</label>
+                    <input type="email" id="emailExibido"  name="emailExibido" required>   
+                    
+                    <input type="hidden"class="idFornecedor"  name="idFornecedor">  
+                    <input type="hidden" id="locatarioExibido" name="locatarioExibido" >
                     <input type="submit" id="atualizarDados" value="Realizar Alterações">  
-                </form>
-                <form action="GerenciarFornecedores" method="post">
-                    <input class="idFornecedor" type="hidden" name="idFornecedor">  
-                    <input type="hidden" name="remocao" value="solicitado">  
-                    <input type="submit" id="remover" value="Remover fornecedor" >  
-                </form>
+                </form>    
                 <button id="reverter">Reverter Alterações</button>
+                <form action="GerenciarFornecedores" method="post" id="formRemover">
+                    <input class="idFornecedor" type="hidden" name="idFornecedor" value="0">  
+                    <input type="hidden" name="remocao" value="solicitado">  
+                    <input type="submit" id="remover" value="Remover fornecedor">  
+                </form>               
             </div>
             
         </main>
@@ -69,7 +75,7 @@
                 <input id="nome" type="text" name="nome" required>
                 
                 <label id="telefoneInput">Telefone de contato:</label>
-                <input type="tel" id="telefone" name="telefone" required>
+                <input type="tel" id="telefone" name="telefone" placeholder="(00)00000-0000" required>
                 
                 <label id="emailInput">E-mail do Fornecedor:</label>
                 <input id="email" type="email" name="email" required>

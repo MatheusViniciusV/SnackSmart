@@ -2,7 +2,7 @@
     display:grid;
     grid-template-columns: 40vw 40vw;
     grid-template-rows: auto auto auto;
-    gap: 2% 5%;
+    gap: 4% 6%;
     grid-auto-flow: row;
     grid-template-areas:
       "Titulo Titulo"
@@ -31,7 +31,7 @@ main {
     display: flex;
     flex-direction: row;
     width: 30vw;
-    height: 40vh;
+    height: 38vh;
     box-shadow: 5px 4px 14px 0px rgb(53, 53, 53);
 }
 
@@ -170,7 +170,7 @@ main {
     padding: 1vw;
     grid-template-areas:
       "imagemMaquina textosMaquina"
-      "botaoAgenda botaoFeedback";  
+      "botaoFeedback botaoFeedback";  
     
     #imagemMaquina {
         grid-area: imagemMaquina; 
@@ -180,7 +180,6 @@ main {
         border: solid gray 0.2vw;
     }
     #textosMaquina { grid-area: textosMaquina; }
-    #botaoAgenda { grid-area: botaoAgenda; }
     #botaoFeedback { grid-area: botaoFeedback; }
 }
 .botaoRelatorio{
@@ -205,14 +204,26 @@ main {
     align-items: center;
     overflow: auto;
 }
-#calendario{
-    padding-left: 6em;
-    padding-right: 6em;
-    display: flex;
-    justify-content: space-around;
-    gap: 8%;
-    height: 30%;
+
+#container {
+    margin-left: 0 !important;
+    width: 30vw !important;
+    height: 38vh !important;
+    padding: 1vw !important;
 }
+.day{
+    width: 3.5vw !important;
+    height: 5.5vh !important;
+}
+#newEventModal, #deleteEventModal {
+    position: fixed !important;
+}
+#modalBackDrop {
+    width: 180vw !important;
+    position: fixed !important;
+    left: 0vw;
+}
+
 
 #bloquearConteudo {        
     display: none;
