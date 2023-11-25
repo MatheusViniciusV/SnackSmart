@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/manutencao.css">
         <link rel="stylesheet" href="css/Calendario.css">    
-        <title>Manuteção Vistorias</title>
+        <title>Manuteção e Vistorias</title>
         
     </head>
     <body>      
@@ -67,7 +67,7 @@
                     <p id="nomeMaquina">SELECIONE UMA MÁQUINA</p>
                     <p id="locatarioMaquina"></p>
                 </div>
-                <input type="button" class="botaoRelatorio" id="botaoAgenda" value="Agendar vistoria">
+
                 <input type="button" class="botaoRelatorio" id="botaoFeedback" value="Verificar Feedbacks">
             </div>
             
@@ -79,20 +79,7 @@
                 <h1>Manutenções Solicitadas</h1>
             </div>
         </main>
-            
-        <article id="formVistoria">
-            <form action="GerenciarManutencaoVistoria" method="post">
-                <label id="descricaoInput">Descrição:</label>
-                <input id="descricao" type="text" name="descricao">
-                
-                <label id="dataInput">Data:</label>
-                <input id="data" type="date" name="data">
-                
-                <input id="enviar" type="submit">    
-            </form>
-            <button id="cancelar">Cancelar</button>
-        </article>    
-            
+              
         <article id="feedbackRetornado">
             <button class="cancelarFeedback">Cancelar</button>
         </article>
