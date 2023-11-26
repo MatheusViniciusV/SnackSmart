@@ -9,7 +9,7 @@
         <h1>SnackSmart</h1>
         <div id="area-login">
             <form action="LoginServlet" method="post">
-                <input type="text" name="usuario" id="usuario" placeholder="Usuário" class="cpf-input" required><br><br>
+                <input type="text" name="usuario" id="usuario" placeholder="Usuário" class="cpf-input" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" required><br><br>
                 <input type="password" name="senha" id="senha" placeholder="Senha" required><br><br>
                 <input type="submit" value="Login">
             </form>

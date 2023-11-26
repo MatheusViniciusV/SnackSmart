@@ -8,7 +8,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/base.css">
-        <link rel="stylesheet" href="css/gestaomaquina.css">
+        <link rel="stylesheet" href="css/gestaoMaquina.css">
         <title>Gestão de Máquinas</title>
         <%@include file="../../comuns/jqueryLink.jsp" %>
 
