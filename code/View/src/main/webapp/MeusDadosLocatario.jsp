@@ -44,8 +44,29 @@
                             <input type='text' name='telefone' value='${usuario.getTelefone()}' >
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            Nova Senha:
+                        </td>
+                        <td>
+                            <input type='text' name='novaSenha' value='' >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Senha:
+                        </td>
+                        <td>
+                            <input type='text' name='senha' value='' >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button>Alterar dados</button>
+                        </td>
+                    </tr>
                 </table> 
-                <input type="submit" value="Alterar dados">
+                        
             </form>
         </main>
     </body>
