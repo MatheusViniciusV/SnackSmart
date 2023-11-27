@@ -8,8 +8,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 */
 
 .box{
-    height: 50em;
-    width: 100em;
+    padding-left: 6em;
+    padding-right: 6em;
+    height: 20em;
+    width: 30em;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -34,6 +36,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
+    grid-gap: 70px;
    /* display:none;*/ 
+}
+input{
+    min-width: 80px;
+    display: box;
 }

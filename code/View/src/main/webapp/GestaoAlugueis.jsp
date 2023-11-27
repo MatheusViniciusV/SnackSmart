@@ -75,22 +75,27 @@ StringBuilder nomes = new StringBuilder();
 StringBuilder datas = new StringBuilder();
 
 for(String s : nomeMaquinas)
-nomes.append(s).append("<br>");
+nomes.append("<p>").append(s).append("</p>");
 for(DataManager d : dataContratos)
-//datas.append("1/1/1111<br>");
-datas.append(d.toString()).append("<br>");
+datas.append("<p>").append(d.toString()).append("</p>");
 %>
+<div>
 <%= nomes%>
+</div>
+<div>
 <%= datas%>
-                <%--</p>--%>
+</div>                <%--</p>--%>
 
             </div>
             <div class="box">
 
                 <form id="pedido">
-                    <input type="text" id="tipo" value='tipo'>
-                    <input type="text" id="local" value='local'>
-                    <input type="text" id="loc" value='loc'>
+                    <p>tipo de máquina</p>
+                    <input type="text" id="tipo">
+                    <p>localização</p>
+                    <input type="text" id="local">
+                    <p>locatário responsável</p>
+                    <input type="text" id="loc">
 
 
                     <input type="submit">
