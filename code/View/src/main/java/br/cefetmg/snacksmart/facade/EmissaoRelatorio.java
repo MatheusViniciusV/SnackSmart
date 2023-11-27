@@ -69,6 +69,6 @@ public class EmissaoRelatorio extends HttpServlet {
         }
         request.setAttribute("vetorMaquinas", vetorMaquinas);
         request.setAttribute("vetorFeedbacks", vetorFeedbacks);
-        request.getRequestDispatcher("WEB-INF/paginas/relatorioGerente.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/paginas/emissaoRelatorio.jsp").forward(request, response);
     }
 }
