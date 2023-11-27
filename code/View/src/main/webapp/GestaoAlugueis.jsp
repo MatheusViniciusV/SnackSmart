@@ -37,12 +37,13 @@
                     PrintWriter writer = response.getWriter();
                 
                 ContratosDAO Contratos = new ContratosDAO();
+                ArrayList<String> jsonContratos = new ArrayList();
+                ArrayList<DataManager> dataContratos = new ArrayList();
+                ArrayList<String> nomeMaquinas = new ArrayList();
+
 
                 try{
-                    ArrayList<String> nomeMaquinas = new ArrayList();
-                    ArrayList<DataManager> dataContratos = new ArrayList();
                     ArrayList<ContratoDTO> ListaContratos = Contratos.listaTodos();
-                    ArrayList<String> jsonContratos = new ArrayList();
 
                     for(ContratoDTO c : ListaContratos){
                         //JsonMaquinas.add(m.toJson());
@@ -68,9 +69,20 @@
                   catch(Exception e){}  
                     
                 %>
-                <p id='listaOculta'>
-                    <%= jsonContratos%>
-                </p>
+                <%--<p id='listaOculta'>--%>
+                    <%
+StringBuilder nomes = new StringBuilder();
+StringBuilder datas = new StringBuilder();
+
+for(String s : nomeMaquinas)
+nomes.append(s).append("<br>");
+for(DataManager d : dataContratos)
+//datas.append("1/1/1111<br>");
+datas.append(d.toString()).append("<br>");
+%>
+<%= nomes%>
+<%= datas%>
+                <%--</p>--%>
 
             </div>
             <div class="box">
@@ -88,4 +100,4 @@
         </div>
         <script src="js/Alugueis.js">
             </body>
-            </html> 
+                    </html> 

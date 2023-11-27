@@ -30,7 +30,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
     gap: 8%;
 }
 
-#listaOculta{
+#listaMaquinas{
     
-    display:none; 
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+   /* display:none;*/ 
 }
