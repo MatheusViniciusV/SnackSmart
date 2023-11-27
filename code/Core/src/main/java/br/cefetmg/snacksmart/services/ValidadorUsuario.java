@@ -61,10 +61,17 @@ public class ValidadorUsuario {
             throws UnsupportedEncodingException, NoSuchAlgorithmException, PersistenciaException {
         
         LocatarioDTO locatario = daoLocatario.consultarPorCPF(cpf);
+        
 
         senha = SenhaManager.fazHash(senha);
 
-        return (senha.equals(locatario.getSenha()) && cpf.equals(locatario.getCPF()));
+        System.out.println(locatario.getSenha());
+        System.out.println(senha);
+        boolean x = (senha.equals(locatario.getSenha()) && cpf.equals(locatario.getCPF()));
+        
+        System.out.println("AAAAAAAAAAAAAAAAAAAA");
+        System.out.println(x);
+        return x;
     }
 
     public IUsuarioDTO getGenrente() {

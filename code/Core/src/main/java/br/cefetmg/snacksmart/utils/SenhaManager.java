@@ -7,6 +7,9 @@ import java.security.NoSuchAlgorithmException;
 
 public class SenhaManager {
     public static String fazHash(final String senha) {
+        if(senha.isEmpty())
+            return "";
+        
         MessageDigest algorithm = null;
         try {
             algorithm = MessageDigest.getInstance("SHA-256");

@@ -1,13 +1,13 @@
 C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\GerFinanceiro.java
 C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\facade\GestaoMaquina.java
-C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\GestaoLocatarios.java
-
+C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\facade\GestaoFornecedores.java
 C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\locatario\SolicitarCancelarContrato.java
 C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\ObterLocatario.java
+C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\ManterLocatariosServlet.java
 C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\locatario\AlterarDadosLocatario.java
 C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\AlterarDadosGerente.java
 C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\GerenciarMaquina.java
-
+C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\facade\RelatorioGerente.java
 C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\RelatorioGerente.java
 C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\facade\LoginServlet.java
 C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\CancelarContrato.java
@@ -18,4 +18,7 @@ C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snac
 C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\facade\VisualizarContratos.java
 C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller_locador\ObterMaquinaDisponivel.java
 C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\ObterMaquinaDisponivel.java
+C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\facade\GestaoLocatarios.java
 C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\GerenciarManutencaoVistoria.java
+C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\locatario\GerenciarFornecedores.java
+C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\PDFContrato.java

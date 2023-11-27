@@ -75,7 +75,7 @@ public class LocatarioDTO implements IUsuarioDTO {
         }
     }
 
-    public LocatarioDTO(int id, String nome, String cpf, String email, String telefone) throws ParametroInvalidoException{
+    public LocatarioDTO(int id, String nome, String senha, String cpf, String email, String telefone) throws ParametroInvalidoException{
         this.id = id;
 
         if(nome.isEmpty()) {
@@ -100,6 +100,12 @@ public class LocatarioDTO implements IUsuarioDTO {
             this.telefone = telefone;
         } else {
             throw new TelefoneInvalidoException(telefone);
+        }
+        
+        if(senha.isEmpty()) {
+            throw new SenhaNulaException();
+        } else {
+            this.senha = senha;
         }
     }
 

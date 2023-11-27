@@ -25,7 +25,7 @@
                             Nome:
                         </td>
                         <td>
-                            <input type='text' name='nome' value='<%=usuario.getNome()%>' >
+                            <input type='text' name='nome' value='${usuario.getNome()}' >
                         </td>
                     </tr>
                     <tr>
@@ -33,7 +33,7 @@
                             Email:
                         </td>
                         <td>
-                            <input type='text' name='email' value='<%=usuario.getEmail()%>' >
+                            <input type='text' name='email' value='${usuario.getEmail()}' >
                         </td>
                     </tr>
                     <tr>
@@ -41,15 +41,7 @@
                             Telefone:
                         </td>
                         <td>
-                            <input type='text' name='telefone' value='<%=usuario.getTelefone()%>' >
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            RG:
-                        </td>
-                        <td>
-                            <input type='text' name='rg' value='<%=usuario.getRG()%>' >
+                            <input type='text' name='telefone' value='${usuario.getTelefone()}' >
                         </td>
                     </tr>
                 </table> 

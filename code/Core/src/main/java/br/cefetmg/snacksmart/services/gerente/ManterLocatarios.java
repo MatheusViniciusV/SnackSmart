@@ -34,4 +34,8 @@ public class ManterLocatarios {
     public int registrar(LocatarioDTO locatarioDTO) throws PersistenciaException {
         return dao.inserir(locatarioDTO);
     }
+
+    public void atualizar(LocatarioDTO locatarioDTO) throws PersistenciaException {
+        dao.atualizar(locatarioDTO);
+    }
 }

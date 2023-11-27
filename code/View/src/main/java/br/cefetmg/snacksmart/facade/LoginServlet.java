@@ -32,6 +32,8 @@ public class LoginServlet extends HttpServlet {
             String senha = request.getParameter("senha");
             
             TipoUsuario tipoUsuario = validador.tipoUsuario(cpf);
+            
+            System.out.println(tipoUsuario);
             if(tipoUsuario == TipoUsuario.NAO_CADASTRADO)
                 response.sendRedirect("index.html");
             

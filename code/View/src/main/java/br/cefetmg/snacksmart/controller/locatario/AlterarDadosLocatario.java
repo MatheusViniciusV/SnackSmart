@@ -15,10 +15,6 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @WebServlet(name = "AlterarDadosLocatario", urlPatterns = {"/AlterarDadosLocatario"})
 public class AlterarDadosLocatario extends HttpServlet {
@@ -33,7 +29,6 @@ public class AlterarDadosLocatario extends HttpServlet {
         LocatarioDTO locatarioDTO = (LocatarioDTO) session.getAttribute("usuario");
             
         locatarioDTO.setNome(request.getParameter("nome"));
-        locatarioDTO.setRG(request.getParameter("rg"));
         locatarioDTO.setEmail(request.getParameter("email"));
         locatarioDTO.setTelefone(request.getParameter("telefone"));
     

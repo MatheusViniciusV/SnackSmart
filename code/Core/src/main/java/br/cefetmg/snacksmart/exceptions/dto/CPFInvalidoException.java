@@ -14,4 +14,8 @@ public class CPFInvalidoException extends ParametroInvalidoException {
     public CPFInvalidoException() {
         super("Formato do CPF invalido ou nulo");
     }
+    
+    public CPFInvalidoException(String msg) {
+        super(msg);
+    }
 }

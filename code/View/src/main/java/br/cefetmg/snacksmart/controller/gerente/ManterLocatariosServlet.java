@@ -3,6 +3,7 @@ package br.cefetmg.snacksmart.controller.gerente;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import br.cefetmg.snacksmart.exceptions.dto.CPFInvalidoException;
 import br.cefetmg.snacksmart.exceptions.dto.ParametroInvalidoException;
 import br.cefetmg.snacksmart.services.gerente.ManterLocatarios;
 import br.cefetmg.snacksmart.utils.SenhaManager;
@@ -26,24 +27,19 @@ public class ManterLocatariosServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try (PrintWriter out = response.getWriter()) {
-            response.setContentType("text/html;charset=UTF-8");
-
+        try {
             ManterLocatarios acesso = new ManterLocatarios();
 
-            LocatarioDAO locatarioDAO = new LocatarioDAO();
-            ArrayList<LocatarioDTO> locatarios;
             LocatarioDTO locatario;
             
             String submitType = request.getParameter("submitType");
-
 
             if (null != submitType) {
                 String nome = request.getParameter("nome");
                 String cpf = request.getParameter("cpf");
                 String email = request.getParameter("email");
                 String telefone = request.getParameter("telefone");
-                String senha = SenhaManager.fazHash(request.getParameter("senha"));
+                String senha = request.getParameter("senha");
                 switch (submitType) {
                     case "adicionar":
                         locatario = new LocatarioDTO(
@@ -55,26 +51,35 @@ public class ManterLocatariosServlet extends HttpServlet {
                         );
 
                         acesso.registrar(locatario);
+                        response.setStatus(HttpServletResponse.SC_OK);
                         break;
                     case "atualizar":
+
+                        if(cpf.isEmpty())
+                            throw new CPFInvalidoException("campo de CPF vazio.");
 
                         locatario = acesso.buscaPorCpf(cpf);
 
                         if(!senha.isEmpty())
-                            locatario.setNome(request.getParameter("nome"));
+                            locatario.setSenha(SenhaManager.fazHash(senha));
 
+                        if(!email.isEmpty())
+                            locatario.setEmail(email);
+
+                        if(!telefone.isEmpty())
+                            locatario.setTelefone(telefone);
                         
+                        if(!nome.isEmpty()) 
+                            locatario.setNome(nome);
+                        
+                        System.out.println(locatario.getNome());
 
-                        locatario.setEmail(request.getParameter("email"));
-                        locatario.setTelefone(request.getParameter("telefone"));
 
-                        locatarioDAO.atualizar(locatario);
+                        acesso.atualizar(locatario);
+                        response.setStatus(HttpServletResponse.SC_OK);
                         break;
-                    default:
                 }
             }
-            out.println("13");
-            response.sendRedirect("gestaoLocatarios.jsp");
         } catch (PersistenciaException ex) {
             Logger.getLogger(ManterLocatariosServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParametroInvalidoException px) {
