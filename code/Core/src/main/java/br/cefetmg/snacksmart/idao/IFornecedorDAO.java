@@ -15,4 +15,6 @@ public interface IFornecedorDAO {
     ArrayList<FornecedorDTO> listarTodos() throws PersistenciaException;
     
     ArrayList<FornecedorDTO> listarPorLocatario(String cpf) throws PersistenciaException;
+    
+    FornecedorDTO consultarPorId(int id) throws PersistenciaException;
 }

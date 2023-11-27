@@ -172,4 +172,42 @@ public class FornecedorDAO implements IFornecedorDAO {
             throw new PersistenciaException(e.getMessage(), e);
         }
     }
+    
+    @Override
+    public FornecedorDTO consultarPorId(int id) throws PersistenciaException {
+
+        try {
+            Connection connection = ConnectionManager.getInstance().getConnection();
+
+            int fk;
+            
+            String sql = "SELECT * FROM fornecedor WHERE pk = ?";
+
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setLong(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            
+            LocatarioDAO locatarioDAO = new LocatarioDAO();
+
+            FornecedorDTO fornecedorDTO = null;
+            if (rs.next()) {
+                fornecedorDTO = new FornecedorDTO();
+                fornecedorDTO.setId(rs.getInt("pk"));
+                fornecedorDTO.setNome(rs.getString("nome"));
+                fornecedorDTO.setTelefone(rs.getString("telefone"));
+                fornecedorDTO.setEmail(rs.getString("email"));
+                fk = rs.getInt("locatario__fk");
+                fornecedorDTO.setLocatario(locatarioDAO.consultarPorId(fk));
+            }
+
+            rs.close();
+            pstmt.close();
+            connection.close();
+
+            return fornecedorDTO;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new PersistenciaException(e.getMessage(), e);
+        }
+    }
 }
