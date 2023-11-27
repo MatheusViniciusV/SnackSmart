@@ -11,8 +11,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Alterar meus dados</title>
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/meusdados.css">
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/meusDados.css">
     </head>
     <body>
         <%@include file="comuns/retornarInicial.jsp" %>

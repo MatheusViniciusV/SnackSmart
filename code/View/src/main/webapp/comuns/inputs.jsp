@@ -4,4 +4,4 @@
     Author     : eloym
 --%>
 
-<script src="js/validarRegEx.js"></script>
+<script src="js/inputs.js"></script>

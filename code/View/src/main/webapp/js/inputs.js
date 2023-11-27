@@ -16,3 +16,12 @@ function validarRegEx(input, regEx, validador) {
         validador = false;
     }
 }
+
+let $cpfInputs = $(".cpf-input");
+$cpfInputs.on('input', function () {
+    if ($cpfInputs.val().length === 3 || $cpfInputs.val().length === 7) {
+        $cpfInputs.val($cpfInputs.val() + '.');
+    } else if ($cpfInputs.val().length === 11) {
+        $cpfInputs.val($cpfInputs.val() + '-');
+    }
+});
