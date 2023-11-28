@@ -10,7 +10,7 @@ public interface ILoteDAO {
 
     boolean atualizar(LoteDTO loteDTO) throws PersistenciaException;
 
-    boolean delete(LoteDTO loteDTO) throws PersistenciaException;
+    boolean delete(int id) throws PersistenciaException;
 
     ArrayList<LoteDTO> listarTodos() throws PersistenciaException;
 

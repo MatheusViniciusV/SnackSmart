@@ -208,6 +208,7 @@ public class MaquinaDAO implements IMaquinaDAO {
         }
     } 
     
+    @Override
     public ArrayList<MaquinaDTO> acessarTodasMaquinasSemExcecoes() throws PersistenciaException {
         try{
             Connection conexao = ConnectionManager.getInstance().getConnection();

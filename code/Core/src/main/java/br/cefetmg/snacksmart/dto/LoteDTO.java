@@ -1,5 +1,7 @@
 package br.cefetmg.snacksmart.dto;
 
+import java.io.InputStream;
+
 public class LoteDTO {
     
     private int id;
@@ -7,13 +9,15 @@ public class LoteDTO {
     private int quantidade;
     private double precoCompra;
     private double precoVenda;
+    private InputStream imagem; 
+    private String urlImagem;
     private FornecedorDTO fornecedor;
     private LocatarioDTO locatario;
     
     public LoteDTO() {};
 
     public LoteDTO(int id, String tipoProduto, int quantidade, double precoCompra, double precoVenda,
-                      FornecedorDTO fornecedor, LocatarioDTO locatario) {
+                      FornecedorDTO fornecedor, LocatarioDTO locatario, InputStream imagem) {
         this.id = id;
         this.tipoProduto = tipoProduto;
         this.quantidade = quantidade;
@@ -21,6 +25,7 @@ public class LoteDTO {
         this.precoVenda = precoVenda;
         this.fornecedor = fornecedor;
         this.locatario = locatario;
+        this.imagem = imagem;
     }
 
     public int getId() {
@@ -77,5 +82,21 @@ public class LoteDTO {
 
     public void setLocatario(LocatarioDTO locatario) {
         this.locatario = locatario;
+    }
+    
+    public InputStream getImagem() {
+        return imagem;
+    }   
+    
+    public void setImagem(InputStream novaImagem) {
+        imagem = novaImagem;
+    }
+    
+    public String getUrlImagem(){
+        return urlImagem;
+    }
+    
+    public void setUrlImagem(String imagem) {
+        urlImagem = imagem;
     }
 }
