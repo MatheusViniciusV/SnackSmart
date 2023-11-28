@@ -18,9 +18,10 @@
         <main id="fornecedorMain">     
             <h1 id="tituloDaPagina">Informações do Estoque</h1>   
             <div id="bloquearConteudo"></div>
-            <div id="pesquisarMaquina" class="slot">
-                <input type="text" placeholder="Procurar por máquina" id="busca"></input>
-                <div id="resultMaquina" ></div>
+            <div id="pesquisarLote" class="slot">
+                <input type="text" placeholder="Procurar por lote de produto" id="busca">
+                <button id="addLote">Adicionar novo lote</button>
+                <div id="resultLote" ></div>                
                 <!-- Cria as variáveis das consultas SQL -->
                 <script>
                     var vetorFornecedores = [
@@ -65,9 +66,16 @@
             
         </main>
         
-        <article id="addLote">
-            <form action="GerenciarEstoque" method="post">
-                <in
+        <article id="formLote" slot="slot">
+            <form action="GerenciarEstoque" method="post" >
+                <input type="text" placeholder="Nome do produto" id="tipoProduto" name="tipoProduto">
+                <input type="number" placeholder="Quantidade" id="quantidade" name="quantidade">
+                <input type="number" placeholder="Preço de Compra" id="precoCompra" name="precoCompra">
+                <input type="number" placeholder="Preco de Venda" id="precoVenda" name="precoVenda">
+                <select id="fornecedor" name="fornecedor">
+                </select><br>    
+                <input id="imagen" type="file" accept="image/*" name="imagem">
+                <input id="enviarLote" class="botaoForm" name="novoLote" type="submit" value="Adicionar novo lote">
             </form>
             <button class="cancelar">Cancelar</button>
         </article>
@@ -83,5 +91,14 @@
                 }
             </script>  
         </c:forEach>
+        <!-- Carrega os fornecedores -->
+        <script>            
+            <c:forEach items="${vetorFornecedores}" var="fornecedor">
+                var nome = "${fornecedor.nome}";
+                vetorNomes.push(nome);
+                var email = "${fornecedor.email}";
+                vetorEmail.push(email);
+            </c:forEach>  
+        </script>   
     </body>   
 </html>

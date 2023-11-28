@@ -1,5 +1,6 @@
 package br.cefetmg.snacksmart.dao;
 
+import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.idao.ILoteDAO;
 import br.cefetmg.snacksmart.dto.LoteDTO;
 import java.sql.Connection;
@@ -172,11 +173,13 @@ public class LoteDAO implements ILoteDAO {
     public ArrayList<LoteDTO> listarPorLocatario(String cpf) throws PersistenciaException {
         try {
             Connection connection = ConnectionManager.getInstance().getConnection();
-            
-            String sql = "SELECT l.* FROM lote l INNER JOIN locatario lo ON l.locatario__fk = lo.id WHERE lo.cpf = ?";
+            LocatarioDAO locatarioDAO = new LocatarioDAO();
+            LocatarioDTO locatario = locatarioDAO.consultarPorCPF(cpf);
+            int id = locatario.getId();
+            String sql = "SELECT * FROM lote WHERE fornecedor__fk = ?";
             
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setString(1, cpf);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             
             ArrayList<LoteDTO> lotes = new ArrayList<>();

@@ -145,11 +145,9 @@
                 <c:forEach items="${listaLocatarios}" var="locatario">
                     var nome = "${locatario.nome}";
                     vetorNomes.push(nome);
-                </c:forEach>  
-                <c:forEach items="${listaLocatarios}" var="locatario">
                     var cpf = "${locatario.CPF}";
                     vetorCPF.push(cpf);
-                </c:forEach>
+                </c:forEach>  
             </script>
         </c:if> 
         

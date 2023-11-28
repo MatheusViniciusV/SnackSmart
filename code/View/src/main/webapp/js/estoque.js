@@ -1,3 +1,6 @@
+let bloquearConteudoEl = document.getElementById("bloquearConteudo");
+let formulario = document.getElementById("formLote");
+let botoesCancelarEl = document.querySelectorAll(".cancelar");
 function criarSlotMaquina(nome, codigo, url){  
     let resultadoEl = document.getElementById("resultMaquina");
     let novoSlot = document.createElement("div");
@@ -51,6 +54,31 @@ function converterBytesEmImagem(url, imagemEl){
     }  
 }
 
+var vetorNomes = [];
+var vetorEmail = [];
+
+function selectDinamicoFornecedor(){
+    let fornecedorEl = document.getElementById("fornecedor");
+    fornecedorEl.innerHTML = "";
+    for (let i = 0; i < vetorNomes.length; i++){
+        let option = document.createElement('option');
+        option.value = vetorEmail[i];
+        option.textContent = vetorNomes[i];
+        fornecedorEl.appendChild(option);      
+    }
+}
+
+function mostrarFormulario(){
+    selectDinamicoFornecedor();     
+    formulario.style.display = "flex"; 
+    bloquearConteudoEl.style.display = "block";
+}
+
+function fecharFormularios(){
+    formulario.style.display = "none"; 
+    bloquearConteudoEl.style.display = "none";
+}
+
 function pesquisarElementos(){
     let stringProcura = this.value;
     let slots = document.querySelectorAll('.slotClick');
@@ -66,3 +94,10 @@ function pesquisarElementos(){
 
 let buscaEl = document.getElementById('busca');
 buscaEl.addEventListener('input', pesquisarElementos);
+
+let addLoteEl = document.getElementById('addLote');
+addLoteEl.addEventListener('click', mostrarFormulario);
+
+botoesCancelarEl.forEach(function(botao) {
+    botao.addEventListener("click", fecharFormularios);
+});
