@@ -13,8 +13,10 @@ br\cefetmg\snacksmart\facade\GestaoMaquina.class
 br\cefetmg\snacksmart\controller\gerente\CancelarContrato.class
 br\cefetmg\snacksmart\controller\gerente\GerenciarManutencaoVistoria.class
 br\cefetmg\snacksmart\controller\gerente\GerenciarMaquina.class
+br\cefetmg\snacksmart\facade\GestaoFinanceiroLocatario.class
 br\cefetmg\snacksmart\controller\gerente\AlterarDadosGerente.class
 br\cefetmg\snacksmart\controller\gerente\RelatorioGerente.class
+br\cefetmg\snacksmart\facade\EmissaoRelatorio.class
 br\cefetmg\snacksmart\controller\gerente\CriarContrato.class
 br\cefetmg\snacksmart\controller\gerente\ObterMaquinaDisponivel.class
 br\cefetmg\snacksmart\facade\VisualizarContratos.class
