@@ -8,8 +8,14 @@ br\cefetmg\snacksmart\facade\ManutecaoVistorias.class
 br\cefetmg\snacksmart\facade\GestaoMaquina.class
 br\cefetmg\snacksmart\controller\gerente\CancelarContrato.class
 br\cefetmg\snacksmart\controller\gerente\GerenciarManutencaoVistoria.class
+<<<<<<< HEAD
+=======
+br\cefetmg\snacksmart\controller\gerente\GerenciarMaquina.class
+br\cefetmg\snacksmart\facade\GestaoFinanceiroLocatario.class
+>>>>>>> 017ebea99d28d781aa0505a57e9a5b770df1fd8a
 br\cefetmg\snacksmart\controller\gerente\AlterarDadosGerente.class
 br\cefetmg\snacksmart\controller\gerente\RelatorioGerente.class
+br\cefetmg\snacksmart\facade\EmissaoRelatorio.class
 br\cefetmg\snacksmart\controller\gerente\CriarContrato.class
 br\cefetmg\snacksmart\controller\PDFContrato.class
 br\cefetmg\snacksmart\controller\gerente\controler.class

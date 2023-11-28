@@ -25,11 +25,20 @@ br\cefetmg\snacksmart\exceptions\services\SenhaInvalidaTamanhoException.class
 br\cefetmg\snacksmart\services\gerente\ManterLocatarios.class
 br\cefetmg\snacksmart\utils\enums\TipoMaquina.class
 br\cefetmg\snacksmart\utils\enums\TipoUsuario$1.class
+<<<<<<< HEAD
+=======
+br\cefetmg\snacksmart\idao\IAluguelDAO.class
+>>>>>>> 017ebea99d28d781aa0505a57e9a5b770df1fd8a
 br\cefetmg\snacksmart\exceptions\services\NomeInvalidoTamanhoException.class
 br\cefetmg\snacksmart\idao\ILocatarioDAO.class
 br\cefetmg\snacksmart\utils\enums\StatusMaquina$1.class
 br\cefetmg\snacksmart\dto\ContratoDTO.class
+br\cefetmg\snacksmart\services\locatario\AcessarAluguel.class
 br\cefetmg\snacksmart\utils\enums\StatusMaquina.class
+<<<<<<< HEAD
+=======
+br\cefetmg\snacksmart\dao\AluguelDAO.class
+>>>>>>> 017ebea99d28d781aa0505a57e9a5b770df1fd8a
 br\cefetmg\snacksmart\exceptions\services\NomeNuloException.class
 br\cefetmg\snacksmart\utils\SenhaManager.class
 br\cefetmg\snacksmart\services\locatario\AcessarFeedback.class

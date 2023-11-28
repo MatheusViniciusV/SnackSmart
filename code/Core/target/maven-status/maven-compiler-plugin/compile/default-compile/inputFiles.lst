@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\services\gerente\ManterLocatarios.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\services\FilaAteracoesVaziaException.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\utils\InputValidador.java
@@ -56,3 +57,57 @@ C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\ce
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dao\FormatoArquivoInvalidoException.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dao\ElementoNaoExisteException.java
 C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\Core\src\main\java\br\cefetmg\snacksmart\services\gerente\ManterContratos.java
+=======
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\StatusMaquina.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\dao\GerenteDAO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\dto\LocatarioDTO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dao\FormatoArquivoInvalidoException.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\services\ParametroInvalidoException.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IAluguelDAO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\utils\SenhaManager.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd\ConnectionTester.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\TiposFeedback.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\services\FilaAteracoesVaziaException.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\services\NomeNuloException.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\dto\ContratoDTO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd\MysqlConnection.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dao\LocatarioInvalidoException.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IVistoriaDAO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\bd\PersistenciaException.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\idao\ILocatarioDAO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\dto\IUsuarioDTO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\dao\FeedbackDAO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\dao\MaquinaDAO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\dto\VistoriaDTO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\dto\MaquinaDTO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IFeedbackDAO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\services\gerente\AcessarMaquinas.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\dto\GerenteDTO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\services\gerente\ManterContratos.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\dao\LocatarioDAO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\services\CPFInvalidoException.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\services\locatario\AcessarContratos.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\services\SenhaInvalidaTamanhoException.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\utils\DataManager.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\dto\FeedbackDTO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\TiposOrdenacaoContrato.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\dao\VistoriaDAO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\dao\AluguelDAO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IMaquinaDAO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\services\locatario\AcessarFeedback.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\TipoUsuario.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IContratosDAO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\StatusContrato.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\utils\enums\TipoMaquina.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\dao\ElementoNaoExisteException.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\idao\IGerenteDAO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\services\gerente\ManterLocatarios.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\dao\ContratosDAO.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\services\locatario\AcessarAluguel.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\utils\InputValidador.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\services\ValidadorUsuario.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\exceptions\services\NomeInvalidoTamanhoException.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\services\gerente\ManterGerente.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd\ConnectionFactory.java
+C:\Users\marco\Documents\NetBeansProjects\lp1-2023-projeto5.2\code\Core\src\main\java\br\cefetmg\snacksmart\utils\bd\ConnectionManager.java
+>>>>>>> 017ebea99d28d781aa0505a57e9a5b770df1fd8a

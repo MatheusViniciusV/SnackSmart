@@ -1,12 +1,18 @@
-
 package br.cefetmg.snacksmart.facade;
 
 import br.cefetmg.snacksmart.dto.FeedbackDTO;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
+<<<<<<< HEAD:code/View/src/main/java/br/cefetmg/snacksmart/facade/RelatorioGerente.java
 import java.io.IOException;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
 import br.cefetmg.snacksmart.services.locatario.AcessarFeedback;
 import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
+=======
+import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
+import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
+import br.cefetmg.snacksmart.services.locatario.AcessarFeedback;
+import java.io.IOException;
+>>>>>>> 017ebea99d28d781aa0505a57e9a5b770df1fd8a:code/View/src/main/java/br/cefetmg/snacksmart/facade/EmissaoRelatorio.java
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,11 +26,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Base64;
 /**
+
+/**
  *
  * @author marco
  */
-@WebServlet(name = "RelatorioGerente", urlPatterns = {"/relatorioGerente"})
-public class RelatorioGerente extends HttpServlet {
+@WebServlet(name = "EmissaoRelatorio", urlPatterns = {"/EmissaoRelatorio"})
+public class EmissaoRelatorio extends HttpServlet {
      @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -68,6 +76,6 @@ public class RelatorioGerente extends HttpServlet {
         }
         request.setAttribute("vetorMaquinas", vetorMaquinas);
         request.setAttribute("vetorFeedbacks", vetorFeedbacks);
-        request.getRequestDispatcher("WEB-INF/paginas/relatorioGerente.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/paginas/emissaoRelatorio.jsp").forward(request, response);
     }
 }
