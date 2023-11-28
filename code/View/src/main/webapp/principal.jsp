@@ -36,7 +36,7 @@
                     <c:choose>
                         <c:when test="${tipoUsuario == TipoUsuario.LOCATARIO}">
                             <li><a href="gestaoFornecedores"><button><h2>Fornecedor</h2></button></a></li>                         
-                            <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
+                            <li><a href="GestaoLote"><button><h2>Informações de Estoque</h2></button></a></li>
                             <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
                             <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
                             <li><a href="MeusDadosLocatario.jsp"><button><h2>Meus dados</h2></button></a></li>

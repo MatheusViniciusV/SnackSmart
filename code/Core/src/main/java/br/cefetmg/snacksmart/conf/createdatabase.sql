@@ -66,6 +66,7 @@ CREATE TABLE `fornecedor` (
 DROP TABLE IF EXISTS `lote`;
 CREATE TABLE `lote` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
+    `imagem` LONGBLOB NULL,
     `tipo_produto` VARCHAR(128) NOT NULL,
     `quantidade` INT NOT NULL,
     `preco_compra` FLOAT NOT NULL,

@@ -2,13 +2,13 @@
 <%@page import="br.cefetmg.snacksmart.dto.LocatarioDTO" %>
 <%@page import="br.cefetmg.snacksmart.dto.FornecedorDTO" %>
 <%@page import="java.util.ArrayList" %>
-<%@include file="../../comuns/JSTL.jsp" %>
+<%@include file="../../comuns/taglibs.jsp" %>
     
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">   
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/base.css">
         <link rel="stylesheet" href="css/fornecedores.css">
         <title>Fornecedores</title>
         <%@include file="../../comuns/jqueryLink.jsp" %>
