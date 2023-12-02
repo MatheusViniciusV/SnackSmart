@@ -181,41 +181,45 @@
                         </div>
                         <h3>Máquinas disponíveis</h3>
                         <select>
-                            <!-- <:set var="maquinas" value="<new MaquinaDAO maquinas()%>">-->
-                            <c:forEach var="maquina" items="vetorMaquinas">
+                            <c:set var="maquinas" value="<%= new br.cefetmg.snacksmart.dao.MaquinaDAO() %>"/>
 
-                                <option value="">${maquina.getNome()}</option>
+                            <!-- <:set var="VetorMaquinas" value="<maquinas.acessarTodasMaquinasSemExcecoes()%>"/>-->
 
-                            </c:forEach>>
-                        </select>
-
-
-
-                        <h3>Dados da máquina</h3>
-                        <div id="dados-contrato">
-                            <label class="nome">Nome: <br>
-                                <input type="text" value="" readonly="readonly" name="maquina-nome">
-                            </label>
-                            <label class="codigo">Código: <br>
-                                <input type="text" value="" readonly="readonly" name="maquina-codigo">
-                            </label>
-
-                            <label>
-                                Valor mensal: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
-                                <input type="number" name="valor" min="0" step="0.01">
-                            </label>
-                            <label>
-                                Tipo de máquina: <br>
-                                <select name="tipo-maquina">
-                                    <c:forEach var="tipo" items="${tipoMaquina}">
-
-                                        <option value="${tipo.toString()}">${tipo.toString().toLowerCase().replace('_',' ')}</option>
-
+                                
+                                    <c:forEach var="maquina" items="${maquinas.acessarTodasMaquinasSemExcecoes()}">
+                                <!--<:if test="maquina.getStatus() == DISPONIVEL">-->
+                                        <option value="">${maquina.getNome()}</option>
+                                        <!--</:if>-->
                                     </c:forEach>
                                 </select>
-                            </label>
-                            <label>
-                                Código da máquina: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
+
+
+
+                                <h3>Dados da máquina</h3>
+                                <div id="dados-contrato">
+                                    <label class="nome">Nome: <br>
+                                        <input type="text" value="" readonly="readonly" name="maquina-nome">
+                                    </label>
+                                    <label class="codigo">Código: <br>
+                                        <input type="text" value="" readonly="readonly" name="maquina-codigo">
+                                    </label>
+
+                                    <label>
+                                        Valor mensal: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
+                                        <input type="number" name="valor" min="0" step="0.01">
+                                    </label>
+                                    <label>
+                                        Tipo de máquina: <br>
+                                        <select name="tipo-maquina">
+                                            <c:forEach var="tipo" items="${tipoMaquina}">
+
+                                                <option value="${tipo.toString()}">${tipo.toString().toLowerCase().replace('_',' ')}</option>
+
+                                            </c:forEach>
+                                        </select>
+                                    </label>
+                                    <label>
+                                        Código da máquina: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
 
 
 
@@ -233,53 +237,53 @@
 
 
 
-                                <input type="number" min="0" name="codigo-maquina">
-                            </label>
-                            <label>Data de inicio: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
-                                <input type="date" name="data-inicio">
-                            </label>
-                            <label>Data de término: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
-                                <input type="date" name="data-termino">
-                            </label>
-                            <label>Dia de pagamento: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
-                                <input type="number" name="dia-pagamento" min="1" max="28">
-                            </label>
-                            <label>Observações: <br>
-                                <textarea name="observacoes" wrap="hard" cols="85" maxlength="510"
-                                          placeholder="escreva informações adicionais que não estão contidas nos campos anteriores."
-                                          ></textarea>
-                            </label>
+                                        <input type="number" min="0" name="codigo-maquina">
+                                    </label>
+                                    <label>Data de inicio: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
+                                        <input type="date" name="data-inicio">
+                                    </label>
+                                    <label>Data de término: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
+                                        <input type="date" name="data-termino">
+                                    </label>
+                                    <label>Dia de pagamento: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
+                                        <input type="number" name="dia-pagamento" min="1" max="28">
+                                    </label>
+                                    <label>Observações: <br>
+                                        <textarea name="observacoes" wrap="hard" cols="85" maxlength="510"
+                                                  placeholder="escreva informações adicionais que não estão contidas nos campos anteriores."
+                                                  ></textarea>
+                                    </label>
+                                </div>
+                                <div id="botoes-criar-contrato">
+                                    <button type="button" id="enviar-contrato"><h3>Criar Contrato</h3></button>
+                                    <button type="button" id="cancelar"><h3>Cancelar</h3></button>
+                                </div>
+                            </form>
+                        </section>
+                        </c:if>
+                        <div id="botoes">
+                            <button id="pdf-contrato" class="null"><a><h2>Emitir PDF</h2></a></button>
+                                        <c:choose>
+                                            <c:when test="${tipoUsuario == LOCADOR}">
+                                    <button id="cancelar-contrato" class="null"><h2>Cancelar Contrato</h2></button>
+                                    <button id="criar-contrato"><h2>Criar Novo Contrato</h2></button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button id="solicita-cancelar-contrato" class="null" data-calcelar="SolicitarCancelarContrato"><h2>Solicitar cancelamento</h2></button>
+                                    <button id="solicitar-contrato"><h2>Solicitar Novo Contrato</h2></button>
+                                </c:otherwise>
+                            </c:choose>        
                         </div>
-                        <div id="botoes-criar-contrato">
-                            <button type="button" id="enviar-contrato"><h3>Criar Contrato</h3></button>
-                            <button type="button" id="cancelar"><h3>Cancelar</h3></button>
-                        </div>
-                    </form>
-                </section>
-            </c:if>
-            <div id="botoes">
-                <button id="pdf-contrato" class="null"><a><h2>Emitir PDF</h2></a></button>
-                            <c:choose>
-                                <c:when test="${tipoUsuario == LOCADOR}">
-                        <button id="cancelar-contrato" class="null"><h2>Cancelar Contrato</h2></button>
-                        <button id="criar-contrato"><h2>Criar Novo Contrato</h2></button>
-                    </c:when>
-                    <c:otherwise>
-                        <button id="solicita-cancelar-contrato" class="null" data-calcelar="SolicitarCancelarContrato"><h2>Solicitar cancelamento</h2></button>
-                        <button id="solicitar-contrato"><h2>Solicitar Novo Contrato</h2></button>
-                    </c:otherwise>
-                </c:choose>        
-            </div>
-        </main>
+                    </main>
 
-        <%@include file="../../comuns/validarRegEx.jsp" %>
-        <%@include file="../../comuns/jqueryLink.jsp" %>
-        <script src="js/contratos.js"></script>
-        <c:if test="${tipoUsuario == LOCADOR}">
-            <script src="js/criarContrato.js"></script>
-        </c:if>
-        <c:if test="${tipoUsuario != LOCADOR}">
-            <script src="js/solicitarMaquina.js"></script>
-        </c:if>
-    </body>
-</html>
+                    <%@include file="../../comuns/validarRegEx.jsp" %>
+                    <%@include file="../../comuns/jqueryLink.jsp" %>
+                    <script src="js/contratos.js"></script>
+                    <c:if test="${tipoUsuario == LOCADOR}">
+                        <script src="js/criarContrato.js"></script>
+                    </c:if>
+                    <c:if test="${tipoUsuario != LOCADOR}">
+                        <script src="js/solicitarMaquina.js"></script>
+                    </c:if>
+                </body>
+            </html>
