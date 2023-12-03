@@ -1,5 +1,6 @@
 package br.cefetmg.snacksmart.dao;
 
+import br.cefetmg.snacksmart.dto.FornecedorDTO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.idao.ILoteDAO;
 import br.cefetmg.snacksmart.dto.LoteDTO;
@@ -17,7 +18,7 @@ public class LoteDAO implements ILoteDAO {
             Connection connection = ConnectionManager.getInstance().getConnection();
          
             String sql = "INSERT INTO lote (tipo_produto, quantidade, preco_compra, preco_venda, fornecedor__fk, imagem, locatario__fk) "
-                       + "VALUES (?, ?, ?, ?, ?, ?) ";
+                       + "VALUES (?, ?, ?, ?, ?, ?, ?) ";
             
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, loteDTO.getTipoProduto());
@@ -50,11 +51,13 @@ public class LoteDAO implements ILoteDAO {
         }
     }
     
+    @Override
     public boolean atualizar(LoteDTO loteDTO) throws PersistenciaException {
         try {
             Connection connection = ConnectionManager.getInstance().getConnection();
             
-            String sql = "UPDATE lote SET tipo_produto = ?, quantidade = ?, preco_compra = ?, preco_venda = ?, fornecedor__fk = ?, locatario__fk = ?, imagem = ? WHERE id = ?";
+            
+            String sql = "UPDATE lote SET tipo_produto = ?, quantidade = ?, preco_compra = ?, preco_venda = ?, fornecedor__fk = ?, imagem = ? WHERE pk = ?";
             
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, loteDTO.getTipoProduto());
@@ -62,16 +65,16 @@ public class LoteDAO implements ILoteDAO {
             pstmt.setDouble(3, loteDTO.getPrecoCompra());
             pstmt.setDouble(4, loteDTO.getPrecoVenda());
             pstmt.setInt(5, loteDTO.getFornecedor().getId());
-            pstmt.setInt(6, loteDTO.getLocatario().getId());
-            pstmt.setBinaryStream(7, loteDTO.getImagem()); 
-            pstmt.setInt(8, loteDTO.getId()); 
-            
-            int rowsAffected = pstmt.executeUpdate();
+            pstmt.setBinaryStream(6, loteDTO.getImagem()); 
+            pstmt.setInt(7, loteDTO.getId()); 
+
+           int rowsAffected = pstmt.executeUpdate();
             
             pstmt.close();
             connection.close();
             
             return rowsAffected > 0;
+            
         } catch (Exception e) {
             e.printStackTrace();
             throw new PersistenciaException(e.getMessage(), e);
@@ -83,7 +86,7 @@ public class LoteDAO implements ILoteDAO {
         try {
             Connection connection = ConnectionManager.getInstance().getConnection();
             
-            String sql = "DELETE FROM lote WHERE id = ?";
+            String sql = "DELETE FROM lote WHERE pk = ?";
             
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, id); 
@@ -105,25 +108,33 @@ public class LoteDAO implements ILoteDAO {
         try {
             Connection connection = ConnectionManager.getInstance().getConnection();
             
-            String sql = "SELECT * FROM lote";
+            String sql = "SELECT * FROM lote ORDER BY pk";
             
             PreparedStatement pstmt = connection.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             
-            ArrayList<LoteDTO> lotes = new ArrayList<>();
-            
-            while (rs.next()) {
-                LoteDTO lote = new LoteDTO();     
-                lote.setId(rs.getInt("id"));
-                lote.setTipoProduto(rs.getString("tipo_produto"));
-                lote.setQuantidade(rs.getInt("quantidade"));
-                lote.setPrecoCompra(rs.getDouble("preco_compra"));
-                lote.setPrecoVenda(rs.getDouble("preco_venda"));
-                lote.setImagem(rs.getBinaryStream("imagem"));
-                
-                lotes.add(lote);
-            }
-            
+            ArrayList<LoteDTO> lotes = null;
+            if (rs.next()) {
+                lotes = new ArrayList<>();
+                do {
+                    LoteDTO lote = new LoteDTO();     
+                    lote.setId(rs.getInt("pk"));
+                    lote.setTipoProduto(rs.getString("tipo_produto"));
+                    lote.setQuantidade(rs.getInt("quantidade"));
+                    lote.setPrecoCompra(rs.getDouble("preco_compra"));
+                    lote.setPrecoVenda(rs.getDouble("preco_venda"));
+                    lote.setImagem(rs.getBinaryStream("imagem"));
+                    int locatarioId = rs.getInt("locatario__fk");               
+                    LocatarioDAO locatarioDAO = new LocatarioDAO();
+                    LocatarioDTO locatario = locatarioDAO.consultarPorId(locatarioId);
+                    lote.setLocatario(locatario);
+                    int fornecedorId = rs.getInt("fornecedor__fk");               
+                    FornecedorDAO fornecedorDAO = new FornecedorDAO();
+                    FornecedorDTO fornecedor = fornecedorDAO.consultarPorId(fornecedorId);
+                    lote.setFornecedor(fornecedor);
+                    lotes.add(lote);
+                } while (rs.next());
+            }           
             rs.close();
             pstmt.close();
             connection.close();
@@ -150,12 +161,20 @@ public class LoteDAO implements ILoteDAO {
             
             if (rs.next()) {
                 lote = new LoteDTO();
-                lote.setId(rs.getInt("id"));
+                lote.setId(rs.getInt("pk"));
                 lote.setTipoProduto(rs.getString("tipo_produto"));
                 lote.setQuantidade(rs.getInt("quantidade"));
                 lote.setPrecoCompra(rs.getDouble("preco_compra"));
                 lote.setPrecoVenda(rs.getDouble("preco_venda"));
                 lote.setImagem(rs.getBinaryStream("imagem"));
+                int locatarioId = rs.getInt("locatario__fk");               
+                LocatarioDAO locatarioDAO = new LocatarioDAO();
+                LocatarioDTO locatario = locatarioDAO.consultarPorId(locatarioId);
+                lote.setLocatario(locatario);
+                int fornecedorId = rs.getInt("fornecedor__fk");               
+                FornecedorDAO fornecedorDAO = new FornecedorDAO();
+                FornecedorDTO fornecedor = fornecedorDAO.consultarPorId(fornecedorId);
+                lote.setFornecedor(fornecedor);
             }
             
             rs.close();
@@ -170,13 +189,10 @@ public class LoteDAO implements ILoteDAO {
     }
 
     @Override
-    public ArrayList<LoteDTO> listarPorLocatario(String cpf) throws PersistenciaException {
+    public ArrayList<LoteDTO> listarPorLocatario(int id) throws PersistenciaException {
         try {
             Connection connection = ConnectionManager.getInstance().getConnection();
-            LocatarioDAO locatarioDAO = new LocatarioDAO();
-            LocatarioDTO locatario = locatarioDAO.consultarPorCPF(cpf);
-            int id = locatario.getId();
-            String sql = "SELECT * FROM lote WHERE fornecedor__fk = ?";
+            String sql = "SELECT * FROM lote WHERE locatario__fk = ?";
             
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, id);
@@ -186,12 +202,20 @@ public class LoteDAO implements ILoteDAO {
             
             while (rs.next()) {
                 LoteDTO lote = new LoteDTO();
-                lote.setId(rs.getInt("id"));
+                lote.setId(rs.getInt("pk"));
                 lote.setTipoProduto(rs.getString("tipo_produto"));
                 lote.setQuantidade(rs.getInt("quantidade"));
                 lote.setPrecoCompra(rs.getDouble("preco_compra"));
                 lote.setPrecoVenda(rs.getDouble("preco_venda"));
                 lote.setImagem(rs.getBinaryStream("imagem"));
+                int locatarioId = rs.getInt("locatario__fk");               
+                LocatarioDAO locatarioDAO = new LocatarioDAO();
+                LocatarioDTO locatario = locatarioDAO.consultarPorId(locatarioId);
+                lote.setLocatario(locatario);
+                int fornecedorId = rs.getInt("fornecedor__fk");               
+                FornecedorDAO fornecedorDAO = new FornecedorDAO();
+                FornecedorDTO fornecedor = fornecedorDAO.consultarPorId(fornecedorId);
+                lote.setFornecedor(fornecedor);
                 lotes.add(lote);
             }
             

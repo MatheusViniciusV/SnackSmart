@@ -36,10 +36,9 @@ public class GestaoLote extends HttpServlet {
         AcessarFornecedores acessoFornecedores = new AcessarFornecedores();
         AcessarLotes acessarLotes = new AcessarLotes();
         LocatarioDTO locatario = (LocatarioDTO) session.getAttribute("usuario");
-        
         try {                 
-             vetorFornecedorSQL = acessoFornecedores.getAllFornecedores(locatario.getCPF());
-             vetorLoteSQL = acessarLotes.recuperarLotesLocatario(locatario.getCPF());
+            vetorFornecedorSQL = acessoFornecedores.getAllFornecedores(locatario.getCPF());            
+            vetorLoteSQL = acessarLotes.recuperarLotesLocatario(locatario.getId());         
         } catch (PersistenciaException ex) {
             Logger.getLogger(GestaoFornecedores.class.getName()).log(Level.SEVERE, null, ex);
         }

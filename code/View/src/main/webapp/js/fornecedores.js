@@ -56,6 +56,8 @@ function slotSelecionado(){
             mostrarInfo(objetoAtual.nome, objetoAtual.telefone, objetoAtual.email, objetoAtual.id);
         }
     }   
+    let boxInfoEl = document.getElementById("boxInfo");
+    boxInfoEl.style.display = "grid";
 }
 
 function mostrarInfo(nome, telefone, email, id){
@@ -136,6 +138,9 @@ telefoneEl.addEventListener('blur', function() {
 telefoneExibidoEl.addEventListener('blur', function() {
     formatarTelefone(telefoneExibidoEl);
 });
+
+let boxInfoEl = document.getElementById("boxInfo");
+    boxInfoEl.style.display = "none";
 //Global VAR - Reverter
 var nomeReverta;
 var telefoneReverta;

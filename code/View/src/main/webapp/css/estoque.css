@@ -6,14 +6,14 @@
     grid-auto-flow: row;
     grid-template-areas:
       "Titulo Titulo"
-      "pesquisarFornecedor boxInfo";
+      "pesquisarLote boxInfo";
     
 
     #tituloDaPagina {
         grid-area: Titulo; 
         font-size: 8vh;
     }
-    #pesquisarFornecedor { grid-area: pesquisarFornecedor; }
+    #pesquisarLote { grid-area: pesquisarLote; }
     #boxInfo { grid-area: boxInfo; }
 }
 
@@ -22,7 +22,7 @@ main {
   margin-left: 10vw;
 }
 
-#pesquisarFornecedor {
+#pesquisarLote {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
@@ -30,11 +30,11 @@ main {
     grid-auto-flow: row;
     padding: 1vw;
     grid-template-areas:
-      "pesquisarFornecedor"
-      "resultFornecedor";  
+      "pesquisarLote"
+      "resultLote";  
     
-    #pesquisarFornecedor { grid-area: pesquisarFornecedor; }
-    #resultFornecedor { grid-area: resultFornecedor; }
+    #pesquisarLote { grid-area: pesquisarLote; }
+    #resultLote { grid-area: resultLote; }
     overflow: auto; 
 }
 
@@ -86,14 +86,10 @@ main {
     padding: 1vw;
     align-items: center;
     justify-items: center;
-    grid-template-areas:
-      "formAtualizar"
-      "reverter"
-      "formRemover";
-    
-    #formAtualizar { grid-area: formAtualizar; }
-    #reverter { grid-area: reverter; }
-    #formRemover { grid-area: formRemover; }
+}
+#boxInfo img {
+    border: solid black 0.2vw;
+    border-radius: 5%;
 }
 
 #bloquearConteudo {        
@@ -106,8 +102,14 @@ main {
     background: rgba(0, 0, 0, 0.5);
     z-index: 2;
 }
-
-.cancelar{
+.cancelar:hover, #addLote:hover, #removerLote:hover, #atualizarLote:hover, #enviarLote:hover{
+    cursor: pointer;
+    box-shadow: 2px 2px 2px gray;
+}
+#removerLote, #atualizarLote{
+    display:none;
+}
+.cancelar, #addLote, #removerLote, #atualizarLote, #enviarLote{
     color: var(--cor-principal);
     width: 12em;
     height: 3em;
@@ -121,21 +123,84 @@ main {
     justify-self: center;
 }
 
-#formLote{
+#formLote, #formAtualizarLote{
     display: none;
     position: fixed;
-    left: 25%;
-    top: 12.5%;
+    left: 28%;
+    top: 17%;
     background-color: var(--cor-principal);
+    padding: 1vw 1vw;
     border-radius: 10px;
     box-shadow: 2px 2px 2px gray;
-    width: 50vw;
-    height: 80vh;
+    width: 42vw;
+    height: 66vh;
     z-index: 3;
-
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
-    border: .2rem solid var(--texto-cor-secundaria);
 }
+
+.formh1 {
+    grid-area: header;
+    text-align: center;
+}
+
+#formAtualizarLote form{
+    display: grid;
+    grid-template-areas: 
+        "formh1 formh1 formh1 formh1"
+        "tipoProdutoLabel tipoProduto tipoProduto tipoProduto"
+        "quantidadeLabel quantidade  fornecedorLabel fornecedor"
+        "precoCompraLabel precoCompra precoVendaLabel precoVenda"
+        "imagem imagem imagem imagem"
+        "enviarLote enviarLote enviarLote enviarLote";
+    grid-gap: 1vw;
+}
+.formh1 { grid-area: formh1; }
+
+#Novo-tipoProdutoLabel { grid-area: tipoProdutoLabel; }
+#Novo-tipoProduto { grid-area: tipoProduto; }
+
+#Novo-quantidadeLabel { grid-area: quantidadeLabel; }
+#Novo-quantidade { grid-area: quantidade; }
+
+#Novo-precoCompraLabel { grid-area: precoCompraLabel; }
+#Novo-precoCompra { grid-area: precoCompra; }
+#Novo-precoVendaLabel { grid-area: precoVendaLabel; }
+#Novo-precoVenda { grid-area: precoVenda; }
+
+#Novo-fornecedorLabel { grid-area: fornecedorLabel; }
+#Novo-fornecedor { grid-area: fornecedor; }
+
+#Novo-imagem { grid-area: imagem; }
+
+#Novo-enviarLote { grid-area: enviarLote; }
+
+#formLote form{
+    display: grid;
+    grid-template-areas: 
+        "formh1 formh1 formh1 formh1"
+        "tipoProdutoLabel tipoProduto tipoProduto tipoProduto"
+        "quantidadeLabel quantidade  fornecedorLabel fornecedor"
+        "precoCompraLabel precoCompra precoVendaLabel precoVenda"
+        "imagem imagem imagem imagem"
+        "enviarLote enviarLote enviarLote enviarLote";
+    grid-gap: 1vw;
+}
+
+.formh1 { grid-area: formh1; }
+
+#tipoProdutoLabel { grid-area: tipoProdutoLabel; }
+#tipoProduto { grid-area: tipoProduto; }
+
+#quantidadeLabel { grid-area: quantidadeLabel; }
+#quantidade { grid-area: quantidade; }
+
+#precoCompraLabel { grid-area: precoCompraLabel; }
+#precoCompra { grid-area: precoCompra; }
+#precoVendaLabel { grid-area: precoVendaLabel; }
+#precoVenda { grid-area: precoVenda; }
+
+#fornecedorLabel { grid-area: fornecedorLabel; }
+#fornecedor { grid-area: fornecedor; }
+
+#imagem { grid-area: imagem; }
+
+#enviarLote { grid-area: enviarLote; }

@@ -16,5 +16,5 @@ public interface ILoteDAO {
 
     LoteDTO consultarPorId(int id) throws PersistenciaException;
     
-    ArrayList<LoteDTO> listarPorLocatario(String cpf) throws PersistenciaException;
+    ArrayList<LoteDTO> listarPorLocatario(int id) throws PersistenciaException;
 }

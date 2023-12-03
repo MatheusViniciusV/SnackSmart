@@ -1,9 +1,7 @@
 br\cefetmg\snacksmart\controller\gerente\ObterLocatario.class
 br\cefetmg\snacksmart\facade\RelatorioGerente.class
 br\cefetmg\snacksmart\facade\LoginServlet.class
-br\cefetmg\snacksmart\facade\GestaoLote.class
 br\cefetmg\snacksmart\controller\gerente\GerFinanceiro.class
-br\cefetmg\snacksmart\facade\GestaoFornecedores.class
 br\cefetmg\snacksmart\facade\ManutecaoVistorias.class
 br\cefetmg\snacksmart\facade\GestaoMaquina.class
 br\cefetmg\snacksmart\controller\gerente\CancelarContrato.class
@@ -15,7 +13,6 @@ br\cefetmg\snacksmart\controller\PDFContrato.class
 br\cefetmg\snacksmart\controller\gerente\controler.class
 br\cefetmg\snacksmart\controller_locador\ObterMaquinaDisponivel.class
 br\cefetmg\snacksmart\controller\locatario\AlterarDadosLocatario.class
-br\cefetmg\snacksmart\controller\locatario\GerenciarFornecedores.class
 br\cefetmg\snacksmart\controller\locatario\SolicitarCancelarContrato.class
 br\cefetmg\snacksmart\controller\gerente\GestaoLocatarios.class
 br\cefetmg\snacksmart\facade\Filtro.class
