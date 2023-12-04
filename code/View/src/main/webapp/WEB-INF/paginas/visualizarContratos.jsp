@@ -183,15 +183,12 @@
                         <h3>Máquinas disponíveis</h3>
                         <c:set var="maquinas" value="<%= new br.cefetmg.snacksmart.dao.MaquinaDAO() %>"/>
 
-                        <!-- <:set var="VetorMaquinas" value="<maquinas.acessarTodasMaquinasSemExcecoes()%>"/>-->
 
                         <div id="lista-oculta">
                             <c:forEach var="maquina" items="${maquinas.acessarTodasMaquinasSemExcecoes()}" varStatus="loop">
-                                <!--<:if test="maquina.getStatus() == DISPONIVEL">-->
                                 <p class="Maq${loop.count}">${maquina.getNome()}</p>
                                 <p class="Maq${loop.count}">${maquina.getCodigo()}</p>
                                 <p class="Maq${loop.count}">${maquina.getTipo()}</p>
-                                <!--</:if>-->
                             </c:forEach>
 
 
@@ -228,8 +225,9 @@
                             </label>
                             <label>
                                 Tipo de máquina: <br>
-                                <input type="text" id="maquina-tipo" readonly="readonly">
+                                <input type="text" id="maquina-tipo" readonly="readonly" name="maquina-tipo">
                             </label>
+                            <h3>Dados do contrato</h3>
                             <label>
                                 Valor mensal: <abbr title="Obrigatório"><span class="obrigatorio">*</span></abbr> <br>
                                 <input type="number" name="valor" min="0" step="0.01">
@@ -253,7 +251,6 @@
                             <script>
                                 let selectMaq = document.querySelector("#selectMaquinas");
                                 let numeroMaquinas = selectMaq.options.length;
-                                //let arrayDados;
                                 let matrizDados = [];
                                 let matrizTexto = [];
                                 let str1 = ".Maq";
@@ -261,8 +258,6 @@
 
                                 for (let i = 0; i < numeroMaquinas; i++) {
                                     str2 = (i + 1).toString();
-                                    //arrayDados = document.querySelector(str1 + str2);
-                                    //console.log(document.querySelector(str1 + str2));
                                     matrizDados.push(document.querySelectorAll(str1 + str2));
 
 
@@ -273,8 +268,6 @@
                                         matrizTexto[j].push(matrizDados[j][i].innerHTML);
                                     }
                                 }
-                                //console.log(matrizDados[0][0].innerHTML);
-                                //console.log(matrizTexto);
 
 
 
@@ -285,15 +278,12 @@
 
 
                                 function mudaMaquina() {
-                                    //console.log(selectMaq.selectedIndex);
                                     let select = selectMaq.selectedIndex;
                                     let nomeSelect = matrizTexto[select][0];
                                     let codigoSelect = matrizTexto[select][1];
                                     let tipoSelect = matrizTexto[select][2];
-                                    console.log(codigoSelect);
 
 
-                                    //let nomeSelect = selectMaq[select].text;
 
                                     maqNome.value = nomeSelect;
                                     maqCod.value = codigoSelect;
