@@ -95,6 +95,22 @@ public class ManterContratos {
         }
     }
     
+    public void validaContrato (int id) throws ClassNotFoundException, SQLException, PersistenciaException{
+        ContratoDTO contrato = dao.consultarPorId(id);
+        
+        if(contrato.getStatus() == StatusContrato.INATIVO){
+            MaquinaDTO maquina = contrato.getMaquina();
+            if(maquina.getStatus() != StatusMaquina.ALUGADA){
+                dao.atualizarStatus(id, StatusContrato.VIGENTE);
+                maquina.setStatus(StatusMaquina.ALUGADA);
+                daoMaquina.atualizarMaquina(maquina);
+            }
+            
+        }
+        
+    
+    }
+    
     public ContratoDTO criarContrato(ContratoDTO contrato) throws PersistenciaException {
         try {
             ContratoDTO novoContrato = dao.registraContrato(contrato);

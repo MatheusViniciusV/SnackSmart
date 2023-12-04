@@ -76,6 +76,8 @@ if($contratoSelecionado !== null) {
     });
 }
 
+const validaContratoBtn = $('#validar-contrato');
+
 $('#enviar-contrato').click(function() {
     let formCorreto = true;
     

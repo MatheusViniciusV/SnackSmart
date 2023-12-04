@@ -304,6 +304,7 @@
                             <c:choose>
                                 <c:when test="${tipoUsuario == LOCADOR}">
                         <button id="cancelar-contrato" class="null"><h2>Cancelar Contrato</h2></button>
+                        <button id="validar-contrato" class="null"><h2>Validar Contrato</h2></button>
                         <button id="criar-contrato"><h2>Criar Novo Contrato</h2></button>
                     </c:when>
                     <c:otherwise>
