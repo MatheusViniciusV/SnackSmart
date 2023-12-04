@@ -60,12 +60,12 @@ public class LoteDAO implements ILoteDAO {
             String sql = "UPDATE lote SET "
                         + "tipo_produto = ?, "
                         + "quantidade = ?, "
-                        + "preco_compra = ? "
-                        + "preco_venda = ? "
-                        + "fornecedor__fk = ? "
-                        + "imagem = ? "
+                        + "preco_compra = ?, "
+                        + "preco_venda = ?, "
+                        + "fornecedor__fk = ?, "
+                        + "imagem = ?, "
                         + "locatario__fk = ? "
-                        + "WHERE pk = ?";
+                        + "WHERE pk = ?;";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, loteDTO.getTipoProduto());
