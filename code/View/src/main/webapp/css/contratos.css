@@ -333,3 +333,7 @@ span.obrigatorio {
     color: var(--cor-secundaria);
     font-size: small;
 }
+
+#lista-oculta {
+    display:none;
+}
