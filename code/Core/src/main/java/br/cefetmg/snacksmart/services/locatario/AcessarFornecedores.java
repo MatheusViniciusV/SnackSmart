@@ -19,6 +19,11 @@ public class AcessarFornecedores {
         return fornecedores;
     }
     
+    public FornecedorDTO getFornecedor(int id) throws PersistenciaException{
+        FornecedorDTO fornecedor = fornecedorDAO.consultarPorId(id);
+        return fornecedor;
+    }
+    
     public ArrayList<FornecedorDTO> getAllFornecedores() throws PersistenciaException{
         ArrayList fornecedores = fornecedorDAO.listarTodos();
         return fornecedores;

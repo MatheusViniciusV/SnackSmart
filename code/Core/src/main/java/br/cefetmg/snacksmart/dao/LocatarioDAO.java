@@ -178,7 +178,6 @@ public class LocatarioDAO implements ILocatarioDAO {
     
     @Override
     public LocatarioDTO consultarPorCPF(String CPF) throws PersistenciaException {
-
         try {
             Connection connection = ConnectionManager.getInstance().getConnection();
 

@@ -7,15 +7,13 @@ import br.cefetmg.snacksmart.idao.ILoteDAO;
 import java.util.ArrayList;
 /* @author Arthur Milagres */
 public class AcessarLotes {
-    
     private final ILoteDAO loteDAO;
-    
     public AcessarLotes() {
         loteDAO = new LoteDAO();
     }
     
-    public ArrayList<LoteDTO> recuperarLotesLocatario(String cpf) throws PersistenciaException{
-        ArrayList lotes = loteDAO.listarPorLocatario(cpf);
+    public ArrayList<LoteDTO> recuperarLotesLocatario(int id) throws PersistenciaException{
+        ArrayList lotes = loteDAO.listarPorLocatario(id);   
         return lotes;
     }
     

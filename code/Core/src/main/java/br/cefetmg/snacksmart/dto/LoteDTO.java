@@ -16,9 +16,8 @@ public class LoteDTO {
     
     public LoteDTO() {};
 
-    public LoteDTO(int id, String tipoProduto, int quantidade, double precoCompra, double precoVenda,
+    public LoteDTO(String tipoProduto, int quantidade, double precoCompra, double precoVenda,
                       FornecedorDTO fornecedor, LocatarioDTO locatario, InputStream imagem) {
-        this.id = id;
         this.tipoProduto = tipoProduto;
         this.quantidade = quantidade;
         this.precoCompra = precoCompra;

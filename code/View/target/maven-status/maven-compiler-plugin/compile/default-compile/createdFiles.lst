@@ -1,5 +1,6 @@
 br\cefetmg\snacksmart\controller\gerente\ObterLocatario.class
 br\cefetmg\snacksmart\facade\RelatorioGerente.class
+br\cefetmg\snacksmart\controller\locatario\GerenciarEstoque.class
 br\cefetmg\snacksmart\facade\LoginServlet.class
 br\cefetmg\snacksmart\facade\GestaoLote.class
 br\cefetmg\snacksmart\controller\gerente\GerFinanceiro.class
