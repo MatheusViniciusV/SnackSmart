@@ -30,7 +30,7 @@ public class LoteDAO implements ILoteDAO {
             pstmt.setInt(7, loteDTO.getLocatario().getId());
             pstmt.executeUpdate();
             
-            sql = "SELECT `pk` FROM `locatario` ORDER BY `pk` DESC LIMIT 1";
+            sql = "SELECT `pk` FROM `lote` ORDER BY `pk` DESC LIMIT 1";
             
             pstmt = connection.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
@@ -54,27 +54,34 @@ public class LoteDAO implements ILoteDAO {
     @Override
     public boolean atualizar(LoteDTO loteDTO) throws PersistenciaException {
         try {
+
             Connection connection = ConnectionManager.getInstance().getConnection();
-            
-            
-            String sql = "UPDATE lote SET tipo_produto = ?, quantidade = ?, preco_compra = ?, preco_venda = ?, fornecedor__fk = ?, imagem = ? WHERE pk = ?";
-            
+
+            String sql = "UPDATE lote SET "
+                        + "tipo_produto = ?, "
+                        + "quantidade = ?, "
+                        + "preco_compra = ? "
+                        + "preco_venda = ? "
+                        + "fornecedor__fk = ? "
+                        + "imagem = ? "
+                        + "locatario__fk = ? "
+                        + "WHERE pk = ?";
+
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, loteDTO.getTipoProduto());
             pstmt.setInt(2, loteDTO.getQuantidade());
             pstmt.setDouble(3, loteDTO.getPrecoCompra());
             pstmt.setDouble(4, loteDTO.getPrecoVenda());
             pstmt.setInt(5, loteDTO.getFornecedor().getId());
-            pstmt.setBinaryStream(6, loteDTO.getImagem()); 
-            pstmt.setInt(7, loteDTO.getId()); 
+            pstmt.setBinaryStream(6, loteDTO.getImagem());
+            pstmt.setInt(7, loteDTO.getLocatario().getId());
+            pstmt.setInt(8, loteDTO.getId());
+            pstmt.executeUpdate();
 
-           int rowsAffected = pstmt.executeUpdate();
-            
             pstmt.close();
             connection.close();
-            
-            return rowsAffected > 0;
-            
+
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
             throw new PersistenciaException(e.getMessage(), e);
