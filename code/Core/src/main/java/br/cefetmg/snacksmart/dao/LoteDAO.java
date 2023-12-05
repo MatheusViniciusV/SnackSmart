@@ -56,7 +56,7 @@ public class LoteDAO implements ILoteDAO {
         try {
 
             Connection connection = ConnectionManager.getInstance().getConnection();
-
+          
             String sql = "UPDATE lote " +
              "SET tipo_produto = ?, " +
              "    quantidade = ?, " +
@@ -66,7 +66,6 @@ public class LoteDAO implements ILoteDAO {
              "    imagem = ?, " +
              "    locatario__fk = ? " +
              "WHERE pk = ?";
-
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, loteDTO.getTipoProduto());
             pstmt.setInt(2, loteDTO.getQuantidade());
