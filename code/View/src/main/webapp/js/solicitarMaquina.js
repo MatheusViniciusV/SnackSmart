@@ -52,7 +52,8 @@ $('#enviar-contrato').click(function() {
             observacoes: $('textarea[name=observacoes]').val(),
             valor: $('input[name=valor]').val(),
             tipoMaquina: $('input[name=maquina-tipo]').val(),
-            codigoMaquina: $('input[name=maquina-codigo]').val()
+            codigoMaquina: $('input[name=maquina-codigo]').val(),
+            statusContrato: "cancelamento_solicitado"
         };
     
         $.ajax({
@@ -71,7 +72,7 @@ $('#enviar-contrato').click(function() {
                 $contrato.append(`<div>Dia do pagamento: ${response.contrato.diaPagamento}</div>`);
                 $contrato.append(`<div>Valor: R$ ${response.contrato.valor}</div>`);
                 $contrato.append(`<div>Máquina: ${response.contrato.maquina.codigo}</div>`);
-                $contrato.append(` <div>Status: <span class="inativo">inativo</span></div>`);
+                $contrato.append(` <div>Status: <span class="cancelamento_solicitado">inativo</span></div>`);
 
                 $contrato.attr("id", `contrato-${response.contrato.id}`);
                 $contrato.attr('data-id', response.contrato.id);

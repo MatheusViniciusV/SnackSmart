@@ -66,6 +66,26 @@ public class ContratoDTO {
 
     }
     
+    public ContratoDTO(double valor,
+                       GerenteDTO gerente,
+                       LocatarioDTO locatario,
+                       MaquinaDTO maquina,
+                       DataManager dataInicio, DataManager dataExpiracao, DataManager dataPagamento,
+                       String observacoes, StatusContrato status) {
+        
+        this.dataExpiracao = dataExpiracao;
+        this.dataInicio = dataInicio;
+        this.dataPagamento = dataPagamento;
+        this.observacoes = observacoes;
+        this.valor = valor;
+        this.locatario = locatario;
+        this.gerente = gerente;
+        this.maquina = maquina;
+        this.status = status;
+
+
+    }
+    
     public int getId() {
         return id;
     }

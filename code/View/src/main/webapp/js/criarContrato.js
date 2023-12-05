@@ -48,35 +48,7 @@ $inputCodigoMaquina.on('input', function () {
 });
 
 
-const $cancelarContratoBtn = $('#cancelar-contrato');
-if($contratoSelecionado !== null) {
-    $cancelarContratoBtn.click(function () {
-        $.ajax({
-            url: 'cancelarContrato',
-            type: 'POST',
-            data: {
-                id: $contratoSelecionado.data('id')
-            },
-            success: function () {
-                $contratoSelecionado.addClass('btn-confirmado');
 
-                setTimeout(function() {
-                    $contratoSelecionado.remove();
-                    $contratoSelecionado.removeClass('btn-confirmado');
-                    $contratoSelecionado.addClass('null');
-                    $('#pdf-contrato').addClass('null');
-                    $('#pdf-contrato a').removeAttr('href');
-                    $contratoSelecionado = null;
-                    $cancelarContratoBtn.addClass('null');
-                }, 750);
-
-                console.log(`Contrato deletado com sucesso.`);
-            }
-        });
-    });
-}
-
-const validaContratoBtn = $('#validar-contrato');
 
 $('#enviar-contrato').click(function() {
     let formCorreto = true;
@@ -101,7 +73,8 @@ $('#enviar-contrato').click(function() {
             observacoes: $('textarea[name=observacoes]').val(),
             valor: $('input[name=valor]').val(),
             tipoMaquina: $('select[name=tipo-maquina]').val(),
-            codigoMaquina: $('input[name=codigo-maquina]').val()
+            codigoMaquina: $('input[name=codigo-maquina]').val(),
+            statusContrato: "a"
         };
     
         $.ajax({
@@ -143,3 +116,61 @@ $('#enviar-contrato').click(function() {
     }
 
 });
+
+const $cancelarContratoBtn = $('#cancelar-contrato');
+if($contratoSelecionado !== null) {
+    $cancelarContratoBtn.click(function () {
+        $.ajax({
+            url: 'cancelarContrato',
+            type: 'POST',
+            data: {
+                id: $contratoSelecionado.data('id')
+            },
+            success: function () {
+                $contratoSelecionado.addClass('btn-confirmado');
+
+                setTimeout(function() {
+                    $contratoSelecionado.remove();
+                    $contratoSelecionado.removeClass('btn-confirmado');
+                    $contratoSelecionado.addClass('null');
+                    $('#pdf-contrato').addClass('null');
+                    $('#pdf-contrato a').removeAttr('href');
+                    $contratoSelecionado = null;
+                    $cancelarContratoBtn.addClass('null');
+                }, 750);
+
+                console.log(`Contrato deletado com sucesso.`);
+            }
+        });
+    });
+}
+
+const $validarContratoBtn = $('#validar-contrato');
+if($contratoSelecionado !== null){
+    $validarContratoBtn.click(function(){
+        
+        $.ajax({
+            url: 'validarContrato',
+            type: 'POST',
+            data: {
+                id: $contratoSelecionado.data('id')
+            },
+            success: function () {
+                $contratoSelecionado.addClass('btn-confirmado');
+
+                setTimeout(function() {
+                    $contratoSelecionado.removeClass('btn-confirmado');
+                    $contratoSelecionado.addClass('null');
+                    $('#pdf-contrato').addClass('null');
+                    $('#pdf-contrato a').removeAttr('href');
+                    $contratoSelecionado = null;
+                    $validarContratoBtn.addClass('null');
+                }, 750);
+
+                console.log(`Contrato validado com sucesso.`);
+            }
+        });
+        
+        
+    });
+}
