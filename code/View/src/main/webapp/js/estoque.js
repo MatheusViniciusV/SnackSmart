@@ -146,10 +146,12 @@ inputEl.addEventListener('input', function(event) {
 let buscaEl = document.getElementById('busca');
 buscaEl.addEventListener('input', pesquisarElementos);
 
+try {
 let addLoteEl = document.getElementById('addLote');
 addLoteEl.addEventListener('click', function() {
     mostrarFormulario(formularioAdd);
-});
+});}
+catch{};
 
 let atualizarLoteEl = document.getElementById('atualizarLote');
 atualizarLoteEl.addEventListener('click', function() {
