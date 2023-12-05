@@ -54,14 +54,6 @@
                     </tr>
                     <tr>
                         <td>
-                            RG:
-                        </td>
-                        <td>
-                            <input type='text' name='rg' value='<%=usuario.getRG()%>' >
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
                             Senha:
                         </td>
                         <td>

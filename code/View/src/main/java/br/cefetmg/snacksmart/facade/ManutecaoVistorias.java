@@ -24,7 +24,7 @@ import java.io.InputStream;
  */
 @WebServlet(name = "ManutecaoVistorias", urlPatterns = {"/manutecaoVistorias"})
 public class ManutecaoVistorias extends HttpServlet {
-     @Override
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         AcessarMaquinas acessoMaquinas = new AcessarMaquinas();

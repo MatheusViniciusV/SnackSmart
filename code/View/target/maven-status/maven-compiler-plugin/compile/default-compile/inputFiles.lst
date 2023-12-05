@@ -22,3 +22,28 @@ C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snac
 C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\GerenciarManutencaoVistoria.java
 C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\locatario\GerenciarFornecedores.java
 C:\Users\Aluno\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\PDFContrato.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\facade\RelatorioGerente.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\controler.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\facade\GestaoLote.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\CriarContrato.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\GestaoLocatarios.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\ObterMaquinaDisponivel.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\locatario\GerenciarFornecedores.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\locatario\SolicitarCancelarContrato.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller_locador\ObterMaquinaDisponivel.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\facade\GestaoMaquina.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\AlterarDadosGerente.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\facade\Filtro.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\GerFinanceiro.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\CancelarContrato.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\GerenciarMaquina.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\facade\ManutecaoVistorias.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\facade\LoginServlet.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\GerenciarManutencaoVistoria.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\ObterLocatario.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\gerente\RelatorioGerente.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\facade\VisualizarContratos.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\locatario\AlterarDadosLocatario.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\locatario\GerenciarEstoque.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\facade\GestaoFornecedores.java
+C:\Users\Arthur Milagres\Desktop\lp1-2023-projeto5\code\View\src\main\java\br\cefetmg\snacksmart\controller\PDFContrato.java

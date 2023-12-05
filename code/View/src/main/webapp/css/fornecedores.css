@@ -160,6 +160,10 @@ main {
     flex-direction: row;
     flex-wrap: wrap;
 }
+#AddFonercedor:hover, .cancelar:hover, #remover:hover, #atualizarDados:hover, #reverter:hover{
+    cursor: pointer;
+    box-shadow: 2px 2px 2px gray;
+}
 
 #AddFonercedor, .cancelar, #remover, #atualizarDados, #reverter{
     color: var(--cor-principal);

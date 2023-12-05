@@ -36,7 +36,7 @@ public class AlterarDadosLocatario extends HttpServlet {
             
         try {
             LocatarioDAO.atualizar(locatarioDTO);
-            response.sendRedirect("MeusDadosLocatario.jsp");
+            response.sendRedirect("meusDados.jsp");
         } catch(PersistenciaException e) {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
         }

@@ -3,9 +3,9 @@ package br.cefetmg.snacksmart.facade;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
 import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
 import java.io.IOException;
-import br.cefetmg.snacksmart.dao.LocatarioDAO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.exceptions.bd.PersistenciaException;
+import br.cefetmg.snacksmart.services.gerente.ManterLocatarios;
 import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -33,14 +33,14 @@ public class GestaoMaquina extends HttpServlet {
         AcessarMaquinas acesso = new AcessarMaquinas();
         
         ArrayList<MaquinaDTO> vetorMaquinasSQL = null;
-        LocatarioDAO locatarioDAO = new LocatarioDAO();     
+        ManterLocatarios acessoLocatario = new ManterLocatarios();     
         HttpSession session = request.getSession();
         TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario");
         
         if (tipoUsuario == TipoUsuario.LOCADOR){
             try {
                 vetorMaquinasSQL = acesso.getAllMaquinasGerente();
-                request.setAttribute("listaLocatarios", locatarioDAO.listarTodos()); //Isso deve estar incorreto no modelo MVC por enquanto             
+                request.setAttribute("listaLocatarios", acessoLocatario.listaLocatarios());
             } catch (PersistenciaException ex) {
                 Logger.getLogger(GestaoMaquina.class.getName()).log(Level.SEVERE, null, ex);
             }

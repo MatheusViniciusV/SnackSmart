@@ -1,22 +1,17 @@
-<%-- 
-    Document   : manutençãovistorias
-    Created on : 11 de nov. de 2023, 12:44:58
-    Author     : marco
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="br.cefetmg.snacksmart.dto.MaquinaDTO" %>
 <%@page import="br.cefetmg.snacksmart.dao.MaquinaDAO" %>
 <%@page import="java.util.ArrayList" %>
-<%@include file="../../comuns/JSTL.jsp" %>
+<%@include file="../../comuns/taglibs.jsp" %>
 <%@include file="../../comuns/jqueryLink.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">      
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/base.css">
         <link rel="stylesheet" href="css/manutencao.css">
-        <link rel="stylesheet" href="css/Calendario.css">    
+        <link rel="stylesheet" href="css/calendario.css">    
         <title>Manuteção e Vistorias</title>
         
     </head>
