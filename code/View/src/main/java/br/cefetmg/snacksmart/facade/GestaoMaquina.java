@@ -33,14 +33,14 @@ public class GestaoMaquina extends HttpServlet {
         AcessarMaquinas acesso = new AcessarMaquinas();
         
         ArrayList<MaquinaDTO> vetorMaquinasSQL = null;
-        ManterLocatarios acessoLocatario = new ManterLocatarios();     
+        ManterLocatarios acessoLocatario = new ManterLocatarios();
         HttpSession session = request.getSession();
         TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario");
         
         if (tipoUsuario == TipoUsuario.LOCADOR){
             try {
                 vetorMaquinasSQL = acesso.getAllMaquinasGerente();
-                request.setAttribute("listaLocatarios", acessoLocatario.recuperarTodos());             
+                request.setAttribute("listaLocatarios", acessoLocatario.listaLocatarios());
             } catch (PersistenciaException ex) {
                 Logger.getLogger(GestaoMaquina.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -11,6 +11,7 @@ import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
 import br.cefetmg.snacksmart.services.gerente.ManterLocatarios;
+import br.cefetmg.snacksmart.services.gerente.ManterLocatarios;
 import br.cefetmg.snacksmart.services.locatario.AcessarFeedback;
 import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -110,7 +111,7 @@ public class GerenciarMaquina extends HttpServlet {
         if (tipoUsuario == TipoUsuario.LOCADOR){
             try {
                 vetorMaquinasSQL =  acessoMaquina.getAllMaquinasGerente();
-                request.setAttribute("listaLocatarios", acessoLocatario.recuperarTodos());
+                request.setAttribute("listaLocatarios", acessoLocatario.listaLocatarios());
             } catch (PersistenciaException ex) {
                 Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
             }

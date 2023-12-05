@@ -13,6 +13,7 @@ main {
     width: 80vw;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 h1 {
@@ -21,24 +22,34 @@ h1 {
     font-weight: bolder;
 }
 
-#menu ul {
-    padding: 1vh;
+#menu section {
+    padding: 5vh;
     border-radius: 10px;
     background-color: var(--cor-terciaria);
     height: 70vh;
     width: 100%;
+    box-sizing: border-box;
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
-    list-style-type: none;
     text-align: center;
-    justify-content: start;
+    margin: auto
 }
 
-#menu ul li {
-    padding: 4vh;
-    width: 45%;
-    
+@media screen and (max-width: 800px) {
+    #menu section {
+
+    }
+
+    #menu section div {
+        flex: 100%;
+        margin: 1.3rem 0;
+    }
+}
+
+#menu div {
+    flex: 50%;
+    display: inline-block;
+    margin: auto;
 }
 
 button {

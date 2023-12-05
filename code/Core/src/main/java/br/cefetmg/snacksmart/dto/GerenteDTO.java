@@ -3,6 +3,9 @@ package br.cefetmg.snacksmart.dto;
 // Importe das exceções usadas
 
 
+import br.cefetmg.snacksmart.exceptions.dto.*;
+import br.cefetmg.snacksmart.utils.InputValidador;
+
 /**
  *
  * @author eloym
@@ -21,13 +24,36 @@ public class GerenteDTO implements IUsuarioDTO {
         this.senha = senha;
     }
 
-    public GerenteDTO(String nome, String cpf, String senha, String rg, String email, String telefone) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.senha = senha;
-        this.rg = rg;
-        this.email = email;
-        this.telefone = telefone;
+    public GerenteDTO(String nome, String cpf, String senha, String email, String telefone) throws ParametroInvalidoException {
+        if(senha.isEmpty()) {
+            throw new SenhaNulaException();
+        } else {
+            this.senha = senha;
+        }
+
+        if(nome.isEmpty()) {
+            throw new NomeNuloException();
+        } else {
+            this.nome = nome;
+        }
+
+        if(InputValidador.validaCPF(cpf)) {
+            this.cpf = cpf;
+        } else {
+            throw new CPFInvalidoException();
+        }
+
+        if(InputValidador.validaEmail(email)) {
+            this.email = email;
+        } else {
+            throw new EmailInvalidoException();
+        }
+
+        if(InputValidador.validaTelefone(telefone)) {
+            this.telefone = telefone;
+        } else {
+            throw new TelefoneInvalidoException(telefone);
+        }
     }
         
 //    public void setCPF(String cpf) throws CPFInvalidoException{
