@@ -17,9 +17,9 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/base.css">
         <link rel="stylesheet" href="css/financeiro.css">
-        <link rel="stylesheet" href="css/Calendario.css">
+        <link rel="stylesheet" href="css/calendario.css">
 
 
         <title>JSP Page</title>

@@ -8,9 +8,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
-import br.cefetmg.snacksmart.dao.LocatarioDAO;
 import br.cefetmg.snacksmart.dto.LocatarioDTO;
 import br.cefetmg.snacksmart.dto.MaquinaDTO;
+import br.cefetmg.snacksmart.services.gerente.ManterLocatarios;
+import br.cefetmg.snacksmart.services.gerente.ManterLocatarios;
 import br.cefetmg.snacksmart.services.locatario.AcessarFeedback;
 import br.cefetmg.snacksmart.utils.enums.TipoUsuario;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -103,14 +104,14 @@ public class GerenciarMaquina extends HttpServlet {
         }
 
         ArrayList<MaquinaDTO> vetorMaquinasSQL = null;
-        LocatarioDAO locatarioDAO = new LocatarioDAO();
+         ManterLocatarios acessoLocatario = new ManterLocatarios();
         HttpSession session = request.getSession();
         TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario");
 
         if (tipoUsuario == TipoUsuario.LOCADOR){
             try {
                 vetorMaquinasSQL =  acessoMaquina.getAllMaquinasGerente();
-                request.setAttribute("listaLocatarios", locatarioDAO.listarTodos()); //Isso deve estar incorreto no modelo MVC por enquanto
+                request.setAttribute("listaLocatarios", acessoLocatario.listaLocatarios());
             } catch (PersistenciaException ex) {
                 Logger.getLogger(GerenciarMaquina.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -10,28 +10,24 @@
 <%@page import="br.cefetmg.snacksmart.dto.IUsuarioDTO" %>
 <%@include file="comuns/taglibs.jsp" %>
 
-<% 
-    TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario");
-    IUsuarioDTO usuario = (IUsuarioDTO) session.getAttribute("usuario");
-%>
-
 
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/principal.css">
+        <link rel="stylesheet" href="css/base.css">
+        <link rel="stylesheet" href="css/telaPrincipal.css">
         <title>Tela principal</title>
     </head>
     <body>
         <main>
-            <h1>Olá, <%=usuario.getNome()%></h1>
+            <h1>Olá, ${usuario.getNome()}</h1>
             
             
             <div id="menu">
-                <ul>
-                    <li><a href="visualizarContratos"><button><h2>Visualizar Contrato</h2></button></a></li>
+                <section>
+                    <div><a href="visualizarContratos"><button><h2>Visualizar Contrato</h2></button></a></div>
+                    <div><a href="gestaoMaquina"><button><h2>Gestão Máquina</h2></button></a></div>
                     <c:choose>
                         <c:when test="${tipoUsuario == TipoUsuario.LOCATARIO}">
                             <li><a href="visualizarContratos"><button><h2>blablabla</h2></button></a></li>
@@ -40,20 +36,18 @@
                             <li><a href="GestaoAlugueis.jsp"><button><h2>aluguéis</h2></button></a></li>
                             <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
                             <li><a href="MeusDadosLocatario.jsp"><button><h2>Meus dados</h2></button></a></li>
+
                         </c:when>
                         <c:otherwise>
-                            <li><a href="gestaoMaquina"><button><h2>Gestão Máquina</h2></button></a></li>
-                            <li><a href="FinanceiroGerente.jsp"><button><h2>Financeiro</h2></button></a></li>
-                            <li><a href="GestaoLocatarios.jsp"><button><h2>Gestão de Locatários</h2></button></a></li>
-                            <li><a href="manutecaoVistorias"><button><h2>Manuteção Vistorias</h2></button></a></li>
-                            <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
-                            <li><a href="MeusDadosGerente.jsp"><button><h2>Meus dados</h2></button></a></li>
+                            <div><a href="FinanceiroGerente.jsp"><button><h2>Financeiro</h2></button></a></div>
+                            <div><a href="gestaoLocatarios"><button><h2>Gestão de Locatários</h2></button></a></div>
+                            <div><a href="manutecaoVistorias"><button><h2>Manuteção Vistorias</h2></button></a></div>
+                            <div><a href="relatorioGerente"><button><h2>Emissão Relatorios</h2></button></a></div>
                         </c:otherwise>
-                    </c:choose>                    
-                    <li><a href="LoginServlet"><button><h2>Encerrar Sessão</h2></button></a></li>
-                </ul>
-                <div id="meus-dados-btn">
-                </div>
+                    </c:choose>
+                    <div><a href="meusDados.jsp"><button><h2>Meus dados</h2></button></a></div>
+                    <div><a href="LoginServlet"><button><h2>Encerrar Sessão</h2></button></a></div>
+                </section>
             </div>
         </main>
     </body>

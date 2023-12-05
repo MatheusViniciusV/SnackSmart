@@ -16,16 +16,15 @@ public class LocatarioDAO implements ILocatarioDAO {
         try {
             Connection connection = ConnectionManager.getInstance().getConnection();
          
-            String sql = "INSERT INTO locatario (nome, senha, cpf, rg, telefone, email) "
-                       + "VALUES (?, ?, ?, ?, ?, ?) ";
+            String sql = "INSERT INTO locatario (nome, senha, cpf, telefone, email) "
+                       + "VALUES (?, ?, ?, ?, ?) ";
             
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1, locatarioDTO.getNome());
             pstmt.setString(2, locatarioDTO.getSenha());
             pstmt.setString(3, locatarioDTO.getCPF());
-            pstmt.setString(4, locatarioDTO.getRG());
-            pstmt.setString(5, locatarioDTO.getTelefone());
-            pstmt.setString(6, locatarioDTO.getEmail());
+            pstmt.setString(4, locatarioDTO.getTelefone());
+            pstmt.setString(5, locatarioDTO.getEmail());
             pstmt.executeUpdate();
             
             sql = "SELECT `pk` FROM `locatario` ORDER BY `pk` DESC LIMIT 1";
@@ -59,7 +58,6 @@ public class LocatarioDAO implements ILocatarioDAO {
                     + "   SET nome = ?, "
                     + "       senha = ?, "
                     + "       cpf = ?, "
-                    + "       rg = ?, "
                     + "       telefone = ?, "
                     + "       email = ? "
                     + " WHERE pk = ?;";
@@ -68,10 +66,9 @@ public class LocatarioDAO implements ILocatarioDAO {
             pstmt.setString(1, locatarioDTO.getNome());
             pstmt.setString(2, locatarioDTO.getSenha());
             pstmt.setString(3, locatarioDTO.getCPF());
-            pstmt.setString(4, locatarioDTO.getRG());
-            pstmt.setString(5, locatarioDTO.getTelefone());
-            pstmt.setString(6, locatarioDTO.getEmail());
-            pstmt.setInt(7, locatarioDTO.getId());
+            pstmt.setString(4, locatarioDTO.getTelefone());
+            pstmt.setString(5, locatarioDTO.getEmail());
+            pstmt.setInt(6, locatarioDTO.getId());
             pstmt.executeUpdate();
 
             pstmt.close();
@@ -118,14 +115,15 @@ public class LocatarioDAO implements ILocatarioDAO {
             if (rs.next()) {
                 listAll = new ArrayList<>();
                 do {
-                    LocatarioDTO locatarioDTO = new LocatarioDTO();
-                    locatarioDTO.setId(rs.getInt("pk"));
-                    locatarioDTO.setNome(rs.getString("nome"));
-                    locatarioDTO.setSenha(rs.getString("senha"));
-                    locatarioDTO.setCPF(rs.getString("CPF"));
-                    locatarioDTO.setRG(rs.getString("RG"));
-                    locatarioDTO.setTelefone(rs.getString("telefone"));
-                    locatarioDTO.setEmail(rs.getString("email"));
+                    LocatarioDTO locatarioDTO = new LocatarioDTO(
+                        rs.getInt("pk"),
+                        rs.getString("nome"),
+                        rs.getString("senha"),
+                        rs.getString("cpf"),
+                        rs.getString("email"),
+                        rs.getString("telefone")
+                    );
+                    
                     listAll.add(locatarioDTO);
                 } while (rs.next());
             }
@@ -155,14 +153,14 @@ public class LocatarioDAO implements ILocatarioDAO {
 
             LocatarioDTO locatarioDTO = null;
             if (rs.next()) {
-                locatarioDTO = new LocatarioDTO();
-                locatarioDTO.setId(rs.getInt("pk"));
-                locatarioDTO.setNome(rs.getString("nome"));
-                locatarioDTO.setSenha(rs.getString("senha"));
-                locatarioDTO.setCPF(rs.getString("CPF"));
-                locatarioDTO.setRG(rs.getString("RG"));
-                locatarioDTO.setTelefone(rs.getString("telefone"));
-                locatarioDTO.setEmail(rs.getString("email"));
+                locatarioDTO = new LocatarioDTO(
+                        rs.getInt("pk"),
+                        rs.getString("nome"),
+                        rs.getString("senha"),
+                        rs.getString("cpf"),
+                        rs.getString("email"),
+                        rs.getString("telefone")
+                );
             }
 
             rs.close();
@@ -178,7 +176,6 @@ public class LocatarioDAO implements ILocatarioDAO {
     
     @Override
     public LocatarioDTO consultarPorCPF(String CPF) throws PersistenciaException {
-
         try {
             Connection connection = ConnectionManager.getInstance().getConnection();
 
@@ -190,14 +187,14 @@ public class LocatarioDAO implements ILocatarioDAO {
 
             LocatarioDTO locatarioDTO = null;
             if (rs.next()) {
-                locatarioDTO = new LocatarioDTO();
-                locatarioDTO.setId(rs.getInt("pk"));
-                locatarioDTO.setNome(rs.getString("nome"));
-                locatarioDTO.setSenha(rs.getString("senha"));
-                locatarioDTO.setCPF(rs.getString("CPF"));
-                locatarioDTO.setRG(rs.getString("RG"));
-                locatarioDTO.setTelefone(rs.getString("telefone"));
-                locatarioDTO.setEmail(rs.getString("email"));
+                locatarioDTO = new LocatarioDTO(
+                        rs.getInt("pk"),
+                        rs.getString("nome"),
+                        rs.getString("senha"),
+                        rs.getString("cpf"),
+                        rs.getString("email"),
+                        rs.getString("telefone")
+                );
             }
 
             rs.close();

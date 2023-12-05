@@ -5,8 +5,8 @@ package br.cefetmg.snacksmart.dto;
  * @author eloym
  */
 
-import br.cefetmg.snacksmart.exceptions.services.NomeNuloException;
-import br.cefetmg.snacksmart.exceptions.services.CPFInvalidoException;
+import br.cefetmg.snacksmart.exceptions.dto.*;
+import br.cefetmg.snacksmart.utils.InputValidador;
 
 public class LocatarioDTO implements IUsuarioDTO {
 
@@ -14,29 +14,100 @@ public class LocatarioDTO implements IUsuarioDTO {
     private String nome;
     private String senha;
     private String cpf;
-    private String rg;
     private String telefone;
     private String email;
 
-    public LocatarioDTO(String nome){
-        this.nome = nome;
+    public LocatarioDTO(String nome, String cpf, String email, String telefone) throws ParametroInvalidoException{
+        if(nome.isEmpty()) {
+            throw new NomeNuloException();
+        } else {
+            this.nome = nome;
+        }
+
+        if(InputValidador.validaCPF(cpf)) {
+            this.cpf = cpf;
+        } else {
+            throw new CPFInvalidoException();
+        }
+
+        if(InputValidador.validaEmail(email)) {
+            this.email = email;
+        } else {
+            throw new EmailInvalidoException();
+        }
+
+        if(InputValidador.validaTelefone(telefone)) {
+            this.telefone = telefone;
+        } else {
+            throw new TelefoneInvalidoException(telefone);
+        }
     }
 
-    public LocatarioDTO(String nome, String cpf, String email, String telefone){
-        this.nome = nome;
-        this.cpf = cpf;
-        this.email = email;
-        this.telefone = telefone;
+    public LocatarioDTO(String nome, String cpf, String email, String telefone, String senha) throws ParametroInvalidoException {
+        if(senha.isEmpty()) {
+            throw new SenhaNulaException();
+        } else {
+            this.senha = senha;
+        }
+
+        if(nome.isEmpty()) {
+            throw new NomeNuloException();
+        } else {
+            this.nome = nome;
+        }
+
+        if(InputValidador.validaCPF(cpf)) {
+            this.cpf = cpf;
+        } else {
+            throw new CPFInvalidoException();
+        }
+
+        if(InputValidador.validaEmail(email)) {
+            this.email = email;
+        } else {
+            throw new EmailInvalidoException();
+        }
+
+        if(InputValidador.validaTelefone(telefone)) {
+            this.telefone = telefone;
+        } else {
+            throw new TelefoneInvalidoException(telefone);
+        }
     }
 
-    public LocatarioDTO(int id, String nome, String cpf, String email, String telefone){
-        this.nome = nome;
-        this.cpf = cpf;
-        this.email = email;
-        this.telefone = telefone;
-    }
+    public LocatarioDTO(int id, String nome, String senha, String cpf, String email, String telefone) throws ParametroInvalidoException{
+        this.id = id;
 
-    public LocatarioDTO() {}
+        if(nome.isEmpty()) {
+            throw new NomeNuloException();
+        } else {
+            this.nome = nome;
+        }
+
+        if(InputValidador.validaCPF(cpf)) {
+            this.cpf = cpf;
+        } else {
+            throw new CPFInvalidoException();
+        }
+
+        if(InputValidador.validaEmail(email)) {
+            this.email = email;
+        } else {
+            throw new EmailInvalidoException();
+        }
+
+        if(InputValidador.validaTelefone(telefone)) {
+            this.telefone = telefone;
+        } else {
+            throw new TelefoneInvalidoException(telefone);
+        }
+        
+        if(senha.isEmpty()) {
+            throw new SenhaNulaException();
+        } else {
+            this.senha = senha;
+        }
+    }
 
     public int getId() {
         return id;
@@ -60,8 +131,8 @@ public class LocatarioDTO implements IUsuarioDTO {
     }
 
     public void setNome(String nome) throws NomeNuloException {
-        if(nome.length() == 0)
-            throw new NomeNuloException("Nome do locatário não deve ser nulo.");
+        if(nome.isEmpty())
+            throw new NomeNuloException();
 
         this.nome = nome;
     }
@@ -75,14 +146,6 @@ public class LocatarioDTO implements IUsuarioDTO {
             throw new CPFInvalidoException("CPF do gerente invalido.");*/
 
         this.cpf = cpf;
-    }
-
-    public String getRG() {
-        return (this.rg == null) ? "" : this.rg;
-    }
-
-    public void setRG(String rg) {
-        this.rg = rg;
     }
 
     public String getTelefone() {

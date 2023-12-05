@@ -131,14 +131,6 @@ function relatorioFeedback(event){
     }
 }
 
-function mostrarFormAgenda(){ 
-    let formVistoriaEl = document.getElementById('formVistoria');
-    formVistoriaEl.style.display = "grid";
-}
-function fecharFormAgenda(){
-    let formVistoriaEl = document.getElementById('formVistoria');
-    formVistoriaEl.style.display = "none";
-}
 function fecharFormFeedback(){
     let feedbackRetornadoEl = document.getElementById('feedbackRetornado');
     let blockerEl = document.getElementById('bloquearConteudo');
@@ -162,12 +154,9 @@ function pesquisarElementos(){
 let botaoRelatorioEl = document.getElementById('botaoFeedback');
 botaoRelatorioEl.addEventListener('click', relatorioFeedback);
 
-let botaoAgendaEl = document.getElementById('botaoAgenda');
-botaoAgendaEl.addEventListener('click', mostrarFormAgenda);
 
 
-let cancelarEl = document.getElementById('cancelar');
-cancelarEl.addEventListener('click', fecharFormAgenda);
+
 
 let cancelarFeedbackEl = document.querySelector(".cancelarFeedback");
 cancelarFeedbackEl.addEventListener('click', fecharFormFeedback);

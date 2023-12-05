@@ -7,9 +7,15 @@ html, body {
 }
 
 main {
-    min-height: 100vh;
+    min-height: 90vh;
     padding: 1rem 3rem;
     background-color: var(--cor-principal);
+}
+
+@media (max-device-height: 700px) {
+    html, body {
+        overflow-y: scroll !important;;
+    }
 }
 
 main h1 {
@@ -88,8 +94,10 @@ header details form a {
 
 
 section#lista-contratos {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-gap: 2vh;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(28rem, 40vh)); 
     width: 90vw;
     padding: 1vh;
     height: 60vh;
@@ -100,12 +108,14 @@ section#lista-contratos {
 }
 
 article.contratos {
+    display: inline-block;
+    min-height: 22rem;
+    min-width: 15rem;
     height: 40vh;
     width: 28vh;
-    margin: 5vh 4.4vh;
+    margin: auto;
     border-radius: 10px;
     background-color: #FFF;
-    position: relative;
 }
 
 article.contratos h3 {
@@ -119,7 +129,6 @@ article.contratos div {
     width: 80%;
     font-size: medium;
     font-weight: bold;
-    /*background-color: var(--texto-cor-principal);*/
 }
 
 span.vigente {
@@ -151,6 +160,7 @@ article.selecionado {
 #botoes {
     display: flex;
     justify-content: space-around;
+    margin-bottom: 2rem;
 }
 
 #botoes button {
@@ -159,6 +169,7 @@ article.selecionado {
     border-radius: 10px;
     border: none;
     width: 18vw;
+    min-width: 15rem;
 }
 
 button.null {

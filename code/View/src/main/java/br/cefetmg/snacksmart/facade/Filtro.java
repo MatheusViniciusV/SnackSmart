@@ -108,7 +108,7 @@ public class Filtro implements Filter {
         HttpSession sessao = httpServletRequest.getSession();
         
         if(sessao.getAttribute("tipoUsuario") != null && sessao.getAttribute("tipoUsuario") != TipoUsuario.NAO_CADASTRADO ||
-                url.lastIndexOf("index.html") >= 1 || url.lastIndexOf(".css") >= 1  || 
+                url.lastIndexOf("index.html") >= 1 || url.lastIndexOf(".css") >= 1  || url.lastIndexOf("inputs.js") >= 1 ||
                 url.lastIndexOf("realizarLogin.js") >= 1  || url.lastIndexOf("LoginServlet") > -1)
             chain.doFilter(request, response);
         else

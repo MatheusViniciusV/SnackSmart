@@ -12,7 +12,7 @@ public class MysqlConnection implements ConnectionFactory {
     private final static String dbDriver = "com.mysql.cj.jdbc.Driver";
     private final static String dbURL = "jdbc:mysql://localhost:3306/snacksmart";
     private final static String user = "root";
-    private final static String pass = "";
+    private final static String pass = ""; // quem foi que colocou a merda da senha como "projeto" e não tira antes de commitar
     
     @Override
     public Connection getConnection() throws ClassNotFoundException, SQLException {

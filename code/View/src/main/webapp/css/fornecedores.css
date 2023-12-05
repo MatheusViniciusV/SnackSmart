@@ -1,0 +1,180 @@
+#fornecedorMain{
+    display:grid;
+    grid-template-columns: 40vw 40vw;
+    grid-template-rows: auto auto auto;
+    gap: 2% 5%;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "Titulo Titulo"
+      "pesquisarFornecedor boxInfo";
+    
+
+    #tituloDaPagina {
+        grid-area: Titulo; 
+        font-size: 8vh;
+    }
+    #pesquisarFornecedor { grid-area: pesquisarFornecedor; }
+    #boxInfo { grid-area: boxInfo; }
+}
+
+main {
+  margin-right: 10vw;
+  margin-left: 10vw;
+}
+
+#pesquisarFornecedor {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 2% 5%;
+    grid-auto-flow: row;
+    padding: 1vw;
+    grid-template-areas:
+      "pesquisarFornecedor"
+      "resultFornecedor";  
+    
+    #pesquisarFornecedor { grid-area: pesquisarFornecedor; }
+    #resultFornecedor { grid-area: resultFornecedor; }
+    overflow: auto; 
+}
+
+#busca{
+    height: 2em;
+    border-radius: 12px / 15px;
+    background-color: #e7e3e3;
+    border: none;
+    color: rgba(0, 0, 0, 0.4);
+    padding: 0.8vw;
+}
+.slotClick {
+    border: ridge gray 2px;
+    border-radius: 1vw;
+    padding: 1vh;
+    margin: 1vh;
+    display:flex;
+}
+.slotClick:hover{
+    cursor: pointer;
+    box-shadow: 3px 3px 3px 3px;
+    transition: 200ms;
+}
+.slotClick:active{
+    border: ridge gainsboro 2px;
+    box-shadow: 3px 3px;
+}
+
+.slotClick h2 {
+    font-size: 3vh;
+    margin-left: 1vw;
+}
+
+.slot{
+    background-color: whitesmoke;
+    border-radius: 2vw;
+    display: flex;
+    flex-direction: row;
+    width: 30vw;
+    height: 60vh;
+    box-shadow: 5px 4px 14px 0px rgb(53, 53, 53);
+}
+#boxInfo{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 2% 5%;
+    grid-auto-flow: row;
+    padding: 1vw;
+    align-items: center;
+    justify-items: center;
+    grid-template-areas:
+      "formAtualizar"
+      "reverter"
+      "formRemover";
+    
+    #formAtualizar { grid-area: formAtualizar; }
+    #reverter { grid-area: reverter; }
+    #formRemover { grid-area: formRemover; }
+}
+#formAtualizar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    gap: 2% 5%;
+    grid-auto-flow: row;
+    padding: 1vw;
+    align-items: center;
+    justify-items: center;
+    grid-template-areas:
+      "nomeExibidoInput nomeExibido"
+      "telefoneExibidoInput telefoneExibido"
+      "emailExibidoInput emailExibido"
+      ". ."
+      "atualizarDados atualizarDados";
+    
+    #nomeExibidoInput { grid-area: nomeExibidoInput; }
+    #nomeExibido { grid-area: nomeExibido; }
+    #telefoneExibidoInput { grid-area: telefoneExibidoInput; }
+    #telefoneExibido { grid-area: telefoneExibido; }
+    #emailExibidoInput { grid-area: emailExibidoInput; }
+    #emailExibido { grid-area: emailExibido; }
+    #atualizarDados { grid-area: atualizarDados; }
+}
+
+#formAtualizar input{
+    padding: 0.4vw;
+}
+
+
+#bloquearConteudo {        
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+}
+
+#addContato{
+    display: none;
+    position: fixed;
+    left: 37%;
+    top: 35%;
+    background-color: var(--cor-principal);
+    padding: 10px 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px gray;
+    width: 25vw;
+    height: 40vh;
+    z-index: 3;
+    
+    overflow: auto; 
+}
+
+#addContato form {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    padding: 1vw;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#AddFonercedor:hover, .cancelar:hover, #remover:hover, #atualizarDados:hover, #reverter:hover{
+    cursor: pointer;
+    box-shadow: 2px 2px 2px gray;
+}
+
+#AddFonercedor, .cancelar, #remover, #atualizarDados, #reverter{
+    color: var(--cor-principal);
+    width: 12em;
+    height: 3em;
+    padding: 0em 1em 0em 1em;
+    background-color: #ff0000;
+    font-size: 1em;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px gray;
+    align-self: center;
+    justify-self: center;
+}

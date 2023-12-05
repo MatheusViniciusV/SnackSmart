@@ -52,7 +52,9 @@ CREATE TABLE `fornecedor` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
     `nome` VARCHAR(256) NOT NULL,
     `telefone` VARCHAR(14) NULL,
-    `email` VARCHAR(128) NULL
+    `email` VARCHAR(128) NULL,
+    `locatario__fk` INT NOT NULL,
+    FOREIGN KEY (`locatario__fk`) REFERENCES `locatario` (`pk`) ON DELETE CASCADE
 );
 
 -- --------------------------------------------------------
@@ -64,10 +66,11 @@ CREATE TABLE `fornecedor` (
 DROP TABLE IF EXISTS `lote`;
 CREATE TABLE `lote` (
     `pk` INT AUTO_INCREMENT PRIMARY KEY,
-    `tipo_produto` VARCHAR(128) NOT NULL,
-    `quantidade` INT NOT NULL,
-    `preco_compra` FLOAT NOT NULL,
-    `preco_venda` FLOAT NOT NULL,
+    `imagem` LONGBLOB NULL,
+    `tipo_produto` VARCHAR(128) NULL,
+    `quantidade` INT NULL,
+    `preco_compra` FLOAT NULL,
+    `preco_venda` FLOAT NULL,
     `fornecedor__fk` INT NOT NULL,
     `locatario__fk` INT NOT NULL,
     FOREIGN KEY (`fornecedor__fk`) REFERENCES `fornecedor` (`pk`) ON DELETE CASCADE,
