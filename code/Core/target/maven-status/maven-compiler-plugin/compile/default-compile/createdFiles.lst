@@ -9,6 +9,7 @@ br\cefetmg\snacksmart\exceptions\dao\LocatarioInvalidoException.class
 br\cefetmg\snacksmart\services\gerente\AcessarMaquinas.class
 br\cefetmg\snacksmart\dto\IUsuarioDTO.class
 br\cefetmg\snacksmart\dao\LoteDAO.class
+br\cefetmg\snacksmart\dao\LoteDAO.class
 br\cefetmg\snacksmart\exceptions\services\FilaAteracoesVaziaException.class
 br\cefetmg\snacksmart\utils\enums\TipoUsuario.class
 br\cefetmg\snacksmart\idao\IVistoriaDAO.class
@@ -23,7 +24,7 @@ br\cefetmg\snacksmart\dto\MaquinaDTO.class
 br\cefetmg\snacksmart\utils\InputValidador.class
 br\cefetmg\snacksmart\utils\enums\StatusContrato.class
 br\cefetmg\snacksmart\exceptions\services\SenhaInvalidaTamanhoException.class
-br\cefetmg\snacksmart\idao\IFornecedorDAO.class
+br\cefetmg\snacksmart\services\gerente\ManterLocatarios.class
 br\cefetmg\snacksmart\utils\enums\TipoMaquina.class
 br\cefetmg\snacksmart\utils\enums\TipoUsuario$1.class
 br\cefetmg\snacksmart\utils\Tester.class

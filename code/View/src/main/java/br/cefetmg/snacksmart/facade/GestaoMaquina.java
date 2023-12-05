@@ -34,6 +34,7 @@ public class GestaoMaquina extends HttpServlet {
         
         ArrayList<MaquinaDTO> vetorMaquinasSQL = null;
         ManterLocatarios acessoLocatario = new ManterLocatarios();     
+        ManterLocatarios acessoLocatario = new ManterLocatarios();     
         HttpSession session = request.getSession();
         TipoUsuario tipoUsuario = (TipoUsuario) session.getAttribute("tipoUsuario");
         
