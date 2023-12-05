@@ -62,19 +62,27 @@ public class GerenciarEstoque extends HttpServlet {
                 Logger.getLogger(GerenciarEstoque.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if ("atualizar".equals(atualizar)){ 
-            String tipoProduto = request.getParameter("novo-tipoProduto");
-            String quantidade = request.getParameter("novo-quantidade");
-            String precoCompra = request.getParameter("novo-precoCompra");
-            String precoVenda = request.getParameter("novo-precoVenda");   
-            String fornecedorId = request.getParameter("novo-fornecedor");  
-            Part imagemPart = request.getPart("novo-imagem"); 
+            String loteId = request.getParameter("novoLoteId");  
+            String tipoProduto = request.getParameter("novoTipoProduto");
+            String quantidade = request.getParameter("novoQuantidade");
+            String precoCompra = request.getParameter("novoPrecoCompra");
+            String precoVenda = request.getParameter("novoPrecoVenda");   
+            String fornecedorId = request.getParameter("novoFornecedor");  
+            Part imagemPart = request.getPart("novoImagem"); 
             InputStream imagemBytes = imagemPart.getInputStream();
             HttpSession session = request.getSession();
             LocatarioDTO locatario = (LocatarioDTO) session.getAttribute("usuario");
             try {
                 FornecedorDTO fornecedor = acessarFornecedores.getFornecedor(Integer.parseInt(fornecedorId));
-                LoteDTO loteDTO = new LoteDTO(tipoProduto, Integer.parseInt(quantidade), Double.parseDouble(precoCompra), 
-                Double.parseDouble(precoVenda), fornecedor, locatario, imagemBytes); 
+                LoteDTO loteDTO = new LoteDTO();
+                loteDTO.setQuantidade(Integer.parseInt(quantidade));
+                loteDTO.setTipoProduto(tipoProduto);
+                loteDTO.setPrecoCompra(Double.parseDouble(precoCompra));
+                loteDTO.setPrecoVenda(Double.parseDouble(precoVenda));
+                loteDTO.setFornecedor(fornecedor);
+                loteDTO.setLocatario(locatario);
+                loteDTO.setId(Integer.parseInt(loteId));
+                loteDTO.setImagem(imagemBytes);
                 acessarLotes.atualizarLote(loteDTO);
             } catch (PersistenciaException ex) {
                 Logger.getLogger(GerenciarEstoque.class.getName()).log(Level.SEVERE, null, ex);
