@@ -200,6 +200,51 @@ button#pdf-contrato a {
     display: none;
 }
 
+#solicitar-contrato-form.oculto {
+    display: none;
+}
+
+#solicitar-contrato-form h2 {
+    margin-top: .1rem;
+}
+
+#solicitar-contrato-form h3 {
+    margin: 0.5rem 0;
+}
+
+#solicitar-contrato-form {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+}
+
+#solicitar-contrato-form form {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 3rem;
+    background-color: var(--cor-principal);
+    margin: auto;
+    border-radius: 10px;
+    width: 39vw;
+    height: 76vh;
+    overflow-y: auto;
+    border: .2rem solid var(--texto-cor-secundaria);
+}
+
+section#solicitar-contrato-form input, label {
+    width: 100%;
+    margin: 0.2rem 0;
+}
+
+section#solicitar-contrato-form input.errado {
+    border: 2px solid red;
+}
+
 #criar-contrato-form h2 {
     margin-top: .1rem;
 }
@@ -298,4 +343,8 @@ span.obrigatorio:first-child {
 span.obrigatorio {
     color: var(--cor-secundaria);
     font-size: small;
+}
+
+#lista-oculta {
+    display:none;
 }

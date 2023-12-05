@@ -19,6 +19,7 @@ import br.cefetmg.snacksmart.services.gerente.AcessarMaquinas;
 import br.cefetmg.snacksmart.services.gerente.ManterContratos;
 import br.cefetmg.snacksmart.services.gerente.ManterGerente;
 import br.cefetmg.snacksmart.services.gerente.ManterLocatarios;
+import br.cefetmg.snacksmart.utils.enums.StatusContrato;
 import br.cefetmg.snacksmart.utils.DataManager;
 import br.cefetmg.snacksmart.utils.enums.TipoMaquina;
 import jakarta.servlet.ServletException;
@@ -54,6 +55,8 @@ public class CriarContrato extends HttpServlet {
         String observacoes  = request.getParameter("observacoes");
         double valor = Double.parseDouble(request.getParameter("valor"));
 
+        String status = request.getParameter("statusContrato");
+
         if(diaPagagento > 0 && diaPagagento <= 29) {
             dataPagamento = new DataManager(LocalDate.of( dataInicio.getAno(), dataInicio.getMes(), diaPagagento));
         } else {
@@ -69,13 +72,25 @@ public class CriarContrato extends HttpServlet {
             if(maquina.getTipo() != tipoMaquina) {
                 throw new ParametroInvalidoException("a máquina " + maquina.getCodigo() + " não é do tipo " + tipoMaquina);
             }
-
-            ContratoDTO contrato = new ContratoDTO(valor,
+            ContratoDTO contrato;
+            //if(status.equals("cancelamento_solicitado")){
+              //   contrato = new ContratoDTO(valor,
+              //      gerente,
+              //      locatario,
+              //      maquina,
+              //      dataInicio, dataFim, dataPagamento,
+              //      observacoes, StatusContrato.CANCELAMENTO_SOLICITADO);
+           // }
+            //else{
+                
+                contrato = new ContratoDTO(valor,
                     gerente,
                     locatario,
                     maquina,
                     dataInicio, dataFim, dataPagamento,
                     observacoes);
+           //}
+            
 
             ContratoDTO contratoCriado = service.criarContrato(contrato);
 
