@@ -29,14 +29,11 @@
                     <div><a href="visualizarContratos"><button><h2>Visualizar Contrato</h2></button></a></div>
                     <div><a href="gestaoMaquina"><button><h2>Gestão Máquina</h2></button></a></div>
                     <c:choose>
-                        <c:when test="${tipoUsuario == TipoUsuario.LOCATARIO}">
-                            <li><a href="visualizarContratos"><button><h2>blablabla</h2></button></a></li>
-                            <li><a href="gestaoMaquina"><button><h2>Gestão Máquina</h2></button></a></li>
-                            <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
-                            <li><a href="GestaoAlugueis.jsp"><button><h2>aluguéis</h2></button></a></li>
-                            <li><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></li>
-                            <li><a href="MeusDadosLocatario.jsp"><button><h2>Meus dados</h2></button></a></li>
-
+                        <c:when test="${tipoUsuario == LOCATARIO}">
+                            <div><a href="gestaoFornecedores"><button><h2>Fornecedor</h2></button></a></div>
+                            <div><a href="GestaoLote"><button><h2>Informações de Estoque</h2></button></a></div>
+                            <div><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></div>
+                            <div><a href="visualizarContratos.jsp"><button><h2>blablabla</h2></button></a></div>
                         </c:when>
                         <c:otherwise>
                             <div><a href="FinanceiroGerente.jsp"><button><h2>Financeiro</h2></button></a></div>
