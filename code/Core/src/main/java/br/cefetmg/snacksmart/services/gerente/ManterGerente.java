@@ -14,4 +14,8 @@ public class ManterGerente {
     public GerenteDTO obterGerente() throws PersistenciaException {
         return dao.get();
     }
+
+    public void atualizarGerente(GerenteDTO gerenteDTO) throws PersistenciaException {
+        dao.set(gerenteDTO);
+    }
 }

@@ -68,9 +68,7 @@ public class ValidadorUsuario {
         System.out.println(locatario.getSenha());
         System.out.println(senha);
         boolean x = (senha.equals(locatario.getSenha()) && cpf.equals(locatario.getCPF()));
-        
-        System.out.println("AAAAAAAAAAAAAAAAAAAA");
-        System.out.println(x);
+
         return x;
     }
 

@@ -1,6 +1,7 @@
 package br.cefetmg.snacksmart.dao;
 
 import br.cefetmg.snacksmart.dto.GerenteDTO;
+import br.cefetmg.snacksmart.exceptions.dto.ParametroInvalidoException;
 import br.cefetmg.snacksmart.idao.IGerenteDAO;
 import br.cefetmg.snacksmart.utils.bd.ConnectionManager;
 import java.sql.Connection;
@@ -36,7 +37,6 @@ public class GerenteDAO implements IGerenteDAO {
                         rs.getString("nome"),
                         rs.getString("cpf"),
                         rs.getString("senha"),
-                        null,
                         rs.getString("email"),
                         rs.getString("telefone"));
             }
@@ -44,6 +44,8 @@ public class GerenteDAO implements IGerenteDAO {
             rs.close();
             pstmt.close();
             cn.close();
+
+            System.out.println(gerente.getNome());
         } catch (SQLException ex) {
             Logger.getLogger(ConnectionTester.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException e) {
@@ -56,7 +58,6 @@ public class GerenteDAO implements IGerenteDAO {
     @Override
     public int set(GerenteDTO gerente) throws PersistenciaException {
         try {
-            delete();
 
             Connection conexao = ConnectionManager.getInstance().getConnection();
             

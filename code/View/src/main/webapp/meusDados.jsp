@@ -2,10 +2,6 @@
 <%@page import="br.cefetmg.snacksmart.dto.GerenteDTO" %>
 <%@include file="comuns/taglibs.jsp" %>
 
-<% 
-    GerenteDTO usuario = (GerenteDTO) session.getAttribute("usuario");
-%>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,30 +14,39 @@
         <%@include file="comuns/retornarInicial.jsp" %>
         <h1>Alterar meus dados</h1>
         <main>
-            <form action="AlterarDadosGerente" name="alterarMeusDados" method="post">
+            <c:choose>
+                <c:when test="${tipoUsuario == LOCADOR}">
+                    <form action="AlterarDadosGerente" name="alterarMeusDados" method="post">
+                </c:when>
+                <c:otherwise>
+                    <form action="AlterarDadosLocatario" name="alterarMeusDados" method="post">
+                </c:otherwise>
+            </c:choose>
                 <table>
                     <tr>
                         <td>
                             Nome:
                         </td>
                         <td>
-                            <input type='text' name='nome' value='<%=usuario.getNome()%>' >
+                            <input type='text' name='nome' value='${usuario.getNome()}' >
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            CPF:
-                        </td>
-                        <td>
-                            <input type='text' name='cpf' value='<%=usuario.getCPF()%>' >
-                        </td>
-                    </tr>
+                    <c:if test="${tipoUsuario == LOCADOR}">
+                        <tr>
+                            <td>
+                                CPF:
+                            </td>
+                            <td>
+                                <input type='text' name='cpf' value='${usuario.getCPF()}' >
+                            </td>
+                        </tr>
+                    </c:if>
                     <tr>
                         <td>
                             Email:
                         </td>
                         <td>
-                            <input type='text' name='email' value='<%=usuario.getEmail()%>' >
+                            <input type='text' name='email' value='${usuario.getEmail()}' >
                         </td>
                     </tr>
                     <tr>
@@ -49,7 +54,7 @@
                             Telefone:
                         </td>
                         <td>
-                            <input type='text' name='telefone' value='<%=usuario.getTelefone()%>' >
+                            <input type='text' name='telefone' value='${usuario.getTelefone()}' >
                         </td>
                     </tr>
                     <tr>
@@ -60,8 +65,8 @@
                             <input type='password' name='senha'> 
                         </td>
                     </tr>
-                </table> 
-                <input type="submit" value="Alterar dados">
+                </table>
+                <button>Alterar dados</button>
             </form>
         </main>
     </body>
